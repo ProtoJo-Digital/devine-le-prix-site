@@ -105,6 +105,31 @@
   footer .enveloppe { padding-top: 24px; padding-bottom: 32px; }
   footer p { color: var(--texte-doux); font-size: .95rem; }
   footer p:last-child { margin-bottom: 0; }
+  /* Lien de bas de page : cible tactile de 44 px de haut, comme dans la barre de navigation */
+  .lien-page {
+    display: inline-flex; align-items: center; min-height: 44px;
+    padding: 0 14px; margin-left: -14px; border-radius: 12px;
+  }
+  .lien-page:hover { background: var(--carte); }
+
+  /* Sur papier et dans un PDF, les navigateurs n'impriment pas les fonds :
+     on repasse donc en texte foncé sur blanc pour rester lisible. */
+  @media print {
+    :root { color-scheme: light; }
+    body { background: #fff; color: #1B1240; font-size: 11pt; line-height: 1.45; }
+    .enveloppe { max-width: none; padding: 0; }
+    .saut, .nav-site { display: none; }
+    .marque, h1, h2, h3, .sous-titre, .date, footer p, .carte p { color: #1B1240; }
+    .points li::marker { color: #1B1240; }
+    a { color: #3A2B9E; }
+    main a[href^="http"]::after { content: " (" attr(href) ")"; font-weight: 400; word-break: break-all; }
+    .entete, footer { border-color: #6B6484; }
+    .resume, .carte, .appel { background: #fff; border-color: #6B6484; }
+    .bouton, .lien-page { min-height: 0; padding: 0; margin-left: 0; background: none; color: #3A2B9E; }
+    .filet { background: #B22D20; }
+    h2, h3 { break-after: avoid; }
+    p, li { break-inside: avoid; }
+  }
 </style>
 </head>
 <body>
@@ -176,7 +201,7 @@
   <div class="enveloppe">
     <p>Devine le Prix – Jeu Famille est édité par ProtoJo Digital (Johan Quille), France.<br>
     Une question ? Écrivez à <a href="mailto:johan.quille@trainedmanager.fr">johan.quille@trainedmanager.fr</a>.</p>
-    <p><a href="index.html">Accueil de Devine le Prix</a></p>
+    <p><a class="lien-page" href="index.html">Accueil de Devine le Prix</a></p>
   </div>
 </footer>
 </body>
