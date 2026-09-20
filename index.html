@@ -3,130 +3,260 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#2C1E6B">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%231B1240'/%3E%3Ccircle cx='32' cy='32' r='21' fill='none' stroke='%23FAB31A' stroke-width='6'/%3E%3Ctext x='32' y='44' text-anchor='middle' font-family='system-ui,sans-serif' font-size='32' font-weight='900' fill='%23ffffff'%3E?%3C/text%3E%3C/svg%3E">
 <title>Devine le Prix – Jeu Famille</title>
 <meta name="description" content="Devine le Prix – Jeu Famille : le jeu sur iPhone et iPad où toute la famille devine le prix des objets. Sans compte, sans inscription, aucune donnée personnelle collectée.">
 <style>
   :root {
     color-scheme: dark;
-    --fond: #1B1240;
-    --carte: #261A55;
-    --texte: #F3F0FF;
-    --texte-doux: #CFC6F0;
-    --violet: #7668E2; /* accent violet de la marque (#6657D9), éclairci pour atteindre 3:1 en bordure */
+
+    /* Palette officielle — planche DA « Devine le Prix – Jeu Famille » */
+    --fond: #1B1240;          /* Fond */
+    --fond-haut: #2C1E6B;     /* Haut du dégradé signature */
+    --carte: #FFFFFF;         /* Cartes */
+    --encre: #1B1240;         /* Encre dès qu'un fond clair ou l'or sert de fond */
+    --encre-douce: #5B5680;   /* Texte secondaire sur carte blanche */
+    --texte: #FFFFFF;         /* Texte blanc sur tous les fonds profonds */
+    --texte-doux: rgba(255, 255, 255, .8);
     --or: #FAB31A;
     --corail: #D63D2F;
-    --rayon: 18px;
+    --vert: #1E7F46;
+    --bleu: #2A6FD0;
+    --violet: #994DCC;
+    --accent: #6657D9;
+    --lavande: #B9AEFF;
+    --voile: rgba(255, 255, 255, .14);   /* Badges posés sur le fond profond */
+
+    /* Échelle d'espacement : uniquement des multiples de 4 px */
+    --e1: 4px; --e2: 8px; --e3: 12px; --e4: 16px;
+    --e5: 20px; --e6: 24px; --e7: 32px; --e8: 48px;
+
+    /* Échelle typographique, base 18 px. La charte interdit tout corps sous 17 px. */
+    --t0: .95rem;   /* 17 px */
+    --t1: 1rem;     /* 18 px */
+    --t2: 1.125rem; /* 20 px */
+    --t3: 1.25rem;  /* 23 px */
+    --t4: 1.5rem;   /* 27 px */
+    --t5: 3rem;     /* 54 px */
+    --t-titre: clamp(2.2rem, 9vw, 3.4rem);
+    --t-titre-page: clamp(1.75rem, 6.5vw, 2.3rem);
+
+    /* Rayons de la charte : cartes 24, grandes cartes 32, pastilles rondes */
+    --rayon-focus: 6px;
+    --rayon-petit: 16px;
+    --rayon: 24px;
+    --rayon-grand: 32px;
+    --rayon-rond: 999px;
   }
   *, *::before, *::after { box-sizing: border-box; }
   /* 112.5% = 18 px avec les réglages par défaut, tout en suivant la taille de texte choisie dans le navigateur */
   html { -webkit-text-size-adjust: 100%; font-size: 112.5%; }
   body {
     margin: 0;
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
-    font-size: 1rem;
-    line-height: 1.65;
+    /* Pile système de la charte : SF Pro Rounded sur les appareils Apple, sans police à télécharger */
+    font-family: ui-rounded, -apple-system, "SF Pro Rounded", "SF Pro Display",
+                 BlinkMacSystemFont, system-ui, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    font-size: var(--t1);
+    line-height: 1.6;
     color: var(--texte);
     background: var(--fond);
     overflow-wrap: break-word;
   }
-  .enveloppe { max-width: 760px; margin: 0 auto; padding: 0 20px; }
+  .enveloppe { max-width: 760px; margin: 0 auto; padding: 0 var(--e5); }
+  /* Page en une seule colonne (confidentialité) : espace avant le pied de page. */
+  main > .enveloppe { padding-bottom: var(--e8); }
 
   /* Lien d'évitement, visible seulement au clavier */
   .saut {
-    position: absolute; top: 10px; left: 10px; z-index: 10;
+    position: absolute; top: var(--e3); left: var(--e3); z-index: 10;
     transform: translateY(-300%);
-    background: var(--or); color: var(--fond);
-    padding: 12px 18px; border-radius: 12px;
-    font-weight: 700; text-decoration: none;
+    background: var(--or); color: var(--encre);
+    padding: var(--e3) var(--e5); border-radius: var(--rayon-petit);
+    font-weight: 800; text-decoration: none;
   }
   .saut:focus { transform: none; }
 
   a { color: var(--or); }
   main a, footer a { text-decoration-thickness: 2px; text-underline-offset: 3px; }
-  :focus-visible { outline: 3px solid var(--or); outline-offset: 3px; border-radius: 6px; }
+  /* L'or sur blanc ne fait que 1,82:1 : sur fond clair, les liens passent à l'accent violet (5,34:1). */
+  .carte a, .resume a { color: var(--accent); }
+  :focus-visible { outline: 3px solid var(--or); outline-offset: 3px; border-radius: var(--rayon-focus); }
 
-  .entete { border-bottom: 1px solid var(--violet); }
+  /* ---- En-tête ---- */
+  .entete { border-bottom: 1px solid rgba(255, 255, 255, .15); }
   .entete .enveloppe {
     display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between;
-    gap: 4px 20px; padding-top: 10px; padding-bottom: 10px;
+    gap: var(--e1) var(--e5); padding-top: var(--e3); padding-bottom: var(--e3);
   }
   .marque {
-    display: inline-flex; align-items: center; min-height: 44px;
-    color: var(--or); font-weight: 800; font-size: 1.05rem;
-    letter-spacing: .01em; text-decoration: none;
+    display: inline-flex; align-items: center; gap: var(--e3); min-height: 44px;
+    color: var(--texte); font-weight: 900; font-size: var(--t2);
+    letter-spacing: -.01em; text-decoration: none;
   }
-  .nav-site ul { display: flex; gap: 6px; list-style: none; margin: 0; padding: 0; }
+  /* Marque : l'icône retenue de la planche DA — anneau doré, « ? » blanc, fond profond */
+  .sceau {
+    flex: none; display: inline-flex; align-items: center; justify-content: center;
+    width: var(--e7); height: var(--e7); border-radius: var(--rayon-rond);
+    border: 3px solid var(--or); background: var(--fond);
+    font-size: var(--t2); font-weight: 900; line-height: 1; color: var(--texte);
+  }
+  .sceau::before { content: "?"; transform: translateY(-1px); }
+  .nav-site ul { display: flex; gap: var(--e2); list-style: none; margin: 0; padding: 0; }
   .nav-site a {
-    display: inline-flex; align-items: center; min-height: 44px; padding: 0 14px;
-    border-radius: 12px; color: var(--texte); text-decoration: none;
+    display: inline-flex; align-items: center; min-height: 44px; padding: 0 var(--e4);
+    border-radius: var(--rayon-petit); color: var(--texte); font-weight: 700; text-decoration: none;
   }
-  .nav-site a[aria-current="page"] { background: var(--carte); color: var(--or); font-weight: 700; }
-  .nav-site a:hover { background: var(--carte); }
+  .nav-site a[aria-current="page"] { background: var(--voile); color: var(--or); font-weight: 800; }
+  .nav-site a:hover { background: var(--voile); }
 
-  .hero { text-align: center; padding: 40px 0 8px; }
-  h1 { font-size: clamp(2rem, 8vw, 2.7rem); line-height: 1.15; margin: 0 0 .25em; color: var(--or); }
-  .sous-titre { display: block; font-size: 1.05rem; color: var(--texte); letter-spacing: .06em; text-transform: uppercase; margin-top: .6em; }
-  .accroche { font-size: 1.2rem; max-width: 30ch; margin: 0 auto; }
-  .filet { width: 84px; height: 5px; border-radius: 999px; background: var(--corail); border: 0; margin: 28px auto; }
+  main > section { position: relative; padding: var(--e8) 0; }
+  main > section h2 { margin-top: 0; }
 
-  .titre-page { padding: 32px 0 0; }
-  .titre-page h1 { font-size: clamp(1.75rem, 6.5vw, 2.3rem); }
-  .titre-page .sous-titre { text-transform: none; letter-spacing: 0; }
-  .date { color: var(--texte-doux); font-size: .95rem; }
-  .resume { background: var(--carte); border: 1px solid var(--violet); border-radius: var(--rayon); padding: 20px; }
+  /* ---- Bandeau d'accueil : dégradé signature + projecteurs très discrets ---- */
+  .hero {
+    text-align: center; overflow: hidden;
+    background: linear-gradient(180deg, var(--fond-haut) 0%, var(--fond) 100%);
+  }
+  .hero::before {
+    content: ""; position: absolute; inset: 0; pointer-events: none;
+    background: radial-gradient(ellipse 70% 62% at 50% -12%, rgba(255, 255, 255, .10), transparent 62%);
+  }
+  .hero > .enveloppe { position: relative; z-index: 1; }
+  h1 {
+    font-size: var(--t-titre); font-weight: 900; line-height: 1.02; letter-spacing: -.03em;
+    margin: 0 0 var(--e3); color: var(--texte); text-wrap: balance;
+  }
+  .hero h1 .sous-titre { color: var(--lavande); }
+  .sous-titre { display: block; }
+  .accroche { font-size: var(--t3); font-weight: 800; color: var(--or); margin: 0 0 var(--e6); }
+
+  .precision {
+    font-size: var(--t2); font-weight: 700; color: var(--texte-doux);
+    max-width: 34ch; margin: 0 auto var(--e6);
+  }
+
+  /* Publics visés — pastilles de la bannière de la planche DA */
+  .publics { display: flex; flex-wrap: wrap; justify-content: center; gap: var(--e3); list-style: none; margin: 0 0 var(--e7); padding: 0; }
+  .publics li { padding: var(--e2) var(--e5); border-radius: var(--rayon-rond); font-weight: 800; color: #fff; }
+  .publics .enfants { background: var(--corail); }
+  .publics .seniors { background: var(--vert); }
+  .publics .famille { background: var(--bleu); }
+
+  /* Objet sur carte blanche : la signature visuelle du jeu */
+  .objet { max-width: 340px; margin: 0 auto; }
+  .objet-carte {
+    display: flex; flex-direction: column; align-items: center; gap: var(--e2);
+    background: var(--carte); border-radius: var(--rayon-grand); padding: var(--e6);
+    box-shadow: 0 20px 44px rgba(0, 0, 0, .42);
+  }
+  .objet-emoji { font-size: 5rem; line-height: 1; }
+  .objet-nom { font-size: var(--t3); font-weight: 900; color: var(--encre); }
+  .objet-prix {
+    display: block; margin-top: var(--e5);
+    font-size: var(--t5); font-weight: 900; line-height: 1; letter-spacing: -.02em; color: var(--or);
+  }
+  .objet-legende { margin-top: var(--e2); font-size: var(--t2); font-weight: 800; color: var(--texte-doux); }
+
+  /* ---- Pages intérieures ---- */
+  .titre-page { padding: var(--e7) 0 0; }
+  .titre-page h1 { font-size: var(--t-titre-page); }
+  .titre-page .sous-titre { font-size: var(--t2); font-weight: 800; color: var(--lavande); margin-top: var(--e3); }
+  .date { color: var(--texte-doux); font-size: var(--t0); font-weight: 700; }
+  .resume {
+    background: var(--carte); color: var(--encre); border-radius: var(--rayon);
+    padding: var(--e6); font-weight: 500;
+  }
   .resume p:last-child { margin-bottom: 0; }
 
-  h2 { font-size: 1.45rem; line-height: 1.25; margin: 2.2em 0 .7em; color: var(--or); }
-  h3 { font-size: 1.15rem; margin: 0 0 .35em; color: var(--or); }
+  h2 { font-size: var(--t4); font-weight: 900; line-height: 1.15; letter-spacing: -.02em; margin: 2em 0 .7em; color: var(--or); }
+  h3 { font-size: var(--t3); font-weight: 900; margin: 0 0 var(--e1); color: var(--encre); }
   p { margin: 0 0 1em; }
 
-  .modes { display: grid; gap: 16px; list-style: none; margin: 0; padding: 0; }
+  /* ---- Cartes blanches ---- */
+  /* Les cartes blanches respirent mal à 760 px en trois colonnes : ce bloc seul est plus large. */
+  .section-large .enveloppe { max-width: 920px; }
+  .modes { display: grid; gap: var(--e4); list-style: none; margin: 0; padding: 0; }
   @media (min-width: 700px) { .modes { grid-template-columns: repeat(3, 1fr); } }
-  .carte { background: var(--carte); border: 1px solid var(--violet); border-radius: var(--rayon); padding: 20px; }
-  .carte p { margin: 0; color: var(--texte-doux); }
-
-  .points { padding-left: 1.3em; margin: 0; }
-  .points li { margin-bottom: .7em; }
-  .points li::marker { color: var(--or); }
-
-  .appel {
-    background: var(--carte); border: 1px solid var(--violet); border-radius: var(--rayon);
-    padding: 24px; margin: 40px 0 8px; text-align: center;
+  .carte {
+    background: var(--carte); color: var(--encre);
+    border-radius: var(--rayon); padding: var(--e6);
+    box-shadow: 0 12px 30px rgba(0, 0, 0, .3);
+    transition: transform .18s ease;
   }
-  .appel h2 { margin-top: 0; }
+  .carte:hover { transform: translateY(-3px); }
+  .carte p { margin: 0; color: var(--encre-douce); font-weight: 700; font-size: var(--t0); }
+  .pictogramme {
+    display: flex; align-items: center; justify-content: center;
+    width: 64px; height: 64px; border-radius: var(--rayon-petit);
+    margin-bottom: var(--e4); font-size: 2rem; line-height: 1;
+  }
+  .pictogramme.lilas { background: #EFEBFF; }
+  .pictogramme.menthe { background: #E4F3EA; }
+  .pictogramme.ciel { background: #E4ECFA; }
+
+  /* ---- Pastilles sur fond profond ---- */
+  .jetons { display: flex; flex-wrap: wrap; gap: var(--e3); list-style: none; margin: 0; padding: 0; }
+  .jetons li { padding: var(--e2) var(--e5); border-radius: var(--rayon-rond); font-weight: 800; background: var(--voile); }
+
+  .avantages { display: grid; gap: var(--e4); list-style: none; margin: 0; padding: 0; }
+  @media (min-width: 700px) { .avantages { grid-template-columns: 1fr 1fr; } }
+  .avantages li { display: flex; gap: var(--e3); align-items: flex-start; }
+  .coche { flex: 0 0 auto; width: var(--e6); height: var(--e6); margin-top: var(--e1); color: var(--or); }
+
+  /* ---- Appel à l'action ---- */
+  .appel { text-align: center; }
   .bouton {
     display: inline-flex; align-items: center; justify-content: center;
-    min-height: 52px; padding: 0 26px; border-radius: 999px;
-    background: var(--or); color: var(--fond);
-    font-size: 1.05rem; font-weight: 700; text-decoration: none;
+    min-height: 56px; padding: 0 var(--e7); border-radius: var(--rayon);
+    background: var(--or); color: var(--encre);
+    font-size: var(--t2); font-weight: 800; text-decoration: none;
+    box-shadow: 0 10px 24px rgba(0, 0, 0, .3);
+    transition: filter .18s ease;
   }
+  .bouton:hover { filter: brightness(1.08); }
 
-  footer { margin-top: 48px; border-top: 1px solid var(--violet); }
-  footer .enveloppe { padding-top: 24px; padding-bottom: 32px; }
-  footer p { color: var(--texte-doux); font-size: .95rem; }
+  footer { border-top: 1px solid rgba(255, 255, 255, .15); }
+  footer .enveloppe { padding-top: var(--e6); padding-bottom: var(--e7); }
+  footer p { color: var(--texte-doux); font-size: var(--t0); font-weight: 700; }
   footer p:last-child { margin-bottom: 0; }
   /* Lien de bas de page : cible tactile de 44 px de haut, comme dans la barre de navigation */
   .lien-page {
     display: inline-flex; align-items: center; min-height: 44px;
-    padding: 0 14px; margin-left: -14px; border-radius: 12px;
+    padding: 0 var(--e4); margin-left: calc(-1 * var(--e4)); border-radius: var(--rayon-petit);
   }
-  .lien-page:hover { background: var(--carte); }
+  .lien-page:hover { background: var(--voile); }
+
+  /* Quand le système demande moins d'animation, on n'en joue aucune */
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+      animation-duration: .01ms !important; animation-iteration-count: 1 !important;
+      transition-duration: .01ms !important;
+    }
+  }
 
   /* Sur papier et dans un PDF, les navigateurs n'impriment pas les fonds :
      on repasse donc en texte foncé sur blanc pour rester lisible. */
   @media print {
     :root { color-scheme: light; }
-    body { background: #fff; color: #1B1240; font-size: 11pt; line-height: 1.45; }
+    body { background: #fff; color: var(--encre); font-size: 11pt; line-height: 1.45; }
     .enveloppe { max-width: none; padding: 0; }
-    .saut, .nav-site { display: none; }
-    .marque, h1, h2, h3, .sous-titre, .date, footer p, .carte p { color: #1B1240; }
-    .points li::marker { color: #1B1240; }
+    .saut, .nav-site, .hero::before, .objet, .pictogramme, .sceau { display: none; }
+    main > section { padding: var(--e3) 0; }
+    .hero { background: none; }
+    h1, h2, h3, .marque, .accroche, .date, .sous-titre, footer p,
+    .jetons li, .publics li, .coche, .precision, .objet-legende,
+    .hero h1 .sous-titre,
+    .titre-page .sous-titre { color: var(--encre); }
     a { color: #3A2B9E; }
     main a[href^="http"]::after { content: " (" attr(href) ")"; font-weight: 400; word-break: break-all; }
     .entete, footer { border-color: #6B6484; }
-    .resume, .carte, .appel { background: #fff; border-color: #6B6484; }
-    .bouton, .lien-page { min-height: 0; padding: 0; margin-left: 0; background: none; color: #3A2B9E; }
-    .filet { background: #B22D20; }
+    .carte, .resume, .jetons li, .publics li,
+    .publics .enfants, .publics .seniors, .publics .famille {
+      background: #fff; box-shadow: none; border: 1px solid #6B6484;
+    }
+    .bouton, .lien-page { min-height: 0; padding: 0; margin-left: 0; background: none;
+      box-shadow: none; color: #3A2B9E; }
     h2, h3 { break-after: avoid; }
     p, li { break-inside: avoid; }
   }
@@ -137,7 +267,7 @@
 
 <header class="entete">
   <div class="enveloppe">
-    <a class="marque" href="index.html">Devine le Prix</a>
+    <a class="marque" href="index.html"><span class="sceau" aria-hidden="true"></span>Devine le Prix</a>
     <nav class="nav-site" aria-label="Navigation principale">
       <ul>
         <li><a href="index.html" aria-current="page">Accueil</a></li>
@@ -148,48 +278,106 @@
 </header>
 
 <main id="contenu">
-  <div class="enveloppe">
 
-    <div class="hero">
-      <h1>Devine le Prix<span class="sous-titre">Jeu Famille</span></h1>
-      <p class="accroche">Le jeu où toute la famille devine le prix des objets, sur iPhone et iPad.</p>
-      <!-- Le bouton « Télécharger sur l'App Store » viendra ici, dès que l'adresse de la fiche App Store sera connue. -->
+  <section class="hero">
+    <div class="enveloppe">
+      <h1>Devine le Prix<span class="sous-titre">– Jeu Famille</span></h1>
+      <p class="accroche">Trouve le prix des objets !</p>
+      <p class="precision">Le jeu de devinettes de toute la famille, sur iPhone et iPad.</p>
+      <ul class="publics">
+        <li class="enfants">Enfants</li>
+        <li class="seniors">Seniors</li>
+        <li class="famille">En famille</li>
+      </ul>
+      <!-- Le bouton « Télécharger sur l'App Store » viendra ici, dès que l'adresse de la fiche App Store sera connue. -->
+      <figure class="objet">
+        <span class="objet-carte">
+          <span class="objet-emoji" aria-hidden="true">🎧</span>
+          <span class="objet-nom">Un casque audio</span>
+        </span>
+        <span class="objet-prix" aria-hidden="true">?&nbsp;€</span>
+        <figcaption class="objet-legende">Quel est le prix ?</figcaption>
+      </figure>
     </div>
+  </section>
 
-    <hr class="filet">
+  <section class="section-large">
+    <div class="enveloppe">
+      <h2>Trois façons de jouer</h2>
+      <ul class="modes">
+        <li class="carte">
+          <span class="pictogramme lilas" aria-hidden="true">🎯</span>
+          <h3>Tout seul</h3>
+          <p>Jouez à votre rythme, gagnez des points et montez de niveau.</p>
+        </li>
+        <li class="carte">
+          <span class="pictogramme menthe" aria-hidden="true">👨‍👩‍👧</span>
+          <h3>Sur ce téléphone</h3>
+          <p>Passez l'appareil de main en main : chacun choisit son prénom et son avatar.</p>
+        </li>
+        <li class="carte">
+          <span class="pictogramme ciel" aria-hidden="true">📲</span>
+          <h3>Avec d'autres téléphones</h3>
+          <p>Chacun sur son appareil, grâce à Game Center. Les invitations passent par Messages.</p>
+        </li>
+      </ul>
+    </div>
+  </section>
 
-    <h2>Trois façons de jouer</h2>
-    <ul class="modes">
-      <li class="carte">
-        <h3>Tout seul</h3>
-        <p>Jouez à votre rythme, gagnez des points et montez de niveau.</p>
-      </li>
-      <li class="carte">
-        <h3>Sur ce téléphone</h3>
-        <p>Passez l'appareil de main en main : chacun choisit son prénom et son avatar.</p>
-      </li>
-      <li class="carte">
-        <h3>Avec d'autres téléphones</h3>
-        <p>Chacun sur son appareil, grâce à Game Center. Les invitations passent par Messages.</p>
-      </li>
-    </ul>
+  <section>
+    <div class="enveloppe">
+      <h2>Ce que l'on gagne en jouant</h2>
+      <ul class="jetons">
+        <li>Niveaux</li>
+        <li>Points d'expérience</li>
+        <li>Étoiles</li>
+        <li>Badges</li>
+        <li>Collection d'objets</li>
+        <li>Série de jours joués</li>
+        <li>Vitrines</li>
+      </ul>
+    </div>
+  </section>
 
-    <h2>Pensé pour les enfants et les grands-parents</h2>
-    <ul class="points">
-      <li>Les textes peuvent être lus à voix haute par la voix intégrée à l'iPhone.</li>
-      <li>Aucun compte, aucune inscription : on ouvre l'application et on joue.</li>
-      <li>Aucune donnée personnelle collectée. La progression reste sur l'appareil, et se retrouve sur vos autres appareils si iCloud est activé.</li>
-      <li>Des réglages simples : voix, sons, musique, vibrations, nombre d'objets par partie.</li>
-      <li>Un rappel quotidien, à l'heure de votre choix, si vous le souhaitez.</li>
-      <li>Jamais de publicité pendant le jeu. Celles de fin de partie sont non personnalisées, et l'achat « Version sans pub » les retire définitivement.</li>
-    </ul>
+  <section>
+    <div class="enveloppe">
+      <h2>Pensé pour les enfants et les grands-parents</h2>
+      <ul class="avantages">
+        <li>
+          <svg class="coche" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="m4 12.5 5 5L20 6.5"/></svg>
+          <span>Les textes peuvent être lus à voix haute par la voix intégrée à l'iPhone.</span>
+        </li>
+        <li>
+          <svg class="coche" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="m4 12.5 5 5L20 6.5"/></svg>
+          <span>Aucun compte, aucune inscription : on ouvre l'application et on joue.</span>
+        </li>
+        <li>
+          <svg class="coche" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="m4 12.5 5 5L20 6.5"/></svg>
+          <span>Aucune donnée personnelle collectée. La progression reste sur l'appareil, et se retrouve sur vos autres appareils si iCloud est activé.</span>
+        </li>
+        <li>
+          <svg class="coche" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="m4 12.5 5 5L20 6.5"/></svg>
+          <span>Des réglages simples : voix, sons, musique, vibrations, nombre d'objets par partie.</span>
+        </li>
+        <li>
+          <svg class="coche" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="m4 12.5 5 5L20 6.5"/></svg>
+          <span>Un rappel quotidien, à l'heure de votre choix, si vous le souhaitez.</span>
+        </li>
+        <li>
+          <svg class="coche" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="m4 12.5 5 5L20 6.5"/></svg>
+          <span>Jamais de publicité pendant le jeu. Celles de fin de partie sont non personnalisées, et l'achat « Version sans pub » les retire définitivement.</span>
+        </li>
+      </ul>
+    </div>
+  </section>
 
-    <div class="appel">
+  <section>
+    <div class="enveloppe appel">
       <h2>Une question ?</h2>
       <a class="bouton" href="mailto:johan.quille@trainedmanager.fr">Écrire à l'éditeur</a>
     </div>
+  </section>
 
-  </div>
 </main>
 
 <footer>
