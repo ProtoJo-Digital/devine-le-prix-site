@@ -23,10 +23,16 @@
     --corail: #D63D2F;
     --vert: #1E7F46;
     --bleu: #2A6FD0;
-    --violet: #994DCC;
+    --violet: #994DCC;    /* réserve de la planche, pas encore utilisée sur le site */
     --accent: #6657D9;
     --lavande: #B9AEFF;
     --voile: rgba(255, 255, 255, .14);   /* Badges posés sur le fond profond */
+    /* Teintes claires des pictogrammes, posées sur carte blanche.
+       Les deux premières viennent de la planche ; la troisième a été ajoutée
+       par analogie pour la troisième carte, elle n'y figure pas. */
+    --lilas: #EFEBFF;
+    --menthe: #E4F3EA;
+    --ciel: #E4ECFA;
 
     /* Échelle d'espacement : uniquement des multiples de 4 px */
     --e1: 4px; --e2: 8px; --e3: 12px; --e4: 16px;
@@ -191,9 +197,9 @@
     width: 64px; height: 64px; border-radius: var(--rayon-petit);
     margin-bottom: var(--e4); font-size: 2rem; line-height: 1;
   }
-  .pictogramme.lilas { background: #EFEBFF; }
-  .pictogramme.menthe { background: #E4F3EA; }
-  .pictogramme.ciel { background: #E4ECFA; }
+  .pictogramme.lilas { background: var(--lilas); }
+  .pictogramme.menthe { background: var(--menthe); }
+  .pictogramme.ciel { background: var(--ciel); }
 
   /* ---- Pastilles sur fond profond ---- */
   .jetons { display: flex; flex-wrap: wrap; gap: var(--e3); list-style: none; margin: 0; padding: 0; }
@@ -330,7 +336,7 @@
 <footer>
   <div class="enveloppe">
     <p>Devine le Prix – Jeu Famille est édité par ProtoJo Digital (Johan Quille), France.<br>
-    Une question ? Écrivez à <a href="mailto:johan.quille@trainedmanager.fr">johan.quille@trainedmanager.fr</a>.</p>
+    Une question ? Écris à <a href="mailto:johan.quille@trainedmanager.fr">johan.quille@trainedmanager.fr</a>.</p>
     <p><a class="lien-page" href="index.html">Accueil de Devine le Prix</a></p>
   </div>
 </footer>
