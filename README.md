@@ -3,7 +3,7 @@
 Site vitrine de l'application iOS « Devine le Prix – Jeu Famille », éditée par
 ProtoJo Digital (Johan Quille), France.
 
-**En ligne :** <https://protojo-digital.github.io/devine-le-prix-site/>
+**En ligne :** <https://devine-le-prix.protojo.fr/>
 
 ## Contenu du dépôt
 
@@ -12,6 +12,7 @@ ProtoJo Digital (Johan Quille), France.
 | `index.html` | Page d'accueil : présentation du jeu, façons de jouer, contact |
 | `confidentialite.html` | Politique de confidentialité |
 | `.nojekyll` | Fichier vide qui demande à GitHub Pages de publier les fichiers tels quels, sans passer par Jekyll |
+| `CNAME` | Le domaine du site. Écrit par GitHub quand on renseigne le domaine personnalisé ; ne pas le modifier à la main |
 
 ## Comment ça marche
 
@@ -26,6 +27,13 @@ Site statique, sans étape de construction et sans outillage :
 - **Publication** : GitHub Pages sert la branche `main`. Une fusion dans `main`
   met le site en ligne à jour en une minute environ. Rien n'est publié depuis
   une branche de travail ou une pull request.
+- **Le dépôt doit rester public.** Pages depuis un dépôt privé exige un plan
+  payant ; le passer en privé dépublie le site et efface la configuration de
+  Pages, qui est alors à refaire à la main. Et cela ne protégerait rien : même
+  depuis un dépôt privé, Pages sert tous les fichiers publiquement.
+- **L'adresse publique passe par `devine-le-prix.protojo.fr`**, un domaine qui
+  nous appartient, et non par l'adresse `github.io`. C'est ce qui permet de
+  changer d'hébergeur sans casser le lien déclaré dans App Store Connect.
 
 ## Prévisualiser en local
 
