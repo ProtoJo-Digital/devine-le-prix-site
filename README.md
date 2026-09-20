@@ -39,37 +39,69 @@ python3 -m http.server 8000
 
 ## Identité visuelle
 
-Ambiance « plateau de jeu télé », fond violet profond. Les couleurs sont
-déclarées en variables CSS dans `:root`, en haut de chaque page :
+Le site suit la **planche de direction artistique de la fiche App Store** de
+l'application. Cette planche fait référence : en cas de désaccord entre le site
+et elle, c'est le site qui a tort.
+
+Ambiance : « un plateau télé chaleureux : fond profond, projecteurs très
+discrets, objets en emoji sur cartes blanches. »
+
+### Couleurs
 
 | Variable | Valeur | Usage |
 | --- | --- | --- |
-| `--fond` | `#1B1240` | Fond de page |
-| `--carte` | `#261A55` | Fond des encadrés et des cartes |
-| `--texte` | `#F3F0FF` | Texte courant |
-| `--texte-doux` | `#CFC6F0` | Texte secondaire (dates, pied de page) |
-| `--violet` | `#7668E2` | Bordures — le violet de marque `#6657D9`, éclairci pour atteindre 3:1 |
-| `--or` | `#FAB31A` | Titres, liens, boutons |
-| `--corail` | `#D63D2F` | Halo du bandeau d'accueil |
-| `--fond-profond` | `#150E31` | Bandes de section alternées, écran de jeu |
+| `--fond` | `#1B1240` | Fond de page, et encre dès qu'un fond clair est utilisé |
+| `--fond-haut` | `#2C1E6B` | Haut du dégradé signature du bandeau |
+| `--carte` | `#FFFFFF` | Cartes |
+| `--encre-douce` | `#5B5680` | Texte secondaire sur carte blanche |
+| `--texte` | `#FFFFFF` | Texte sur tous les fonds profonds |
+| `--or` | `#FAB31A` | Titres de section, accroche, bouton principal |
+| `--corail` | `#D63D2F` | Public « Enfants » |
+| `--vert` | `#1E7F46` | Public « Seniors » |
+| `--bleu` | `#2A6FD0` | Public « En famille » |
+| `--violet` | `#994DCC` | Réserve de la palette |
+| `--accent` | `#6657D9` | Liens posés sur fond clair |
+| `--lavande` | `#B9AEFF` | Sous-titre « – Jeu Famille » |
+| `--voile` | `rgba(255,255,255,.14)` | Pastilles posées sur le fond profond |
 
-### Espacements, tailles et rayons
+Deux règles de couleur, non négociables :
 
-Toutes les marges, tous les espacements et tous les rayons passent par un
-token. **Aucune valeur en dur dans le CSS** : si un palier manque, on l'ajoute
-à l'échelle plutôt que d'écrire une valeur à la main.
+- **Texte blanc sur tous les fonds profonds. Encre `#1B1240` dès que l'or ou le
+  blanc sert de fond.**
+- **L'or ne se pose jamais sur blanc** : le contraste n'y est que de 1,82:1, très
+  en dessous du minimum de 4,5:1. Sur carte blanche, les liens passent à
+  `--accent` (5,34:1) et les titres à l'encre (17,4:1).
+
+### Typographie
+
+Pile système, sans police à télécharger : `ui-rounded`, `-apple-system`,
+`"SF Pro Rounded"`, `"SF Pro Display"`, puis les replis habituels. Sur les
+appareils Apple, cela donne le SF Pro Rounded de la planche.
+
+Graisses de la charte : **titres 900, boutons et pastilles 800, textes de carte
+700**. La planche interdit tout corps sous 17 pt ; l'échelle du site commence donc
+à 17 px.
 
 | Échelle | Tokens |
 | --- | --- |
-| Espacement (multiples de 4 px) | `--e1` 4 · `--e2` 8 · `--e3` 12 · `--e4` 16 · `--e5` 20 · `--e6` 24 · `--e7` 32 · `--e8` 48 |
-| Typographie (base 18 px) | `--t0` 17 · `--t1` 18 · `--t2` 20 · `--t3` 23 · `--t4` 27 · `--t5` 54, plus `--t-titre` et `--t-titre-page` qui sont fluides |
-| Rayons | `--rayon-focus` 6 · `--rayon-petit` 12 · `--rayon` 18 · `--rayon-grand` 26 · `--rayon-rond` (pastilles et boutons) |
+| Espacement (multiples de 4 px) | `--e1` 4 · `--e2` 8 · `--e3` 12 · `--e4` 16 · `--e5` 20 · `--e6` 24 · `--e7` 32 · `--e8` 48 |
+| Typographie (base 18 px) | `--t0` 17 · `--t1` 18 · `--t2` 20 · `--t3` 23 · `--t4` 27 · `--t5` 54, plus `--t-titre` et `--t-titre-page` qui sont fluides |
+| Rayons | `--rayon-focus` 6 · `--rayon-petit` 16 · `--rayon` 24 (cartes) · `--rayon-grand` 32 (grandes cartes) · `--rayon-rond` (pastilles) |
 
-Le plus petit palier typographique est à 17 px : il n'existe pas de taille en
-dessous, ce qui garantit le minimum de 16 px sur tout le site.
+Toutes les marges, tailles et rayons passent par un token. **Aucune valeur en
+dur dans le CSS** : si un palier manque, on l'ajoute à l'échelle. Deux
+exceptions assumées et commentées : la base `112.5%` sur `html`, et les
+dimensions du halo décoratif.
 
-Deux exceptions assumées, toutes deux commentées dans le CSS : la base `112.5%`
-sur `html`, et les dimensions du halo décoratif du bandeau d'accueil.
+### Marque
+
+L'icône retenue sur la planche est un **anneau doré avec un « ? » blanc sur fond
+profond**. Elle est redessinée en CSS dans l'en-tête (`.sceau`) et en SVG dans la
+favicon, sans fichier image.
+
+Formulations officielles : l'accroche est « Trouve le prix des objets ! », la
+formule du jeu est « Pile le bon prix ! », et les prix s'écrivent au format
+français, « 1 249 € ».
 
 ## Règles à respecter
 

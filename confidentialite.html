@@ -3,57 +3,50 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="theme-color" content="#1B1240">
+<meta name="theme-color" content="#2C1E6B">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%231B1240'/%3E%3Ccircle cx='32' cy='32' r='21' fill='none' stroke='%23FAB31A' stroke-width='6'/%3E%3Ctext x='32' y='44' text-anchor='middle' font-family='system-ui,sans-serif' font-size='32' font-weight='900' fill='%23ffffff'%3E?%3C/text%3E%3C/svg%3E">
 <title>Politique de confidentialité – Devine le Prix</title>
 <meta name="description" content="Politique de confidentialité de Devine le Prix – Jeu Famille : aucune donnée personnelle collectée, aucun compte, tout reste sur votre appareil.">
 <style>
   :root {
     color-scheme: dark;
 
-    /* Couleurs de la marque */
-    --fond: #1B1240;
-    --fond-profond: #150E31;
-    --carte: #261A55;
-    --texte: #F3F0FF;
-    --texte-doux: #CFC6F0;
-    --violet: #7668E2; /* accent violet de la marque (#6657D9), éclairci pour atteindre 3:1 en bordure */
+    /* Palette officielle — planche DA « Devine le Prix – Jeu Famille » */
+    --fond: #1B1240;          /* Fond */
+    --fond-haut: #2C1E6B;     /* Haut du dégradé signature */
+    --carte: #FFFFFF;         /* Cartes */
+    --encre: #1B1240;         /* Encre dès qu'un fond clair ou l'or sert de fond */
+    --encre-douce: #5B5680;   /* Texte secondaire sur carte blanche */
+    --texte: #FFFFFF;         /* Texte blanc sur tous les fonds profonds */
+    --texte-doux: rgba(255, 255, 255, .8);
     --or: #FAB31A;
     --corail: #D63D2F;
-    --violet-marque: #6657D9; /* le violet de marque, utilisé seulement dans le halo */
-    /* Composantes RVB des mêmes couleurs, pour les usages avec transparence.
-       CSS ne sait pas extraire les composantes d'un hexadécimal : les deux
-       formes coexistent, la forme hexadécimale restant la valeur de référence. */
-    --carte-rvb: 38, 26, 85;
-    --violet-rvb: 118, 104, 226;
-    --violet-marque-rvb: 102, 87, 217;
-    --or-rvb: 250, 179, 26;
-    --corail-rvb: 214, 61, 47;
+    --vert: #1E7F46;
+    --bleu: #2A6FD0;
+    --violet: #994DCC;
+    --accent: #6657D9;
+    --lavande: #B9AEFF;
+    --voile: rgba(255, 255, 255, .14);   /* Badges posés sur le fond profond */
 
     /* Échelle d'espacement : uniquement des multiples de 4 px */
-    --e1: 4px;
-    --e2: 8px;
-    --e3: 12px;
-    --e4: 16px;
-    --e5: 20px;
-    --e6: 24px;
-    --e7: 32px;
-    --e8: 48px;
+    --e1: 4px; --e2: 8px; --e3: 12px; --e4: 16px;
+    --e5: 20px; --e6: 24px; --e7: 32px; --e8: 48px;
 
-    /* Échelle typographique, base 18 px. Aucun palier en dessous de 17 px. */
-    --t0: .95rem;   /* 17 px — mentions et textes secondaires */
-    --t1: 1rem;     /* 18 px — corps de texte */
-    --t2: 1.125rem; /* 20 px — sous-titres, boutons, marque */
-    --t3: 1.25rem;  /* 23 px — accroche */
-    --t4: 1.5rem;   /* 27 px — titres de section */
-    --t5: 3rem;     /* 54 px — chiffre d'affichage de l'écran de jeu */
-    --t-titre: clamp(2.1rem, 8.5vw, 3rem);        /* h1 de l'accueil */
-    --t-titre-page: clamp(1.75rem, 6.5vw, 2.3rem); /* h1 des pages intérieures */
+    /* Échelle typographique, base 18 px. La charte interdit tout corps sous 17 px. */
+    --t0: .95rem;   /* 17 px */
+    --t1: 1rem;     /* 18 px */
+    --t2: 1.125rem; /* 20 px */
+    --t3: 1.25rem;  /* 23 px */
+    --t4: 1.5rem;   /* 27 px */
+    --t5: 3rem;     /* 54 px */
+    --t-titre: clamp(2.2rem, 9vw, 3.4rem);
+    --t-titre-page: clamp(1.75rem, 6.5vw, 2.3rem);
 
-    /* Rayons */
+    /* Rayons de la charte : cartes 24, grandes cartes 32, pastilles rondes */
     --rayon-focus: 6px;
-    --rayon-petit: 12px;
-    --rayon: 18px;
-    --rayon-grand: 26px;
+    --rayon-petit: 16px;
+    --rayon: 24px;
+    --rayon-grand: 32px;
     --rayon-rond: 999px;
   }
   *, *::before, *::after { box-sizing: border-box; }
@@ -61,160 +54,178 @@
   html { -webkit-text-size-adjust: 100%; font-size: 112.5%; }
   body {
     margin: 0;
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    /* Pile système de la charte : SF Pro Rounded sur les appareils Apple, sans police à télécharger */
+    font-family: ui-rounded, -apple-system, "SF Pro Rounded", "SF Pro Display",
+                 BlinkMacSystemFont, system-ui, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
     font-size: var(--t1);
-    line-height: 1.65;
+    line-height: 1.6;
     color: var(--texte);
     background: var(--fond);
     overflow-wrap: break-word;
   }
   .enveloppe { max-width: 760px; margin: 0 auto; padding: 0 var(--e5); }
-  /* Page en une seule colonne (confidentialité) : espace avant le pied de page.
-     Sur l'accueil, le contenu est dans des <section> qui ont leur propre respiration. */
+  /* Page en une seule colonne (confidentialité) : espace avant le pied de page. */
   main > .enveloppe { padding-bottom: var(--e8); }
 
   /* Lien d'évitement, visible seulement au clavier */
   .saut {
     position: absolute; top: var(--e3); left: var(--e3); z-index: 10;
     transform: translateY(-300%);
-    background: var(--or); color: var(--fond);
+    background: var(--or); color: var(--encre);
     padding: var(--e3) var(--e5); border-radius: var(--rayon-petit);
-    font-weight: 700; text-decoration: none;
+    font-weight: 800; text-decoration: none;
   }
   .saut:focus { transform: none; }
 
   a { color: var(--or); }
   main a, footer a { text-decoration-thickness: 2px; text-underline-offset: 3px; }
+  /* L'or sur blanc ne fait que 1,82:1 : sur fond clair, les liens passent à l'accent violet (5,34:1). */
+  .carte a, .resume a { color: var(--accent); }
   :focus-visible { outline: 3px solid var(--or); outline-offset: 3px; border-radius: var(--rayon-focus); }
 
-  .entete { border-bottom: 1px solid var(--violet); }
+  /* ---- En-tête ---- */
+  .entete { border-bottom: 1px solid rgba(255, 255, 255, .15); }
   .entete .enveloppe {
     display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between;
     gap: var(--e1) var(--e5); padding-top: var(--e3); padding-bottom: var(--e3);
   }
   .marque {
-    display: inline-flex; align-items: center; min-height: 44px;
-    color: var(--or); font-weight: 800; font-size: var(--t2);
-    letter-spacing: .01em; text-decoration: none;
+    display: inline-flex; align-items: center; gap: var(--e3); min-height: 44px;
+    color: var(--texte); font-weight: 900; font-size: var(--t2);
+    letter-spacing: -.01em; text-decoration: none;
   }
+  /* Marque : l'icône retenue de la planche DA — anneau doré, « ? » blanc, fond profond */
+  .sceau {
+    flex: none; display: inline-flex; align-items: center; justify-content: center;
+    width: var(--e7); height: var(--e7); border-radius: var(--rayon-rond);
+    border: 3px solid var(--or); background: var(--fond);
+    font-size: var(--t2); font-weight: 900; line-height: 1; color: var(--texte);
+  }
+  .sceau::before { content: "?"; transform: translateY(-1px); }
   .nav-site ul { display: flex; gap: var(--e2); list-style: none; margin: 0; padding: 0; }
   .nav-site a {
     display: inline-flex; align-items: center; min-height: 44px; padding: 0 var(--e4);
-    border-radius: var(--rayon-petit); color: var(--texte); text-decoration: none;
+    border-radius: var(--rayon-petit); color: var(--texte); font-weight: 700; text-decoration: none;
   }
-  .nav-site a[aria-current="page"] { background: var(--carte); color: var(--or); font-weight: 700; }
-  .nav-site a:hover { background: var(--carte); }
+  .nav-site a[aria-current="page"] { background: var(--voile); color: var(--or); font-weight: 800; }
+  .nav-site a:hover { background: var(--voile); }
 
-  /* ---- Rythme : des bandes alternées plutôt qu'une seule longue colonne ---- */
   main > section { position: relative; padding: var(--e8) 0; }
   main > section h2 { margin-top: 0; }
-  .bande { background: var(--fond-profond); }
 
-  /* ---- Bandeau d'accueil ---- */
-  .hero { text-align: center; overflow: hidden; }
-  /* Halo de « plateau de jeu télé ». Opacités choisies pour que le texte reste
-     au-dessus de 4,5:1 même là où les trois dégradés se superposent. */
+  /* ---- Bandeau d'accueil : dégradé signature + projecteurs très discrets ---- */
+  .hero {
+    text-align: center; overflow: hidden;
+    background: linear-gradient(180deg, var(--fond-haut) 0%, var(--fond) 100%);
+  }
   .hero::before {
-    content: ""; position: absolute; z-index: 0; pointer-events: none;
-    left: -25%; right: -25%; top: -220px; height: 560px;
-    background:
-      radial-gradient(38% 52% at 50% 42%, rgba(var(--or-rvb), .12), transparent 72%),
-      radial-gradient(42% 48% at 18% 58%, rgba(var(--violet-marque-rvb), .30), transparent 72%),
-      radial-gradient(38% 46% at 84% 52%, rgba(var(--corail-rvb), .14), transparent 72%);
+    content: ""; position: absolute; inset: 0; pointer-events: none;
+    background: radial-gradient(ellipse 70% 62% at 50% -12%, rgba(255, 255, 255, .10), transparent 62%);
   }
   .hero > .enveloppe { position: relative; z-index: 1; }
-  .etiquette {
-    display: inline-block; margin: 0 0 var(--e5); padding: var(--e2) var(--e4);
-    border: 1px solid var(--violet); border-radius: var(--rayon-rond);
-    background: rgba(var(--carte-rvb), .8);
-    font-size: var(--t0); font-weight: 600; letter-spacing: .05em; text-transform: uppercase;
+  h1 {
+    font-size: var(--t-titre); font-weight: 900; line-height: 1.02; letter-spacing: -.03em;
+    margin: 0 0 var(--e3); color: var(--texte); text-wrap: balance;
   }
-  h1 { font-size: var(--t-titre); line-height: 1.12; margin: 0 0 .25em; color: var(--or); }
-  .hero h1 { text-shadow: 0 0 34px rgba(var(--or-rvb), .28); }
-  .sous-titre { display: block; font-size: var(--t2); color: var(--texte); letter-spacing: .06em; text-transform: uppercase; margin-top: .6em; }
-  .accroche { font-size: var(--t3); max-width: 32ch; margin: 0 auto; }
+  .hero h1 .sous-titre { color: var(--lavande); }
+  .sous-titre { display: block; }
+  .accroche { font-size: var(--t3); font-weight: 800; color: var(--or); margin: 0 0 var(--e6); }
 
-  /* Écran de jeu décoratif : le « ? € » est un ornement, la légende porte le sens */
-  .tableau {
-    max-width: 328px; margin: var(--e7) auto 0; padding: var(--e4);
-    background: var(--carte); border: 1px solid var(--violet);
-    border-radius: var(--rayon-grand); box-shadow: 0 20px 44px rgba(0, 0, 0, .42);
-  }
-  .ampoules {
-    display: block; height: var(--e3); margin: 0 var(--e2) var(--e3);
-    background-image: radial-gradient(circle at 6px 6px, var(--or) 3px, transparent 3.5px);
-    background-size: 24px 12px; background-repeat: repeat-x;
-  }
-  .tableau-ecran {
-    display: block; padding: var(--e6) var(--e5); border-radius: var(--rayon);
-    background: var(--fond-profond); border: 1px solid rgba(var(--violet-rvb), .55);
-  }
-  .tableau-prix {
-    display: block; color: var(--or); font-size: var(--t5); font-weight: 800;
-    line-height: 1.05; letter-spacing: .04em;
-  }
-  .tableau-legende {
-    margin-top: var(--e3); color: var(--texte-doux);
-    font-size: var(--t0); letter-spacing: .08em; text-transform: uppercase;
+  .precision {
+    font-size: var(--t2); font-weight: 700; color: var(--texte-doux);
+    max-width: 34ch; margin: 0 auto var(--e6);
   }
 
+  /* Publics visés — pastilles de la bannière de la planche DA */
+  .publics { display: flex; flex-wrap: wrap; justify-content: center; gap: var(--e3); list-style: none; margin: 0 0 var(--e7); padding: 0; }
+  .publics li { padding: var(--e2) var(--e5); border-radius: var(--rayon-rond); font-weight: 800; color: #fff; }
+  .publics .enfants { background: var(--corail); }
+  .publics .seniors { background: var(--vert); }
+  .publics .famille { background: var(--bleu); }
+
+  /* Objet sur carte blanche : la signature visuelle du jeu */
+  .objet { max-width: 340px; margin: 0 auto; }
+  .objet-carte {
+    display: flex; flex-direction: column; align-items: center; gap: var(--e2);
+    background: var(--carte); border-radius: var(--rayon-grand); padding: var(--e6);
+    box-shadow: 0 20px 44px rgba(0, 0, 0, .42);
+  }
+  .objet-emoji { font-size: 5rem; line-height: 1; }
+  .objet-nom { font-size: var(--t3); font-weight: 900; color: var(--encre); }
+  .objet-prix {
+    display: block; margin-top: var(--e5);
+    font-size: var(--t5); font-weight: 900; line-height: 1; letter-spacing: -.02em; color: var(--or);
+  }
+  .objet-legende { margin-top: var(--e2); font-size: var(--t2); font-weight: 800; color: var(--texte-doux); }
+
+  /* ---- Pages intérieures ---- */
   .titre-page { padding: var(--e7) 0 0; }
   .titre-page h1 { font-size: var(--t-titre-page); }
-  .titre-page .sous-titre { text-transform: none; letter-spacing: 0; }
-  .date { color: var(--texte-doux); font-size: var(--t0); }
-  .resume { background: var(--carte); border: 1px solid var(--violet); border-radius: var(--rayon); padding: var(--e5); }
+  .titre-page .sous-titre { font-size: var(--t2); font-weight: 800; color: var(--lavande); margin-top: var(--e3); }
+  .date { color: var(--texte-doux); font-size: var(--t0); font-weight: 700; }
+  .resume {
+    background: var(--carte); color: var(--encre); border-radius: var(--rayon);
+    padding: var(--e6); font-weight: 500;
+  }
   .resume p:last-child { margin-bottom: 0; }
 
-  h2 { font-size: var(--t4); line-height: 1.25; margin: 2.2em 0 .8em; color: var(--or); }
-  h3 { font-size: var(--t2); margin: 0 0 .35em; color: var(--or); }
+  h2 { font-size: var(--t4); font-weight: 900; line-height: 1.15; letter-spacing: -.02em; margin: 2em 0 .7em; color: var(--or); }
+  h3 { font-size: var(--t3); font-weight: 900; margin: 0 0 var(--e1); color: var(--encre); }
   p { margin: 0 0 1em; }
 
+  /* ---- Cartes blanches ---- */
+  /* Les cartes blanches respirent mal à 760 px en trois colonnes : ce bloc seul est plus large. */
+  .section-large .enveloppe { max-width: 920px; }
   .modes { display: grid; gap: var(--e4); list-style: none; margin: 0; padding: 0; }
   @media (min-width: 700px) { .modes { grid-template-columns: repeat(3, 1fr); } }
   .carte {
-    background: var(--carte); border: 1px solid var(--violet);
+    background: var(--carte); color: var(--encre);
     border-radius: var(--rayon); padding: var(--e6);
-    transition: transform .18s ease, border-color .18s ease;
+    box-shadow: 0 12px 30px rgba(0, 0, 0, .3);
+    transition: transform .18s ease;
   }
-  .carte:hover { transform: translateY(-3px); border-color: var(--or); }
-  .carte p { margin: 0; color: var(--texte-doux); }
-  .mode-icone { display: block; width: var(--e7); height: var(--e7); margin-bottom: var(--e3); color: var(--or); }
+  .carte:hover { transform: translateY(-3px); }
+  .carte p { margin: 0; color: var(--encre-douce); font-weight: 700; font-size: var(--t0); }
+  .pictogramme {
+    display: flex; align-items: center; justify-content: center;
+    width: 64px; height: 64px; border-radius: var(--rayon-petit);
+    margin-bottom: var(--e4); font-size: 2rem; line-height: 1;
+  }
+  .pictogramme.lilas { background: #EFEBFF; }
+  .pictogramme.menthe { background: #E4F3EA; }
+  .pictogramme.ciel { background: #E4ECFA; }
 
-  /* Ce que l'on gagne : des pastilles plutôt qu'une liste de plus */
+  /* ---- Pastilles sur fond profond ---- */
   .jetons { display: flex; flex-wrap: wrap; gap: var(--e3); list-style: none; margin: 0; padding: 0; }
-  .jetons li {
-    padding: var(--e2) var(--e4); border-radius: var(--rayon-rond); font-weight: 600;
-    background: var(--carte); border: 1px solid var(--violet);
-  }
+  .jetons li { padding: var(--e2) var(--e5); border-radius: var(--rayon-rond); font-weight: 800; background: var(--voile); }
 
   .avantages { display: grid; gap: var(--e4); list-style: none; margin: 0; padding: 0; }
   @media (min-width: 700px) { .avantages { grid-template-columns: 1fr 1fr; } }
   .avantages li { display: flex; gap: var(--e3); align-items: flex-start; }
   .coche { flex: 0 0 auto; width: var(--e6); height: var(--e6); margin-top: var(--e1); color: var(--or); }
 
-  .appel {
-    background: var(--carte); border: 1px solid var(--violet);
-    border-radius: var(--rayon-grand); padding: var(--e7) var(--e6); text-align: center;
-  }
+  /* ---- Appel à l'action ---- */
+  .appel { text-align: center; }
   .bouton {
     display: inline-flex; align-items: center; justify-content: center;
-    min-height: 52px; padding: 0 var(--e6); border-radius: var(--rayon-rond);
-    background: var(--or); color: var(--fond);
-    font-size: var(--t2); font-weight: 700; text-decoration: none;
+    min-height: 56px; padding: 0 var(--e7); border-radius: var(--rayon);
+    background: var(--or); color: var(--encre);
+    font-size: var(--t2); font-weight: 800; text-decoration: none;
+    box-shadow: 0 10px 24px rgba(0, 0, 0, .3);
     transition: filter .18s ease;
   }
   .bouton:hover { filter: brightness(1.08); }
 
-  footer { border-top: 1px solid var(--violet); }
+  footer { border-top: 1px solid rgba(255, 255, 255, .15); }
   footer .enveloppe { padding-top: var(--e6); padding-bottom: var(--e7); }
-  footer p { color: var(--texte-doux); font-size: var(--t0); }
+  footer p { color: var(--texte-doux); font-size: var(--t0); font-weight: 700; }
   footer p:last-child { margin-bottom: 0; }
   /* Lien de bas de page : cible tactile de 44 px de haut, comme dans la barre de navigation */
   .lien-page {
     display: inline-flex; align-items: center; min-height: 44px;
     padding: 0 var(--e4); margin-left: calc(-1 * var(--e4)); border-radius: var(--rayon-petit);
   }
-  .lien-page:hover { background: var(--carte); }
+  .lien-page:hover { background: var(--voile); }
 
   /* Quand le système demande moins d'animation, on n'en joue aucune */
   @media (prefers-reduced-motion: reduce) {
@@ -228,19 +239,24 @@
      on repasse donc en texte foncé sur blanc pour rester lisible. */
   @media print {
     :root { color-scheme: light; }
-    body { background: #fff; color: #1B1240; font-size: 11pt; line-height: 1.45; }
+    body { background: #fff; color: var(--encre); font-size: 11pt; line-height: 1.45; }
     .enveloppe { max-width: none; padding: 0; }
-    .saut, .nav-site, .hero::before, .ampoules, .tableau { display: none; }
+    .saut, .nav-site, .hero::before, .objet, .pictogramme, .sceau { display: none; }
     main > section { padding: var(--e3) 0; }
-    .marque, h1, h2, h3, .sous-titre, .date, footer p, .carte p,
-    .jetons li, .mode-icone, .coche { color: #1B1240; }
-    .hero h1 { text-shadow: none; }
+    .hero { background: none; }
+    h1, h2, h3, .marque, .accroche, .date, .sous-titre, footer p,
+    .jetons li, .publics li, .coche, .precision, .objet-legende,
+    .hero h1 .sous-titre,
+    .titre-page .sous-titre { color: var(--encre); }
     a { color: #3A2B9E; }
     main a[href^="http"]::after { content: " (" attr(href) ")"; font-weight: 400; word-break: break-all; }
     .entete, footer { border-color: #6B6484; }
-    .bande { background: #fff; }
-    .resume, .carte, .appel, .jetons li, .etiquette { background: #fff; border-color: #6B6484; }
-    .bouton, .lien-page { min-height: 0; padding: 0; margin-left: 0; background: none; color: #3A2B9E; }
+    .carte, .resume, .jetons li, .publics li,
+    .publics .enfants, .publics .seniors, .publics .famille {
+      background: #fff; box-shadow: none; border: 1px solid #6B6484;
+    }
+    .bouton, .lien-page { min-height: 0; padding: 0; margin-left: 0; background: none;
+      box-shadow: none; color: #3A2B9E; }
     h2, h3 { break-after: avoid; }
     p, li { break-inside: avoid; }
   }
@@ -251,7 +267,7 @@
 
 <header class="entete">
   <div class="enveloppe">
-    <a class="marque" href="index.html">Devine le Prix</a>
+    <a class="marque" href="index.html"><span class="sceau" aria-hidden="true"></span>Devine le Prix</a>
     <nav class="nav-site" aria-label="Navigation principale">
       <ul>
         <li><a href="index.html">Accueil</a></li>
