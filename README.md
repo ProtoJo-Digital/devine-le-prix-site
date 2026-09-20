@@ -50,8 +50,26 @@ déclarées en variables CSS dans `:root`, en haut de chaque page :
 | `--texte-doux` | `#CFC6F0` | Texte secondaire (dates, pied de page) |
 | `--violet` | `#7668E2` | Bordures — le violet de marque `#6657D9`, éclairci pour atteindre 3:1 |
 | `--or` | `#FAB31A` | Titres, liens, boutons |
-| `--corail` | `#D63D2F` | Filet de séparation |
-| `--rayon` | `18px` | Rayon des coins arrondis |
+| `--corail` | `#D63D2F` | Halo du bandeau d'accueil |
+| `--fond-profond` | `#150E31` | Bandes de section alternées, écran de jeu |
+
+### Espacements, tailles et rayons
+
+Toutes les marges, tous les espacements et tous les rayons passent par un
+token. **Aucune valeur en dur dans le CSS** : si un palier manque, on l'ajoute
+à l'échelle plutôt que d'écrire une valeur à la main.
+
+| Échelle | Tokens |
+| --- | --- |
+| Espacement (multiples de 4 px) | `--e1` 4 · `--e2` 8 · `--e3` 12 · `--e4` 16 · `--e5` 20 · `--e6` 24 · `--e7` 32 · `--e8` 48 |
+| Typographie (base 18 px) | `--t0` 17 · `--t1` 18 · `--t2` 20 · `--t3` 23 · `--t4` 27 · `--t5` 54, plus `--t-titre` et `--t-titre-page` qui sont fluides |
+| Rayons | `--rayon-focus` 6 · `--rayon-petit` 12 · `--rayon` 18 · `--rayon-grand` 26 · `--rayon-rond` (pastilles et boutons) |
+
+Le plus petit palier typographique est à 17 px : il n'existe pas de taille en
+dessous, ce qui garantit le minimum de 16 px sur tout le site.
+
+Deux exceptions assumées, toutes deux commentées dans le CSS : la base `112.5%`
+sur `html`, et les dimensions du halo décoratif du bandeau d'accueil.
 
 ## Règles à respecter
 
