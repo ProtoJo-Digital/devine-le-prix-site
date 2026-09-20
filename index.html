@@ -23,10 +23,16 @@
     --corail: #D63D2F;
     --vert: #1E7F46;
     --bleu: #2A6FD0;
-    --violet: #994DCC;
+    --violet: #994DCC;    /* réserve de la planche, pas encore utilisée sur le site */
     --accent: #6657D9;
     --lavande: #B9AEFF;
     --voile: rgba(255, 255, 255, .14);   /* Badges posés sur le fond profond */
+    /* Teintes claires des pictogrammes, posées sur carte blanche.
+       Les deux premières viennent de la planche ; la troisième a été ajoutée
+       par analogie pour la troisième carte, elle n'y figure pas. */
+    --lilas: #EFEBFF;
+    --menthe: #E4F3EA;
+    --ciel: #E4ECFA;
 
     /* Échelle d'espacement : uniquement des multiples de 4 px */
     --e1: 4px; --e2: 8px; --e3: 12px; --e4: 16px;
@@ -191,9 +197,9 @@
     width: 64px; height: 64px; border-radius: var(--rayon-petit);
     margin-bottom: var(--e4); font-size: 2rem; line-height: 1;
   }
-  .pictogramme.lilas { background: #EFEBFF; }
-  .pictogramme.menthe { background: #E4F3EA; }
-  .pictogramme.ciel { background: #E4ECFA; }
+  .pictogramme.lilas { background: var(--lilas); }
+  .pictogramme.menthe { background: var(--menthe); }
+  .pictogramme.ciel { background: var(--ciel); }
 
   /* ---- Pastilles sur fond profond ---- */
   .jetons { display: flex; flex-wrap: wrap; gap: var(--e3); list-style: none; margin: 0; padding: 0; }
@@ -308,12 +314,12 @@
         <li class="carte">
           <span class="pictogramme lilas" aria-hidden="true">🎯</span>
           <h3>Tout seul</h3>
-          <p>Jouez à votre rythme, gagnez des points et montez de niveau.</p>
+          <p>Joue à ton rythme, gagne des points et monte de niveau.</p>
         </li>
         <li class="carte">
           <span class="pictogramme menthe" aria-hidden="true">👨‍👩‍👧</span>
           <h3>Sur ce téléphone</h3>
-          <p>Passez l'appareil de main en main : chacun choisit son prénom et son avatar.</p>
+          <p>Passe l'appareil de main en main : chacun choisit son prénom et son avatar.</p>
         </li>
         <li class="carte">
           <span class="pictogramme ciel" aria-hidden="true">📲</span>
@@ -326,7 +332,7 @@
 
   <section>
     <div class="enveloppe">
-      <h2>Ce que l'on gagne en jouant</h2>
+      <h2>Ce que tu gagnes en jouant</h2>
       <ul class="jetons">
         <li>Niveaux</li>
         <li>Points d'expérience</li>
@@ -349,11 +355,11 @@
         </li>
         <li>
           <svg class="coche" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="m4 12.5 5 5L20 6.5"/></svg>
-          <span>Aucun compte, aucune inscription : on ouvre l'application et on joue.</span>
+          <span>Aucun compte, aucune inscription : tu ouvres l'application et tu joues.</span>
         </li>
         <li>
           <svg class="coche" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="m4 12.5 5 5L20 6.5"/></svg>
-          <span>Aucune donnée personnelle collectée. La progression reste sur l'appareil, et se retrouve sur vos autres appareils si iCloud est activé.</span>
+          <span>Aucune donnée personnelle collectée. La progression reste sur l'appareil, et se retrouve sur tes autres appareils si iCloud est activé.</span>
         </li>
         <li>
           <svg class="coche" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="m4 12.5 5 5L20 6.5"/></svg>
@@ -361,7 +367,7 @@
         </li>
         <li>
           <svg class="coche" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="m4 12.5 5 5L20 6.5"/></svg>
-          <span>Un rappel quotidien, à l'heure de votre choix, si vous le souhaitez.</span>
+          <span>Un rappel quotidien, à l'heure de ton choix, si tu le souhaites.</span>
         </li>
         <li>
           <svg class="coche" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="m4 12.5 5 5L20 6.5"/></svg>
@@ -383,7 +389,7 @@
 <footer>
   <div class="enveloppe">
     <p>Devine le Prix – Jeu Famille est édité par ProtoJo Digital (Johan Quille), France.<br>
-    Une question ? Écrivez à <a href="mailto:johan.quille@trainedmanager.fr">johan.quille@trainedmanager.fr</a>.</p>
+    Une question ? Écris à <a href="mailto:johan.quille@trainedmanager.fr">johan.quille@trainedmanager.fr</a>.</p>
     <p><a class="lien-page" href="confidentialite.html">Politique de confidentialité</a></p>
   </div>
 </footer>

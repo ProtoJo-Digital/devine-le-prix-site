@@ -59,10 +59,13 @@ discrets, objets en emoji sur cartes blanches. »
 | `--corail` | `#D63D2F` | Public « Enfants » |
 | `--vert` | `#1E7F46` | Public « Seniors » |
 | `--bleu` | `#2A6FD0` | Public « En famille » |
-| `--violet` | `#994DCC` | Réserve de la palette |
+| `--violet` | `#994DCC` | Réserve de la planche, pas encore utilisée sur le site |
 | `--accent` | `#6657D9` | Liens posés sur fond clair |
 | `--lavande` | `#B9AEFF` | Sous-titre « – Jeu Famille » |
 | `--voile` | `rgba(255,255,255,.14)` | Pastilles posées sur le fond profond |
+| `--lilas` | `#EFEBFF` | Fond du pictogramme « Tout seul » |
+| `--menthe` | `#E4F3EA` | Fond du pictogramme « Sur ce téléphone » |
+| `--ciel` | `#E4ECFA` | Fond du pictogramme « Avec d'autres téléphones ». **Hors planche** : ajoutée par analogie avec les deux précédentes |
 
 Deux règles de couleur, non négociables :
 
@@ -98,6 +101,18 @@ dimensions du halo décoratif.
 L'icône retenue sur la planche est un **anneau doré avec un « ? » blanc sur fond
 profond**. Elle est redessinée en CSS dans l'en-tête (`.sceau`) et en SVG dans la
 favicon, sans fichier image.
+
+### Registre
+
+**Le site tutoie.** C'est le registre de l'application et de la planche :
+« Trouve le prix des objets ! ». Les textes de l'accueil suivent, y compris le
+pied de page, commun aux deux pages.
+
+**Une exception : la politique de confidentialité reste au vouvoiement.** C'est un
+document juridique ; en changer le registre reviendrait à le réécrire, ce que la
+règle « ne pas modifier le fond » interdit.
+
+### Formulations
 
 Formulations officielles : l'accroche est « Trouve le prix des objets ! », la
 formule du jeu est « Pile le bon prix ! », et les prix s'écrivent au format
