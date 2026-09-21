@@ -108,7 +108,9 @@
     font-size: var(--t2); font-weight: 900; line-height: 1; color: var(--texte);
   }
   .sceau::before { content: "?"; transform: translateY(-1px); }
-  .nav-site ul { display: flex; gap: var(--e2); list-style: none; margin: 0; padding: 0; }
+  /* Les deux onglets passent à la ligne quand le texte est agrandi,
+     plutôt que de pousser la page en dehors de l'écran. */
+  .nav-site ul { display: flex; flex-wrap: wrap; gap: var(--e2); list-style: none; margin: 0; padding: 0; }
   .nav-site a {
     display: inline-flex; align-items: center; min-height: 44px; padding: 0 var(--e4);
     border-radius: var(--rayon-petit); color: var(--texte); font-weight: 700; text-decoration: none;
