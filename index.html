@@ -90,12 +90,21 @@
   .carte a, .resume a { color: var(--accent); }
   :focus-visible { outline: 3px solid var(--or); outline-offset: 3px; border-radius: var(--rayon-focus); }
 
+  /* Onglets, boutons et pastilles sont des boîtes « inline-flex » : par défaut elles
+     refusent de descendre sous la largeur de leur mot le plus long et poussent la page
+     hors de l'écran dès que le texte est agrandi. On les autorise à rétrécir, quitte à
+     couper un mot trop long — mieux vaut une coupure qu'un défilement latéral. */
+  .nav-site a, .bouton, .lien-page, .jetons li { max-width: 100%; overflow-wrap: anywhere; }
+
   /* ---- En-tête ---- */
   .entete { border-bottom: 1px solid rgba(255, 255, 255, .15); }
   .entete .enveloppe {
     display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between;
     gap: var(--e1) var(--e5); padding-top: var(--e3); padding-bottom: var(--e3);
   }
+  /* Sans cela, la marque et les onglets refusent de descendre sous la largeur de leur
+     mot le plus long : à texte très agrandi, ils poussent la page hors de l'écran. */
+  .entete .enveloppe > * { min-width: 0; }
   .marque {
     display: inline-flex; align-items: center; gap: var(--e3); min-height: 44px;
     color: var(--texte); font-weight: 900; font-size: var(--t2);
@@ -112,8 +121,9 @@
   /* Les deux onglets passent à la ligne quand le texte est agrandi,
      plutôt que de pousser la page en dehors de l'écran. */
   .nav-site ul { display: flex; flex-wrap: wrap; gap: var(--e2); list-style: none; margin: 0; padding: 0; }
+  .nav-site ul, .nav-site li { min-width: 0; }
   .nav-site a {
-    display: inline-flex; align-items: center; min-height: 44px; padding: 0 var(--e4);
+    display: inline-flex; align-items: center; min-height: 44px; padding: var(--e1) var(--e4);
     border-radius: var(--rayon-petit); color: var(--texte); font-weight: 700; text-decoration: none;
   }
   .nav-site a[aria-current="page"] { background: var(--voile); color: var(--or); font-weight: 800; }
@@ -185,8 +195,14 @@
   /* ---- Cartes blanches ---- */
   /* Les cartes blanches respirent mal à 760 px en trois colonnes : ce bloc seul est plus large. */
   .section-large .enveloppe { max-width: 920px; }
+  /* ...mais son titre reste aligné sur ceux des autres sections : 720 px centrés dans
+     les 880 px du bloc large retombent exactement sur la colonne de texte habituelle. */
+  .section-large h2 { max-width: 720px; margin-inline: auto; }
   .modes { display: grid; gap: var(--e4); list-style: none; margin: 0; padding: 0; }
   @media (min-width: 700px) { .modes { grid-template-columns: repeat(3, 1fr); } }
+  /* Une case de grille ou de flexbox ne rétrécit pas sous son mot le plus long
+     tant qu'on ne l'y autorise pas : « téléphones » suffisait à élargir la page. */
+  .modes > li, .avantages li, .avantages li > span { min-width: 0; }
   .carte {
     background: var(--carte); color: var(--encre);
     border-radius: var(--rayon); padding: var(--e6);
@@ -217,7 +233,8 @@
   .appel { text-align: center; }
   .bouton {
     display: inline-flex; align-items: center; justify-content: center;
-    min-height: 56px; padding: 0 var(--e7); border-radius: var(--rayon);
+    min-height: 56px; padding: var(--e2) var(--e7); border-radius: var(--rayon);
+    text-align: center;
     background: var(--or); color: var(--encre);
     font-size: var(--t2); font-weight: 800; text-decoration: none;
     box-shadow: 0 10px 24px rgba(0, 0, 0, .3);
@@ -232,7 +249,7 @@
   /* Lien de bas de page : cible tactile de 44 px de haut, comme dans la barre de navigation */
   .lien-page {
     display: inline-flex; align-items: center; min-height: 44px;
-    padding: 0 var(--e4); margin-left: calc(-1 * var(--e4)); border-radius: var(--rayon-petit);
+    padding: var(--e1) var(--e4); margin-left: calc(-1 * var(--e4)); border-radius: var(--rayon-petit);
   }
   .lien-page:hover { background: var(--voile); }
 
@@ -280,7 +297,7 @@
     <nav class="nav-site" aria-label="Navigation principale">
       <ul>
         <li><a href="index.html" aria-current="page">Accueil</a></li>
-        <li><a href="confidentialite.html">Confidentialité</a></li>
+        <li><a href="confidentialite.html">Confiden&shy;tialité</a></li>
       </ul>
     </nav>
   </div>
