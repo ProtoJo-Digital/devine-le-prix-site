@@ -8,6 +8,16 @@
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%231B1240'/%3E%3Ccircle cx='32' cy='32' r='21' fill='none' stroke='%23FAB31A' stroke-width='6'/%3E%3Ctext x='32' y='44' text-anchor='middle' font-family='system-ui,sans-serif' font-size='32' font-weight='900' fill='%23ffffff'%3E?%3C/text%3E%3C/svg%3E">
 <title>Devine le Prix – Jeu Famille</title>
 <meta name="description" content="Devine le Prix – Jeu Famille : le jeu sur iPhone et iPad où toute la famille devine le prix des objets. Sans compte, sans inscription, aucune donnée personnelle collectée.">
+<link rel="canonical" href="https://devine-le-prix.protojo.fr/">
+<!-- Aperçu du lien quand le site est partagé (Messages, WhatsApp, réseaux sociaux) :
+     sans ces lignes, seule l'adresse brute s'affiche. Le texte reprend mot pour mot
+     le titre et la description ci-dessus. -->
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Devine le Prix – Jeu Famille">
+<meta property="og:locale" content="fr_FR">
+<meta property="og:url" content="https://devine-le-prix.protojo.fr/">
+<meta property="og:title" content="Devine le Prix – Jeu Famille">
+<meta property="og:description" content="Le jeu sur iPhone et iPad où toute la famille devine le prix des objets. Sans compte, sans inscription, aucune donnée personnelle collectée.">
 <style>
   :root {
     color-scheme: dark;
@@ -177,6 +187,26 @@
   }
   .objet-legende { margin-top: var(--e2); font-size: var(--t2); font-weight: 800; color: var(--texte-doux); }
 
+  /* ---- Mini-partie d'essai (accueil) ----
+     Deux gros boutons, une réponse immédiate : on comprend le jeu en un geste,
+     sans rien installer. Tout est allumé par le script de bas de page ; sans
+     lui, la carte garde son « ? € » et aucun bouton ne s'affiche. */
+  .essai { margin-top: var(--e6); }
+  .essai-boutons { display: flex; flex-wrap: wrap; justify-content: center; gap: var(--e3); }
+  .essai-verdict {
+    display: inline-flex; align-items: center; justify-content: center;
+    max-width: 100%; min-height: 44px; margin: var(--e4) 0 0;
+    padding: var(--e2) var(--e5); border-radius: var(--rayon-rond);
+    font-size: var(--t2); font-weight: 800; color: var(--texte);
+    overflow-wrap: anywhere;
+  }
+  /* Le verdict reste dans la page même vide, pour que les lecteurs d'écran
+     le suivent ; tant qu'il n'a rien à dire, il ne prend aucune place. */
+  .essai-verdict:empty { min-height: 0; margin: 0; padding: 0; }
+  .essai-verdict.juste { background: var(--vert); }
+  .essai-verdict.faux { background: var(--corail); }
+  .essai-rejouer { margin-top: var(--e4); }
+
   /* ---- Pages intérieures ---- */
   .titre-page { padding: var(--e7) 0 0; }
   .titre-page h1 { font-size: var(--t-titre-page); }
@@ -187,6 +217,33 @@
     padding: var(--e6); font-weight: 500;
   }
   .resume p:last-child { margin-bottom: 0; }
+
+  /* ---- Sommaire de la politique de confidentialité ----
+     La page fait près de 7 000 px de haut sur un téléphone : sans sommaire,
+     on n'atteint une section qu'en faisant défiler à l'aveugle. Les ancres
+     rendent en prime chaque section adressable par un lien. */
+  .sommaire { margin-bottom: var(--e7); }
+  .sommaire h2 { font-size: var(--t3); margin: var(--e7) 0 var(--e3); }
+  .sommaire ol {
+    display: grid; gap: var(--e1); counter-reset: sommaire;
+    list-style: none; margin: 0; padding: 0;
+  }
+  @media (min-width: 700px) { .sommaire ol { grid-template-columns: 1fr 1fr; } }
+  .sommaire li { counter-increment: sommaire; min-width: 0; }
+  /* Pas de soulignement : c'est de la navigation, comme les onglets de
+     l'en-tête, et le trait passait aussi sous le numéro. */
+  .sommaire a {
+    display: flex; align-items: center; gap: var(--e3); min-height: 44px;
+    padding: var(--e1) var(--e4); margin-left: calc(-1 * var(--e4));
+    border-radius: var(--rayon-petit); font-weight: 700; text-decoration: none;
+  }
+  .sommaire a::before {
+    content: counter(sommaire) "."; flex: none;
+    color: var(--texte-doux); font-weight: 800;
+  }
+  .sommaire a:hover { background: var(--voile); }
+  /* Un titre atteint par une ancre ne colle pas au bord haut de l'écran */
+  :target { scroll-margin-top: var(--e6); }
 
   h2 { font-size: var(--t4); font-weight: 900; line-height: 1.15; letter-spacing: -.02em; margin: 2em 0 .7em; color: var(--or); }
   h3 { font-size: var(--t3); font-weight: 900; margin: 0 0 var(--e1); color: var(--encre); }
@@ -207,9 +264,10 @@
     background: var(--carte); color: var(--encre);
     border-radius: var(--rayon); padding: var(--e6);
     box-shadow: 0 12px 30px rgba(0, 0, 0, .3);
-    transition: transform .18s ease;
   }
-  .carte:hover { transform: translateY(-3px); }
+  /* Pas d'effet de survol sur les cartes : elles ne sont pas cliquables, et sur
+     iPhone le survol reste collé après un appui — il laissait croire qu'il
+     venait de se passer quelque chose. */
   .carte p { margin: 0; color: var(--encre-douce); font-weight: 700; font-size: var(--t0); }
   .pictogramme {
     display: flex; align-items: center; justify-content: center;
@@ -241,6 +299,13 @@
     transition: filter .18s ease;
   }
   .bouton:hover { filter: brightness(1.08); }
+  /* Les deux variantes sont déclarées après « .bouton » : à égalité de
+     spécificité, c'est la dernière règle qui gagne. */
+  /* Rembourrage réduit, pour que les deux choix tiennent côte à côte sur un
+     téléphone de 375 px et passent l'un sous l'autre en dessous. */
+  .bouton-choix { padding-inline: var(--e4); }
+  /* Bouton secondaire : discret à côté de l'or du bouton principal. */
+  .bouton-doux { background: var(--voile); color: var(--texte); box-shadow: none; }
 
   footer { border-top: 1px solid rgba(255, 255, 255, .15); }
   footer .enveloppe { padding-top: var(--e6); padding-bottom: var(--e7); }
@@ -267,12 +332,13 @@
     :root { color-scheme: light; }
     body { background: #fff; color: var(--encre); font-size: 11pt; line-height: 1.45; }
     .enveloppe { max-width: none; padding: 0; }
-    .saut, .nav-site, .hero::before, .objet, .pictogramme, .sceau { display: none; }
+    .saut, .nav-site, .hero::before, .objet, .essai, .retour,
+    .pictogramme, .sceau { display: none; }
     main > section { padding: var(--e3) 0; }
     .hero { background: none; }
     h1, h2, h3, .marque, .accroche, .date, .sous-titre, footer p,
     .jetons li, .publics li, .coche, .precision, .objet-legende,
-    .hero h1 .sous-titre,
+    .hero h1 .sous-titre, .sommaire a::before,
     .titre-page .sous-titre { color: var(--encre); }
     a { color: #3A2B9E; }
     main a[href^="http"]::after { content: " (" attr(href) ")"; font-weight: 400; word-break: break-all; }
@@ -281,7 +347,7 @@
     .publics .enfants, .publics .seniors, .publics .famille {
       background: #fff; box-shadow: none; border: 1px solid #6B6484;
     }
-    .bouton, .lien-page { min-height: 0; padding: 0; margin-left: 0; background: none;
+    .bouton, .lien-page, .sommaire a { min-height: 0; padding: 0; margin-left: 0; background: none;
       box-shadow: none; color: #3A2B9E; }
     h2, h3 { break-after: avoid; }
     p, li { break-inside: avoid; }
@@ -318,12 +384,23 @@
       <!-- Le bouton « Télécharger sur l'App Store » viendra ici, dès que l'adresse de la fiche App Store sera connue. -->
       <figure class="objet">
         <span class="objet-carte">
-          <span class="objet-emoji" aria-hidden="true">🎧</span>
-          <span class="objet-nom">Un casque audio</span>
+          <span class="objet-emoji" id="essai-emoji" aria-hidden="true">🎧</span>
+          <span class="objet-nom" id="essai-nom">Un casque audio</span>
         </span>
-        <span class="objet-prix" aria-hidden="true">?&nbsp;€</span>
-        <figcaption class="objet-legende">Quel est le prix ?</figcaption>
+        <span class="objet-prix" id="essai-prix" aria-hidden="true">?&nbsp;€</span>
+        <figcaption class="objet-legende" id="essai-question">Quel est le prix ?</figcaption>
       </figure>
+
+      <!-- Mini-partie d'essai. Le bloc reste caché tant que le script ne l'a pas
+           allumé : sans JavaScript, la page reste exactement ce qu'elle est. -->
+      <div class="essai" id="essai" hidden>
+        <div class="essai-boutons" id="essai-boutons">
+          <button type="button" class="bouton bouton-choix" id="essai-moins" data-reponse="moins">C'est moins</button>
+          <button type="button" class="bouton bouton-choix" data-reponse="plus">C'est plus</button>
+        </div>
+        <p class="essai-verdict" id="essai-verdict" role="status"></p>
+        <p><button type="button" class="bouton bouton-doux essai-rejouer" id="essai-rejouer" hidden>Un autre objet</button></p>
+      </div>
     </div>
   </section>
 
@@ -413,5 +490,80 @@
     <p><a class="lien-page" href="confidentialite.html">Politique de confidentialité</a></p>
   </div>
 </footer>
+
+<script>
+/* Mini-partie d'essai de la page d'accueil.
+   Aucune bibliothèque, aucun appel réseau, rien d'enregistré : le script se
+   contente d'allumer le bloc « essai » et d'écrire dans la carte déjà présente.
+   Sans JavaScript, rien de tout cela ne s'affiche et la page reste exactement
+   ce qu'elle était. */
+(function () {
+  "use strict";
+
+  /* Objets d'exemple, propres au site : on montre un prix, le visiteur dit si
+     le vrai prix est au-dessus ou en dessous. */
+  var OBJETS = [
+    { emoji: "🎧", nom: "Un casque audio",      sujet: "Il",   propose: 149, vrai: 79 },
+    { emoji: "🛴", nom: "Une trottinette",      sujet: "Elle", propose: 99,  vrai: 159 },
+    { emoji: "🧸", nom: "Un ours en peluche",   sujet: "Il",   propose: 45,  vrai: 19 },
+    { emoji: "⌚", nom: "Une montre connectée", sujet: "Elle", propose: 199, vrai: 249 }
+  ];
+
+  var essai    = document.getElementById("essai");
+  var emoji    = document.getElementById("essai-emoji");
+  var nom      = document.getElementById("essai-nom");
+  var prix     = document.getElementById("essai-prix");
+  var question = document.getElementById("essai-question");
+  var boutons  = document.getElementById("essai-boutons");
+  var verdict  = document.getElementById("essai-verdict");
+  var rejouer  = document.getElementById("essai-rejouer");
+  var premier  = document.getElementById("essai-moins");
+  if (!essai || !emoji || !boutons || !verdict || !rejouer) { return; }
+
+  var rang = Math.floor(Math.random() * OBJETS.length);
+  var encours = null;
+
+  function euros(n) { return n + "\u00a0€"; }
+
+  function poser() {
+    encours = OBJETS[rang % OBJETS.length];
+    rang += 1;
+    emoji.textContent = encours.emoji;
+    nom.textContent = encours.nom;
+    prix.textContent = euros(encours.propose);
+    /* Le prix devient une vraie information : il cesse d'être masqué aux
+       lecteurs d'écran, contrairement au « ? € » décoratif du départ. */
+    prix.removeAttribute("aria-hidden");
+    question.textContent = "Le vrai prix est-il plus ou moins\u00a0?";
+    verdict.textContent = "";
+    verdict.className = "essai-verdict";
+    rejouer.hidden = true;
+  }
+
+  function repondre(reponse) {
+    if (!encours) { return; }
+    var juste = (encours.vrai < encours.propose) === (reponse === "moins");
+    /* Le mot porte la réponse autant que la couleur : jamais la couleur seule. */
+    verdict.className = "essai-verdict " + (juste ? "juste" : "faux");
+    verdict.textContent = (juste ? "Bravo\u00a0!" : "Raté\u00a0!") + " " +
+      encours.sujet + " coûte " + euros(encours.vrai) + ".";
+    rejouer.hidden = false;
+  }
+
+  boutons.addEventListener("click", function (e) {
+    var b = e.target && e.target.closest ? e.target.closest("[data-reponse]") : null;
+    if (b) { repondre(b.getAttribute("data-reponse")); }
+  });
+
+  rejouer.addEventListener("click", function () {
+    poser();
+    /* Le bouton qui vient de disparaître avait le focus : on le rend au jeu. */
+    if (premier) { premier.focus(); }
+  });
+
+  poser();
+  essai.hidden = false;
+})();
+</script>
 </body>
 </html>
