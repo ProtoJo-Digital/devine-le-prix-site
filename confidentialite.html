@@ -8,6 +8,16 @@
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%231B1240'/%3E%3Ccircle cx='32' cy='32' r='21' fill='none' stroke='%23FAB31A' stroke-width='6'/%3E%3Ctext x='32' y='44' text-anchor='middle' font-family='system-ui,sans-serif' font-size='32' font-weight='900' fill='%23ffffff'%3E?%3C/text%3E%3C/svg%3E">
 <title>Politique de confidentialité – Devine le Prix</title>
 <meta name="description" content="Politique de confidentialité de Devine le Prix – Jeu Famille : aucune donnée personnelle collectée, aucun compte, tout reste sur votre appareil.">
+<link rel="canonical" href="https://devine-le-prix.protojo.fr/confidentialite.html">
+<!-- Aperçu du lien quand la page est partagée (Messages, WhatsApp, réseaux sociaux) :
+     sans ces lignes, seule l'adresse brute s'affiche. Le texte reprend mot pour mot
+     le titre et la description ci-dessus. -->
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="Devine le Prix – Jeu Famille">
+<meta property="og:locale" content="fr_FR">
+<meta property="og:url" content="https://devine-le-prix.protojo.fr/confidentialite.html">
+<meta property="og:title" content="Politique de confidentialité – Devine le Prix">
+<meta property="og:description" content="Aucune donnée personnelle collectée, aucun compte, tout reste sur votre appareil.">
 <style>
   :root {
     color-scheme: dark;
@@ -177,6 +187,26 @@
   }
   .objet-legende { margin-top: var(--e2); font-size: var(--t2); font-weight: 800; color: var(--texte-doux); }
 
+  /* ---- Mini-partie d'essai (accueil) ----
+     Deux gros boutons, une réponse immédiate : on comprend le jeu en un geste,
+     sans rien installer. Tout est allumé par le script de bas de page ; sans
+     lui, la carte garde son « ? € » et aucun bouton ne s'affiche. */
+  .essai { margin-top: var(--e6); }
+  .essai-boutons { display: flex; flex-wrap: wrap; justify-content: center; gap: var(--e3); }
+  .essai-verdict {
+    display: inline-flex; align-items: center; justify-content: center;
+    max-width: 100%; min-height: 44px; margin: var(--e4) 0 0;
+    padding: var(--e2) var(--e5); border-radius: var(--rayon-rond);
+    font-size: var(--t2); font-weight: 800; color: var(--texte);
+    overflow-wrap: anywhere;
+  }
+  /* Le verdict reste dans la page même vide, pour que les lecteurs d'écran
+     le suivent ; tant qu'il n'a rien à dire, il ne prend aucune place. */
+  .essai-verdict:empty { min-height: 0; margin: 0; padding: 0; }
+  .essai-verdict.juste { background: var(--vert); }
+  .essai-verdict.faux { background: var(--corail); }
+  .essai-rejouer { margin-top: var(--e4); }
+
   /* ---- Pages intérieures ---- */
   .titre-page { padding: var(--e7) 0 0; }
   .titre-page h1 { font-size: var(--t-titre-page); }
@@ -187,6 +217,33 @@
     padding: var(--e6); font-weight: 500;
   }
   .resume p:last-child { margin-bottom: 0; }
+
+  /* ---- Sommaire de la politique de confidentialité ----
+     La page fait près de 7 000 px de haut sur un téléphone : sans sommaire,
+     on n'atteint une section qu'en faisant défiler à l'aveugle. Les ancres
+     rendent en prime chaque section adressable par un lien. */
+  .sommaire { margin-bottom: var(--e7); }
+  .sommaire h2 { font-size: var(--t3); margin: var(--e7) 0 var(--e3); }
+  .sommaire ol {
+    display: grid; gap: var(--e1); counter-reset: sommaire;
+    list-style: none; margin: 0; padding: 0;
+  }
+  @media (min-width: 700px) { .sommaire ol { grid-template-columns: 1fr 1fr; } }
+  .sommaire li { counter-increment: sommaire; min-width: 0; }
+  /* Pas de soulignement : c'est de la navigation, comme les onglets de
+     l'en-tête, et le trait passait aussi sous le numéro. */
+  .sommaire a {
+    display: flex; align-items: center; gap: var(--e3); min-height: 44px;
+    padding: var(--e1) var(--e4); margin-left: calc(-1 * var(--e4));
+    border-radius: var(--rayon-petit); font-weight: 700; text-decoration: none;
+  }
+  .sommaire a::before {
+    content: counter(sommaire) "."; flex: none;
+    color: var(--texte-doux); font-weight: 800;
+  }
+  .sommaire a:hover { background: var(--voile); }
+  /* Un titre atteint par une ancre ne colle pas au bord haut de l'écran */
+  :target { scroll-margin-top: var(--e6); }
 
   h2 { font-size: var(--t4); font-weight: 900; line-height: 1.15; letter-spacing: -.02em; margin: 2em 0 .7em; color: var(--or); }
   h3 { font-size: var(--t3); font-weight: 900; margin: 0 0 var(--e1); color: var(--encre); }
@@ -207,9 +264,10 @@
     background: var(--carte); color: var(--encre);
     border-radius: var(--rayon); padding: var(--e6);
     box-shadow: 0 12px 30px rgba(0, 0, 0, .3);
-    transition: transform .18s ease;
   }
-  .carte:hover { transform: translateY(-3px); }
+  /* Pas d'effet de survol sur les cartes : elles ne sont pas cliquables, et sur
+     iPhone le survol reste collé après un appui — il laissait croire qu'il
+     venait de se passer quelque chose. */
   .carte p { margin: 0; color: var(--encre-douce); font-weight: 700; font-size: var(--t0); }
   .pictogramme {
     display: flex; align-items: center; justify-content: center;
@@ -241,6 +299,13 @@
     transition: filter .18s ease;
   }
   .bouton:hover { filter: brightness(1.08); }
+  /* Les deux variantes sont déclarées après « .bouton » : à égalité de
+     spécificité, c'est la dernière règle qui gagne. */
+  /* Rembourrage réduit, pour que les deux choix tiennent côte à côte sur un
+     téléphone de 375 px et passent l'un sous l'autre en dessous. */
+  .bouton-choix { padding-inline: var(--e4); }
+  /* Bouton secondaire : discret à côté de l'or du bouton principal. */
+  .bouton-doux { background: var(--voile); color: var(--texte); box-shadow: none; }
 
   footer { border-top: 1px solid rgba(255, 255, 255, .15); }
   footer .enveloppe { padding-top: var(--e6); padding-bottom: var(--e7); }
@@ -267,12 +332,13 @@
     :root { color-scheme: light; }
     body { background: #fff; color: var(--encre); font-size: 11pt; line-height: 1.45; }
     .enveloppe { max-width: none; padding: 0; }
-    .saut, .nav-site, .hero::before, .objet, .pictogramme, .sceau { display: none; }
+    .saut, .nav-site, .hero::before, .objet, .essai, .retour,
+    .pictogramme, .sceau { display: none; }
     main > section { padding: var(--e3) 0; }
     .hero { background: none; }
     h1, h2, h3, .marque, .accroche, .date, .sous-titre, footer p,
     .jetons li, .publics li, .coche, .precision, .objet-legende,
-    .hero h1 .sous-titre,
+    .hero h1 .sous-titre, .sommaire a::before,
     .titre-page .sous-titre { color: var(--encre); }
     a { color: #3A2B9E; }
     main a[href^="http"]::after { content: " (" attr(href) ")"; font-weight: 400; word-break: break-all; }
@@ -281,7 +347,7 @@
     .publics .enfants, .publics .seniors, .publics .famille {
       background: #fff; box-shadow: none; border: 1px solid #6B6484;
     }
-    .bouton, .lien-page { min-height: 0; padding: 0; margin-left: 0; background: none;
+    .bouton, .lien-page, .sommaire a { min-height: 0; padding: 0; margin-left: 0; background: none;
       box-shadow: none; color: #3A2B9E; }
     h2, h3 { break-after: avoid; }
     p, li { break-inside: avoid; }
@@ -315,40 +381,58 @@
 <p>Devine le Prix est un jeu édité par ProtoJo Digital (Johan Quille), France. Cette page explique, en langage simple, quelles données l'application utilise. En résumé : <strong>nous ne collectons aucune donnée personnelle</strong>, l'application fonctionne sans compte, et les seules données techniques traitées le sont par Apple (Game Center, iCloud) et par Google (publicités), selon leurs propres règles.</p>
     </div>
 
-<h2>1. Données enregistrées sur votre appareil</h2>
+    <nav class="sommaire" id="sommaire" aria-labelledby="titre-sommaire">
+      <h2 id="titre-sommaire">Sur cette page</h2>
+      <ol>
+        <li><a href="#donnees-appareil">Données enregistrées sur votre appareil</a></li>
+        <li><a href="#aucun-compte">Aucun compte, aucune inscription</a></li>
+        <li><a href="#voix-sons-musique">Voix, sons et musique</a></li>
+        <li><a href="#rappel-quotidien">Rappel quotidien</a></li>
+        <li><a href="#game-center">Jouer avec d'autres téléphones (Game Center)</a></li>
+        <li><a href="#publicites">Publicités</a></li>
+        <li><a href="#achat-integre">Achat intégré</a></li>
+        <li><a href="#enfants">Enfants</a></li>
+        <li><a href="#vos-droits">Vos droits</a></li>
+        <li><a href="#modifications">Modifications</a></li>
+      </ol>
+    </nav>
+
+<h2 id="donnees-appareil">1. Données enregistrées sur votre appareil</h2>
 <p>Votre progression (niveau, points d'expérience, étoiles, badges, collection d'objets, série de jours joués, vitrines gagnées), vos records, la liste des prénoms et avatars saisis pour jouer à plusieurs, et vos réglages (voix, sons, musique, vibrations, nombre d'objets par partie, rappel quotidien) sont enregistrés uniquement sur votre iPhone ou iPad. Ces informations ne sont jamais envoyées à nos serveurs : nous n'en avons pas. Supprimer l'application les efface.</p>
 <p>Si iCloud est activé sur votre appareil, cette progression et ces réglages sont également copiés dans votre espace iCloud personnel (stockage clé-valeur d'Apple) afin de les retrouver sur vos autres appareils. Nous n'y avons pas accès : ce sont vos données, protégées par votre identifiant Apple.</p>
 
-<h2>2. Aucun compte, aucune inscription</h2>
+<h2 id="aucun-compte">2. Aucun compte, aucune inscription</h2>
 <p>Aucune adresse e-mail, aucun nom, aucune information de contact n'est demandée. L'application n'accède ni aux contacts, ni aux photos, ni à la position, ni au micro, ni à la caméra. Les prénoms saisis pour une partie à plusieurs restent sur l'appareil et peuvent être n'importe quel surnom.</p>
 
-<h2>3. Voix, sons et musique</h2>
+<h2 id="voix-sons-musique">3. Voix, sons et musique</h2>
 <p>La lecture à voix haute utilise la synthèse vocale intégrée à iOS : le texte est lu sur l'appareil, rien n'est envoyé sur Internet. Les sons et les musiques sont inclus dans l'application.</p>
 
-<h2>4. Rappel quotidien</h2>
+<h2 id="rappel-quotidien">4. Rappel quotidien</h2>
 <p>Si vous activez le rappel dans les réglages, l'application demande l'autorisation d'afficher des notifications et programme un rappel local à l'heure choisie. Ce rappel est géré par votre appareil, sans serveur. Vous pouvez le désactiver à tout moment dans les réglages de l'application ou d'iOS.</p>
 
-<h2>5. Jouer avec d'autres téléphones (Game Center)</h2>
+<h2 id="game-center">5. Jouer avec d'autres téléphones (Game Center)</h2>
 <p>Le mode « Avec d'autres téléphones » utilise Game Center, le service de jeu en réseau d'Apple. Il nécessite d'être connecté à Game Center avec votre identifiant Apple. Pendant une partie, votre pseudonyme Game Center et votre avatar sont visibles des autres joueurs de la partie, et les scores de la partie sont échangés entre les appareils. Les invitations envoyées à des amis passent par Messages ou Game Center, selon votre choix. Nous n'avons accès à aucune de ces informations : elles sont gérées par Apple selon sa politique de confidentialité (<a href="https://www.apple.com/legal/privacy/">apple.com/legal/privacy</a>). Les modes solo et « Sur ce téléphone » fonctionnent sans Game Center.</p>
 
-<h2>6. Publicités</h2>
+<h2 id="publicites">6. Publicités</h2>
 <p>L'application peut afficher des publicités fournies par Google AdMob, uniquement à la fin d'une partie : une bannière, et une vidéo facultative que vous choisissez de regarder pour doubler vos points. Il n'y a jamais de publicité pendant le jeu.</p>
 <p>Comme l'application s'adresse aussi aux enfants, elle est configurée pour un public de mineurs : les publicités sont <strong>non personnalisées</strong>, limitées à un contenu tout public, et l'application ne demande pas l'autorisation de suivi publicitaire (identifiant IDFA).</p>
 <p>Pour diffuser une publicité et lutter contre la fraude, le logiciel de Google intégré à l'application traite des données techniques : identifiants de l'appareil (par exemple un identifiant de publicité réinitialisable ou un identifiant propre à l'application), position approximative déduite de l'adresse IP (ville ou région, jamais la position précise), informations sur l'appareil et le système, interactions avec les publicités, et données de diagnostic (performances, plantages). Ces données sont traitées par Google conformément à sa politique : <a href="https://policies.google.com/privacy">policies.google.com/privacy</a> et <a href="https://support.google.com/admob/answer/6128543">support.google.com/admob</a>. Elles sont déclarées dans la fiche « Confidentialité de l'app » de l'App Store.</p>
 <p>Dans l'Union européenne et au Royaume-Uni, un message de consentement (fourni par Google) peut vous être présenté au premier lancement. Vous pouvez modifier votre choix à tout moment via « Options de confidentialité » dans les réglages de l'application.</p>
 <p>Les publicités peuvent être supprimées définitivement grâce à l'achat « Version sans pub » dans les réglages de l'application.</p>
 
-<h2>7. Achat intégré</h2>
+<h2 id="achat-integre">7. Achat intégré</h2>
 <p>L'achat « Version sans pub » est traité par Apple via l'App Store. Nous ne recevons aucune information bancaire ni aucune donnée d'identité : Apple nous indique seulement que l'achat est actif sur l'appareil. Vous pouvez restaurer cet achat sur un autre appareil utilisant le même identifiant Apple.</p>
 
-<h2>8. Enfants</h2>
+<h2 id="enfants">8. Enfants</h2>
 <p>L'application ne collecte sciemment aucune donnée personnelle auprès d'enfants. Elle est configurée comme destinée à un public pouvant inclure des mineurs (publicités non personnalisées, contenu tout public) et respecte les principes du COPPA (États-Unis) et du RGPD (Union européenne) applicables aux services utilisés par des mineurs. Le mode Game Center est soumis aux règles d'Apple sur les comptes des enfants (partage familial).</p>
 
-<h2>9. Vos droits</h2>
+<h2 id="vos-droits">9. Vos droits</h2>
 <p>Comme nous ne conservons aucune donnée personnelle, il n'y a rien à consulter, corriger ou supprimer de notre côté : tout est sur votre appareil et dans vos espaces Apple. Pour les données traitées par Google à des fins publicitaires, les demandes se font auprès de Google. Pour toute question sur cette politique ou sur l'application, écrivez-nous : <a href="mailto:johan.quille@trainedmanager.fr">johan.quille@trainedmanager.fr</a>.</p>
 
-<h2>10. Modifications</h2>
+<h2 id="modifications">10. Modifications</h2>
 <p>Cette page pourra être mise à jour si l'application évolue. La date en haut de page indique la dernière version.</p>
+
+<p class="retour"><a class="lien-page" href="#sommaire">Revenir au sommaire</a></p>
 
   </div>
 </main>
