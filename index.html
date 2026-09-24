@@ -67,6 +67,11 @@
     --rayon-rond: 999px;
   }
   *, *::before, *::after { box-sizing: border-box; }
+  /* L'attribut « hidden » du HTML ne fait que proposer « display: none » : la
+     moindre règle de cette feuille qui fixe un « display » l'emporte sur lui.
+     Sans cette ligne, le bouton « Un autre objet », pourtant marqué hidden,
+     s'affichait dès l'arrivée sur la page, avant toute réponse. */
+  [hidden] { display: none !important; }
   /* 112.5% = 18 px avec les réglages par défaut, tout en suivant la taille de texte choisie dans le navigateur */
   html { -webkit-text-size-adjust: 100%; font-size: 112.5%; }
   body {
