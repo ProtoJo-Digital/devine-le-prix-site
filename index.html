@@ -311,6 +311,12 @@
   .bouton-choix { padding-inline: var(--e4); }
   /* Bouton secondaire : discret à côté de l'or du bouton principal. */
   .bouton-doux { background: var(--voile); color: var(--texte); box-shadow: none; }
+  /* Une fois la réponse donnée, le prix est révélé : les deux choix passent en
+     retrait et « Un autre objet » devient la seule chose à faire. Un bouton
+     éteint n'est soumis à aucun minimum de contraste, mais à 0,65 son libellé
+     reste lu sans effort (4,6:1) tout en se distinguant nettement de l'or vif. */
+  .bouton:disabled { opacity: .65; box-shadow: none; cursor: default; }
+  .bouton:disabled:hover { filter: none; }
 
   footer { border-top: 1px solid rgba(255, 255, 255, .15); }
   footer .enveloppe { padding-top: var(--e6); padding-bottom: var(--e7); }
@@ -527,12 +533,19 @@
 
   var rang = Math.floor(Math.random() * OBJETS.length);
   var encours = null;
+  /* Les deux choix, pour les rouvrir ou les fermer en bloc. */
+  var choix = boutons.querySelectorAll("[data-reponse]");
+
+  function ouvrirChoix(ouverts) {
+    for (var i = 0; i < choix.length; i++) { choix[i].disabled = !ouverts; }
+  }
 
   function euros(n) { return n + "\u00a0€"; }
 
   function poser() {
     encours = OBJETS[rang % OBJETS.length];
     rang += 1;
+    ouvrirChoix(true);
     emoji.textContent = encours.emoji;
     nom.textContent = encours.nom;
     prix.textContent = euros(encours.propose);
@@ -546,13 +559,26 @@
   }
 
   function repondre(reponse) {
-    if (!encours) { return; }
+    /* Une question ne se répond qu'une fois : sans ce verrou, appuyer ensuite
+       sur l'autre choix transformait un « Raté ! » en « Bravo ! » pour le même
+       objet, dont le prix venait pourtant d'être révélé. */
+    if (!encours || choix[0].disabled) { return; }
+    /* À relever avant de désactiver : le navigateur retire aussitôt le focus
+       d'un bouton désactivé, et il serait déjà perdu si on regardait après. */
+    var auClavier = document.activeElement &&
+      document.activeElement.hasAttribute &&
+      document.activeElement.hasAttribute("data-reponse");
+    ouvrirChoix(false);
     var juste = (encours.vrai < encours.propose) === (reponse === "moins");
     /* Le mot porte la réponse autant que la couleur : jamais la couleur seule. */
     verdict.className = "essai-verdict " + (juste ? "juste" : "faux");
     verdict.textContent = (juste ? "Bravo\u00a0!" : "Raté\u00a0!") + " " +
       encours.sujet + " coûte " + euros(encours.vrai) + ".";
     rejouer.hidden = false;
+    /* Le choix qui portait le focus vient d'être désactivé : sans cela, le
+       focus retomberait sur la page entière. On le passe à la seule action
+       qui reste. */
+    if (auClavier) { rejouer.focus(); }
   }
 
   boutons.addEventListener("click", function (e) {
