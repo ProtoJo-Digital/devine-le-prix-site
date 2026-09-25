@@ -570,6 +570,12 @@
       document.activeElement.hasAttribute("data-reponse");
     ouvrirChoix(false);
     var juste = (encours.vrai < encours.propose) === (reponse === "moins");
+    /* Le grand chiffre doré, l'élément le plus visible de l'écran, passe au vrai
+       prix. Sans cela il continuait d'afficher le prix proposé : deux montants
+       différents restaient à l'écran, et le plus gros était celui que le verdict
+       venait de démentir. */
+    prix.textContent = euros(encours.vrai);
+    question.textContent = "Le vrai prix";
     /* Le mot porte la réponse autant que la couleur : jamais la couleur seule. */
     verdict.className = "essai-verdict " + (juste ? "juste" : "faux");
     verdict.textContent = (juste ? "Bravo\u00a0!" : "Raté\u00a0!") + " " +
