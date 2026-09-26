@@ -185,7 +185,14 @@
     box-shadow: 0 20px 44px rgba(0, 0, 0, .42);
   }
   .objet-emoji { font-size: 5rem; line-height: 1; }
-  .objet-nom { font-size: var(--t3); font-weight: 900; color: var(--encre); }
+  /* Le nom est un élément de flex dans une carte en colonne : sans cette
+     autorisation, un mot long (« connectée ») gardait sa largeur entière et
+     sortait de la carte blanche à texte agrandi — de l'encre sombre sur le
+     fond sombre, illisible, et rognée par le bord de l'écran. */
+  .objet-nom {
+    max-width: 100%; overflow-wrap: anywhere;
+    font-size: var(--t3); font-weight: 900; color: var(--encre);
+  }
   .objet-prix {
     display: block; margin-top: var(--e5);
     font-size: var(--t5); font-weight: 900; line-height: 1; letter-spacing: -.02em; color: var(--or);
@@ -237,10 +244,17 @@
   .sommaire li { counter-increment: sommaire; min-width: 0; }
   /* Pas de soulignement : c'est de la navigation, comme les onglets de
      l'en-tête, et le trait passait aussi sous le numéro. */
+  /* « anywhere » et non « break-word » : seul le premier autorise la boîte à
+     descendre sous la largeur de son mot le plus long. Sans lui, un titre d'un
+     seul tenant (« Modifications ») gardait sa largeur entière et poussait la
+     page hors de l'écran dès que le texte était agrandi. Pas de « max-width »
+     ici, contrairement aux autres liens : elle annulerait le débord de
+     gouttière voulu par la marge négative ci-dessous. */
   .sommaire a {
     display: flex; align-items: center; gap: var(--e3); min-height: 44px;
     padding: var(--e1) var(--e4); margin-left: calc(-1 * var(--e4));
     border-radius: var(--rayon-petit); font-weight: 700; text-decoration: none;
+    overflow-wrap: anywhere;
   }
   .sommaire a::before {
     content: counter(sommaire) "."; flex: none;
