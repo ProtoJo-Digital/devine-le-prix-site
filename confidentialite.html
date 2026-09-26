@@ -185,7 +185,14 @@
     box-shadow: 0 20px 44px rgba(0, 0, 0, .42);
   }
   .objet-emoji { font-size: 5rem; line-height: 1; }
-  .objet-nom { font-size: var(--t3); font-weight: 900; color: var(--encre); }
+  /* Le nom est un élément de flex dans une carte en colonne : sans cette
+     autorisation, un mot long (« connectée ») gardait sa largeur entière et
+     sortait de la carte blanche à texte agrandi — de l'encre sombre sur le
+     fond sombre, illisible, et rognée par le bord de l'écran. */
+  .objet-nom {
+    max-width: 100%; overflow-wrap: anywhere;
+    font-size: var(--t3); font-weight: 900; color: var(--encre);
+  }
   .objet-prix {
     display: block; margin-top: var(--e5);
     font-size: var(--t5); font-weight: 900; line-height: 1; letter-spacing: -.02em; color: var(--or);
