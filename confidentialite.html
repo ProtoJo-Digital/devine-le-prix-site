@@ -237,10 +237,17 @@
   .sommaire li { counter-increment: sommaire; min-width: 0; }
   /* Pas de soulignement : c'est de la navigation, comme les onglets de
      l'en-tête, et le trait passait aussi sous le numéro. */
+  /* « anywhere » et non « break-word » : seul le premier autorise la boîte à
+     descendre sous la largeur de son mot le plus long. Sans lui, un titre d'un
+     seul tenant (« Modifications ») gardait sa largeur entière et poussait la
+     page hors de l'écran dès que le texte était agrandi. Pas de « max-width »
+     ici, contrairement aux autres liens : elle annulerait le débord de
+     gouttière voulu par la marge négative ci-dessous. */
   .sommaire a {
     display: flex; align-items: center; gap: var(--e3); min-height: 44px;
     padding: var(--e1) var(--e4); margin-left: calc(-1 * var(--e4));
     border-radius: var(--rayon-petit); font-weight: 700; text-decoration: none;
+    overflow-wrap: anywhere;
   }
   .sommaire a::before {
     content: counter(sommaire) "."; flex: none;
