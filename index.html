@@ -420,8 +420,14 @@
            allumé : sans JavaScript, la page reste exactement ce qu'elle est. -->
       <div class="essai" id="essai" hidden>
         <div class="essai-boutons" id="essai-boutons">
-          <button type="button" class="bouton bouton-choix" id="essai-moins" data-reponse="moins">C'est moins</button>
-          <button type="button" class="bouton bouton-choix" data-reponse="plus">C'est plus</button>
+          <!-- « Un autre objet » change l'objet et le prix dans la carte, au-dessus,
+               puis envoie le focus droit sur ces deux boutons. Rien n'annonce plus ce
+               changement : sans cette description, un lecteur d'écran ne dit que
+               « C'est moins, bouton » et demande de juger un prix qu'il n'a jamais
+               énoncé. On réutilise le nom et le prix déjà présents dans la carte,
+               qui restent donc toujours à jour. -->
+          <button type="button" class="bouton bouton-choix" id="essai-moins" data-reponse="moins" aria-describedby="essai-nom essai-prix">C'est moins</button>
+          <button type="button" class="bouton bouton-choix" data-reponse="plus" aria-describedby="essai-nom essai-prix">C'est plus</button>
         </div>
         <p class="essai-verdict" id="essai-verdict" role="status"></p>
         <p><button type="button" class="bouton bouton-doux essai-rejouer" id="essai-rejouer" hidden>Un autre objet</button></p>
