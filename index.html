@@ -605,6 +605,13 @@
        focus retomberait sur la page entière. On le passe à la seule action
        qui reste. */
     if (auClavier) { rejouer.focus(); }
+    /* Au doigt comme à la souris, rien ne faisait défiler la page : qui visait
+       les deux choix les avait amenés en bas de l'écran, et le verdict comme
+       « Un autre objet » apparaissaient juste en dessous, hors de vue. On
+       descend du strict nécessaire pour que la réponse et la suite tiennent à
+       l'écran — jamais vers le haut, et pas du tout si elles y sont déjà. */
+    var bas = rejouer.getBoundingClientRect().bottom + 16;
+    if (bas > window.innerHeight) { window.scrollBy(0, bas - window.innerHeight); }
   }
 
   boutons.addEventListener("click", function (e) {
