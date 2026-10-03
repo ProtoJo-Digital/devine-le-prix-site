@@ -104,6 +104,13 @@
   /* L'or sur blanc ne fait que 1,82:1 : sur fond clair, les liens passent à l'accent violet (5,34:1). */
   .carte a, .resume a { color: var(--accent); }
   :focus-visible { outline: 3px solid var(--or); outline-offset: 3px; border-radius: var(--rayon-focus); }
+  /* Une ancre déplace le regard, pas le clavier. Sans « tabindex="-1" » sur la
+     cible, Safari — le navigateur de tous les visiteurs d'un site d'application
+     iPhone — laisse le focus là où il était : la tabulation suivante repart du
+     haut de la page, et le lien « Aller au contenu » ne fait alors rien d'utile.
+     Ces cibles ne sont pas des commandes ; elles reçoivent le focus pour que la
+     suite du parcours reparte du bon endroit, et n'ont donc pas de contour. */
+  [tabindex="-1"]:focus { outline: none; }
 
   /* Onglets, boutons et pastilles sont des boîtes « inline-flex » : par défaut elles
      refusent de descendre sous la largeur de leur mot le plus long et poussent la page
@@ -394,7 +401,7 @@
   </div>
 </header>
 
-<main id="contenu">
+<main id="contenu" tabindex="-1">
   <div class="enveloppe">
 
     <div class="titre-page">
