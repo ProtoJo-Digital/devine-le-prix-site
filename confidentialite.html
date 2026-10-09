@@ -325,13 +325,11 @@
     transition: filter .18s ease;
   }
   .bouton:hover { filter: brightness(1.08); }
-  /* Les deux variantes sont déclarées après « .bouton » : à égalité de
+  /* La variante est déclarée après « .bouton » : à égalité de
      spécificité, c'est la dernière règle qui gagne. */
   /* Rembourrage réduit, pour que les deux choix tiennent côte à côte sur un
      téléphone de 375 px et passent l'un sous l'autre en dessous. */
   .bouton-choix { padding-inline: var(--e4); }
-  /* Bouton secondaire : discret à côté de l'or du bouton principal. */
-  .bouton-doux { background: var(--voile); color: var(--texte); box-shadow: none; }
   /* Une fois la réponse donnée, le prix est révélé : les deux choix passent en
      retrait et « Un autre objet » devient la seule chose à faire. Un bouton
      éteint n'est soumis à aucun minimum de contraste, mais à 0,65 son libellé
