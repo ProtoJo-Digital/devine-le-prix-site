@@ -191,7 +191,11 @@
     background: var(--carte); border-radius: var(--rayon-grand); padding: var(--e6);
     box-shadow: 0 20px 44px rgba(0, 0, 0, .42);
   }
-  .objet-emoji { font-size: 5rem; line-height: 1; }
+  /* L'emoji héritait du blanc du corps de page : sur un appareil qui ne rend
+     pas les emojis en couleur, il devenait du blanc sur la carte blanche, et
+     la carte — l'image même du jeu — apparaissait vide. L'encre sombre de la
+     carte ne change rien là où l'emoji est en couleur, et le sauve ailleurs. */
+  .objet-emoji { font-size: 5rem; line-height: 1; color: var(--encre); }
   /* Le nom est un élément de flex dans une carte en colonne : sans cette
      autorisation, un mot long (« connectée ») gardait sa largeur entière et
      sortait de la carte blanche à texte agrandi — de l'encre sombre sur le
