@@ -230,6 +230,25 @@
   .essai-verdict.faux { background: var(--corail); }
   .essai-rejouer { margin-top: var(--e4); }
 
+  /* ---- Verrou : la suite du site s'ouvre après la première réponse ----
+     C'est le script qui pose le verrou, jamais le HTML : sans JavaScript,
+     aucune section n'est cachée et le site se lit en entier. */
+  .verrou { padding: var(--e8) 0; text-align: center; }
+  .verrou p {
+    max-width: 30ch; margin: 0 auto;
+    font-size: var(--t2); font-weight: 700; color: var(--texte-doux);
+  }
+  /* Les sections libérées arrivent en douceur plutôt que d'apparaître d'un
+     coup. Le bloc « prefers-reduced-motion » plus bas ramène la durée à zéro
+     pour qui demande moins d'animation.
+     Pas de « forwards » ni de « both » ici, volontairement : avec eux, un
+     navigateur qui ne joue pas l'animation garderait la première image —
+     opacité 0 — et tout le contenu du site resterait invisible. Sans eux,
+     l'animation n'est qu'un embellissement : si elle ne part pas, le contenu
+     s'affiche normalement. */
+  @keyframes ouverture { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: none; } }
+  .ouvert { animation: ouverture .35s ease; }
+
   /* ---- Pages intérieures ---- */
   .titre-page { padding: var(--e7) 0 0; }
   .titre-page h1 { font-size: var(--t-titre-page); }
@@ -366,9 +385,12 @@
     :root { color-scheme: light; }
     body { background: #fff; color: var(--encre); font-size: 11pt; line-height: 1.45; }
     .enveloppe { max-width: none; padding: 0; }
-    .saut, .nav-site, .hero::before, .objet, .essai, .retour,
+    .saut, .nav-site, .hero::before, .objet, .essai, .verrou, .retour,
     .pictogramme, .sceau { display: none; }
     main > section { padding: var(--e3) 0; }
+    /* Sur papier, rien n'est verrouillé : on imprime le site entier,
+       même si le visiteur n'a pas encore répondu. */
+    main > section[hidden] { display: block !important; }
     .hero { background: none; }
     h1, h2, h3, .marque, .accroche, .date, .sous-titre, footer p,
     .jetons li, .publics li, .coche, .precision, .objet-legende,

@@ -230,6 +230,25 @@
   .essai-verdict.faux { background: var(--corail); }
   .essai-rejouer { margin-top: var(--e4); }
 
+  /* ---- Verrou : la suite du site s'ouvre après la première réponse ----
+     C'est le script qui pose le verrou, jamais le HTML : sans JavaScript,
+     aucune section n'est cachée et le site se lit en entier. */
+  .verrou { padding: var(--e8) 0; text-align: center; }
+  .verrou p {
+    max-width: 30ch; margin: 0 auto;
+    font-size: var(--t2); font-weight: 700; color: var(--texte-doux);
+  }
+  /* Les sections libérées arrivent en douceur plutôt que d'apparaître d'un
+     coup. Le bloc « prefers-reduced-motion » plus bas ramène la durée à zéro
+     pour qui demande moins d'animation.
+     Pas de « forwards » ni de « both » ici, volontairement : avec eux, un
+     navigateur qui ne joue pas l'animation garderait la première image —
+     opacité 0 — et tout le contenu du site resterait invisible. Sans eux,
+     l'animation n'est qu'un embellissement : si elle ne part pas, le contenu
+     s'affiche normalement. */
+  @keyframes ouverture { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: none; } }
+  .ouvert { animation: ouverture .35s ease; }
+
   /* ---- Pages intérieures ---- */
   .titre-page { padding: var(--e7) 0 0; }
   .titre-page h1 { font-size: var(--t-titre-page); }
@@ -366,9 +385,12 @@
     :root { color-scheme: light; }
     body { background: #fff; color: var(--encre); font-size: 11pt; line-height: 1.45; }
     .enveloppe { max-width: none; padding: 0; }
-    .saut, .nav-site, .hero::before, .objet, .essai, .retour,
+    .saut, .nav-site, .hero::before, .objet, .essai, .verrou, .retour,
     .pictogramme, .sceau { display: none; }
     main > section { padding: var(--e3) 0; }
+    /* Sur papier, rien n'est verrouillé : on imprime le site entier,
+       même si le visiteur n'a pas encore répondu. */
+    main > section[hidden] { display: block !important; }
     .hero { background: none; }
     h1, h2, h3, .marque, .accroche, .date, .sous-titre, footer p,
     .jetons li, .publics li, .coche, .precision, .objet-legende,
@@ -447,6 +469,15 @@
       </div>
     </div>
   </section>
+
+  <!-- Invitation affichée à la place du reste du site tant qu'aucune réponse
+       n'a été donnée. Elle reste cachée sans JavaScript, puisque alors rien
+       n'est verrouillé. -->
+  <div class="verrou" id="verrou" hidden>
+    <div class="enveloppe">
+      <p>À toi de jouer ! Choisis une réponse pour découvrir la suite du site.</p>
+    </div>
+  </div>
 
   <section class="section-large">
     <div class="enveloppe">
@@ -562,10 +593,14 @@
   var verdict  = document.getElementById("essai-verdict");
   var rejouer  = document.getElementById("essai-rejouer");
   var premier  = document.getElementById("essai-moins");
+  /* La suite du site : toutes les sections sauf le bandeau d'accueil. */
+  var verrou   = document.getElementById("verrou");
+  var suite    = document.querySelectorAll("main > section:not(.hero)");
   if (!essai || !emoji || !boutons || !verdict || !rejouer) { return; }
 
   var rang = Math.floor(Math.random() * OBJETS.length);
   var encours = null;
+  var ouvert = false;
   /* Les deux choix, pour les rouvrir ou les fermer en bloc. */
   var choix = boutons.querySelectorAll("[data-reponse]");
 
@@ -574,6 +609,24 @@
   }
 
   function euros(n) { return n + "\u00a0€"; }
+
+  /* Le reste du site attend la première réponse : on arrive sur le jeu, on y
+     joue, et la page s'ouvre. Le pied de page, lui, n'est jamais verrouillé —
+     le lien vers la politique de confidentialité doit rester atteignable à
+     tout moment. */
+  function verrouiller() {
+    for (var i = 0; i < suite.length; i++) { suite[i].hidden = true; }
+    if (verrou) { verrou.hidden = false; }
+  }
+
+  function ouvrir() {
+    ouvert = true;
+    if (verrou) { verrou.hidden = true; }
+    for (var i = 0; i < suite.length; i++) {
+      suite[i].hidden = false;
+      suite[i].classList.add("ouvert");
+    }
+  }
 
   function poser() {
     encours = OBJETS[rang % OBJETS.length];
@@ -611,8 +664,12 @@
     question.textContent = "Le vrai prix";
     /* Le mot porte la réponse autant que la couleur : jamais la couleur seule. */
     verdict.className = "essai-verdict " + (juste ? "juste" : "faux");
+    /* Tout est dit en une fois : les lecteurs d'écran n'annoncent le verdict
+       qu'une seule fois, l'ouverture du site comprise. */
     verdict.textContent = (juste ? "Bravo\u00a0!" : "Raté\u00a0!") + " " +
-      encours.sujet + " coûte " + euros(encours.vrai) + ".";
+      encours.sujet + " coûte " + euros(encours.vrai) + "." +
+      (ouvert ? "" : " La suite du site est ouverte.");
+    if (!ouvert) { ouvrir(); }
     rejouer.hidden = false;
     /* Le choix qui portait le focus vient d'être désactivé : sans cela, le
        focus retomberait sur la page entière. On le passe à la seule action
@@ -639,6 +696,7 @@
   });
 
   poser();
+  verrouiller();
   essai.hidden = false;
 })();
 </script>
