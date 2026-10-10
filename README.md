@@ -165,16 +165,52 @@ prime sur tout le reste.
 ## Contribuer
 
 `main` n'est pas modifiée directement : chaque changement passe par une branche
-et une pull request.
+et une pull request. `CLAUDE.md`, à la racine, rassemble les consignes de
+travail : référentiels, vérifications obligatoires avant une pull request,
+conventions git.
 
 ## À faire
 
-- Ajouter le bouton « Télécharger sur l'App Store » sur la page d'accueil, dès
-  que l'adresse de la fiche App Store sera connue. L'emplacement prévu est
-  signalé par un commentaire dans `index.html`.
+Liste tenue à jour par la relecture quotidienne, de la plus utile à la moins
+utile pour les visiteurs. Les entrées faites en sortent, les nouvelles y
+entrent.
+
+### Ce qui attend une décision ou une information de Johan
+
+- **Bouton « Télécharger sur l'App Store » sur la page d'accueil**, dès que
+  l'adresse de la fiche App Store (ou TestFlight) sera connue. C'est l'action
+  principale d'un site vitrine, et aujourd'hui le seul bouton de la page est
+  « Écrire à l'éditeur ». L'emplacement prévu est signalé par un commentaire
+  dans `index.html`.
+- **Image d'aperçu au partage (`og:image`)** : envoyé par Messages ou WhatsApp,
+  le lien s'affiche avec son titre et sa description, sans visuel. Suppose
+  d'ajouter un fichier image au dépôt.
+- **Icône d'écran d'accueil iOS (`apple-touch-icon`)** : ajouté à l'écran
+  d'accueil d'un iPhone, le site prend une capture de la page en guise d'icône,
+  iOS n'acceptant pas le favicon SVG actuel. Suppose un PNG 180 × 180 dans le
+  dépôt.
+- **Page 404** : une adresse erronée affiche la page par défaut de GitHub
+  Pages, en anglais. Un `404.html` aux couleurs du site réglerait ça. Suppose un
+  troisième fichier HTML.
+- **Registre** : l'accueil et le pied de page tutoient, la politique de
+  confidentialité vouvoie. Ce n'est pas choquant pour un texte juridique, mais
+  c'est visible dans le pied de page, commun aux deux pages.
+
+Les quatre premières entrées reviennent à la même question : élargir ou non la
+règle « le site reste deux fichiers HTML autonomes ».
+
+### Ce qui peut être fait sans décision préalable
+
+- **Boutons éteints après la réponse, dans la mini-partie d'accueil** :
+  « C'est moins » et « C'est plus » restent affichés, inertes, entre le prix
+  et le verdict. Pour des enfants et des seniors, ce sont deux cibles mortes qui
+  invitent encore au clic. Les retirer sans provoquer de saut de mise en page
+  demande de réserver leur hauteur : à faire avec captures avant/après.
 
 ## Relecture automatique
 
 Une tâche Claude Code relit le site une fois par jour (interface, accessibilité,
 affichage mobile, liens, typographie) et ouvre une pull request depuis une
 branche `claude/site-AAAA-MM-JJ` lorsqu'une amélioration en vaut la peine.
+Chaque relecture se termine par une liste d'améliorations possibles, reportée
+dans la section « À faire » ci-dessus — y compris les jours où rien ne change.
