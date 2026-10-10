@@ -289,6 +289,51 @@
   }
   .bouton-choix.appel { animation: appel 1.5s ease-in-out 1s 3; }
 
+  /* ---- La fenêtre s'efface, le site arrive ----
+     Deux temps d'un même mouvement : le voile et la fenêtre s'en vont, le
+     bandeau d'accueil se lève. La durée est tenue par le script, jamais par
+     l'animation : si celle-ci ne part pas, la fenêtre se ferme quand même.
+     Aucune n'utilise « forwards » ni « both », pour la même raison que
+     plus haut — une animation qui ne démarre pas ne doit rien effacer. */
+  @keyframes fenetre-sortie { to { opacity: 0; transform: translateY(10px) scale(.94); } }
+  @keyframes voile-sortie { to { opacity: 0; } }
+  .fenetre.sortie { animation: fenetre-sortie .26s ease; }
+  .fenetre.sortie::backdrop { animation: voile-sortie .26s ease; }
+  @keyframes arrivee { from { opacity: 0; transform: translateY(18px) scale(.985); } }
+  .hero.arrivee > .enveloppe { animation: arrivee .55s cubic-bezier(.2, .7, .3, 1); }
+
+  /* Une fois la fenêtre refermée, le visiteur est en haut d'une page dont il
+     ne voit qu'un écran : cette flèche lui dit qu'il y a une suite. Trois
+     descentes, puis elle s'immobilise — rien ne bouge en continu à l'écran. */
+  .indice {
+    display: flex; flex-direction: column; align-items: center; gap: var(--e1);
+    margin: var(--e7) 0 0; color: var(--texte-doux);
+    font-size: var(--t0); font-weight: 800;
+  }
+  .indice svg { width: var(--e6); height: var(--e6); }
+  .indice.anime svg { animation: descend 1.4s ease-in-out 3; }
+  @keyframes descend { 0%, 100% { transform: none; } 50% { transform: translateY(7px); } }
+
+  /* ---- Bloc de fin : la dernière image que le visiteur emporte ----
+     Le dégradé s'inverse par rapport au bandeau d'accueil : la page s'ouvre
+     et se referme sur la même lumière, et le bouton doré y ressort seul. */
+  .final { background: linear-gradient(180deg, var(--fond) 0%, var(--fond-haut) 100%); }
+  .final h2 { font-size: var(--t-titre-page); color: var(--texte); margin-bottom: var(--e4); }
+  .final p { margin: 0; }
+  .final-texte {
+    max-width: 30ch; margin: 0 auto var(--e7);
+    font-size: var(--t2); font-weight: 700; color: var(--texte-doux);
+  }
+  .final-contact { margin-top: var(--e4); }
+  .final .bouton { min-height: 64px; padding-inline: var(--e7); font-size: var(--t3); }
+  /* Le jour où le bouton App Store s'allume, « Écrire à l'éditeur » passe au
+     second plan : un seul bouton doré à la fois, sinon aucun des deux ne
+     ressort. Un navigateur sans « :has() » laisse les deux dorés — moins bien,
+     mais rien de cassé. */
+  .final:has(#lien-app-store:not([hidden])) .final-contact .bouton {
+    background: var(--voile); color: var(--texte); box-shadow: none;
+  }
+
   /* ---- Pages intérieures ---- */
   .titre-page { padding: var(--e7) 0 0; }
   .titre-page h1 { font-size: var(--t-titre-page); }
@@ -425,10 +470,10 @@
     :root { color-scheme: light; }
     body { background: #fff; color: var(--encre); font-size: 11pt; line-height: 1.45; }
     .enveloppe { max-width: none; padding: 0; }
-    .saut, .nav-site, .hero::before, .objet, .essai, .fenetre, .retour,
+    .saut, .nav-site, .hero::before, .objet, .essai, .fenetre, .indice, .retour,
     .pictogramme, .sceau { display: none; }
     main > section { padding: var(--e3) 0; }
-    .hero { background: none; }
+    .hero, .final { background: none; }
     h1, h2, h3, .marque, .accroche, .date, .sous-titre, footer p,
     .jetons li, .publics li, .coche, .precision, .objet-legende,
     .hero h1 .sous-titre, .sommaire a::before,
