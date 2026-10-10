@@ -177,11 +177,12 @@ entrent.
 
 ### Ce qui attend une décision ou une information de Johan
 
-- **Bouton « Télécharger sur l'App Store » sur la page d'accueil**, dès que
-  l'adresse de la fiche App Store (ou TestFlight) sera connue. C'est l'action
-  principale d'un site vitrine, et aujourd'hui le seul bouton de la page est
-  « Écrire à l'éditeur ». L'emplacement prévu est signalé par un commentaire
-  dans `index.html`.
+- **Adresse de la fiche App Store (ou TestFlight)**, la seule chose qui manque
+  encore. Le bouton « Télécharger sur l'App Store » est déjà écrit dans le
+  bloc de fin d'`index.html` (`id="lien-app-store"`), en bonne place et à la
+  bonne taille, mais il porte l'attribut `hidden` faute d'adresse. Pour
+  l'allumer : remplacer l'adresse par celle de la fiche, retirer `hidden`.
+  « Écrire à l'éditeur » passe alors tout seul au second plan.
 - **Image d'aperçu au partage (`og:image`)** : envoyé par Messages ou WhatsApp,
   le lien s'affiche avec son titre et sa description, sans visuel. Suppose
   d'ajouter un fichier image au dépôt.

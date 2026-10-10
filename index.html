@@ -289,6 +289,51 @@
   }
   .bouton-choix.appel { animation: appel 1.5s ease-in-out 1s 3; }
 
+  /* ---- La fenêtre s'efface, le site arrive ----
+     Deux temps d'un même mouvement : le voile et la fenêtre s'en vont, le
+     bandeau d'accueil se lève. La durée est tenue par le script, jamais par
+     l'animation : si celle-ci ne part pas, la fenêtre se ferme quand même.
+     Aucune n'utilise « forwards » ni « both », pour la même raison que
+     plus haut — une animation qui ne démarre pas ne doit rien effacer. */
+  @keyframes fenetre-sortie { to { opacity: 0; transform: translateY(10px) scale(.94); } }
+  @keyframes voile-sortie { to { opacity: 0; } }
+  .fenetre.sortie { animation: fenetre-sortie .26s ease; }
+  .fenetre.sortie::backdrop { animation: voile-sortie .26s ease; }
+  @keyframes arrivee { from { opacity: 0; transform: translateY(18px) scale(.985); } }
+  .hero.arrivee > .enveloppe { animation: arrivee .55s cubic-bezier(.2, .7, .3, 1); }
+
+  /* Une fois la fenêtre refermée, le visiteur est en haut d'une page dont il
+     ne voit qu'un écran : cette flèche lui dit qu'il y a une suite. Trois
+     descentes, puis elle s'immobilise — rien ne bouge en continu à l'écran. */
+  .indice {
+    display: flex; flex-direction: column; align-items: center; gap: var(--e1);
+    margin: var(--e7) 0 0; color: var(--texte-doux);
+    font-size: var(--t0); font-weight: 800;
+  }
+  .indice svg { width: var(--e6); height: var(--e6); }
+  .indice.anime svg { animation: descend 1.4s ease-in-out 3; }
+  @keyframes descend { 0%, 100% { transform: none; } 50% { transform: translateY(7px); } }
+
+  /* ---- Bloc de fin : la dernière image que le visiteur emporte ----
+     Le dégradé s'inverse par rapport au bandeau d'accueil : la page s'ouvre
+     et se referme sur la même lumière, et le bouton doré y ressort seul. */
+  .final { background: linear-gradient(180deg, var(--fond) 0%, var(--fond-haut) 100%); }
+  .final h2 { font-size: var(--t-titre-page); color: var(--texte); margin-bottom: var(--e4); }
+  .final p { margin: 0; }
+  .final-texte {
+    max-width: 30ch; margin: 0 auto var(--e7);
+    font-size: var(--t2); font-weight: 700; color: var(--texte-doux);
+  }
+  .final-contact { margin-top: var(--e4); }
+  .final .bouton { min-height: 64px; padding-inline: var(--e7); font-size: var(--t3); }
+  /* Le jour où le bouton App Store s'allume, « Écrire à l'éditeur » passe au
+     second plan : un seul bouton doré à la fois, sinon aucun des deux ne
+     ressort. Un navigateur sans « :has() » laisse les deux dorés — moins bien,
+     mais rien de cassé. */
+  .final:has(#lien-app-store:not([hidden])) .final-contact .bouton {
+    background: var(--voile); color: var(--texte); box-shadow: none;
+  }
+
   /* ---- Pages intérieures ---- */
   .titre-page { padding: var(--e7) 0 0; }
   .titre-page h1 { font-size: var(--t-titre-page); }
@@ -425,10 +470,10 @@
     :root { color-scheme: light; }
     body { background: #fff; color: var(--encre); font-size: 11pt; line-height: 1.45; }
     .enveloppe { max-width: none; padding: 0; }
-    .saut, .nav-site, .hero::before, .objet, .essai, .fenetre, .retour,
+    .saut, .nav-site, .hero::before, .objet, .essai, .fenetre, .indice, .retour,
     .pictogramme, .sceau { display: none; }
     main > section { padding: var(--e3) 0; }
-    .hero { background: none; }
+    .hero, .final { background: none; }
     h1, h2, h3, .marque, .accroche, .date, .sous-titre, footer p,
     .jetons li, .publics li, .coche, .precision, .objet-legende,
     .hero h1 .sous-titre, .sommaire a::before,
@@ -510,6 +555,14 @@
         <p><button type="button" class="bouton essai-rejouer" id="essai-rejouer" hidden>Un autre objet</button></p>
       </div>
       </div>
+
+      <!-- Allumé à la fermeture de la fenêtre : le visiteur vient d'entrer, on
+           lui montre qu'il y a une suite. Caché sans JavaScript, puisqu'alors
+           il n'y a pas eu de fenêtre. -->
+      <p class="indice" id="indice" hidden>
+        <span>Découvre le jeu</span>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M12 5v13M6 13l6 6 6-6"/></svg>
+      </p>
     </div>
   </section>
 
@@ -583,10 +636,16 @@
     </div>
   </section>
 
-  <section>
+  <section class="final">
     <div class="enveloppe appel">
-      <h2>Une question ?</h2>
-      <a class="bouton" href="mailto:johan.quille@trainedmanager.fr">Écrire à l’éditeur</a>
+      <h2>Prêt à jouer en famille ?</h2>
+      <p class="final-texte">Tout seul, à plusieurs sur le même téléphone, ou chacun sur le sien. Sans compte, sans inscription.</p>
+      <!-- Bouton de téléchargement : la place est prête, le bouton attend
+           l'adresse de la fiche App Store. Pour l'allumer, remplacer l'adresse
+           ci-dessous par celle de la fiche, puis retirer « hidden ». Tant qu'il
+           est caché, c'est « Écrire à l’éditeur » qui occupe la place. -->
+      <p><a class="bouton" id="lien-app-store" hidden href="https://apps.apple.com/">Télécharger sur l’App Store</a></p>
+      <p class="final-contact"><a class="bouton" href="mailto:johan.quille@trainedmanager.fr">Écrire à l’éditeur</a></p>
     </div>
   </section>
 
@@ -644,12 +703,19 @@
   var sous     = document.getElementById("fenetre-sous");
   var entrer   = document.getElementById("fenetre-entrer");
   var jeu      = document.getElementById("jeu");
+  var hero     = document.querySelector(".hero");
+  var indice   = document.getElementById("indice");
   if (!essai || !emoji || !boutons || !verdict || !rejouer) { return; }
 
   var rang = Math.floor(Math.random() * OBJETS.length);
   var encours = null;
   /* Le jeu se joue d'abord dans la fenêtre, puis dans la page. */
   var dansFenetre = false;
+  /* La fermeture est animée : on ne la lance qu'une fois. */
+  var ferme = false;
+  /* Qui demande moins d'animation n'attend pas non plus qu'elles finissent. */
+  var douceur = !(window.matchMedia &&
+    window.matchMedia("(prefers-reduced-motion: reduce)").matches);
   /* Où le jeu doit revenir une fois la fenêtre fermée. */
   var berceau = jeu ? jeu.parentNode : null;
   var apres = jeu ? jeu.nextSibling : null;
@@ -678,14 +744,36 @@
     for (var i = 0; i < choix.length; i++) { choix[i].classList.add("appel"); }
   }
 
+  /* La fenêtre s'efface, puis le site arrive. Le compte à rebours est tenu
+     ici et non par l'animation : si le navigateur ne la joue pas, la fenêtre
+     se ferme à l'heure dite quand même. */
   function fermerFenetre() {
+    if (ferme) { return; }
+    ferme = true;
+    fenetre.classList.add("sortie");
+    window.setTimeout(entrerDansLeSite, douceur ? 260 : 0);
+  }
+
+  function entrerDansLeSite() {
     dansFenetre = false;
     if (berceau) { berceau.insertBefore(jeu, apres); }
     fenetre.close();
+    fenetre.classList.remove("sortie");
     /* Le jeu continue dans la page : « Un autre objet » reprend son rôle. */
     rejouer.hidden = false;
+    /* Le bandeau d'accueil se lève : c'est le site qui arrive, pas une page
+       qui était déjà là. */
+    if (hero) { hero.classList.add("arrivee"); }
+    /* Et on montre qu'il y a une suite sous le premier écran. */
+    if (indice) { indice.hidden = false; indice.classList.add("anime"); }
+    /* « preventScroll » n'est pas un détail : sans lui, donner le focus au
+       contenu fait défiler la page de la hauteur de l'en-tête, et le visiteur
+       entre sur un site dont la marque et les onglets sont déjà sortis par le
+       haut. Mesuré : 117 px de saut. */
     var contenu = document.getElementById("contenu");
-    if (contenu) { contenu.focus(); }
+    if (contenu) {
+      try { contenu.focus({ preventScroll: true }); } catch (e) { contenu.focus(); }
+    }
   }
 
   function poser() {
