@@ -178,10 +178,12 @@ entrent.
 ### Ce qui attend une décision ou une information de Johan
 
 - **Adresse de la fiche App Store (ou TestFlight)**, la seule chose qui manque
-  encore. Le bouton « Télécharger sur l'App Store » est déjà écrit dans le
-  bloc de fin d'`index.html` (`id="lien-app-store"`), en bonne place et à la
-  bonne taille, mais il porte l'attribut `hidden` faute d'adresse. Pour
-  l'allumer : remplacer l'adresse par celle de la fiche, retirer `hidden`.
+  encore. Le bouton « Télécharger sur l'App Store » est déjà écrit deux fois
+  dans `index.html`, aux deux endroits que recommandent les guides de pages
+  d'application : dans le bandeau d'accueil (`id="lien-app-store-haut"`) et
+  dans le bloc de fin (`id="lien-app-store"`). Les deux portent l'attribut
+  `hidden` faute d'adresse et ne prennent aucune place. Pour les allumer :
+  remplacer l'adresse par celle de la fiche, retirer `hidden`.
   « Écrire à l'éditeur » passe alors tout seul au second plan.
 - **Image d'aperçu au partage (`og:image`)** : envoyé par Messages ou WhatsApp,
   le lien s'affiche avec son titre et sa description, sans visuel. Suppose

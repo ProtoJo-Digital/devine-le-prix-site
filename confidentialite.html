@@ -314,6 +314,44 @@
   .indice.anime svg { animation: descend 1.4s ease-in-out 3; }
   @keyframes descend { 0%, 100% { transform: none; } 50% { transform: translateY(7px); } }
 
+  /* ---- Questions fréquentes ----
+     On balaie les questions, on ouvre celle qui inquiète. « details » est
+     natif : rien à charger, et le clavier comme les lecteurs d'écran le
+     comprennent sans qu'on ait à l'expliquer. */
+  .faq { display: grid; gap: var(--e3); }
+  .question { background: var(--voile); border-radius: var(--rayon-petit); min-width: 0; }
+  /* Même raison que pour les onglets et les pastilles plus haut : une boîte
+     « flex » refuse de descendre sous la largeur de son mot le plus long. Sans
+     ces deux lignes, une question poussait la page hors de l'écran dès que le
+     texte était agrandi — mesuré à 320 px, 327 px de large pour 305 utiles. */
+  .question summary, .question p { min-width: 0; overflow-wrap: anywhere; }
+  .question summary {
+    display: flex; align-items: center; gap: var(--e4); min-height: 56px;
+    padding: var(--e3) var(--e5); cursor: pointer; list-style: none;
+    font-size: var(--t2); font-weight: 800; color: var(--texte);
+  }
+  .question summary::-webkit-details-marker { display: none; }
+  /* Un chevron dessiné en CSS plutôt qu'un caractère : il tourne à l'ouverture
+     et ne dépend d'aucune police. */
+  .question summary::after {
+    content: ""; flex: none; margin-left: auto;
+    width: 11px; height: 11px;
+    border-right: 3px solid var(--or); border-bottom: 3px solid var(--or);
+    transform: translateY(-3px) rotate(45deg);
+    transition: transform .2s ease;
+  }
+  .question[open] summary::after { transform: translateY(2px) rotate(-135deg); }
+  .question p {
+    margin: 0; padding: 0 var(--e5) var(--e5);
+    color: var(--texte-doux); font-weight: 500;
+  }
+  .question a { color: var(--or); }
+
+  /* Appel à l'action du bandeau d'accueil : la place est prête, en haut comme
+     en bas de page, pour le jour où l'adresse de la fiche App Store sera
+     connue. Tant qu'il est caché, il ne prend pas un pixel. */
+  .appel-haut { margin: 0 0 var(--e6); }
+
   /* ---- Bloc de fin : la dernière image que le visiteur emporte ----
      Le dégradé s'inverse par rapport au bandeau d'accueil : la page s'ouvre
      et se referme sur la même lumière, et le bouton doré y ressort seul. */
@@ -380,6 +418,12 @@
   :target { scroll-margin-top: var(--e6); }
 
   h2 { font-size: var(--t4); font-weight: 900; line-height: 1.15; letter-spacing: -.02em; margin: 2em 0 .7em; color: var(--or); }
+  /* Chapeau : une phrase sous un titre, qui dit en quoi la section intéresse
+     le visiteur avant de lui demander de lire une liste. */
+  .chapeau {
+    max-width: 46ch; margin: 0 0 var(--e5);
+    font-size: var(--t2); font-weight: 700; color: var(--texte-doux);
+  }
   h3 { font-size: var(--t3); font-weight: 900; margin: 0 0 var(--e1); color: var(--encre); }
   p { margin: 0 0 1em; }
 
@@ -473,12 +517,24 @@
     .saut, .nav-site, .hero::before, .objet, .essai, .fenetre, .indice, .retour,
     .pictogramme, .sceau { display: none; }
     main > section { padding: var(--e3) 0; }
+    /* Sur papier, les questions s'impriment ouvertes : un accordéon replié ne
+       donnerait qu'une liste de questions sans réponse. Le script les ouvre
+       avant l'impression ; cette règle-ci fait le même travail dans les
+       navigateurs qui la comprennent, avec ou sans JavaScript. */
+    .question::details-content { content-visibility: visible; }
+    .question summary::after { display: none; }
+    .question { background: none; border: 1px solid #6B6484; margin-bottom: var(--e2); }
+    /* Sans cette ligne, question et réponse restaient blanches sur blanc :
+       la page sortait avec six cadres vides. */
+    .question summary, .question p { color: var(--encre); }
     .hero, .final { background: none; }
     h1, h2, h3, .marque, .accroche, .date, .sous-titre, footer p,
     .jetons li, .publics li, .coche, .precision, .objet-legende,
     .hero h1 .sous-titre, .sommaire a::before,
     .titre-page .sous-titre { color: var(--encre); }
-    a { color: #3A2B9E; }
+    /* « .question a » est plus spécifique que « a » : sans le citer ici, le lien
+       d'une réponse restait doré, soit 1,8:1 sur du papier blanc. */
+    a, .question a { color: #3A2B9E; }
     main a[href^="http"]::after { content: " (" attr(href) ")"; font-weight: 400; word-break: break-all; }
     .entete, footer { border-color: #6B6484; }
     .carte, .resume, .jetons li, .publics li,
