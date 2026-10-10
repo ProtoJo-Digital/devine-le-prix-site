@@ -230,24 +230,64 @@
   .essai-verdict.faux { background: var(--corail); }
   .essai-rejouer { margin-top: var(--e4); }
 
-  /* ---- Verrou : la suite du site s'ouvre après la première réponse ----
-     C'est le script qui pose le verrou, jamais le HTML : sans JavaScript,
-     aucune section n'est cachée et le site se lit en entier. */
-  .verrou { padding: var(--e8) 0; text-align: center; }
-  .verrou p {
-    max-width: 30ch; margin: 0 auto;
-    font-size: var(--t2); font-weight: 700; color: var(--texte-doux);
+  /* ---- Fenêtre d'accueil : on devine un prix avant d'entrer ----
+     C'est le script qui l'ouvre, jamais le HTML : une balise <dialog> fermée
+     ne s'affiche pas, donc sans JavaScript le site se lit directement.
+     Aucune règle ici ne pose « forwards » ni « both » : une animation qui ne
+     partirait pas laisserait sinon son premier instant à l'écran, c'est-à-dire
+     du vide. Les animations ne sont ici que des embellissements. */
+  .fenetre {
+    width: min(26rem, 100% - var(--e7));
+    max-height: calc(100dvh - var(--e6));
+    overflow: auto;
+    margin: auto;
+    border: none; border-radius: var(--rayon-grand);
+    padding: var(--e6) var(--e4) var(--e6);
+    background: linear-gradient(180deg, var(--fond-haut) 0%, var(--fond) 100%);
+    color: var(--texte); text-align: center;
+    box-shadow: 0 30px 70px rgba(0, 0, 0, .55);
   }
-  /* Les sections libérées arrivent en douceur plutôt que d'apparaître d'un
-     coup. Le bloc « prefers-reduced-motion » plus bas ramène la durée à zéro
-     pour qui demande moins d'animation.
-     Pas de « forwards » ni de « both » ici, volontairement : avec eux, un
-     navigateur qui ne joue pas l'animation garderait la première image —
-     opacité 0 — et tout le contenu du site resterait invisible. Sans eux,
-     l'animation n'est qu'un embellissement : si elle ne part pas, le contenu
-     s'affiche normalement. */
-  @keyframes ouverture { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: none; } }
-  .ouvert { animation: ouverture .35s ease; }
+  /* Le site reste là, derrière, mais illisible : c'est ce qui donne envie
+     d'ouvrir la porte. Le flou n'est qu'un bonus, l'assombrissement suffit. */
+  .fenetre::backdrop { background: rgba(11, 7, 28, .9); backdrop-filter: blur(4px); }
+  .fenetre[open] { animation: fenetre-entree .3s ease; }
+  @keyframes fenetre-entree { from { opacity: 0; transform: translateY(14px) scale(.96); } to { opacity: 1; transform: none; } }
+  .fenetre h2 { font-size: var(--t3); margin: 0 0 var(--e1); }
+  .fenetre-sous { font-size: var(--t1); font-weight: 700; color: var(--texte-doux); margin: 0 0 var(--e4); }
+  .fenetre-lien { display: inline-block; margin-top: var(--e4); font-size: var(--t0); font-weight: 700; }
+  /* Dans la fenêtre, le jeu est plus compact que dans la page : sur un petit
+     téléphone, tout doit tenir sous les yeux une fois la réponse donnée —
+     la carte, le prix, le verdict et le bouton pour entrer. */
+  .fenetre .objet-carte { padding: var(--e3); }
+  .fenetre .objet-emoji { font-size: 3.4rem; }
+  .fenetre .objet-prix { margin-top: var(--e3); font-size: 2.4rem; }
+  .fenetre .objet-legende { margin-top: var(--e1); font-size: var(--t1); }
+  /* Les deux choix doivent tenir côte à côte même sur un petit téléphone :
+     à deux lignes, le second passait sous le bord de la fenêtre. */
+  .fenetre .bouton-choix { padding-inline: var(--e3); }
+  .fenetre .essai-verdict { margin-top: var(--e3); }
+  .fenetre .essai p, .fenetre > p { margin-bottom: 0; }
+  .fenetre #fenetre-entrer { margin-top: var(--e4); }
+  /* Écran très bas — un téléphone tenu à l'horizontale, par exemple : on
+     resserre encore, pour que les deux choix restent sous les yeux plutôt
+     que de tomber sous le bord de la fenêtre. */
+  @media (max-height: 620px) {
+    .fenetre { padding-top: var(--e4); padding-bottom: var(--e4); }
+    .fenetre-sous { display: none; }
+    .fenetre .objet-emoji { font-size: 2.4rem; }
+    .fenetre .objet-prix { margin-top: var(--e2); font-size: 1.9rem; }
+    .fenetre .objet-legende { font-size: var(--t0); }
+    .fenetre-lien { margin-top: var(--e3); }
+  }
+
+  /* Les deux choix appellent le regard : trois battements, puis plus rien.
+     Rien ne bouge en permanence à l'écran, et qui demande moins d'animation
+     n'en voit aucun (bloc « prefers-reduced-motion » plus bas). */
+  @keyframes appel {
+    0%, 100% { transform: none; }
+    50% { transform: scale(1.06); box-shadow: 0 10px 24px rgba(0, 0, 0, .3), 0 0 0 10px rgba(250, 179, 26, .22); }
+  }
+  .bouton-choix.appel { animation: appel 1.5s ease-in-out 1s 3; }
 
   /* ---- Pages intérieures ---- */
   .titre-page { padding: var(--e7) 0 0; }
@@ -385,12 +425,9 @@
     :root { color-scheme: light; }
     body { background: #fff; color: var(--encre); font-size: 11pt; line-height: 1.45; }
     .enveloppe { max-width: none; padding: 0; }
-    .saut, .nav-site, .hero::before, .objet, .essai, .verrou, .retour,
+    .saut, .nav-site, .hero::before, .objet, .essai, .fenetre, .retour,
     .pictogramme, .sceau { display: none; }
     main > section { padding: var(--e3) 0; }
-    /* Sur papier, rien n'est verrouillé : on imprime le site entier,
-       même si le visiteur n'a pas encore répondu. */
-    main > section[hidden] { display: block !important; }
     .hero { background: none; }
     h1, h2, h3, .marque, .accroche, .date, .sous-titre, footer p,
     .jetons li, .publics li, .coche, .precision, .objet-legende,
