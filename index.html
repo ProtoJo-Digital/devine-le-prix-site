@@ -314,6 +314,44 @@
   .indice.anime svg { animation: descend 1.4s ease-in-out 3; }
   @keyframes descend { 0%, 100% { transform: none; } 50% { transform: translateY(7px); } }
 
+  /* ---- Questions fréquentes ----
+     On balaie les questions, on ouvre celle qui inquiète. « details » est
+     natif : rien à charger, et le clavier comme les lecteurs d'écran le
+     comprennent sans qu'on ait à l'expliquer. */
+  .faq { display: grid; gap: var(--e3); }
+  .question { background: var(--voile); border-radius: var(--rayon-petit); min-width: 0; }
+  /* Même raison que pour les onglets et les pastilles plus haut : une boîte
+     « flex » refuse de descendre sous la largeur de son mot le plus long. Sans
+     ces deux lignes, une question poussait la page hors de l'écran dès que le
+     texte était agrandi — mesuré à 320 px, 327 px de large pour 305 utiles. */
+  .question summary, .question p { min-width: 0; overflow-wrap: anywhere; }
+  .question summary {
+    display: flex; align-items: center; gap: var(--e4); min-height: 56px;
+    padding: var(--e3) var(--e5); cursor: pointer; list-style: none;
+    font-size: var(--t2); font-weight: 800; color: var(--texte);
+  }
+  .question summary::-webkit-details-marker { display: none; }
+  /* Un chevron dessiné en CSS plutôt qu'un caractère : il tourne à l'ouverture
+     et ne dépend d'aucune police. */
+  .question summary::after {
+    content: ""; flex: none; margin-left: auto;
+    width: 11px; height: 11px;
+    border-right: 3px solid var(--or); border-bottom: 3px solid var(--or);
+    transform: translateY(-3px) rotate(45deg);
+    transition: transform .2s ease;
+  }
+  .question[open] summary::after { transform: translateY(2px) rotate(-135deg); }
+  .question p {
+    margin: 0; padding: 0 var(--e5) var(--e5);
+    color: var(--texte-doux); font-weight: 500;
+  }
+  .question a { color: var(--or); }
+
+  /* Appel à l'action du bandeau d'accueil : la place est prête, en haut comme
+     en bas de page, pour le jour où l'adresse de la fiche App Store sera
+     connue. Tant qu'il est caché, il ne prend pas un pixel. */
+  .appel-haut { margin: 0 0 var(--e6); }
+
   /* ---- Bloc de fin : la dernière image que le visiteur emporte ----
      Le dégradé s'inverse par rapport au bandeau d'accueil : la page s'ouvre
      et se referme sur la même lumière, et le bouton doré y ressort seul. */
@@ -380,6 +418,12 @@
   :target { scroll-margin-top: var(--e6); }
 
   h2 { font-size: var(--t4); font-weight: 900; line-height: 1.15; letter-spacing: -.02em; margin: 2em 0 .7em; color: var(--or); }
+  /* Chapeau : une phrase sous un titre, qui dit en quoi la section intéresse
+     le visiteur avant de lui demander de lire une liste. */
+  .chapeau {
+    max-width: 46ch; margin: 0 0 var(--e5);
+    font-size: var(--t2); font-weight: 700; color: var(--texte-doux);
+  }
   h3 { font-size: var(--t3); font-weight: 900; margin: 0 0 var(--e1); color: var(--encre); }
   p { margin: 0 0 1em; }
 
@@ -473,12 +517,24 @@
     .saut, .nav-site, .hero::before, .objet, .essai, .fenetre, .indice, .retour,
     .pictogramme, .sceau { display: none; }
     main > section { padding: var(--e3) 0; }
+    /* Sur papier, les questions s'impriment ouvertes : un accordéon replié ne
+       donnerait qu'une liste de questions sans réponse. Le script les ouvre
+       avant l'impression ; cette règle-ci fait le même travail dans les
+       navigateurs qui la comprennent, avec ou sans JavaScript. */
+    .question::details-content { content-visibility: visible; }
+    .question summary::after { display: none; }
+    .question { background: none; border: 1px solid #6B6484; margin-bottom: var(--e2); }
+    /* Sans cette ligne, question et réponse restaient blanches sur blanc :
+       la page sortait avec six cadres vides. */
+    .question summary, .question p { color: var(--encre); }
     .hero, .final { background: none; }
     h1, h2, h3, .marque, .accroche, .date, .sous-titre, footer p,
     .jetons li, .publics li, .coche, .precision, .objet-legende,
     .hero h1 .sous-titre, .sommaire a::before,
     .titre-page .sous-titre { color: var(--encre); }
-    a { color: #3A2B9E; }
+    /* « .question a » est plus spécifique que « a » : sans le citer ici, le lien
+       d'une réponse restait doré, soit 1,8:1 sur du papier blanc. */
+    a, .question a { color: #3A2B9E; }
     main a[href^="http"]::after { content: " (" attr(href) ")"; font-weight: 400; word-break: break-all; }
     .entete, footer { border-color: #6B6484; }
     .carte, .resume, .jetons li, .publics li,
@@ -519,7 +575,11 @@
         <li class="seniors">Seniors</li>
         <li class="famille">En famille</li>
       </ul>
-      <!-- Le bouton « Télécharger sur l'App Store » viendra ici, dès que l'adresse de la fiche App Store sera connue. -->
+      <!-- Appel à l'action du premier écran, le plus regardé de la page. Comme
+           celui du bas, il attend l'adresse de la fiche App Store : remplacer
+           l'adresse ci-dessous par celle de la fiche, puis retirer « hidden ».
+           Caché, il ne prend pas de place. -->
+      <p class="appel-haut"><a class="bouton" id="lien-app-store-haut" hidden href="https://apps.apple.com/">Télécharger sur l’App Store</a></p>
       <!-- Le jeu — la carte et les deux choix — part dans la fenêtre d'accueil
            au chargement, puis revient ici une fois la réponse donnée. Il n'en
            existe donc qu'un seul exemplaire, et sans JavaScript il ne bouge
@@ -592,6 +652,7 @@
   <section>
     <div class="enveloppe">
       <h2>Ce que tu gagnes en jouant</h2>
+      <p class="chapeau">Chaque partie laisse une trace : on monte de niveau, on remplit sa collection, on tient sa série de jours.</p>
       <ul class="jetons">
         <li>Niveaux</li>
         <li>Points d’expérience</li>
@@ -636,6 +697,41 @@
     </div>
   </section>
 
+  <!-- Les objections d'un parent ou d'un grand-parent, traitées avant le dernier
+       appel à l'action. Chaque réponse reprend ce qui est déjà écrit sur ce site
+       ou dans la politique de confidentialité : rien n'y est affirmé de neuf. -->
+  <section id="questions">
+    <div class="enveloppe">
+      <h2>Les questions qu’on nous pose</h2>
+      <div class="faq">
+        <details class="question">
+          <summary>Faut-il créer un compte ?</summary>
+          <p>Non. Aucun compte, aucune inscription : tu ouvres l’application et tu joues. Aucune adresse e-mail, aucun nom, aucune information de contact n’est demandée.</p>
+        </details>
+        <details class="question">
+          <summary>Y a-t-il de la publicité ?</summary>
+          <p>Jamais pendant le jeu. Seulement à la fin d’une partie, et ces publicités sont non personnalisées, limitées à un contenu tout public. L’achat « Version sans pub » les retire définitivement.</p>
+        </details>
+        <details class="question">
+          <summary>Mes données sont-elles collectées ?</summary>
+          <p>Aucune donnée personnelle n’est collectée. La progression et les réglages restent sur l’appareil, et se retrouvent sur tes autres appareils si iCloud est activé. Le détail est dans la <a href="confidentialite.html">politique de confidentialité</a>.</p>
+        </details>
+        <details class="question">
+          <summary>Est-ce adapté aux enfants ?</summary>
+          <p>L’application est configurée pour un public pouvant inclure des mineurs : publicités non personnalisées, contenu tout public, et aucune demande d’autorisation de suivi publicitaire. Les textes peuvent en plus être lus à voix haute par la voix intégrée à l’iPhone.</p>
+        </details>
+        <details class="question">
+          <summary>Peut-on jouer à plusieurs ?</summary>
+          <p>Oui, de deux façons : en se passant l’appareil de main en main, chacun choisissant son prénom et son avatar ; ou chacun sur son appareil, grâce à Game Center. Les invitations passent par Messages.</p>
+        </details>
+        <details class="question">
+          <summary>Sur quels appareils ?</summary>
+          <p>Sur iPhone et sur iPad.</p>
+        </details>
+      </div>
+    </div>
+  </section>
+
   <section class="final">
     <div class="enveloppe appel">
       <h2>Prêt à jouer en famille ?</h2>
@@ -664,7 +760,7 @@
      ici, il y est déplacé au chargement depuis le bandeau d'accueil. -->
 <dialog class="fenetre" id="fenetre" tabindex="-1" aria-labelledby="fenetre-titre">
   <h2 id="fenetre-titre">À toi de jouer !</h2>
-  <p class="fenetre-sous" id="fenetre-sous">Une réponse, et le site s'ouvre.</p>
+  <p class="fenetre-sous" id="fenetre-sous">Une réponse, et le site s’ouvre.</p>
   <div id="fenetre-jeu"></div>
   <p><button type="button" class="bouton" id="fenetre-entrer" hidden>Découvrir le site</button></p>
   <a class="fenetre-lien" href="confidentialite.html">Politique de confidentialité</a>
@@ -868,6 +964,29 @@
   poser();
   essai.hidden = false;
   ouvrirFenetre();
+})();
+
+/* Les questions fréquentes à l'impression.
+   Indépendant du jeu : même si la mini-partie ne s'allume pas, une page
+   imprimée doit porter les réponses et pas seulement les questions. On
+   rouvre ensuite ce qu'on avait ouvert, pour rendre l'écran tel qu'il était. */
+(function () {
+  "use strict";
+  if (!window.addEventListener) { return; }
+  window.addEventListener("beforeprint", function () {
+    var q = document.querySelectorAll(".question:not([open])");
+    for (var i = 0; i < q.length; i++) {
+      q[i].open = true;
+      q[i].setAttribute("data-impression", "");
+    }
+  });
+  window.addEventListener("afterprint", function () {
+    var q = document.querySelectorAll(".question[data-impression]");
+    for (var i = 0; i < q.length; i++) {
+      q[i].open = false;
+      q[i].removeAttribute("data-impression");
+    }
+  });
 })();
 </script>
 </body>
