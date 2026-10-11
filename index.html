@@ -81,6 +81,8 @@
     --t-prix: clamp(2rem, 6vw, 2.444rem);           /* 36 → 44 px */
     --t-objet: clamp(4.444rem, 15vw, 6.111rem);     /* 80 → 110 px */
     --t-objet-court: clamp(3.111rem, 11vw, 4.444rem); /* 56 → 80 px, écrans bas */
+    --photo-objet: clamp(5.333rem, 26vw, 8.333rem);   /* 96 → 150 px de haut */
+    --photo-objet-court: clamp(4rem, 19vw, 5.333rem); /* 72 → 96 px, écrans bas */
 
     /* Rayons de la planche */
     --rayon-focus: 6px;
@@ -256,6 +258,9 @@
   }
   .jeu-essai { font-size: var(--t0); font-weight: 800; color: var(--encre-douce); margin: 0; }
   .jeu-objet { font-size: var(--t-objet); line-height: 1; }
+  /* La boîte de l'objet garde la même hauteur pour une photo comme pour un emoji. */
+  .jeu-visuel { display: flex; align-items: center; justify-content: center; width: 100%; height: var(--photo-objet); }
+  .jeu-photo { display: block; max-width: 100%; max-height: 100%; width: auto; height: auto; object-fit: contain; border-radius: var(--rayon-petit); }
   .jeu-nom { font-size: var(--t6); font-weight: 900; line-height: 1.15; margin: 0; max-width: 100%; }
   .jeu-indice {
     display: inline-block; padding: var(--e1) var(--e4); border-radius: var(--rayon-rond);
@@ -582,6 +587,7 @@
     .scene-sous { margin-bottom: var(--e5); }
     .jeu { gap: var(--e2); padding: var(--e4); }
     .jeu-objet { font-size: var(--t-objet-court); }
+    .jeu-visuel { height: var(--photo-objet-court); }
   }
 
   /* ---- Quand le système demande moins d'animation ---- */
@@ -658,7 +664,13 @@
            ne peut pas jouer : le reste de la page, lui, se lit entièrement. -->
       <div class="jeu" id="jeu">
         <p class="jeu-essai" id="jeu-essai"></p>
-        <span class="jeu-objet" id="jeu-objet" aria-hidden="true">🥖</span>
+        <!-- La photo est décorative : le nom de l'objet est écrit juste en dessous.
+             Sa boîte a une hauteur fixe, pour que la carte ne saute pas d'un objet à
+             l'autre quelles que soient les proportions de l'image. -->
+        <span class="jeu-visuel">
+          <img class="jeu-photo" id="jeu-photo" src="objets/baguette.jpg" alt="">
+          <span class="jeu-objet" id="jeu-objet" aria-hidden="true" hidden>🥖</span>
+        </span>
         <p class="jeu-nom" id="jeu-nom">Une baguette de pain</p>
         <p class="jeu-indice" id="jeu-indice">Entre 1&nbsp;€ et 5&nbsp;€</p>
 
@@ -785,36 +797,40 @@
   "use strict";
 
   /* Objets tirés du catalogue de l'application (Catalog.swift) : nom, emoji et
-     prix réels, repris tels quels. Le site en montre une poignée ; l'app en a 400. */
+     prix réels, repris tels quels. Le site en montre une poignée ; l'app en a 400.
+     Le quatrième champ est la photo de l'objet dans le dossier objets/, reprise de
+     la table ItemPhotos.swift de l'app : certains fichiers portent le nom d'un autre
+     objet (« Un poulet rôti » → menu-hamburger), chaque ligne a été vérifiée à l'œil,
+     ne pas les « corriger ». Sans photo juste, l'objet garde son emoji, comme dans l'app. */
   var OBJETS = [
-    ["🥖", "Une baguette de pain", 1],
-    ["📮", "Un timbre", 1],
-    ["☕", "Un café en terrasse", 3],
-    ["🍎", "Un kilo de pommes", 3],
-    ["🍦", "Une glace à l’italienne", 3],
-    ["📖", "Un livre de poche", 8],
-    ["🍗", "Un poulet rôti", 10],
-    ["🎥", "Une place de cinéma", 12],
-    ["🍕", "Une pizza à emporter", 12],
-    ["🧩", "Un puzzle de 1 000 pièces", 25],
+    ["🥖", "Une baguette de pain", 1, "baguette"],
+    ["📮", "Un timbre", 1, "timbre"],
+    ["☕", "Un café en terrasse", 3, "cafe-en-terrasse"],
+    ["🍎", "Un kilo de pommes", 3, "kilo-de-pommes"],
+    ["🍦", "Une glace à l’italienne", 3, "glace-italienne"],
+    ["📖", "Un livre de poche", 8, "livre-poche"],
+    ["🍗", "Un poulet rôti", 10, "menu-hamburger"],
+    ["🎥", "Une place de cinéma", 12, "pizza-emporter"],
+    ["🍕", "Une pizza à emporter", 12, "place-cinema"],
+    ["🧩", "Un puzzle de 1 000 pièces", 25, "puzzle-1000-pieces"],
     ["🪁", "Un cerf-volant", 25],
-    ["🍞", "Un grille-pain", 30],
-    ["🎄", "Un sapin de Noël", 40],
-    ["💇", "Un sèche-cheveux", 40],
-    ["👔", "Un fer à repasser", 45],
-    ["🍱", "Un four à micro-ondes", 90],
-    ["👟", "Une paire de baskets", 90],
-    ["🚲", "Un vélo d’enfant", 120],
-    ["🧹", "Un aspirateur traîneau", 150],
-    ["🎸", "Une guitare folk pour débuter", 200],
-    ["⌚", "Une montre connectée", 350],
-    ["🌱", "Une tondeuse à gazon thermique", 350],
-    ["🤖", "Un aspirateur robot", 400],
-    ["🧺", "Un lave-linge", 500],
-    ["📺", "Une télévision de 55 pouces", 600],
-    ["🧊", "Un réfrigérateur", 800],
-    ["🛋️", "Un canapé", 900],
-    ["🎹", "Un piano droit", 4000]
+    ["🍞", "Un grille-pain", 30, "gateau-anniversaire-8"],
+    ["🎄", "Un sapin de Noël", 40, "sapin-noel"],
+    ["💇", "Un sèche-cheveux", 40, "seche-cheveux"],
+    ["👔", "Un fer à repasser", 45, "circuit-petites-voitures"],
+    ["🍱", "Un four à micro-ondes", 90, "machine-cafe-capsules"],
+    ["👟", "Une paire de baskets", 90, "four-micro-ondes"],
+    ["🚲", "Un vélo d’enfant", 120, "velo-enfant"],
+    ["🧹", "Un aspirateur traîneau", 150, "aspirateur-traineau"],
+    ["🎸", "Une guitare folk pour débuter", 200, "guitare-folk-debuter"],
+    ["⌚", "Une montre connectée", 350, "montre-connectee"],
+    ["🌱", "Une tondeuse à gazon thermique", 350, "tondeuse-thermique"],
+    ["🤖", "Un aspirateur robot", 400, "aspirateur-robot"],
+    ["🧺", "Un lave-linge", 500, "lave-linge"],
+    ["📺", "Une télévision de 55 pouces", 600, "television-55-pouces"],
+    ["🧊", "Un réfrigérateur", 800, "refrigerateur"],
+    ["🛋️", "Un canapé", 900, "canape"],
+    ["🎹", "Un piano droit", 4000, "piano-droit"]
   ];
 
   var ESSAIS = 3;
@@ -824,6 +840,7 @@
   var carte    = document.getElementById("jeu");
   var compteur = document.getElementById("jeu-essai");
   var objet    = document.getElementById("jeu-objet");
+  var photo    = document.getElementById("jeu-photo");
   var nom      = document.getElementById("jeu-nom");
   var indice   = document.getElementById("jeu-indice");
   var message  = document.getElementById("jeu-message");
@@ -841,6 +858,11 @@
   var bientot  = document.getElementById("jeu-bientot");
 
   if (!carte || !champ || !saisie || !fin) { return; }
+  /* Une photo qui ne se charge pas (réseau coupé, fichier manquant) laisse la place à
+     l'emoji plutôt qu'à une icône d'image cassée. */
+  if (photo) {
+    photo.addEventListener("error", function () { photo.hidden = true; objet.hidden = false; });
+  }
 
   var rang = Math.floor(Math.random() * OBJETS.length);
   var encours = null;
@@ -873,6 +895,15 @@
     essai = 0;
     fini = false;
     objet.textContent = encours[0];
+    /* La photo quand l'objet en a une, sinon l'emoji : le même repli que l'app. */
+    if (photo && encours[3]) {
+      photo.src = "objets/" + encours[3] + ".jpg";
+      photo.hidden = false;
+      objet.hidden = true;
+    } else {
+      if (photo) { photo.hidden = true; }
+      objet.hidden = false;
+    }
     nom.textContent = encours[1];
     indice.textContent = fourchette(encours[2]);
     compteur.textContent = "Essai 1 sur " + ESSAIS;

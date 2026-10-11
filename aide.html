@@ -81,6 +81,8 @@
     --t-prix: clamp(2rem, 6vw, 2.444rem);           /* 36 → 44 px */
     --t-objet: clamp(4.444rem, 15vw, 6.111rem);     /* 80 → 110 px */
     --t-objet-court: clamp(3.111rem, 11vw, 4.444rem); /* 56 → 80 px, écrans bas */
+    --photo-objet: clamp(5.333rem, 26vw, 8.333rem);   /* 96 → 150 px de haut */
+    --photo-objet-court: clamp(4rem, 19vw, 5.333rem); /* 72 → 96 px, écrans bas */
 
     /* Rayons de la planche */
     --rayon-focus: 6px;
@@ -256,6 +258,9 @@
   }
   .jeu-essai { font-size: var(--t0); font-weight: 800; color: var(--encre-douce); margin: 0; }
   .jeu-objet { font-size: var(--t-objet); line-height: 1; }
+  /* La boîte de l'objet garde la même hauteur pour une photo comme pour un emoji. */
+  .jeu-visuel { display: flex; align-items: center; justify-content: center; width: 100%; height: var(--photo-objet); }
+  .jeu-photo { display: block; max-width: 100%; max-height: 100%; width: auto; height: auto; object-fit: contain; border-radius: var(--rayon-petit); }
   .jeu-nom { font-size: var(--t6); font-weight: 900; line-height: 1.15; margin: 0; max-width: 100%; }
   .jeu-indice {
     display: inline-block; padding: var(--e1) var(--e4); border-radius: var(--rayon-rond);
@@ -582,6 +587,7 @@
     .scene-sous { margin-bottom: var(--e5); }
     .jeu { gap: var(--e2); padding: var(--e4); }
     .jeu-objet { font-size: var(--t-objet-court); }
+    .jeu-visuel { height: var(--photo-objet-court); }
   }
 
   /* ---- Quand le système demande moins d'animation ---- */
