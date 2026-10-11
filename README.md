@@ -17,6 +17,7 @@ ProtoJo Digital (Johan Quille), France.
 | `presse.html` | Espace presse : présentation, fiche, bannière à télécharger |
 | `confidentialite.html` | Politique de confidentialité |
 | `mentions-legales.html` | Mentions légales : éditeur, directeur de la publication, hébergeur, propriété |
+| `404.html` | Page servie par GitHub Pages pour toute adresse inconnue : le plan des huit pages et le retour à l'accueil |
 | `partage.jpg` | Aperçu du lien au partage (1200 × 630), et bannière de l'espace presse. Recadrée depuis `livrables/banniere-1920x1080.png` du projet Claude Design |
 | `.nojekyll` | Fichier vide qui demande à GitHub Pages de publier les fichiers tels quels, sans passer par Jekyll |
 | `CNAME` | Le domaine du site. Écrit par GitHub quand on renseigne le domaine personnalisé ; ne pas le modifier à la main |
@@ -29,8 +30,8 @@ Site statique, sans étape de construction et sans outillage :
   de bibliothèque, pas de traceur ni de statistiques. Les pages sont
   autonomes.
 - **Le CSS est intégré** dans une balise `<style>` au début de chaque page, et
-  les huit feuilles sont volontairement **identiques**, à l'octet près : toute
-  modification de style doit donc être reportée dans les huit fichiers. L'en-tête
+  les neuf feuilles sont volontairement **identiques**, à l'octet près : toute
+  modification de style doit donc être reportée dans les neuf fichiers. L'en-tête
   et le pied de page le sont aussi, à la marque de page courante près.
 - **Publication** : GitHub Pages sert la branche `main`. Une fusion dans `main`
   met le site en ligne à jour en une minute environ. Rien n'est publié depuis
@@ -228,8 +229,6 @@ entrent.
 - **Le reste du dossier de presse** : l'icône 1024 et les six captures d'écran.
   Elles arrivent avec la publication sur l'App Store, et peuvent encore changer
   d'ici là. `presse.html` le dit et propose d'écrire en attendant.
-- **Page 404** : une adresse erronée affiche la page par défaut de GitHub
-  Pages, en anglais. Un `404.html` aux couleurs du site réglerait ça.
 - **Adresse du site** : la maquette est titrée « Site web · devineleprix.fr »,
   le site est publié sur `devine-le-prix.protojo.fr`, l'adresse du `CNAME` et
   celle à déclarer dans App Store Connect. Rien n'a été changé.

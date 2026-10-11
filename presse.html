@@ -366,6 +366,17 @@
   }
 
   .centre { text-align: center; }
+  /* Plan du site de la page 404 : des cartes sans pictogramme, le titre est le lien. */
+  .grille-plan li { gap: var(--e1); }
+  .grille-plan h3 { font-size: var(--t4); }
+  /* Ces liens sont la sortie de la page : 44 px de haut au moins, comme tout
+     bouton isolé. Ils ne faisaient que 29 px. */
+  .grille-plan h3 a {
+    display: block; min-height: var(--touche); padding: var(--e2) 0;
+    overflow-wrap: anywhere;
+    text-decoration-thickness: 2px; text-underline-offset: 3px;
+  }
+  .retour-accueil { margin-top: var(--e10); }
   /* Un nom technique cité dans une phrase : lisible sans être un lien. */
   .lien-texte { font-weight: 800; overflow-wrap: anywhere; }
   /* Deuxième titre de même niveau dans une page : même taille, plus d'air. */
