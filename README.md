@@ -175,7 +175,9 @@ prime sur tout le reste.
 ### Ne pas modifier sans validation
 
 - Les faits : liens App Store ou TestFlight, adresses de contact, dates, prix,
-  noms.
+  noms. L'adresse de contact du site est `contact@protojo.fr`, celle que les
+  mentions légales déclarent : une seule adresse sur tout le site, page de
+  confidentialité comprise.
 - Le fond juridique de `confidentialite.html`. Seules les fautes de frappe et la
   mise en forme s'y corrigent librement ; le sens doit rester identique.
 - L'identité visuelle et la palette ci-dessus. Une teinte peut être ajustée pour
