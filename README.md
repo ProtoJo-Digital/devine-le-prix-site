@@ -207,12 +207,6 @@ entrent.
   `hidden` ; celui de la carte s'allume alors tout seul, et il reste à retirer le
   `hidden` du bandeau de fin. Penser aussi à la date de sortie dans
   `presse.html`, qui dit aujourd'hui « pas encore publiée ».
-- **Deux adresses de contact cohabitent.** Les mentions légales déclarent
-  `contact@protojo.fr` et le 07 83 18 49 42, repris de
-  <https://protojo.fr/mentions-legales> ; le pied de page et la page Aide, eux,
-  donnent `johan.quille@trainedmanager.fr`, qui était déjà là. Une adresse de
-  contact est un fait : rien n'a été changé. Unifier sur `contact@protojo.fr`
-  rendrait le site plus cohérent, mais c'est une décision.
 - **« D'où viennent les prix ? »**, la seule question de la maquette encore sans
   réponse. Les dix autres sont écrites dans `questions.html`.
 - **Les trois affirmations reprises de la maquette et pas encore vues ailleurs** :
