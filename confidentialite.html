@@ -4,90 +4,123 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <!-- Teinte de la barre du navigateur : le fond de l'en-tête, qui touche cette barre -->
-<meta name="theme-color" content="#1B1240">
+<meta name="theme-color" content="#2C1E6B">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%231B1240'/%3E%3Ccircle cx='32' cy='32' r='21' fill='none' stroke='%23FAB31A' stroke-width='6'/%3E%3Ctext x='32' y='44' text-anchor='middle' font-family='system-ui,sans-serif' font-size='32' font-weight='900' fill='%23ffffff'%3E?%3C/text%3E%3C/svg%3E">
-<title>Politique de confidentialité – Devine le Prix</title>
-<meta name="description" content="Politique de confidentialité de Devine le Prix – Jeu Famille : aucune donnée personnelle collectée, aucun compte, tout reste sur votre appareil.">
+<title>Politique de confidentialité – Devine le Prix – Jeu Famille</title>
+<meta name="description" content="Politique de confidentialité de l’application Devine le Prix – Jeu Famille : aucune donnée personnelle collectée, aucun compte, progression enregistrée sur l’appareil.">
 <link rel="canonical" href="https://devine-le-prix.protojo.fr/confidentialite.html">
-<!-- Aperçu du lien quand la page est partagée (Messages, WhatsApp, réseaux sociaux) :
-     sans ces lignes, seule l'adresse brute s'affiche. Le texte reprend mot pour mot
-     le titre et la description ci-dessus. -->
-<meta property="og:type" content="article">
+<!-- Aperçu du lien quand le site est partagé (Messages, WhatsApp, réseaux sociaux) :
+     sans ces lignes, seule l'adresse brute s'affiche. L'image est la bannière de
+     la planche DA, recadrée au format que réclament les messageries. -->
+<meta property="og:type" content="website">
 <meta property="og:site_name" content="Devine le Prix – Jeu Famille">
 <meta property="og:locale" content="fr_FR">
 <meta property="og:url" content="https://devine-le-prix.protojo.fr/confidentialite.html">
-<meta property="og:title" content="Politique de confidentialité – Devine le Prix">
-<meta property="og:description" content="Aucune donnée personnelle collectée, aucun compte, tout reste sur votre appareil.">
+<meta property="og:title" content="Politique de confidentialité – Devine le Prix – Jeu Famille">
+<meta property="og:description" content="Aucune donnée personnelle collectée, aucun compte, progression enregistrée sur l’appareil.">
+<meta property="og:image" content="https://devine-le-prix.protojo.fr/partage.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Devine le Prix – Jeu Famille, par ProtoJo Digital. Trouve le prix des objets !">
+<meta name="twitter:card" content="summary_large_image">
 <style>
   :root {
-    color-scheme: dark;
+    color-scheme: light;
 
-    /* Palette officielle — planche DA « Devine le Prix – Jeu Famille » */
-    --fond: #1B1240;          /* Fond */
-    --fond-haut: #2C1E6B;     /* Haut du dégradé signature */
-    --carte: #FFFFFF;         /* Cartes */
-    --encre: #1B1240;         /* Encre dès qu'un fond clair ou l'or sert de fond */
-    --encre-douce: #5B5680;   /* Texte secondaire sur carte blanche */
-    --texte: #FFFFFF;         /* Texte blanc sur tous les fonds profonds */
-    --texte-doux: rgba(255, 255, 255, .8);
-    --or: #FAB31A;
-    --corail: #D63D2F;
-    --vert: #1E7F46;
-    --bleu: #2A6FD0;
-    --violet: #994DCC;    /* réserve de la planche, pas encore utilisée sur le site */
-    --accent: #6657D9;
-    --lavande: #B9AEFF;
-    --voile: rgba(255, 255, 255, .14);   /* Badges posés sur le fond profond */
-    /* Teintes claires des pictogrammes, posées sur carte blanche.
-       Les deux premières viennent de la planche ; la troisième a été ajoutée
-       par analogie pour la troisième carte, elle n'y figure pas. */
-    --lilas: #EFEBFF;
-    --menthe: #E4F3EA;
-    --ciel: #E4ECFA;
+    /* ---- Palette ----
+       Jetons de la planche DA, repris tels quels du fichier de design
+       « design-tokens/devine-le-prix.tokens.json », lui-même tiré de
+       Theme.swift. Les teintes ajoutées par la maquette du site (encres
+       intermédiaires, fond clair, violet foncé des liens) viennent de la même
+       planche : la palette s'étend, elle ne change pas. */
+    --fond: #1B1240;          /* ink-900 — fond profond, et encre sur fond clair */
+    --fond-haut: #2C1E6B;     /* stage-top — haut du dégradé signature */
+    --nuit: #120B2E;          /* ink-950 — bordure du téléphone, ombres */
+    --carte: #FFFFFF;
+    --clair: #F4F2FA;         /* fond des sections de contenu */
+    --puits: #EEEBFA;         /* well — creux posés sur fond clair */
+    --encre: #1B1240;         /* ink-900 — texte sur fond clair */
+    --encre-douce: #4E4773;   /* ink-700 — texte secondaire sur carte */
+    --encre-tendre: #676088;  /* ink-600 — texte d'invite */
+    --texte: #FFFFFF;
+    --texte-doux: rgba(255, 255, 255, .88);
+    --or: #FAB31A;            /* gold-500 */
+    --or-clair: #FFD36B;      /* gold-300 */
+    --corail: #D63D2F;        /* coral-600 — « C'est plus ! » */
+    --vert: #1E7F46;          /* green-600 — valider, réussite */
+    --bleu: #2A6FD0;          /* blue-600 — « C'est moins ! » */
+    --violet: #994DCC;        /* purple-600 */
+    --accent: #6657D9;        /* violet-500 — action principale */
+    --accent-fonce: #4F41C4;  /* violet-700 — liens sur fond clair */
+    --lavande: #B9AEFF;       /* violet-200 */
+    --voile: rgba(255, 255, 255, .14);
 
     /* Échelle d'espacement : uniquement des multiples de 4 px */
-    --e1: 4px; --e2: 8px; --e3: 12px; --e4: 16px;
-    --e5: 20px; --e6: 24px; --e7: 32px; --e8: 48px;
+    --e1: 4px;  --e2: 8px;  --e3: 12px; --e4: 16px; --e5: 20px;
+    --e6: 24px; --e7: 28px; --e8: 32px; --e9: 40px; --e10: 48px;
+    --e11: 56px; --e12: 64px; --e13: 80px;
 
     /* Échelle typographique, base 18 px. La charte interdit tout corps sous 17 px. */
-    --t0: .95rem;   /* 17 px */
-    --t1: 1rem;     /* 18 px */
-    --t2: 1.125rem; /* 20 px */
-    --t3: 1.25rem;  /* 23 px */
-    --t4: 1.5rem;   /* 27 px */
-    --t5: 3rem;     /* 54 px */
-    --t-titre: clamp(2.2rem, 9vw, 3.4rem);
-    --t-titre-page: clamp(1.75rem, 6.5vw, 2.3rem);
+    --t0: .945rem;   /* 17 px */
+    --t1: 1rem;      /* 18 px */
+    --t2: 1.056rem;  /* 19 px */
+    --t3: 1.167rem;  /* 21 px */
+    --t4: 1.333rem;  /* 24 px */
+    --t5: 1.444rem;  /* 26 px */
+    --t6: 1.556rem;  /* 28 px */
+    --t7: 1.889rem;  /* 34 px */
+    /* Titres fluides : les valeurs des deux bornes sont celles de la maquette,
+       téléphone (390 px) et ordinateur (1280 px). */
+    --t-titre: clamp(2.111rem, 6.4vw, 3.556rem);    /* 38 → 64 px */
+    --t-section: clamp(1.778rem, 4.4vw, 2.667rem);  /* 32 → 48 px */
+    --t-duo: clamp(1.333rem, 3.2vw, 1.889rem);      /* 24 → 34 px */
+    --t-prix: clamp(2rem, 6vw, 2.444rem);           /* 36 → 44 px */
+    --t-objet: clamp(4.444rem, 15vw, 6.111rem);     /* 80 → 110 px */
+    --t-objet-court: clamp(3.111rem, 11vw, 4.444rem); /* 56 → 80 px, écrans bas */
 
-    /* Rayons de la charte : cartes 24, grandes cartes 32, pastilles rondes */
+    /* Rayons de la planche */
     --rayon-focus: 6px;
     --rayon-petit: 16px;
+    --rayon-champ: 18px;
+    --rayon-bouton: 22px;
     --rayon: 24px;
+    --rayon-carte: 28px;
     --rayon-grand: 32px;
     --rayon-rond: 999px;
+
+    /* Tailles de la planche : 44 px est le minimum tactile, 64 px la hauteur
+       du champ de saisie, 66 px celle des grands boutons du jeu. */
+    --touche: 44px;
+    --champ: 64px;
+    --gros-bouton: 66px;
+
+    --ombre-carte: 0 8px 24px rgba(27, 18, 64, .08);
+    --ombre-jeu: 0 20px 50px rgba(0, 0, 0, .40);
+    --ombre-sceau: 0 10px 30px rgba(0, 0, 0, .40);
   }
+
   *, *::before, *::after { box-sizing: border-box; }
   /* L'attribut « hidden » du HTML ne fait que proposer « display: none » : la
-     moindre règle de cette feuille qui fixe un « display » l'emporte sur lui.
-     Sans cette ligne, le bouton « Un autre objet », pourtant marqué hidden,
-     s'affichait dès l'arrivée sur la page, avant toute réponse. */
+     moindre règle de cette feuille qui fixe un « display » l'emporte sur lui. */
   [hidden] { display: none !important; }
-  /* 112.5% = 18 px avec les réglages par défaut, tout en suivant la taille de texte choisie dans le navigateur */
+  /* 112.5% = 18 px avec les réglages par défaut, tout en suivant la taille de
+     texte choisie dans le navigateur. */
   html { -webkit-text-size-adjust: 100%; font-size: 112.5%; }
   body {
     margin: 0;
-    /* Pile système de la charte : SF Pro Rounded sur les appareils Apple, sans police à télécharger */
+    /* Pile système de la planche : SF Pro Rounded sur les appareils Apple,
+       aucune police à télécharger. */
     font-family: ui-rounded, -apple-system, "SF Pro Rounded", "SF Pro Display",
                  BlinkMacSystemFont, system-ui, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
     font-size: var(--t1);
     line-height: 1.6;
-    color: var(--texte);
-    background: var(--fond);
+    color: var(--encre);
+    background: var(--clair);
     overflow-wrap: break-word;
   }
-  .enveloppe { max-width: 760px; margin: 0 auto; padding: 0 var(--e5); }
-  /* Page en une seule colonne (confidentialité) : espace avant le pied de page. */
-  main > .enveloppe { padding-bottom: var(--e8); }
+  .enveloppe { max-width: 1060px; margin: 0 auto; padding: 0 var(--e5); }
+  /* Colonne de lecture : la page de confidentialité et les textes longs. */
+  .colonne { max-width: 760px; margin-inline: auto; }
 
   /* Lien d'évitement, visible seulement au clavier */
   .saut {
@@ -99,481 +132,482 @@
   }
   .saut:focus { transform: none; }
 
-  a { color: var(--or); }
+  /* L'or sur blanc ne fait que 1,82:1. Sur fond clair, les liens passent au
+     violet foncé de la planche (7,28:1) ; sur fond profond ils restent dorés. */
+  a { color: var(--accent-fonce); }
+  .scene a, footer a { color: var(--or); }
   main a, footer a { text-decoration-thickness: 2px; text-underline-offset: 3px; }
-  /* L'or sur blanc ne fait que 1,82:1 : sur fond clair, les liens passent à l'accent violet (5,34:1). */
-  .carte a, .resume a { color: var(--accent); }
-  :focus-visible { outline: 3px solid var(--or); outline-offset: 3px; border-radius: var(--rayon-focus); }
-  /* Une ancre déplace le regard, pas le clavier. Sans « tabindex="-1" » sur la
-     cible, Safari — le navigateur de tous les visiteurs d'un site d'application
-     iPhone — laisse le focus là où il était : la tabulation suivante repart du
-     haut de la page, et le lien « Aller au contenu » ne fait alors rien d'utile.
-     Ces cibles ne sont pas des commandes ; elles reçoivent le focus pour que la
-     suite du parcours reparte du bon endroit, et n'ont donc pas de contour. */
+  :focus-visible { outline: 3px solid var(--accent); outline-offset: 3px; border-radius: var(--rayon-focus); }
+  .scene :focus-visible, footer :focus-visible { outline-color: var(--or); }
+  /* Une ancre déplace le regard, pas le clavier. Ces cibles ne sont pas des
+     commandes : elles reçoivent le focus sans porter de contour. */
   [tabindex="-1"]:focus { outline: none; }
 
-  /* Onglets, boutons et pastilles sont des boîtes « inline-flex » : par défaut elles
-     refusent de descendre sous la largeur de leur mot le plus long et poussent la page
-     hors de l'écran dès que le texte est agrandi. On les autorise à rétrécir, quitte à
-     couper un mot trop long — mieux vaut une coupure qu'un défilement latéral. */
-  .nav-site a, .bouton, .lien-page, .jetons li { max-width: 100%; overflow-wrap: anywhere; }
+  h1, h2, h3 { font-weight: 900; letter-spacing: -.02em; text-wrap: balance; }
+  h2 { font-size: var(--t-section); line-height: 1.1; margin: 0 0 var(--e8); text-align: center; }
+  h3 { font-size: var(--t5); line-height: 1.15; margin: 0; }
+  p { margin: 0 0 var(--e4); }
+  p:last-child { margin-bottom: 0; }
 
-  /* ---- En-tête ---- */
-  .entete { border-bottom: 1px solid rgba(255, 255, 255, .15); }
-  .entete .enveloppe {
-    display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between;
-    gap: var(--e1) var(--e5); padding-top: var(--e3); padding-bottom: var(--e3);
-  }
-  /* Sans cela, la marque et les onglets refusent de descendre sous la largeur de leur
-     mot le plus long : à texte très agrandi, ils poussent la page hors de l'écran. */
-  .entete .enveloppe > * { min-width: 0; }
-  .marque {
-    display: inline-flex; align-items: center; gap: var(--e3); min-height: 44px;
-    color: var(--texte); font-weight: 900; font-size: var(--t2);
-    letter-spacing: -.01em; text-decoration: none;
-  }
-  /* Marque : l'icône retenue de la planche DA — anneau doré, « ? » blanc, fond profond */
-  .sceau {
-    flex: none; display: inline-flex; align-items: center; justify-content: center;
-    width: var(--e7); height: var(--e7); border-radius: var(--rayon-rond);
-    border: 3px solid var(--or); background: var(--fond);
-    font-size: var(--t2); font-weight: 900; line-height: 1; color: var(--texte);
-  }
-  .sceau::before { content: "?"; transform: translateY(-1px); }
-  /* Les deux onglets passent à la ligne quand le texte est agrandi,
-     plutôt que de pousser la page en dehors de l'écran. */
-  .nav-site ul { display: flex; flex-wrap: wrap; gap: var(--e2); list-style: none; margin: 0; padding: 0; }
-  .nav-site ul, .nav-site li { min-width: 0; }
-  .nav-site a {
-    display: inline-flex; align-items: center; min-height: 44px; padding: var(--e1) var(--e4);
-    border-radius: var(--rayon-petit); color: var(--texte); font-weight: 700; text-decoration: none;
-  }
-  .nav-site a[aria-current="page"] { background: var(--voile); color: var(--or); font-weight: 800; }
-  .nav-site a:hover { background: var(--voile); }
-
-  main > section { position: relative; padding: var(--e8) 0; }
-  main > section h2 { margin-top: 0; }
-
-  /* ---- Bandeau d'accueil : dégradé signature + projecteurs très discrets ---- */
-  .hero {
-    text-align: center; overflow: hidden;
-    background: linear-gradient(180deg, var(--fond-haut) 0%, var(--fond) 100%);
-  }
-  .hero::before {
-    content: ""; position: absolute; inset: 0; pointer-events: none;
-    background: radial-gradient(ellipse 70% 62% at 50% -12%, rgba(255, 255, 255, .10), transparent 62%);
-  }
-  .hero > .enveloppe { position: relative; z-index: 1; }
-  h1 {
-    font-size: var(--t-titre); font-weight: 900; line-height: 1.02; letter-spacing: -.03em;
-    margin: 0 0 var(--e3); color: var(--texte); text-wrap: balance;
-  }
-  .hero h1 .sous-titre { color: var(--lavande); }
-  .sous-titre { display: block; }
-  .accroche { font-size: var(--t3); font-weight: 800; color: var(--or); margin: 0 0 var(--e6); }
-
-  .precision {
-    font-size: var(--t2); font-weight: 500; color: var(--texte-doux);
-    max-width: 34ch; margin: 0 auto var(--e6);
-  }
-
-  /* Publics visés — pastilles de la bannière de la planche DA */
-  .publics { display: flex; flex-wrap: wrap; justify-content: center; gap: var(--e3); list-style: none; margin: 0 0 var(--e7); padding: 0; }
-  .publics li { padding: var(--e2) var(--e5); border-radius: var(--rayon-rond); font-weight: 700; color: #fff; }
-  .publics .enfants { background: var(--corail); }
-  .publics .seniors { background: var(--vert); }
-  .publics .famille { background: var(--bleu); }
-
-  /* Objet sur carte blanche : la signature visuelle du jeu */
-  .objet { max-width: 340px; margin: 0 auto; }
-  /* Deux ombres plutôt qu'une grosse : un contact net juste sous la carte, et
-     une ombre portée large et très diluée. C'est ce qui fait la différence
-     entre une carte posée sur le fond et une carte qui flotte dans une tache
-     grise. Le liseré clair en haut imite la lumière qui arrive d'en haut. */
-  .objet-carte {
-    display: flex; flex-direction: column; align-items: center; gap: var(--e3);
-    background: var(--carte); border-radius: var(--rayon-grand); padding: var(--e6);
-    box-shadow:
-      0 1px 0 rgba(255, 255, 255, .5) inset,
-      0 2px 4px rgba(10, 6, 26, .3),
-      0 24px 48px -20px rgba(10, 6, 26, .85);
-  }
-  /* La planche de dessins ne s'affiche pas : elle ne sert qu'à être recopiée. */
-  .planche { position: absolute; width: 0; height: 0; overflow: hidden; }
-  /* Un seul réglage de trait pour tous les dessins du site : c'est ce qui les
-     fait appartenir à la même famille. */
-  .planche symbol, .objet-dessin, .pictogramme svg {
-    fill: none; stroke: currentColor; stroke-width: 2.6;
-    stroke-linecap: round; stroke-linejoin: round;
-  }
-  /* Le dessin est posé sur un rond lilas de la planche : seul au milieu du
-     blanc il flottait, et la carte paraissait vide. */
-  .objet-dessin {
-    box-sizing: content-box; width: 100px; height: 100px; padding: var(--e5);
-    border-radius: var(--rayon-rond); background: var(--lilas); color: var(--encre);
-  }
-  /* Le nom est un élément de flex dans une carte en colonne : sans cette
-     autorisation, un mot long (« connectée ») gardait sa largeur entière et
-     sortait de la carte blanche à texte agrandi — de l'encre sombre sur le
-     fond sombre, illisible, et rognée par le bord de l'écran. */
-  .objet-nom {
-    max-width: 100%; overflow-wrap: anywhere;
-    font-size: var(--t3); font-weight: 900; color: var(--encre);
-  }
-  .objet-prix {
-    display: block; margin-top: var(--e5);
-    font-size: var(--t5); font-weight: 900; line-height: 1; letter-spacing: -.02em; color: var(--or);
-  }
-  .objet-legende { margin-top: var(--e2); font-size: var(--t2); font-weight: 800; color: var(--texte-doux); }
-
-  /* ---- Mini-partie d'essai (accueil) ----
-     Deux gros boutons, une réponse immédiate : on comprend le jeu en un geste,
-     sans rien installer. Tout est allumé par le script de bas de page ; sans
-     lui, la carte garde son « ? € » et aucun bouton ne s'affiche. */
-  .essai { margin-top: var(--e6); }
-  .essai-boutons { display: flex; flex-wrap: wrap; justify-content: center; gap: var(--e3); }
-  .essai-verdict {
-    display: inline-flex; align-items: center; justify-content: center;
-    max-width: 100%; min-height: 44px; margin: var(--e4) 0 0;
-    padding: var(--e2) var(--e5); border-radius: var(--rayon-rond);
-    font-size: var(--t2); font-weight: 800; color: var(--texte);
-    overflow-wrap: anywhere;
-  }
-  /* Le verdict reste dans la page même vide, pour que les lecteurs d'écran
-     le suivent ; tant qu'il n'a rien à dire, il ne prend aucune place. */
-  .essai-verdict:empty { min-height: 0; margin: 0; padding: 0; }
-  .essai-verdict.juste { background: var(--vert); }
-  .essai-verdict.faux { background: var(--corail); }
-  .essai-rejouer { margin-top: var(--e4); }
-
-  /* ---- Fenêtre d'accueil : on devine un prix avant d'entrer ----
-     C'est le script qui l'ouvre, jamais le HTML : une balise <dialog> fermée
-     ne s'affiche pas, donc sans JavaScript le site se lit directement.
-     Aucune règle ici ne pose « forwards » ni « both » : une animation qui ne
-     partirait pas laisserait sinon son premier instant à l'écran, c'est-à-dire
-     du vide. Les animations ne sont ici que des embellissements. */
-  .fenetre {
-    width: min(26rem, 100% - var(--e7));
-    max-height: calc(100dvh - var(--e6));
-    overflow: auto;
-    margin: auto;
-    border: none; border-radius: var(--rayon-grand);
-    padding: var(--e6) var(--e4) var(--e6);
-    background: linear-gradient(180deg, var(--fond-haut) 0%, var(--fond) 100%);
-    color: var(--texte); text-align: center;
-    box-shadow: 0 30px 70px rgba(0, 0, 0, .55);
-  }
-  /* Le site reste là, derrière, mais illisible : c'est ce qui donne envie
-     d'ouvrir la porte. Le flou n'est qu'un bonus, l'assombrissement suffit. */
-  .fenetre::backdrop { background: rgba(11, 7, 28, .9); backdrop-filter: blur(4px); }
-  .fenetre[open] { animation: fenetre-entree .3s ease; }
-  @keyframes fenetre-entree { from { opacity: 0; transform: translateY(14px) scale(.96); } to { opacity: 1; transform: none; } }
-  .fenetre h2 { font-size: var(--t3); margin: 0 0 var(--e1); }
-  .fenetre-sous { font-size: var(--t1); font-weight: 700; color: var(--texte-doux); margin: 0 0 var(--e4); }
-  .fenetre-lien { display: inline-block; margin-top: var(--e4); font-size: var(--t0); font-weight: 700; }
-  /* Dans la fenêtre, le jeu est plus compact que dans la page : sur un petit
-     téléphone, tout doit tenir sous les yeux une fois la réponse donnée —
-     la carte, le prix, le verdict et le bouton pour entrer. */
-  .fenetre .objet-carte { padding: var(--e3); }
-  .fenetre .objet-dessin { width: 72px; height: 72px; padding: var(--e4); }
-  .fenetre .objet-prix { margin-top: var(--e3); font-size: 2.4rem; }
-  .fenetre .objet-legende { margin-top: var(--e1); font-size: var(--t1); }
-  /* Les deux choix doivent tenir côte à côte même sur un petit téléphone :
-     à deux lignes, le second passait sous le bord de la fenêtre. */
-  .fenetre .bouton-choix { padding-inline: var(--e3); }
-  .fenetre .essai-verdict { margin-top: var(--e3); }
-  .fenetre .essai p, .fenetre > p { margin-bottom: 0; }
-  .fenetre #fenetre-entrer { margin-top: var(--e4); }
-  /* Écran très bas — un téléphone tenu à l'horizontale, par exemple : on
-     resserre encore, pour que les deux choix restent sous les yeux plutôt
-     que de tomber sous le bord de la fenêtre. */
-  @media (max-height: 620px) {
-    .fenetre { padding-top: var(--e4); padding-bottom: var(--e4); }
-    .fenetre-sous { display: none; }
-    .fenetre .objet-dessin { width: 52px; height: 52px; padding: var(--e3); }
-    .fenetre .objet-prix { margin-top: var(--e2); font-size: 1.9rem; }
-    .fenetre .objet-legende { font-size: var(--t0); }
-    .fenetre-lien { margin-top: var(--e3); }
-  }
-
-  /* Les deux choix appellent le regard : trois battements, puis plus rien.
-     Rien ne bouge en permanence à l'écran, et qui demande moins d'animation
-     n'en voit aucun (bloc « prefers-reduced-motion » plus bas). */
-  @keyframes appel {
-    0%, 100% { transform: none; }
-    50% { transform: scale(1.06); box-shadow: 0 10px 24px rgba(0, 0, 0, .3), 0 0 0 10px rgba(250, 179, 26, .22); }
-  }
-  .bouton-choix.appel { animation: appel 1.5s ease-in-out 1s 3; }
-
-  /* ---- La fenêtre s'efface, le site arrive ----
-     Deux temps d'un même mouvement : le voile et la fenêtre s'en vont, le
-     bandeau d'accueil se lève. La durée est tenue par le script, jamais par
-     l'animation : si celle-ci ne part pas, la fenêtre se ferme quand même.
-     Aucune n'utilise « forwards » ni « both », pour la même raison que
-     plus haut — une animation qui ne démarre pas ne doit rien effacer. */
-  @keyframes fenetre-sortie { to { opacity: 0; transform: translateY(10px) scale(.94); } }
-  @keyframes voile-sortie { to { opacity: 0; } }
-  .fenetre.sortie { animation: fenetre-sortie .26s ease; }
-  .fenetre.sortie::backdrop { animation: voile-sortie .26s ease; }
-  @keyframes arrivee { from { opacity: 0; transform: translateY(18px) scale(.985); } }
-  .hero.arrivee > .enveloppe { animation: arrivee .55s cubic-bezier(.2, .7, .3, 1); }
-
-  /* Une fois la fenêtre refermée, le visiteur est en haut d'une page dont il
-     ne voit qu'un écran : cette flèche lui dit qu'il y a une suite. Trois
-     descentes, puis elle s'immobilise — rien ne bouge en continu à l'écran. */
-  .indice {
-    display: flex; flex-direction: column; align-items: center; gap: var(--e1);
-    margin: var(--e7) 0 0; color: var(--texte-doux);
-    font-size: var(--t0); font-weight: 800;
-  }
-  .indice svg { width: var(--e6); height: var(--e6); }
-  .indice.anime svg { animation: descend 1.4s ease-in-out 3; }
-  @keyframes descend { 0%, 100% { transform: none; } 50% { transform: translateY(7px); } }
-
-  /* ---- Questions fréquentes ----
-     On balaie les questions, on ouvre celle qui inquiète. « details » est
-     natif : rien à charger, et le clavier comme les lecteurs d'écran le
-     comprennent sans qu'on ait à l'expliquer. */
-  .faq { display: grid; gap: var(--e3); }
-  .question {
-    background: var(--voile); border-radius: var(--rayon-petit); min-width: 0;
-    border: 1px solid rgba(255, 255, 255, .12);
-  }
-  /* Même raison que pour les onglets et les pastilles plus haut : une boîte
-     « flex » refuse de descendre sous la largeur de son mot le plus long. Sans
-     ces deux lignes, une question poussait la page hors de l'écran dès que le
-     texte était agrandi — mesuré à 320 px, 327 px de large pour 305 utiles. */
-  .question summary, .question p { min-width: 0; overflow-wrap: anywhere; }
-  .question summary {
-    display: flex; align-items: center; gap: var(--e4); min-height: 56px;
-    padding: var(--e3) var(--e5); cursor: pointer; list-style: none;
-    font-size: var(--t2); font-weight: 800; color: var(--texte);
-  }
-  .question summary::-webkit-details-marker { display: none; }
-  /* Un chevron dessiné en CSS plutôt qu'un caractère : il tourne à l'ouverture
-     et ne dépend d'aucune police. */
-  .question summary::after {
-    content: ""; flex: none; margin-left: auto;
-    width: 11px; height: 11px;
-    border-right: 3px solid var(--or); border-bottom: 3px solid var(--or);
-    transform: translateY(-3px) rotate(45deg);
-    transition: transform .2s ease;
-  }
-  .question[open] summary::after { transform: translateY(2px) rotate(-135deg); }
-  .question p {
-    margin: 0; padding: 0 var(--e5) var(--e5);
-    color: var(--texte-doux); font-weight: 500; line-height: 1.55;
-  }
-  .question a { color: var(--or); }
-
-  /* Appel à l'action du bandeau d'accueil : la place est prête, en haut comme
-     en bas de page, pour le jour où l'adresse de la fiche App Store sera
-     connue. Tant qu'il est caché, il ne prend pas un pixel. */
-  .appel-haut { margin: 0 0 var(--e6); }
-
-  /* ---- Bloc de fin : la dernière image que le visiteur emporte ----
-     Le dégradé s'inverse par rapport au bandeau d'accueil : la page s'ouvre
-     et se referme sur la même lumière, et le bouton doré y ressort seul. */
-  .final { background: linear-gradient(180deg, var(--fond) 0%, var(--fond-haut) 100%); }
-  .final h2 { font-size: var(--t-titre-page); color: var(--texte); margin-bottom: var(--e4); }
-  .final p { margin: 0; }
-  .final-texte {
-    max-width: 30ch; margin: 0 auto var(--e7);
-    font-size: var(--t2); font-weight: 500; color: var(--texte-doux);
-  }
-  .final-contact { margin-top: var(--e4); }
-  .final .bouton { min-height: 64px; padding-inline: var(--e7); font-size: var(--t3); }
-  /* Le jour où le bouton App Store s'allume, « Écrire à l'éditeur » passe au
-     second plan : un seul bouton doré à la fois, sinon aucun des deux ne
-     ressort. Un navigateur sans « :has() » laisse les deux dorés — moins bien,
-     mais rien de cassé. */
-  .final:has(#lien-app-store:not([hidden])) .final-contact .bouton {
-    background: var(--voile); color: var(--texte); box-shadow: none;
-  }
-
-  /* ---- Pages intérieures ---- */
-  .titre-page { padding: var(--e7) 0 0; }
-  .titre-page h1 { font-size: var(--t-titre-page); }
-  .titre-page .sous-titre { font-size: var(--t2); font-weight: 800; color: var(--lavande); margin-top: var(--e3); }
-  .date { color: var(--texte-doux); font-size: var(--t0); font-weight: 700; }
-  .resume {
-    background: var(--carte); color: var(--encre); border-radius: var(--rayon);
-    padding: var(--e6); font-weight: 500;
-  }
-  .resume p:last-child { margin-bottom: 0; }
-
-  /* ---- Sommaire de la politique de confidentialité ----
-     La page fait près de 7 000 px de haut sur un téléphone : sans sommaire,
-     on n'atteint une section qu'en faisant défiler à l'aveugle. Les ancres
-     rendent en prime chaque section adressable par un lien. */
-  .sommaire { margin-bottom: var(--e7); }
-  .sommaire h2 { font-size: var(--t3); margin: var(--e7) 0 var(--e3); }
-  .sommaire ol {
-    display: grid; gap: var(--e1); counter-reset: sommaire;
-    list-style: none; margin: 0; padding: 0;
-  }
-  @media (min-width: 700px) { .sommaire ol { grid-template-columns: 1fr 1fr; } }
-  .sommaire li { counter-increment: sommaire; min-width: 0; }
-  /* Pas de soulignement : c'est de la navigation, comme les onglets de
-     l'en-tête, et le trait passait aussi sous le numéro. */
-  /* « anywhere » et non « break-word » : seul le premier autorise la boîte à
-     descendre sous la largeur de son mot le plus long. Sans lui, un titre d'un
-     seul tenant (« Modifications ») gardait sa largeur entière et poussait la
-     page hors de l'écran dès que le texte était agrandi. Pas de « max-width »
-     ici, contrairement aux autres liens : elle annulerait le débord de
-     gouttière voulu par la marge négative ci-dessous. */
-  .sommaire a {
-    display: flex; align-items: center; gap: var(--e3); min-height: 44px;
-    padding: var(--e1) var(--e4); margin-left: calc(-1 * var(--e4));
-    border-radius: var(--rayon-petit); font-weight: 700; text-decoration: none;
-    overflow-wrap: anywhere;
-  }
-  .sommaire a::before {
-    content: counter(sommaire) "."; flex: none;
-    color: var(--texte-doux); font-weight: 800;
-  }
-  .sommaire a:hover { background: var(--voile); }
-  /* Un titre atteint par une ancre ne colle pas au bord haut de l'écran */
-  :target { scroll-margin-top: var(--e6); }
-
-  h2 { font-size: var(--t4); font-weight: 900; line-height: 1.15; letter-spacing: -.02em; margin: 2em 0 .7em; color: var(--or); }
-  /* Chapeau : une phrase sous un titre, qui dit en quoi la section intéresse
-     le visiteur avant de lui demander de lire une liste. */
-  .chapeau {
-    max-width: 46ch; margin: 0 0 var(--e5);
-    font-size: var(--t2); font-weight: 500; color: var(--texte-doux);
-  }
-  h3 { font-size: var(--t3); font-weight: 900; margin: 0 0 var(--e1); color: var(--encre); }
-  p { margin: 0 0 1em; }
-
-  /* ---- Cartes blanches ---- */
-  /* Les cartes blanches respirent mal à 760 px en trois colonnes : ce bloc seul est plus large. */
-  .section-large .enveloppe { max-width: 920px; }
-  /* ...mais son titre reste aligné sur ceux des autres sections : 720 px centrés dans
-     les 880 px du bloc large retombent exactement sur la colonne de texte habituelle. */
-  .section-large h2 { max-width: 720px; margin-inline: auto; }
-  .modes { display: grid; gap: var(--e4); list-style: none; margin: 0; padding: 0; }
-  @media (min-width: 700px) { .modes { grid-template-columns: repeat(3, 1fr); } }
-  /* Une case de grille ou de flexbox ne rétrécit pas sous son mot le plus long
-     tant qu'on ne l'y autorise pas : « téléphones » suffisait à élargir la page. */
-  .modes > li, .avantages li, .avantages li > span { min-width: 0; }
-  .carte {
-    background: var(--carte); color: var(--encre);
-    border-radius: var(--rayon); padding: var(--e6);
-    box-shadow:
-      0 1px 0 rgba(255, 255, 255, .5) inset,
-      0 2px 4px rgba(10, 6, 26, .25),
-      0 18px 36px -18px rgba(10, 6, 26, .7);
-  }
-  /* Pas d'effet de survol sur les cartes : elles ne sont pas cliquables, et sur
-     iPhone le survol reste collé après un appui — il laissait croire qu'il
-     venait de se passer quelque chose. */
-  /* Tout était en gras : quand tout pèse, plus rien ne ressort. Les titres
-     gardent le 900, le texte courant redescend. */
-  .carte p { margin: 0; color: var(--encre-douce); font-weight: 500; font-size: var(--t1); line-height: 1.55; }
-  .pictogramme {
-    display: flex; align-items: center; justify-content: center;
-    width: 64px; height: 64px; border-radius: var(--rayon-petit);
-    margin-bottom: var(--e5); color: var(--encre);
-  }
-  .pictogramme svg { width: 38px; height: 38px; }
-  .pictogramme.lilas { background: var(--lilas); }
-  .pictogramme.menthe { background: var(--menthe); }
-  .pictogramme.ciel { background: var(--ciel); }
-
-  /* ---- Pastilles sur fond profond ---- */
-  .jetons { display: flex; flex-wrap: wrap; gap: var(--e3); list-style: none; margin: 0; padding: 0; }
-  .jetons li {
-    padding: var(--e2) var(--e5); border-radius: var(--rayon-rond);
-    font-weight: 600; background: var(--voile);
-    border: 1px solid rgba(255, 255, 255, .12);
-  }
-
-  .avantages { display: grid; gap: var(--e4); list-style: none; margin: 0; padding: 0; }
-  @media (min-width: 700px) { .avantages { grid-template-columns: 1fr 1fr; } }
-  .avantages li { display: flex; gap: var(--e3); align-items: flex-start; }
-  .coche { flex: 0 0 auto; width: var(--e6); height: var(--e6); margin-top: var(--e1); color: var(--or); }
-
-  /* ---- Appel à l'action ---- */
-  .appel { text-align: center; }
+  /* ---- Boutons ----
+     Trois familles : l'or (action principale sur fond profond), le noir de
+     l'App Store, et le contour violet (action secondaire sur carte blanche). */
   .bouton {
     display: inline-flex; align-items: center; justify-content: center;
-    min-height: 56px; padding: var(--e2) var(--e7); border-radius: var(--rayon);
-    text-align: center;
+    min-height: var(--touche); padding: var(--e3) var(--e7);
+    border: none; border-radius: var(--rayon-rond);
     background: var(--or); color: var(--encre);
-    font-size: var(--t2); font-weight: 800; text-decoration: none;
-    box-shadow: 0 10px 24px rgba(0, 0, 0, .3);
-    transition: filter .18s ease;
+    font: inherit; font-size: var(--t1); font-weight: 900; line-height: 1.2;
+    text-align: center; text-decoration: none; cursor: pointer;
+    max-width: 100%; overflow-wrap: anywhere;
   }
-  .bouton:hover { filter: brightness(1.08); }
-  /* La variante est déclarée après « .bouton » : à égalité de
-     spécificité, c'est la dernière règle qui gagne. */
-  /* Rembourrage réduit, pour que les deux choix tiennent côte à côte sur un
-     téléphone de 375 px et passent l'un sous l'autre en dessous. */
-  .bouton-choix { padding-inline: var(--e4); }
-  /* Une fois la réponse donnée, le prix est révélé : les deux choix passent en
-     retrait et « Un autre objet » devient la seule chose à faire. Un bouton
-     éteint n'est soumis à aucun minimum de contraste, mais à 0,65 son libellé
-     reste lu sans effort (4,6:1) tout en se distinguant nettement de l'or vif. */
-  .bouton:disabled { opacity: .65; box-shadow: none; cursor: default; }
-  .bouton:disabled:hover { filter: none; }
-
-  footer { border-top: 1px solid rgba(255, 255, 255, .15); }
-  footer .enveloppe { padding-top: var(--e6); padding-bottom: var(--e7); }
-  footer p { color: var(--texte-doux); font-size: var(--t0); font-weight: 700; }
-  footer p:last-child { margin-bottom: 0; }
-  /* Lien de bas de page : cible tactile de 44 px de haut, comme dans la barre de navigation */
-  .lien-page {
-    display: inline-flex; align-items: center; min-height: 44px;
-    padding: var(--e1) var(--e4); margin-left: calc(-1 * var(--e4)); border-radius: var(--rayon-petit);
+  .bouton:hover { filter: brightness(1.06); }
+  .bouton-app {
+    min-height: var(--champ); padding: var(--e3) var(--e7);
+    border-radius: var(--rayon-champ);
+    background: #000; color: #fff;
+    box-shadow: inset 0 0 0 1.5px rgba(255, 255, 255, .5);
+    font-size: var(--t2); font-weight: 800;
   }
-  .lien-page:hover { background: var(--voile); }
+  .bouton-contour {
+    min-height: var(--champ); border-radius: var(--rayon-champ);
+    background: var(--carte); color: var(--accent-fonce);
+    box-shadow: inset 0 0 0 3px var(--accent);
+    font-size: var(--t2); font-weight: 800;
+  }
+  .bouton-valider {
+    min-height: var(--champ); padding: var(--e3) var(--e6);
+    border-radius: var(--rayon-champ);
+    background: var(--vert); color: var(--texte);
+    font-size: var(--t3); font-weight: 800;
+  }
 
-  /* Quand le système demande moins d'animation, on n'en joue aucune */
+  /* ---- En-tête ---- */
+  .entete { background: var(--fond-haut); color: var(--texte); }
+  .entete .enveloppe {
+    display: flex; flex-wrap: wrap; align-items: center;
+    gap: var(--e3) var(--e6); padding-top: var(--e4); padding-bottom: var(--e4);
+  }
+  .entete .enveloppe > * { min-width: 0; }
+  .marque {
+    display: inline-flex; align-items: center; gap: var(--e3); min-height: var(--touche);
+    color: var(--texte); font-weight: 900; font-size: var(--t3);
+    letter-spacing: -.01em; text-decoration: none; margin-right: auto;
+  }
+  /* Marque : l'icône de la planche — anneau doré, « ? » blanc, fond profond */
+  .sceau {
+    flex: none; display: inline-flex; align-items: center; justify-content: center;
+    width: var(--touche); height: var(--touche); border-radius: var(--rayon-champ);
+    background: radial-gradient(circle at 50% 40%, #3A2A85, var(--fond));
+    box-shadow: inset 0 0 0 1px rgba(255, 255, 255, .2);
+  }
+  .sceau::before {
+    content: "?"; display: flex; align-items: center; justify-content: center;
+    width: var(--e7); height: var(--e7); border-radius: var(--rayon-rond);
+    box-shadow: 0 0 0 3px var(--or);
+    font-size: var(--t1); font-weight: 900; line-height: 1; color: var(--texte);
+  }
+  .nav-site ul {
+    display: flex; flex-wrap: wrap; gap: var(--e1) var(--e2);
+    list-style: none; margin: 0; padding: 0;
+  }
+  .nav-site ul, .nav-site li { min-width: 0; }
+  .nav-site a {
+    display: inline-flex; align-items: center; min-height: var(--touche);
+    min-width: var(--touche); justify-content: center;
+    padding: var(--e1) var(--e4); border-radius: var(--rayon-petit);
+    color: var(--texte); font-size: var(--t0); font-weight: 800; text-decoration: none;
+    max-width: 100%; overflow-wrap: anywhere;
+  }
+  .nav-site a:hover { background: var(--voile); }
+  .nav-site a[aria-current="page"] { background: var(--voile); color: var(--or); }
+
+  /* ---- La scène : le dégradé signature, projecteurs très discrets ---- */
+  .scene {
+    position: relative; overflow: hidden;
+    color: var(--texte); text-align: center;
+    background:
+      radial-gradient(600px 600px at 20% -20%, rgba(255, 255, 255, .10), transparent 70%),
+      radial-gradient(600px 600px at 80% -20%, rgba(255, 255, 255, .10), transparent 70%),
+      linear-gradient(var(--fond-haut), var(--fond));
+  }
+  .scene .enveloppe { position: relative; z-index: 1; padding-top: var(--e9); padding-bottom: var(--e12); }
+  h1 {
+    font-size: var(--t-titre); line-height: 1.05; letter-spacing: -.03em;
+    margin: 0 auto var(--e5); max-width: 18ch; color: var(--texte);
+  }
+  .scene-sous {
+    font-size: var(--t3); font-weight: 700; color: var(--texte-doux);
+    max-width: 38ch; margin: 0 auto var(--e7);
+  }
+
+  /* ---- La carte du jeu ---- */
+  .jeu {
+    width: min(560px, 100%); margin: 0 auto;
+    background: var(--carte); color: var(--encre);
+    border-radius: var(--rayon-carte); box-shadow: var(--ombre-jeu);
+    padding: var(--e6);
+    display: flex; flex-direction: column; align-items: center; gap: var(--e3);
+    text-align: center;
+  }
+  .jeu-essai { font-size: var(--t0); font-weight: 800; color: var(--encre-douce); margin: 0; }
+  .jeu-objet { font-size: var(--t-objet); line-height: 1; }
+  .jeu-nom { font-size: var(--t6); font-weight: 900; line-height: 1.15; margin: 0; max-width: 100%; }
+  .jeu-indice {
+    display: inline-block; padding: var(--e1) var(--e4); border-radius: var(--rayon-rond);
+    background: var(--violet); color: var(--texte);
+    font-size: var(--t1); font-weight: 800; margin: 0; max-width: 100%; overflow-wrap: anywhere;
+  }
+  /* Le dialogue du jeu : « C'est plus ! » en corail, « C'est moins ! » en bleu.
+     Le mot et la flèche portent la réponse autant que la couleur. */
+  .jeu-message {
+    width: 100%; margin: 0; padding: var(--e3) var(--e4);
+    border-radius: var(--rayon-champ); color: var(--texte);
+    display: flex; align-items: center; justify-content: center; gap: var(--e2);
+    font-size: var(--t4); font-weight: 900; overflow-wrap: anywhere;
+  }
+  .jeu-message.plus { background: var(--corail); }
+  .jeu-message.moins { background: var(--bleu); }
+  .jeu-message:empty { display: none; }
+  .jeu-saisie { width: 100%; display: flex; gap: var(--e3); }
+  .jeu-saisie input {
+    flex: 1; min-width: 0; height: var(--champ);
+    border: 3px solid var(--accent); border-radius: var(--rayon-champ);
+    padding: 0 var(--e5); background: var(--carte);
+    font: inherit; font-size: var(--t5); font-weight: 800; color: var(--encre);
+    text-align: center;
+  }
+  .jeu-saisie input::placeholder { color: var(--encre-tendre); font-weight: 700; }
+  .jeu-saisie input:focus-visible { outline: 3px solid var(--accent); outline-offset: 2px; }
+  .jeu-fin { width: 100%; display: flex; flex-direction: column; align-items: center; gap: var(--e3); }
+  .jeu-fin-titre { font-size: var(--t3); font-weight: 800; color: var(--encre-douce); margin: 0; }
+  .jeu-prix {
+    display: inline-block; padding: var(--e2) var(--e6); border-radius: var(--rayon-champ);
+    background: var(--or); color: var(--encre);
+    font-size: var(--t-prix); font-weight: 900; line-height: 1.1; margin: 0;
+    max-width: 100%; overflow-wrap: anywhere;
+  }
+  .jeu-verdict { font-size: var(--t3); font-weight: 900; margin: 0; max-width: 100%; overflow-wrap: anywhere; }
+  .jeu-suite { width: 100%; display: flex; flex-wrap: wrap; gap: var(--e3); }
+  .jeu-suite > * { flex: 1 1 12rem; }
+  .jeu-sans-js { font-size: var(--t0); font-weight: 700; color: var(--encre-douce); margin: 0; }
+
+  /* Publics visés — pastilles de la bannière de la planche */
+  .publics {
+    display: flex; flex-wrap: wrap; justify-content: center; gap: var(--e3);
+    list-style: none; margin: var(--e7) 0 0; padding: 0;
+  }
+  .publics li {
+    padding: var(--e2) var(--e4); border-radius: var(--rayon-rond);
+    color: var(--texte); font-size: var(--t0); font-weight: 800;
+  }
+  .publics .enfants { background: var(--vert); }
+  .publics .seniors { background: var(--bleu); }
+  .publics .famille { background: var(--violet); }
+
+  /* ---- Sections de contenu, sur fond clair ---- */
+  main > section { padding: var(--e13) 0; }
+  /* La scène et le bandeau de titre portent leur propre rembourrage : sans
+     cette ligne il s'ajoutait à celui des sections et le bandeau faisait
+     328 px de haut pour 180 px de contenu. */
+  main > section.scene, main > section.titre-page { padding: 0; }
+
+  /* Les trois temps du jeu */
+  .etapes { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(16rem, 100%), 1fr)); gap: var(--e6); list-style: none; margin: 0; padding: 0; }
+  .etapes li {
+    background: var(--carte); border-radius: var(--rayon-carte); padding: var(--e7);
+    box-shadow: var(--ombre-carte);
+    display: flex; flex-direction: column; gap: var(--e3);
+  }
+  .numero {
+    flex: none; display: inline-flex; align-items: center; justify-content: center;
+    width: var(--e11); height: var(--e11); border-radius: var(--rayon-rond);
+    font-size: var(--t5); font-weight: 900; line-height: 1;
+  }
+  .numero-1 { background: var(--accent); color: var(--texte); }
+  .numero-2 { background: var(--corail); color: var(--texte); }
+  .numero-3 { background: var(--or); color: var(--encre); }
+  .etapes p { font-size: var(--t2); font-weight: 700; line-height: 1.45; color: var(--encre-douce); margin: 0; }
+
+  /* Les deux grandes cartes : la famille et l'accessibilité */
+  .duo { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(19rem, 100%), 1fr)); gap: var(--e6); margin-top: var(--e10); }
+  .duo > div {
+    border-radius: var(--rayon-grand); padding: var(--e9);
+    display: flex; flex-direction: column; gap: var(--e4);
+  }
+  .duo h3 { font-size: var(--t-duo); line-height: 1.1; }
+  .duo p { font-size: var(--t2); font-weight: 700; line-height: 1.45; margin: 0; }
+  .duo .emblisse { font-size: var(--t7); line-height: 1; }
+  .duo .lien-suite {
+    display: inline-flex; align-items: center; align-self: flex-start;
+    min-height: var(--touche); max-width: 100%; overflow-wrap: anywhere;
+    font-size: var(--t2); font-weight: 900;
+  }
+  .duo-violet { background: linear-gradient(135deg, var(--accent), var(--violet)); color: var(--texte); }
+  .duo-violet .lien-suite { color: var(--texte); }
+  .duo-blanc { background: var(--carte); box-shadow: var(--ombre-carte); }
+  .duo-blanc p { color: var(--encre-douce); }
+
+  /* Grilles de cartes : façons de jouer, accessibilité */
+  .grille { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(15rem, 100%), 1fr)); gap: var(--e5); list-style: none; margin: 0; padding: 0; }
+  .grille li {
+    background: var(--carte); border-radius: var(--rayon); padding: var(--e6);
+    box-shadow: var(--ombre-carte);
+    display: flex; flex-direction: column; gap: var(--e2);
+  }
+  .grille h3 { font-size: var(--t4); }
+  .grille p { font-size: var(--t1); font-weight: 700; line-height: 1.45; color: var(--encre-douce); margin: 0; }
+  .pictogramme {
+    display: inline-flex; align-items: center; justify-content: center;
+    align-self: flex-start; max-width: 100%;
+    min-width: var(--e11); min-height: var(--e11); padding: var(--e2);
+    border-radius: var(--rayon-petit);
+    background: var(--puits); font-size: var(--t5); line-height: 1; margin-bottom: var(--e1);
+  }
+
+  .centre { text-align: center; }
+  /* Plan du site de la page 404 : des cartes sans pictogramme, le titre est le lien. */
+  .grille-plan li { gap: var(--e1); }
+  .grille-plan h3 { font-size: var(--t4); }
+  /* Ces liens sont la sortie de la page : 44 px de haut au moins, comme tout
+     bouton isolé. Ils ne faisaient que 29 px. */
+  .grille-plan h3 a {
+    display: block; min-height: var(--touche); padding: var(--e2) 0;
+    overflow-wrap: anywhere;
+    text-decoration-thickness: 2px; text-underline-offset: 3px;
+  }
+  .retour-accueil { margin-top: var(--e10); }
+  /* Un nom technique cité dans une phrase : lisible sans être un lien. */
+  .lien-texte { font-weight: 800; overflow-wrap: anywhere; }
+  /* Deuxième titre de même niveau dans une page : même taille, plus d'air. */
+  .h2-suite { margin-top: var(--e13); }
+  /* Sous-titre d'un deuxième temps à l'intérieur d'une section */
+  .sous-titre-section {
+    font-size: var(--t4); line-height: 1.25; text-align: center;
+    max-width: 46ch; margin: var(--e10) auto var(--e6);
+  }
+  .chapeau {
+    font-size: var(--t3); font-weight: 700; color: var(--encre-douce);
+    max-width: 52ch; margin: calc(var(--e8) * -1) auto var(--e8); text-align: center;
+  }
+
+  /* Points rassurants : une coche, une affirmation courte */
+  .points { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(17rem, 100%), 1fr)); gap: var(--e5); list-style: none; margin: 0; padding: 0; }
+  .points li {
+    display: flex; gap: var(--e4); align-items: flex-start;
+    background: var(--carte); border-radius: var(--rayon); padding: var(--e6);
+    box-shadow: var(--ombre-carte);
+  }
+  .points .coche { flex: none; width: var(--e8); height: var(--e8); color: var(--vert); }
+  .points li > div { min-width: 0; overflow-wrap: anywhere; }
+  .points h3 { font-size: var(--t3); margin: 0 0 var(--e1); }
+  .points p { font-size: var(--t1); font-weight: 700; line-height: 1.45; color: var(--encre-douce); margin: 0; }
+
+  /* Fiche d'identité de l'espace presse */
+  .fiche {
+    display: grid; grid-template-columns: minmax(0, auto) minmax(0, 1fr);
+    gap: var(--e3) var(--e6); margin: 0;
+  }
+  .fiche dt { font-size: var(--t1); font-weight: 900; overflow-wrap: anywhere; }
+  .fiche dd { font-size: var(--t1); font-weight: 700; color: var(--encre-douce); margin: 0; overflow-wrap: anywhere; }
+  /* Un lien seul dans une définition est une cible à part entière. */
+  .fiche dd > a:only-child { display: inline-flex; align-items: center; min-height: var(--touche); }
+
+  /* Fichiers à télécharger */
+  .telechargements { display: flex; flex-direction: column; gap: var(--e3); list-style: none; margin: 0; padding: 0; }
+  .telechargements a {
+    display: flex; flex-wrap: wrap; align-items: center; gap: var(--e1) var(--e4);
+    min-height: var(--touche); padding: var(--e4) var(--e5);
+    background: var(--puits); border-radius: var(--rayon-petit);
+    font-size: var(--t1); font-weight: 800; text-decoration: none;
+  }
+  .telechargements a > span:first-child { min-width: 0; overflow-wrap: anywhere; }
+  .telechargements a:hover { background: var(--carte); box-shadow: var(--ombre-carte); }
+  .telechargements .poids { margin-left: auto; font-weight: 700; color: var(--encre-douce); }
+  .apercu-partage { display: block; width: 100%; height: auto; border-radius: var(--rayon-petit); margin-bottom: var(--e4); }
+
+  /* Jetons : ce qu'on gagne en jouant */
+  .jetons { display: flex; flex-wrap: wrap; justify-content: center; gap: var(--e3); list-style: none; margin: 0; padding: 0; }
+  .jetons li {
+    padding: var(--e3) var(--e5); border-radius: var(--rayon-rond);
+    background: var(--carte); box-shadow: var(--ombre-carte);
+    font-size: var(--t1); font-weight: 800; max-width: 100%; overflow-wrap: anywhere;
+  }
+
+  /* Questions fréquentes */
+  .faq { display: flex; flex-direction: column; gap: var(--e3); max-width: 760px; margin: 0 auto; }
+  .question {
+    background: var(--carte); border-radius: var(--rayon); box-shadow: var(--ombre-carte);
+  }
+  .question summary {
+    display: flex; align-items: center; justify-content: space-between; gap: var(--e4);
+    min-height: var(--touche); padding: var(--e5) var(--e6);
+    border-radius: var(--rayon);
+    font-size: var(--t3); font-weight: 900; cursor: pointer;
+    list-style: none;
+  }
+  .question summary::-webkit-details-marker { display: none; }
+  .question summary > span { min-width: 0; overflow-wrap: anywhere; }
+  /* Le signe dit l'état sans dépendre du triangle du navigateur, différent
+     d'un appareil à l'autre et parfois invisible. */
+  .question summary::after {
+    content: "+"; flex: none;
+    display: flex; align-items: center; justify-content: center;
+    width: var(--e8); height: var(--e8); border-radius: var(--rayon-rond);
+    background: var(--puits); color: var(--accent-fonce);
+    font-size: var(--t4); font-weight: 900; line-height: 1;
+  }
+  .question[open] summary::after { content: "−"; }
+  .question p {
+    padding: 0 var(--e6) var(--e6); margin: 0;
+    font-size: var(--t1); font-weight: 700; line-height: 1.5; color: var(--encre-douce);
+  }
+
+  /* Le bandeau de téléchargement */
+  .bandeau-app {
+    margin-top: var(--e10);
+    border-radius: var(--rayon-grand); padding: var(--e10);
+    background:
+      radial-gradient(500px 300px at 50% -20%, rgba(255, 255, 255, .12), transparent 70%),
+      linear-gradient(var(--fond-haut), var(--fond));
+    color: var(--texte);
+    display: flex; flex-wrap: wrap; align-items: center; gap: var(--e8);
+  }
+  .bandeau-app > div { flex: 1 1 16rem; min-width: 0; }
+  .bandeau-titre { font-size: var(--t7); font-weight: 900; letter-spacing: -.02em; line-height: 1.1; margin: 0 0 var(--e2); }
+  .bandeau-app p { font-size: var(--t2); font-weight: 700; color: var(--texte-doux); margin: 0; }
+  .bandeau-app .bouton { flex: none; }
+  .grand-sceau {
+    flex: none; display: flex; align-items: center; justify-content: center;
+    width: var(--e13); height: var(--e13); border-radius: var(--rayon-grand);
+    background: radial-gradient(circle at 50% 40%, #3A2A85, var(--fond));
+    box-shadow: inset 0 0 0 1px rgba(255, 255, 255, .2), var(--ombre-sceau);
+  }
+  .grand-sceau::before {
+    content: "?"; display: flex; align-items: center; justify-content: center;
+    width: var(--e10); height: var(--e10); border-radius: var(--rayon-rond);
+    box-shadow: 0 0 0 5px var(--or), 0 0 24px rgba(250, 179, 26, .5);
+    font-size: var(--t6); font-weight: 900; line-height: 1;
+  }
+
+  /* ---- Pied de page ---- */
+  footer { background: var(--fond); color: var(--texte); }
+  footer .enveloppe { padding-top: var(--e9); padding-bottom: var(--e9); }
+  footer p { font-size: var(--t0); font-weight: 700; color: var(--texte-doux); }
+  .liens-pied {
+    display: flex; flex-wrap: wrap; gap: var(--e3) var(--e7);
+    list-style: none; margin: 0 0 var(--e6); padding: 0;
+  }
+  .liens-pied a {
+    display: inline-flex; align-items: center; justify-content: center;
+    min-width: var(--touche); min-height: var(--touche);
+    font-size: var(--t0); font-weight: 800;
+  }
+
+  /* ---- Page de contenu (confidentialité) ---- */
+  .titre-page { background: linear-gradient(var(--fond-haut), var(--fond)); color: var(--texte); }
+  .titre-page .enveloppe { padding-top: var(--e9); padding-bottom: var(--e9); }
+  .titre-page h1 { text-align: left; margin: 0 0 var(--e2); max-width: 20ch; font-size: var(--t-section); }
+  .titre-page p { font-size: var(--t2); font-weight: 700; color: var(--texte-doux); margin: 0; }
+  .texte { background: var(--carte); border-radius: var(--rayon); box-shadow: var(--ombre-carte); padding: var(--e8); margin-bottom: var(--e5); }
+  .texte h2 { font-size: var(--t5); text-align: left; margin: 0 0 var(--e4); }
+  .texte h3 { font-size: var(--t4); margin: var(--e6) 0 var(--e3); }
+  .texte p, .texte li { font-size: var(--t1); font-weight: 700; line-height: 1.55; color: var(--encre-douce); }
+  .texte ul { margin: 0 0 var(--e4); padding-left: var(--e5); }
+  .texte li { margin-bottom: var(--e2); }
+  .texte > :last-child { margin-bottom: 0; }
+  /* Deux colonnes sur ordinateur : le sommaire reste sous les yeux pendant
+     qu'on descend dans le texte. Une seule colonne sur téléphone. */
+  .page-deux-colonnes {
+    display: grid; grid-template-columns: minmax(0, 16rem) minmax(0, 1fr);
+    gap: var(--e8); align-items: start;
+    padding-top: var(--e9); padding-bottom: var(--e10);
+  }
+  .sommaire { position: sticky; top: var(--e5); background: var(--puits); border-radius: var(--rayon); padding: var(--e6); }
+  .sommaire h2 { font-size: var(--t4); text-align: left; margin: 0 0 var(--e3); }
+  .sommaire ol { display: flex; flex-direction: column; gap: var(--e1); margin: 0; padding-left: var(--e5); }
+  .sommaire li { font-size: var(--t1); font-weight: 800; overflow-wrap: anywhere; }
+  .sommaire a { display: inline-flex; align-items: center; min-height: var(--touche); max-width: 100%; overflow-wrap: anywhere; font-size: var(--t1); font-weight: 800; }
+  .resume {
+    background: var(--carte); border-radius: var(--rayon); box-shadow: var(--ombre-carte);
+    border-left: var(--e1) solid var(--or);
+    padding: var(--e8); margin-bottom: var(--e5);
+  }
+  .resume p { font-size: var(--t2); font-weight: 700; line-height: 1.55; color: var(--encre); }
+  .retour { margin-top: var(--e6); font-weight: 800; }
+  .retour a { display: inline-flex; align-items: center; min-height: var(--touche); }
+  @media (max-width: 52rem) {
+    .page-deux-colonnes { grid-template-columns: minmax(0, 1fr); gap: var(--e5); padding-top: var(--e6); }
+    .sommaire { position: static; }
+    .resume { padding: var(--e5); }
+  }
+
+  /* ---- Téléphones ---- */
+  @media (max-width: 46rem) {
+    /* Sur téléphone, les onglets prenaient trois lignes et repoussaient le jeu
+       hors du premier écran. Ils laissent la place : la page se parcourt en
+       descendant, et le pied de page porte les mêmes liens, au complet. */
+    .entete .nav-site { display: none; }
+    .scene .enveloppe { padding-top: var(--e6); padding-bottom: var(--e9); }
+    main > section { padding: var(--e9) 0; }
+    .jeu { padding: var(--e5); gap: var(--e3); }
+    .jeu-saisie { flex-direction: column; }
+    .jeu-saisie input { flex: none; width: 100%; }
+    .duo > div, .bandeau-app { padding: var(--e6); }
+    .bandeau-app { margin-top: var(--e9); }
+    .bandeau-app { gap: var(--e5); text-align: center; justify-content: center; }
+    .bandeau-app h2 { text-align: center; }
+    .bandeau-app .bouton { width: 100%; }
+    .etapes li { padding: var(--e5); flex-direction: row; align-items: flex-start; gap: var(--e4); }
+    .etapes li > div { display: flex; flex-direction: column; gap: var(--e1); min-width: 0; }
+    .numero { width: var(--touche); height: var(--touche); font-size: var(--t3); }
+    .etapes h3 { font-size: var(--t3); }
+    .etapes p { font-size: var(--t0); }
+    .texte, .sommaire { padding: var(--e5); }
+    .fiche { grid-template-columns: minmax(0, 1fr); gap: var(--e1); }
+    .fiche dd { margin-bottom: var(--e3); }
+    .fiche dd:last-child { margin-bottom: 0; }
+  }
+
+  /* ---- Écrans bas : un iPhone SE, ou un téléphone tenu à l'horizontale ----
+     Le jeu doit tenir sous les yeux sans descendre : on resserre la carte
+     plutôt que de laisser « Valider » tomber sous le bord de l'écran. */
+  @media (max-height: 46rem) {
+    .scene .enveloppe { padding-top: var(--e4); padding-bottom: var(--e7); }
+    h1 { margin-bottom: var(--e3); }
+    .scene-sous { margin-bottom: var(--e5); }
+    .jeu { gap: var(--e2); padding: var(--e4); }
+    .jeu-objet { font-size: var(--t-objet-court); }
+  }
+
+  /* ---- Quand le système demande moins d'animation ---- */
   @media (prefers-reduced-motion: reduce) {
-    *, *::before, *::after {
-      animation-duration: .01ms !important; animation-iteration-count: 1 !important;
-      transition-duration: .01ms !important;
-    }
+    *, *::before, *::after { animation: none !important; transition: none !important; scroll-behavior: auto !important; }
   }
 
-  /* Sur papier et dans un PDF, les navigateurs n'impriment pas les fonds :
-     on repasse donc en texte foncé sur blanc pour rester lisible. */
+  /* ---- Impression : les navigateurs n'impriment pas les fonds ---- */
   @media print {
-    :root { color-scheme: light; }
-    body { background: #fff; color: var(--encre); font-size: 11pt; line-height: 1.45; }
-    .enveloppe { max-width: none; padding: 0; }
-    .saut, .nav-site, .hero::before, .objet, .essai, .fenetre, .indice, .retour,
-    .pictogramme, .sceau { display: none; }
-    main > section { padding: var(--e3) 0; }
-    /* Sur papier, les questions s'impriment ouvertes : un accordéon replié ne
-       donnerait qu'une liste de questions sans réponse. Le script les ouvre
-       avant l'impression ; cette règle-ci fait le même travail dans les
-       navigateurs qui la comprennent, avec ou sans JavaScript. */
-    .question::details-content { content-visibility: visible; }
-    .question summary::after { display: none; }
-    .question { background: none; border: 1px solid #6B6484; margin-bottom: var(--e2); }
-    /* Sans cette ligne, question et réponse restaient blanches sur blanc :
-       la page sortait avec six cadres vides. */
-    .question summary, .question p { color: var(--encre); }
-    .hero, .final { background: none; }
-    h1, h2, h3, .marque, .accroche, .date, .sous-titre, footer p,
-    .jetons li, .publics li, .coche, .precision, .objet-legende,
-    .hero h1 .sous-titre, .sommaire a::before,
-    .titre-page .sous-titre { color: var(--encre); }
-    /* « .question a » est plus spécifique que « a » : sans le citer ici, le lien
-       d'une réponse restait doré, soit 1,8:1 sur du papier blanc. */
-    a, .question a { color: #3A2B9E; }
-    main a[href^="http"]::after { content: " (" attr(href) ")"; font-weight: 400; word-break: break-all; }
-    .entete, footer { border-color: #6B6484; }
-    .carte, .resume, .jetons li, .publics li,
-    .publics .enfants, .publics .seniors, .publics .famille {
-      background: #fff; box-shadow: none; border: 1px solid #6B6484;
+    body { background: #fff; color: #000; }
+    .saut, .entete, .nav-site, .jeu-saisie, .jeu-suite, .bandeau-app, .liens-pied { display: none !important; }
+    .scene, .titre-page, footer { background: #fff !important; color: #000 !important; }
+    .scene *, .titre-page *, footer * { color: #000 !important; }
+    .jeu, .texte, .question, .grille li, .etapes li, .jetons li, .duo > div {
+      box-shadow: none !important; background: #fff !important; color: #000 !important;
+      border: 1px solid #999;
     }
-    .bouton, .lien-page, .sommaire a { min-height: 0; padding: 0; margin-left: 0; background: none;
-      box-shadow: none; color: #3A2B9E; }
-    h2, h3 { break-after: avoid; }
-    p, li { break-inside: avoid; }
+    .duo-violet, .duo-violet * { background: #fff !important; color: #000 !important; }
+    .question p { display: block !important; }
+    a { color: #000 !important; }
+  }
+
+  /* Zone d'annonce du jeu : un seul repère vivant, pour que les lecteurs
+     d'écran suivent le dialogue « C'est plus ! » puis la révélation. */
+  .jeu-annonce { width: 100%; display: flex; flex-direction: column; align-items: center; gap: var(--e3); }
+  .jeu-essai:empty { display: none; }
+  /* Lu par les lecteurs d'écran, invisible à l'œil */
+  .invisible {
+    position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px;
+    overflow: hidden; clip-path: inset(50%); white-space: nowrap; border: 0;
   }
 </style>
 </head>
@@ -583,88 +617,115 @@
 <header class="entete">
   <div class="enveloppe">
     <a class="marque" href="index.html"><span class="sceau" aria-hidden="true"></span>Devine le Prix</a>
-    <nav class="nav-site" aria-label="Navigation principale">
+    <nav class="nav-site" aria-label="Sections du site">
       <ul>
-        <li><a href="index.html">Accueil</a></li>
-        <li><a href="confidentialite.html" aria-current="page">Confiden&shy;tialité</a></li>
+        <li><a href="familles.html">Familles et seniors</a></li>
+        <li><a href="accessibilite.html">Accessibilité</a></li>
+        <li><a href="questions.html">Questions</a></li>
+        <li><a href="aide.html">Aide</a></li>
       </ul>
     </nav>
+    <!-- Appel à l'action de l'en-tête. Comme les deux autres (dans le jeu et
+         dans le bandeau de fin), il attend l'adresse de la fiche App Store :
+         remplacer l'adresse ci-dessous par celle de la fiche, puis retirer
+         « hidden ». Caché, il ne prend aucune place. -->
+    <a class="bouton" id="lien-app-store-haut" hidden href="https://apps.apple.com/">Télécharger</a>
   </div>
 </header>
 
 <main id="contenu" tabindex="-1">
-  <div class="enveloppe">
 
-    <div class="titre-page">
-      <h1>Politique de confidentialité<span class="sous-titre">Devine le Prix – Jeu Famille</span></h1>
-      <p class="date">Dernière mise à jour : 13 septembre 2026</p>
+  <section class="titre-page">
+    <div class="enveloppe">
+      <h1>Politique de confidentialité</h1>
+      <p>Devine le Prix – Jeu Famille · Dernière mise à jour : 13 septembre 2026</p>
     </div>
+  </section>
 
-    <div class="resume">
-<p>Devine le Prix est un jeu édité par ProtoJo Digital (Johan Quille), France. Cette page explique, en langage simple, quelles données l’application utilise. En résumé : <strong>nous ne collectons aucune donnée personnelle</strong>, l’application fonctionne sans compte, et les seules données techniques traitées le sont par Apple (Game Center, iCloud) et par Google (publicités), selon leurs propres règles.</p>
-    </div>
-
+  <div class="enveloppe page-deux-colonnes">
     <nav class="sommaire" id="sommaire" tabindex="-1" aria-labelledby="titre-sommaire">
-      <h2 id="titre-sommaire">Sur cette page</h2>
-      <ol>
-        <li><a href="#donnees-appareil">Données enregistrées sur votre appareil</a></li>
-        <li><a href="#aucun-compte">Aucun compte, aucune inscription</a></li>
-        <li><a href="#voix-sons-musique">Voix, sons et musique</a></li>
-        <li><a href="#rappel-quotidien">Rappel quotidien</a></li>
-        <li><a href="#game-center">Jouer avec d’autres téléphones (Game Center)</a></li>
-        <li><a href="#publicites">Publicités</a></li>
-        <li><a href="#achat-integre">Achat intégré</a></li>
-        <li><a href="#enfants">Enfants</a></li>
-        <li><a href="#vos-droits">Vos droits</a></li>
-        <li><a href="#modifications">Modifications</a></li>
-      </ol>
-    </nav>
-
-<h2 id="donnees-appareil" tabindex="-1">1. Données enregistrées sur votre appareil</h2>
-<p>Votre progression (niveau, points d’expérience, étoiles, badges, collection d’objets, série de jours joués, vitrines gagnées), vos records, la liste des prénoms et avatars saisis pour jouer à plusieurs, et vos réglages (voix, sons, musique, vibrations, nombre d’objets par partie, rappel quotidien) sont enregistrés uniquement sur votre iPhone ou iPad. Ces informations ne sont jamais envoyées à nos serveurs : nous n’en avons pas. Supprimer l’application les efface.</p>
-<p>Si iCloud est activé sur votre appareil, cette progression et ces réglages sont également copiés dans votre espace iCloud personnel (stockage clé-valeur d’Apple) afin de les retrouver sur vos autres appareils. Nous n’y avons pas accès : ce sont vos données, protégées par votre identifiant Apple.</p>
-
-<h2 id="aucun-compte" tabindex="-1">2. Aucun compte, aucune inscription</h2>
-<p>Aucune adresse e-mail, aucun nom, aucune information de contact n’est demandée. L’application n’accède ni aux contacts, ni aux photos, ni à la position, ni au micro, ni à la caméra. Les prénoms saisis pour une partie à plusieurs restent sur l’appareil et peuvent être n’importe quel surnom.</p>
-
-<h2 id="voix-sons-musique" tabindex="-1">3. Voix, sons et musique</h2>
-<p>La lecture à voix haute utilise la synthèse vocale intégrée à iOS : le texte est lu sur l’appareil, rien n’est envoyé sur Internet. Les sons et les musiques sont inclus dans l’application.</p>
-
-<h2 id="rappel-quotidien" tabindex="-1">4. Rappel quotidien</h2>
-<p>Si vous activez le rappel dans les réglages, l’application demande l’autorisation d’afficher des notifications et programme un rappel local à l’heure choisie. Ce rappel est géré par votre appareil, sans serveur. Vous pouvez le désactiver à tout moment dans les réglages de l’application ou d’iOS.</p>
-
-<h2 id="game-center" tabindex="-1">5. Jouer avec d’autres téléphones (Game Center)</h2>
-<p>Le mode « Avec d’autres téléphones » utilise Game Center, le service de jeu en réseau d’Apple. Il nécessite d’être connecté à Game Center avec votre identifiant Apple. Pendant une partie, votre pseudonyme Game Center et votre avatar sont visibles des autres joueurs de la partie, et les scores de la partie sont échangés entre les appareils. Les invitations envoyées à des amis passent par Messages ou Game Center, selon votre choix. Nous n’avons accès à aucune de ces informations : elles sont gérées par Apple selon sa politique de confidentialité (<a href="https://www.apple.com/legal/privacy/">apple.com/legal/privacy</a>). Les modes solo et « Sur ce téléphone » fonctionnent sans Game Center.</p>
-
-<h2 id="publicites" tabindex="-1">6. Publicités</h2>
-<p>L’application peut afficher des publicités fournies par Google AdMob, uniquement à la fin d’une partie : une bannière, et une vidéo facultative que vous choisissez de regarder pour doubler vos points. Il n’y a jamais de publicité pendant le jeu.</p>
-<p>Comme l’application s’adresse aussi aux enfants, elle est configurée pour un public de mineurs : les publicités sont <strong>non personnalisées</strong>, limitées à un contenu tout public, et l’application ne demande pas l’autorisation de suivi publicitaire (identifiant IDFA).</p>
-<p>Pour diffuser une publicité et lutter contre la fraude, le logiciel de Google intégré à l’application traite des données techniques : identifiants de l’appareil (par exemple un identifiant de publicité réinitialisable ou un identifiant propre à l’application), position approximative déduite de l’adresse IP (ville ou région, jamais la position précise), informations sur l’appareil et le système, interactions avec les publicités, et données de diagnostic (performances, plantages). Ces données sont traitées par Google conformément à sa politique : <a href="https://policies.google.com/privacy">policies.google.com/privacy</a> et <a href="https://support.google.com/admob/answer/6128543">support.google.com/admob</a>. Elles sont déclarées dans la fiche « Confidentialité de l’app » de l’App Store.</p>
-<p>Dans l’Union européenne et au Royaume-Uni, un message de consentement (fourni par Google) peut vous être présenté au premier lancement. Vous pouvez modifier votre choix à tout moment via « Options de confidentialité » dans les réglages de l’application.</p>
-<p>Les publicités peuvent être supprimées définitivement grâce à l’achat « Version sans pub » dans les réglages de l’application.</p>
-
-<h2 id="achat-integre" tabindex="-1">7. Achat intégré</h2>
-<p>L’achat « Version sans pub » est traité par Apple via l’App Store. Nous ne recevons aucune information bancaire ni aucune donnée d’identité : Apple nous indique seulement que l’achat est actif sur l’appareil. Vous pouvez restaurer cet achat sur un autre appareil utilisant le même identifiant Apple.</p>
-
-<h2 id="enfants" tabindex="-1">8. Enfants</h2>
-<p>L’application ne collecte sciemment aucune donnée personnelle auprès d’enfants. Elle est configurée comme destinée à un public pouvant inclure des mineurs (publicités non personnalisées, contenu tout public) et respecte les principes du COPPA (États-Unis) et du RGPD (Union européenne) applicables aux services utilisés par des mineurs. Le mode Game Center est soumis aux règles d’Apple sur les comptes des enfants (partage familial).</p>
-
-<h2 id="vos-droits" tabindex="-1">9. Vos droits</h2>
-<p>Comme nous ne conservons aucune donnée personnelle, il n’y a rien à consulter, corriger ou supprimer de notre côté : tout est sur votre appareil et dans vos espaces Apple. Pour les données traitées par Google à des fins publicitaires, les demandes se font auprès de Google. Pour toute question sur cette politique ou sur l’application, écrivez-nous : <a href="mailto:johan.quille@trainedmanager.fr">johan.quille@trainedmanager.fr</a>.</p>
-
-<h2 id="modifications" tabindex="-1">10. Modifications</h2>
-<p>Cette page pourra être mise à jour si l’application évolue. La date en haut de page indique la dernière version.</p>
-
-<p class="retour"><a class="lien-page" href="#sommaire">Revenir au sommaire</a></p>
-
+        <h2 id="titre-sommaire">Sur cette page</h2>
+        <ol>
+          <li><a href="#donnees-appareil">Données enregistrées sur votre appareil</a></li>
+          <li><a href="#aucun-compte">Aucun compte, aucune inscription</a></li>
+          <li><a href="#voix-sons-musique">Voix, sons et musique</a></li>
+          <li><a href="#rappel-quotidien">Rappel quotidien</a></li>
+          <li><a href="#game-center">Jouer avec d’autres téléphones (Game Center)</a></li>
+          <li><a href="#publicites">Publicités</a></li>
+          <li><a href="#achat-integre">Achat intégré</a></li>
+          <li><a href="#enfants">Enfants</a></li>
+          <li><a href="#vos-droits">Vos droits</a></li>
+          <li><a href="#modifications">Modifications</a></li>
+        </ol>
+      </nav>
+    <div>
+      <div class="resume">
+<p>Devine le Prix est un jeu édité par ProtoJo Digital (Johan Quille), France. Cette page explique, en langage simple, quelles données l’application utilise. En résumé : <strong>nous ne collectons aucune donnée personnelle</strong>, l’application fonctionne sans compte, et les seules données techniques traitées le sont par Apple (Game Center, iCloud) et par Google (publicités), selon leurs propres règles.</p>
+      </div>
+    <section class="texte">
+      <h2 id="donnees-appareil" tabindex="-1">1. Données enregistrées sur votre appareil</h2>
+      <p>Votre progression (niveau, points d’expérience, étoiles, badges, collection d’objets, série de jours joués, vitrines gagnées), vos records, la liste des prénoms et avatars saisis pour jouer à plusieurs, et vos réglages (voix, sons, musique, vibrations, nombre d’objets par partie, rappel quotidien) sont enregistrés uniquement sur votre iPhone ou iPad. Ces informations ne sont jamais envoyées à nos serveurs : nous n’en avons pas. Supprimer l’application les efface.</p>
+      <p>Si iCloud est activé sur votre appareil, cette progression et ces réglages sont également copiés dans votre espace iCloud personnel (stockage clé-valeur d’Apple) afin de les retrouver sur vos autres appareils. Nous n’y avons pas accès : ce sont vos données, protégées par votre identifiant Apple.</p>
+    </section>
+    <section class="texte">
+      <h2 id="aucun-compte" tabindex="-1">2. Aucun compte, aucune inscription</h2>
+      <p>Aucune adresse e-mail, aucun nom, aucune information de contact n’est demandée. L’application n’accède ni aux contacts, ni aux photos, ni à la position, ni au micro, ni à la caméra. Les prénoms saisis pour une partie à plusieurs restent sur l’appareil et peuvent être n’importe quel surnom.</p>
+    </section>
+    <section class="texte">
+      <h2 id="voix-sons-musique" tabindex="-1">3. Voix, sons et musique</h2>
+      <p>La lecture à voix haute utilise la synthèse vocale intégrée à iOS : le texte est lu sur l’appareil, rien n’est envoyé sur Internet. Les sons et les musiques sont inclus dans l’application.</p>
+    </section>
+    <section class="texte">
+      <h2 id="rappel-quotidien" tabindex="-1">4. Rappel quotidien</h2>
+      <p>Si vous activez le rappel dans les réglages, l’application demande l’autorisation d’afficher des notifications et programme un rappel local à l’heure choisie. Ce rappel est géré par votre appareil, sans serveur. Vous pouvez le désactiver à tout moment dans les réglages de l’application ou d’iOS.</p>
+    </section>
+    <section class="texte">
+      <h2 id="game-center" tabindex="-1">5. Jouer avec d’autres téléphones (Game Center)</h2>
+      <p>Le mode « Avec d’autres téléphones » utilise Game Center, le service de jeu en réseau d’Apple. Il nécessite d’être connecté à Game Center avec votre identifiant Apple. Pendant une partie, votre pseudonyme Game Center et votre avatar sont visibles des autres joueurs de la partie, et les scores de la partie sont échangés entre les appareils. Les invitations envoyées à des amis passent par Messages ou Game Center, selon votre choix. Nous n’avons accès à aucune de ces informations : elles sont gérées par Apple selon sa politique de confidentialité (<a href="https://www.apple.com/legal/privacy/">apple.com/legal/privacy</a>). Les modes solo et « Sur ce téléphone » fonctionnent sans Game Center.</p>
+    </section>
+    <section class="texte">
+      <h2 id="publicites" tabindex="-1">6. Publicités</h2>
+      <p>L’application peut afficher des publicités fournies par Google AdMob, uniquement à la fin d’une partie : une bannière, et une vidéo facultative que vous choisissez de regarder pour doubler vos points. Il n’y a jamais de publicité pendant le jeu.</p>
+      <p>Comme l’application s’adresse aussi aux enfants, elle est configurée pour un public de mineurs : les publicités sont <strong>non personnalisées</strong>, limitées à un contenu tout public, et l’application ne demande pas l’autorisation de suivi publicitaire (identifiant IDFA).</p>
+      <p>Pour diffuser une publicité et lutter contre la fraude, le logiciel de Google intégré à l’application traite des données techniques : identifiants de l’appareil (par exemple un identifiant de publicité réinitialisable ou un identifiant propre à l’application), position approximative déduite de l’adresse IP (ville ou région, jamais la position précise), informations sur l’appareil et le système, interactions avec les publicités, et données de diagnostic (performances, plantages). Ces données sont traitées par Google conformément à sa politique : <a href="https://policies.google.com/privacy">policies.google.com/privacy</a> et <a href="https://support.google.com/admob/answer/6128543">support.google.com/admob</a>. Elles sont déclarées dans la fiche « Confidentialité de l’app » de l’App Store.</p>
+      <p>Dans l’Union européenne et au Royaume-Uni, un message de consentement (fourni par Google) peut vous être présenté au premier lancement. Vous pouvez modifier votre choix à tout moment via « Options de confidentialité » dans les réglages de l’application.</p>
+      <p>Les publicités peuvent être supprimées définitivement grâce à l’achat « Version sans pub » dans les réglages de l’application.</p>
+    </section>
+    <section class="texte">
+      <h2 id="achat-integre" tabindex="-1">7. Achat intégré</h2>
+      <p>L’achat « Version sans pub » est traité par Apple via l’App Store. Nous ne recevons aucune information bancaire ni aucune donnée d’identité : Apple nous indique seulement que l’achat est actif sur l’appareil. Vous pouvez restaurer cet achat sur un autre appareil utilisant le même identifiant Apple.</p>
+    </section>
+    <section class="texte">
+      <h2 id="enfants" tabindex="-1">8. Enfants</h2>
+      <p>L’application ne collecte sciemment aucune donnée personnelle auprès d’enfants. Elle est configurée comme destinée à un public pouvant inclure des mineurs (publicités non personnalisées, contenu tout public) et respecte les principes du COPPA (États-Unis) et du RGPD (Union européenne) applicables aux services utilisés par des mineurs. Le mode Game Center est soumis aux règles d’Apple sur les comptes des enfants (partage familial).</p>
+    </section>
+    <section class="texte">
+      <h2 id="vos-droits" tabindex="-1">9. Vos droits</h2>
+      <p>Comme nous ne conservons aucune donnée personnelle, il n’y a rien à consulter, corriger ou supprimer de notre côté : tout est sur votre appareil et dans vos espaces Apple. Pour les données traitées par Google à des fins publicitaires, les demandes se font auprès de Google. Pour toute question sur cette politique ou sur l’application, écrivez-nous : <a href="mailto:contact@protojo.fr">contact@protojo.fr</a>.</p>
+    </section>
+    <section class="texte">
+      <h2 id="modifications" tabindex="-1">10. Modifications</h2>
+      <p>Cette page pourra être mise à jour si l’application évolue. La date en haut de page indique la dernière version.</p>
+    </section>
+      <p class="retour"><a href="#sommaire">Revenir au sommaire</a></p>
+    </div>
   </div>
+
 </main>
 
 <footer>
   <div class="enveloppe">
-    <p>Devine le Prix – Jeu Famille est édité par ProtoJo Digital (Johan Quille), France.<br>
-    Une question ? Écris à <a href="mailto:johan.quille@trainedmanager.fr">johan.quille@trainedmanager.fr</a>.</p>
-    <p><a class="lien-page" href="index.html">Accueil de Devine le Prix</a></p>
+    <ul class="liens-pied">
+      <li><a href="familles.html">Familles et seniors</a></li>
+      <li><a href="accessibilite.html">Accessibilité</a></li>
+      <li><a href="questions.html">Questions</a></li>
+      <li><a href="aide.html">Aide</a></li>
+      <li><a href="presse.html">Presse</a></li>
+      <li><a href="confidentialite.html" aria-current="page">Confidentialité</a></li>
+      <li><a href="mentions-legales.html">Mentions légales</a></li>
+    </ul>
+    <p>© 2026 ProtoJo Digital. Devine le Prix – Jeu Famille est édité par ProtoJo Digital (Johan Quille), France.<br>
+    Une question&nbsp;? Écris à <a href="mailto:contact@protojo.fr">contact@protojo.fr</a>.</p>
   </div>
 </footer>
 </body>

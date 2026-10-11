@@ -1,0 +1,710 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<!-- Teinte de la barre du navigateur : le fond de l'en-tête, qui touche cette barre -->
+<meta name="theme-color" content="#2C1E6B">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%231B1240'/%3E%3Ccircle cx='32' cy='32' r='21' fill='none' stroke='%23FAB31A' stroke-width='6'/%3E%3Ctext x='32' y='44' text-anchor='middle' font-family='system-ui,sans-serif' font-size='32' font-weight='900' fill='%23ffffff'%3E?%3C/text%3E%3C/svg%3E">
+<title>Aide et contact – Devine le Prix</title>
+<meta name="description" content="Besoin d’aide sur Devine le Prix : la voix, la taille du texte, la restauration des achats, le jeu à plusieurs téléphones, et comment nous écrire.">
+<link rel="canonical" href="https://devine-le-prix.protojo.fr/aide.html">
+<!-- Aperçu du lien quand le site est partagé (Messages, WhatsApp, réseaux sociaux) :
+     sans ces lignes, seule l'adresse brute s'affiche. L'image est la bannière de
+     la planche DA, recadrée au format que réclament les messageries. -->
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Devine le Prix – Jeu Famille">
+<meta property="og:locale" content="fr_FR">
+<meta property="og:url" content="https://devine-le-prix.protojo.fr/aide.html">
+<meta property="og:title" content="Aide et contact – Devine le Prix">
+<meta property="og:description" content="Un obstacle dans le jeu ? Dis-nous ce qui bloque, nous corrigeons en priorité.">
+<meta property="og:image" content="https://devine-le-prix.protojo.fr/partage.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Devine le Prix – Jeu Famille, par ProtoJo Digital. Trouve le prix des objets !">
+<meta name="twitter:card" content="summary_large_image">
+<style>
+  :root {
+    color-scheme: light;
+
+    /* ---- Palette ----
+       Jetons de la planche DA, repris tels quels du fichier de design
+       « design-tokens/devine-le-prix.tokens.json », lui-même tiré de
+       Theme.swift. Les teintes ajoutées par la maquette du site (encres
+       intermédiaires, fond clair, violet foncé des liens) viennent de la même
+       planche : la palette s'étend, elle ne change pas. */
+    --fond: #1B1240;          /* ink-900 — fond profond, et encre sur fond clair */
+    --fond-haut: #2C1E6B;     /* stage-top — haut du dégradé signature */
+    --nuit: #120B2E;          /* ink-950 — bordure du téléphone, ombres */
+    --carte: #FFFFFF;
+    --clair: #F4F2FA;         /* fond des sections de contenu */
+    --puits: #EEEBFA;         /* well — creux posés sur fond clair */
+    --encre: #1B1240;         /* ink-900 — texte sur fond clair */
+    --encre-douce: #4E4773;   /* ink-700 — texte secondaire sur carte */
+    --encre-tendre: #676088;  /* ink-600 — texte d'invite */
+    --texte: #FFFFFF;
+    --texte-doux: rgba(255, 255, 255, .88);
+    --or: #FAB31A;            /* gold-500 */
+    --or-clair: #FFD36B;      /* gold-300 */
+    --corail: #D63D2F;        /* coral-600 — « C'est plus ! » */
+    --vert: #1E7F46;          /* green-600 — valider, réussite */
+    --bleu: #2A6FD0;          /* blue-600 — « C'est moins ! » */
+    --violet: #994DCC;        /* purple-600 */
+    --accent: #6657D9;        /* violet-500 — action principale */
+    --accent-fonce: #4F41C4;  /* violet-700 — liens sur fond clair */
+    --lavande: #B9AEFF;       /* violet-200 */
+    --voile: rgba(255, 255, 255, .14);
+
+    /* Échelle d'espacement : uniquement des multiples de 4 px */
+    --e1: 4px;  --e2: 8px;  --e3: 12px; --e4: 16px; --e5: 20px;
+    --e6: 24px; --e7: 28px; --e8: 32px; --e9: 40px; --e10: 48px;
+    --e11: 56px; --e12: 64px; --e13: 80px;
+
+    /* Échelle typographique, base 18 px. La charte interdit tout corps sous 17 px. */
+    --t0: .945rem;   /* 17 px */
+    --t1: 1rem;      /* 18 px */
+    --t2: 1.056rem;  /* 19 px */
+    --t3: 1.167rem;  /* 21 px */
+    --t4: 1.333rem;  /* 24 px */
+    --t5: 1.444rem;  /* 26 px */
+    --t6: 1.556rem;  /* 28 px */
+    --t7: 1.889rem;  /* 34 px */
+    /* Titres fluides : les valeurs des deux bornes sont celles de la maquette,
+       téléphone (390 px) et ordinateur (1280 px). */
+    --t-titre: clamp(2.111rem, 6.4vw, 3.556rem);    /* 38 → 64 px */
+    --t-section: clamp(1.778rem, 4.4vw, 2.667rem);  /* 32 → 48 px */
+    --t-duo: clamp(1.333rem, 3.2vw, 1.889rem);      /* 24 → 34 px */
+    --t-prix: clamp(2rem, 6vw, 2.444rem);           /* 36 → 44 px */
+    --t-objet: clamp(4.444rem, 15vw, 6.111rem);     /* 80 → 110 px */
+    --t-objet-court: clamp(3.111rem, 11vw, 4.444rem); /* 56 → 80 px, écrans bas */
+
+    /* Rayons de la planche */
+    --rayon-focus: 6px;
+    --rayon-petit: 16px;
+    --rayon-champ: 18px;
+    --rayon-bouton: 22px;
+    --rayon: 24px;
+    --rayon-carte: 28px;
+    --rayon-grand: 32px;
+    --rayon-rond: 999px;
+
+    /* Tailles de la planche : 44 px est le minimum tactile, 64 px la hauteur
+       du champ de saisie, 66 px celle des grands boutons du jeu. */
+    --touche: 44px;
+    --champ: 64px;
+    --gros-bouton: 66px;
+
+    --ombre-carte: 0 8px 24px rgba(27, 18, 64, .08);
+    --ombre-jeu: 0 20px 50px rgba(0, 0, 0, .40);
+    --ombre-sceau: 0 10px 30px rgba(0, 0, 0, .40);
+  }
+
+  *, *::before, *::after { box-sizing: border-box; }
+  /* L'attribut « hidden » du HTML ne fait que proposer « display: none » : la
+     moindre règle de cette feuille qui fixe un « display » l'emporte sur lui. */
+  [hidden] { display: none !important; }
+  /* 112.5% = 18 px avec les réglages par défaut, tout en suivant la taille de
+     texte choisie dans le navigateur. */
+  html { -webkit-text-size-adjust: 100%; font-size: 112.5%; }
+  body {
+    margin: 0;
+    /* Pile système de la planche : SF Pro Rounded sur les appareils Apple,
+       aucune police à télécharger. */
+    font-family: ui-rounded, -apple-system, "SF Pro Rounded", "SF Pro Display",
+                 BlinkMacSystemFont, system-ui, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    font-size: var(--t1);
+    line-height: 1.6;
+    color: var(--encre);
+    background: var(--clair);
+    overflow-wrap: break-word;
+  }
+  .enveloppe { max-width: 1060px; margin: 0 auto; padding: 0 var(--e5); }
+  /* Colonne de lecture : la page de confidentialité et les textes longs. */
+  .colonne { max-width: 760px; margin-inline: auto; }
+
+  /* Lien d'évitement, visible seulement au clavier */
+  .saut {
+    position: absolute; top: var(--e3); left: var(--e3); z-index: 10;
+    transform: translateY(-300%);
+    background: var(--or); color: var(--encre);
+    padding: var(--e3) var(--e5); border-radius: var(--rayon-petit);
+    font-weight: 800; text-decoration: none;
+  }
+  .saut:focus { transform: none; }
+
+  /* L'or sur blanc ne fait que 1,82:1. Sur fond clair, les liens passent au
+     violet foncé de la planche (7,28:1) ; sur fond profond ils restent dorés. */
+  a { color: var(--accent-fonce); }
+  .scene a, footer a { color: var(--or); }
+  main a, footer a { text-decoration-thickness: 2px; text-underline-offset: 3px; }
+  :focus-visible { outline: 3px solid var(--accent); outline-offset: 3px; border-radius: var(--rayon-focus); }
+  .scene :focus-visible, footer :focus-visible { outline-color: var(--or); }
+  /* Une ancre déplace le regard, pas le clavier. Ces cibles ne sont pas des
+     commandes : elles reçoivent le focus sans porter de contour. */
+  [tabindex="-1"]:focus { outline: none; }
+
+  h1, h2, h3 { font-weight: 900; letter-spacing: -.02em; text-wrap: balance; }
+  h2 { font-size: var(--t-section); line-height: 1.1; margin: 0 0 var(--e8); text-align: center; }
+  h3 { font-size: var(--t5); line-height: 1.15; margin: 0; }
+  p { margin: 0 0 var(--e4); }
+  p:last-child { margin-bottom: 0; }
+
+  /* ---- Boutons ----
+     Trois familles : l'or (action principale sur fond profond), le noir de
+     l'App Store, et le contour violet (action secondaire sur carte blanche). */
+  .bouton {
+    display: inline-flex; align-items: center; justify-content: center;
+    min-height: var(--touche); padding: var(--e3) var(--e7);
+    border: none; border-radius: var(--rayon-rond);
+    background: var(--or); color: var(--encre);
+    font: inherit; font-size: var(--t1); font-weight: 900; line-height: 1.2;
+    text-align: center; text-decoration: none; cursor: pointer;
+    max-width: 100%; overflow-wrap: anywhere;
+  }
+  .bouton:hover { filter: brightness(1.06); }
+  .bouton-app {
+    min-height: var(--champ); padding: var(--e3) var(--e7);
+    border-radius: var(--rayon-champ);
+    background: #000; color: #fff;
+    box-shadow: inset 0 0 0 1.5px rgba(255, 255, 255, .5);
+    font-size: var(--t2); font-weight: 800;
+  }
+  .bouton-contour {
+    min-height: var(--champ); border-radius: var(--rayon-champ);
+    background: var(--carte); color: var(--accent-fonce);
+    box-shadow: inset 0 0 0 3px var(--accent);
+    font-size: var(--t2); font-weight: 800;
+  }
+  .bouton-valider {
+    min-height: var(--champ); padding: var(--e3) var(--e6);
+    border-radius: var(--rayon-champ);
+    background: var(--vert); color: var(--texte);
+    font-size: var(--t3); font-weight: 800;
+  }
+
+  /* ---- En-tête ---- */
+  .entete { background: var(--fond-haut); color: var(--texte); }
+  .entete .enveloppe {
+    display: flex; flex-wrap: wrap; align-items: center;
+    gap: var(--e3) var(--e6); padding-top: var(--e4); padding-bottom: var(--e4);
+  }
+  .entete .enveloppe > * { min-width: 0; }
+  .marque {
+    display: inline-flex; align-items: center; gap: var(--e3); min-height: var(--touche);
+    color: var(--texte); font-weight: 900; font-size: var(--t3);
+    letter-spacing: -.01em; text-decoration: none; margin-right: auto;
+  }
+  /* Marque : l'icône de la planche — anneau doré, « ? » blanc, fond profond */
+  .sceau {
+    flex: none; display: inline-flex; align-items: center; justify-content: center;
+    width: var(--touche); height: var(--touche); border-radius: var(--rayon-champ);
+    background: radial-gradient(circle at 50% 40%, #3A2A85, var(--fond));
+    box-shadow: inset 0 0 0 1px rgba(255, 255, 255, .2);
+  }
+  .sceau::before {
+    content: "?"; display: flex; align-items: center; justify-content: center;
+    width: var(--e7); height: var(--e7); border-radius: var(--rayon-rond);
+    box-shadow: 0 0 0 3px var(--or);
+    font-size: var(--t1); font-weight: 900; line-height: 1; color: var(--texte);
+  }
+  .nav-site ul {
+    display: flex; flex-wrap: wrap; gap: var(--e1) var(--e2);
+    list-style: none; margin: 0; padding: 0;
+  }
+  .nav-site ul, .nav-site li { min-width: 0; }
+  .nav-site a {
+    display: inline-flex; align-items: center; min-height: var(--touche);
+    min-width: var(--touche); justify-content: center;
+    padding: var(--e1) var(--e4); border-radius: var(--rayon-petit);
+    color: var(--texte); font-size: var(--t0); font-weight: 800; text-decoration: none;
+    max-width: 100%; overflow-wrap: anywhere;
+  }
+  .nav-site a:hover { background: var(--voile); }
+  .nav-site a[aria-current="page"] { background: var(--voile); color: var(--or); }
+
+  /* ---- La scène : le dégradé signature, projecteurs très discrets ---- */
+  .scene {
+    position: relative; overflow: hidden;
+    color: var(--texte); text-align: center;
+    background:
+      radial-gradient(600px 600px at 20% -20%, rgba(255, 255, 255, .10), transparent 70%),
+      radial-gradient(600px 600px at 80% -20%, rgba(255, 255, 255, .10), transparent 70%),
+      linear-gradient(var(--fond-haut), var(--fond));
+  }
+  .scene .enveloppe { position: relative; z-index: 1; padding-top: var(--e9); padding-bottom: var(--e12); }
+  h1 {
+    font-size: var(--t-titre); line-height: 1.05; letter-spacing: -.03em;
+    margin: 0 auto var(--e5); max-width: 18ch; color: var(--texte);
+  }
+  .scene-sous {
+    font-size: var(--t3); font-weight: 700; color: var(--texte-doux);
+    max-width: 38ch; margin: 0 auto var(--e7);
+  }
+
+  /* ---- La carte du jeu ---- */
+  .jeu {
+    width: min(560px, 100%); margin: 0 auto;
+    background: var(--carte); color: var(--encre);
+    border-radius: var(--rayon-carte); box-shadow: var(--ombre-jeu);
+    padding: var(--e6);
+    display: flex; flex-direction: column; align-items: center; gap: var(--e3);
+    text-align: center;
+  }
+  .jeu-essai { font-size: var(--t0); font-weight: 800; color: var(--encre-douce); margin: 0; }
+  .jeu-objet { font-size: var(--t-objet); line-height: 1; }
+  .jeu-nom { font-size: var(--t6); font-weight: 900; line-height: 1.15; margin: 0; max-width: 100%; }
+  .jeu-indice {
+    display: inline-block; padding: var(--e1) var(--e4); border-radius: var(--rayon-rond);
+    background: var(--violet); color: var(--texte);
+    font-size: var(--t1); font-weight: 800; margin: 0; max-width: 100%; overflow-wrap: anywhere;
+  }
+  /* Le dialogue du jeu : « C'est plus ! » en corail, « C'est moins ! » en bleu.
+     Le mot et la flèche portent la réponse autant que la couleur. */
+  .jeu-message {
+    width: 100%; margin: 0; padding: var(--e3) var(--e4);
+    border-radius: var(--rayon-champ); color: var(--texte);
+    display: flex; align-items: center; justify-content: center; gap: var(--e2);
+    font-size: var(--t4); font-weight: 900; overflow-wrap: anywhere;
+  }
+  .jeu-message.plus { background: var(--corail); }
+  .jeu-message.moins { background: var(--bleu); }
+  .jeu-message:empty { display: none; }
+  .jeu-saisie { width: 100%; display: flex; gap: var(--e3); }
+  .jeu-saisie input {
+    flex: 1; min-width: 0; height: var(--champ);
+    border: 3px solid var(--accent); border-radius: var(--rayon-champ);
+    padding: 0 var(--e5); background: var(--carte);
+    font: inherit; font-size: var(--t5); font-weight: 800; color: var(--encre);
+    text-align: center;
+  }
+  .jeu-saisie input::placeholder { color: var(--encre-tendre); font-weight: 700; }
+  .jeu-saisie input:focus-visible { outline: 3px solid var(--accent); outline-offset: 2px; }
+  .jeu-fin { width: 100%; display: flex; flex-direction: column; align-items: center; gap: var(--e3); }
+  .jeu-fin-titre { font-size: var(--t3); font-weight: 800; color: var(--encre-douce); margin: 0; }
+  .jeu-prix {
+    display: inline-block; padding: var(--e2) var(--e6); border-radius: var(--rayon-champ);
+    background: var(--or); color: var(--encre);
+    font-size: var(--t-prix); font-weight: 900; line-height: 1.1; margin: 0;
+    max-width: 100%; overflow-wrap: anywhere;
+  }
+  .jeu-verdict { font-size: var(--t3); font-weight: 900; margin: 0; max-width: 100%; overflow-wrap: anywhere; }
+  .jeu-suite { width: 100%; display: flex; flex-wrap: wrap; gap: var(--e3); }
+  .jeu-suite > * { flex: 1 1 12rem; }
+  .jeu-sans-js { font-size: var(--t0); font-weight: 700; color: var(--encre-douce); margin: 0; }
+
+  /* Publics visés — pastilles de la bannière de la planche */
+  .publics {
+    display: flex; flex-wrap: wrap; justify-content: center; gap: var(--e3);
+    list-style: none; margin: var(--e7) 0 0; padding: 0;
+  }
+  .publics li {
+    padding: var(--e2) var(--e4); border-radius: var(--rayon-rond);
+    color: var(--texte); font-size: var(--t0); font-weight: 800;
+  }
+  .publics .enfants { background: var(--vert); }
+  .publics .seniors { background: var(--bleu); }
+  .publics .famille { background: var(--violet); }
+
+  /* ---- Sections de contenu, sur fond clair ---- */
+  main > section { padding: var(--e13) 0; }
+  /* La scène et le bandeau de titre portent leur propre rembourrage : sans
+     cette ligne il s'ajoutait à celui des sections et le bandeau faisait
+     328 px de haut pour 180 px de contenu. */
+  main > section.scene, main > section.titre-page { padding: 0; }
+
+  /* Les trois temps du jeu */
+  .etapes { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(16rem, 100%), 1fr)); gap: var(--e6); list-style: none; margin: 0; padding: 0; }
+  .etapes li {
+    background: var(--carte); border-radius: var(--rayon-carte); padding: var(--e7);
+    box-shadow: var(--ombre-carte);
+    display: flex; flex-direction: column; gap: var(--e3);
+  }
+  .numero {
+    flex: none; display: inline-flex; align-items: center; justify-content: center;
+    width: var(--e11); height: var(--e11); border-radius: var(--rayon-rond);
+    font-size: var(--t5); font-weight: 900; line-height: 1;
+  }
+  .numero-1 { background: var(--accent); color: var(--texte); }
+  .numero-2 { background: var(--corail); color: var(--texte); }
+  .numero-3 { background: var(--or); color: var(--encre); }
+  .etapes p { font-size: var(--t2); font-weight: 700; line-height: 1.45; color: var(--encre-douce); margin: 0; }
+
+  /* Les deux grandes cartes : la famille et l'accessibilité */
+  .duo { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(19rem, 100%), 1fr)); gap: var(--e6); margin-top: var(--e10); }
+  .duo > div {
+    border-radius: var(--rayon-grand); padding: var(--e9);
+    display: flex; flex-direction: column; gap: var(--e4);
+  }
+  .duo h3 { font-size: var(--t-duo); line-height: 1.1; }
+  .duo p { font-size: var(--t2); font-weight: 700; line-height: 1.45; margin: 0; }
+  .duo .emblisse { font-size: var(--t7); line-height: 1; }
+  .duo .lien-suite {
+    display: inline-flex; align-items: center; align-self: flex-start;
+    min-height: var(--touche); max-width: 100%; overflow-wrap: anywhere;
+    font-size: var(--t2); font-weight: 900;
+  }
+  .duo-violet { background: linear-gradient(135deg, var(--accent), var(--violet)); color: var(--texte); }
+  .duo-violet .lien-suite { color: var(--texte); }
+  .duo-blanc { background: var(--carte); box-shadow: var(--ombre-carte); }
+  .duo-blanc p { color: var(--encre-douce); }
+
+  /* Grilles de cartes : façons de jouer, accessibilité */
+  .grille { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(15rem, 100%), 1fr)); gap: var(--e5); list-style: none; margin: 0; padding: 0; }
+  .grille li {
+    background: var(--carte); border-radius: var(--rayon); padding: var(--e6);
+    box-shadow: var(--ombre-carte);
+    display: flex; flex-direction: column; gap: var(--e2);
+  }
+  .grille h3 { font-size: var(--t4); }
+  .grille p { font-size: var(--t1); font-weight: 700; line-height: 1.45; color: var(--encre-douce); margin: 0; }
+  .pictogramme {
+    display: inline-flex; align-items: center; justify-content: center;
+    align-self: flex-start; max-width: 100%;
+    min-width: var(--e11); min-height: var(--e11); padding: var(--e2);
+    border-radius: var(--rayon-petit);
+    background: var(--puits); font-size: var(--t5); line-height: 1; margin-bottom: var(--e1);
+  }
+
+  .centre { text-align: center; }
+  /* Plan du site de la page 404 : des cartes sans pictogramme, le titre est le lien. */
+  .grille-plan li { gap: var(--e1); }
+  .grille-plan h3 { font-size: var(--t4); }
+  /* Ces liens sont la sortie de la page : 44 px de haut au moins, comme tout
+     bouton isolé. Ils ne faisaient que 29 px. */
+  .grille-plan h3 a {
+    display: block; min-height: var(--touche); padding: var(--e2) 0;
+    overflow-wrap: anywhere;
+    text-decoration-thickness: 2px; text-underline-offset: 3px;
+  }
+  .retour-accueil { margin-top: var(--e10); }
+  /* Un nom technique cité dans une phrase : lisible sans être un lien. */
+  .lien-texte { font-weight: 800; overflow-wrap: anywhere; }
+  /* Deuxième titre de même niveau dans une page : même taille, plus d'air. */
+  .h2-suite { margin-top: var(--e13); }
+  /* Sous-titre d'un deuxième temps à l'intérieur d'une section */
+  .sous-titre-section {
+    font-size: var(--t4); line-height: 1.25; text-align: center;
+    max-width: 46ch; margin: var(--e10) auto var(--e6);
+  }
+  .chapeau {
+    font-size: var(--t3); font-weight: 700; color: var(--encre-douce);
+    max-width: 52ch; margin: calc(var(--e8) * -1) auto var(--e8); text-align: center;
+  }
+
+  /* Points rassurants : une coche, une affirmation courte */
+  .points { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(17rem, 100%), 1fr)); gap: var(--e5); list-style: none; margin: 0; padding: 0; }
+  .points li {
+    display: flex; gap: var(--e4); align-items: flex-start;
+    background: var(--carte); border-radius: var(--rayon); padding: var(--e6);
+    box-shadow: var(--ombre-carte);
+  }
+  .points .coche { flex: none; width: var(--e8); height: var(--e8); color: var(--vert); }
+  .points li > div { min-width: 0; overflow-wrap: anywhere; }
+  .points h3 { font-size: var(--t3); margin: 0 0 var(--e1); }
+  .points p { font-size: var(--t1); font-weight: 700; line-height: 1.45; color: var(--encre-douce); margin: 0; }
+
+  /* Fiche d'identité de l'espace presse */
+  .fiche {
+    display: grid; grid-template-columns: minmax(0, auto) minmax(0, 1fr);
+    gap: var(--e3) var(--e6); margin: 0;
+  }
+  .fiche dt { font-size: var(--t1); font-weight: 900; overflow-wrap: anywhere; }
+  .fiche dd { font-size: var(--t1); font-weight: 700; color: var(--encre-douce); margin: 0; overflow-wrap: anywhere; }
+  /* Un lien seul dans une définition est une cible à part entière. */
+  .fiche dd > a:only-child { display: inline-flex; align-items: center; min-height: var(--touche); }
+
+  /* Fichiers à télécharger */
+  .telechargements { display: flex; flex-direction: column; gap: var(--e3); list-style: none; margin: 0; padding: 0; }
+  .telechargements a {
+    display: flex; flex-wrap: wrap; align-items: center; gap: var(--e1) var(--e4);
+    min-height: var(--touche); padding: var(--e4) var(--e5);
+    background: var(--puits); border-radius: var(--rayon-petit);
+    font-size: var(--t1); font-weight: 800; text-decoration: none;
+  }
+  .telechargements a > span:first-child { min-width: 0; overflow-wrap: anywhere; }
+  .telechargements a:hover { background: var(--carte); box-shadow: var(--ombre-carte); }
+  .telechargements .poids { margin-left: auto; font-weight: 700; color: var(--encre-douce); }
+  .apercu-partage { display: block; width: 100%; height: auto; border-radius: var(--rayon-petit); margin-bottom: var(--e4); }
+
+  /* Jetons : ce qu'on gagne en jouant */
+  .jetons { display: flex; flex-wrap: wrap; justify-content: center; gap: var(--e3); list-style: none; margin: 0; padding: 0; }
+  .jetons li {
+    padding: var(--e3) var(--e5); border-radius: var(--rayon-rond);
+    background: var(--carte); box-shadow: var(--ombre-carte);
+    font-size: var(--t1); font-weight: 800; max-width: 100%; overflow-wrap: anywhere;
+  }
+
+  /* Questions fréquentes */
+  .faq { display: flex; flex-direction: column; gap: var(--e3); max-width: 760px; margin: 0 auto; }
+  .question {
+    background: var(--carte); border-radius: var(--rayon); box-shadow: var(--ombre-carte);
+  }
+  .question summary {
+    display: flex; align-items: center; justify-content: space-between; gap: var(--e4);
+    min-height: var(--touche); padding: var(--e5) var(--e6);
+    border-radius: var(--rayon);
+    font-size: var(--t3); font-weight: 900; cursor: pointer;
+    list-style: none;
+  }
+  .question summary::-webkit-details-marker { display: none; }
+  .question summary > span { min-width: 0; overflow-wrap: anywhere; }
+  /* Le signe dit l'état sans dépendre du triangle du navigateur, différent
+     d'un appareil à l'autre et parfois invisible. */
+  .question summary::after {
+    content: "+"; flex: none;
+    display: flex; align-items: center; justify-content: center;
+    width: var(--e8); height: var(--e8); border-radius: var(--rayon-rond);
+    background: var(--puits); color: var(--accent-fonce);
+    font-size: var(--t4); font-weight: 900; line-height: 1;
+  }
+  .question[open] summary::after { content: "−"; }
+  .question p {
+    padding: 0 var(--e6) var(--e6); margin: 0;
+    font-size: var(--t1); font-weight: 700; line-height: 1.5; color: var(--encre-douce);
+  }
+
+  /* Le bandeau de téléchargement */
+  .bandeau-app {
+    margin-top: var(--e10);
+    border-radius: var(--rayon-grand); padding: var(--e10);
+    background:
+      radial-gradient(500px 300px at 50% -20%, rgba(255, 255, 255, .12), transparent 70%),
+      linear-gradient(var(--fond-haut), var(--fond));
+    color: var(--texte);
+    display: flex; flex-wrap: wrap; align-items: center; gap: var(--e8);
+  }
+  .bandeau-app > div { flex: 1 1 16rem; min-width: 0; }
+  .bandeau-titre { font-size: var(--t7); font-weight: 900; letter-spacing: -.02em; line-height: 1.1; margin: 0 0 var(--e2); }
+  .bandeau-app p { font-size: var(--t2); font-weight: 700; color: var(--texte-doux); margin: 0; }
+  .bandeau-app .bouton { flex: none; }
+  .grand-sceau {
+    flex: none; display: flex; align-items: center; justify-content: center;
+    width: var(--e13); height: var(--e13); border-radius: var(--rayon-grand);
+    background: radial-gradient(circle at 50% 40%, #3A2A85, var(--fond));
+    box-shadow: inset 0 0 0 1px rgba(255, 255, 255, .2), var(--ombre-sceau);
+  }
+  .grand-sceau::before {
+    content: "?"; display: flex; align-items: center; justify-content: center;
+    width: var(--e10); height: var(--e10); border-radius: var(--rayon-rond);
+    box-shadow: 0 0 0 5px var(--or), 0 0 24px rgba(250, 179, 26, .5);
+    font-size: var(--t6); font-weight: 900; line-height: 1;
+  }
+
+  /* ---- Pied de page ---- */
+  footer { background: var(--fond); color: var(--texte); }
+  footer .enveloppe { padding-top: var(--e9); padding-bottom: var(--e9); }
+  footer p { font-size: var(--t0); font-weight: 700; color: var(--texte-doux); }
+  .liens-pied {
+    display: flex; flex-wrap: wrap; gap: var(--e3) var(--e7);
+    list-style: none; margin: 0 0 var(--e6); padding: 0;
+  }
+  .liens-pied a {
+    display: inline-flex; align-items: center; justify-content: center;
+    min-width: var(--touche); min-height: var(--touche);
+    font-size: var(--t0); font-weight: 800;
+  }
+
+  /* ---- Page de contenu (confidentialité) ---- */
+  .titre-page { background: linear-gradient(var(--fond-haut), var(--fond)); color: var(--texte); }
+  .titre-page .enveloppe { padding-top: var(--e9); padding-bottom: var(--e9); }
+  .titre-page h1 { text-align: left; margin: 0 0 var(--e2); max-width: 20ch; font-size: var(--t-section); }
+  .titre-page p { font-size: var(--t2); font-weight: 700; color: var(--texte-doux); margin: 0; }
+  .texte { background: var(--carte); border-radius: var(--rayon); box-shadow: var(--ombre-carte); padding: var(--e8); margin-bottom: var(--e5); }
+  .texte h2 { font-size: var(--t5); text-align: left; margin: 0 0 var(--e4); }
+  .texte h3 { font-size: var(--t4); margin: var(--e6) 0 var(--e3); }
+  .texte p, .texte li { font-size: var(--t1); font-weight: 700; line-height: 1.55; color: var(--encre-douce); }
+  .texte ul { margin: 0 0 var(--e4); padding-left: var(--e5); }
+  .texte li { margin-bottom: var(--e2); }
+  .texte > :last-child { margin-bottom: 0; }
+  /* Deux colonnes sur ordinateur : le sommaire reste sous les yeux pendant
+     qu'on descend dans le texte. Une seule colonne sur téléphone. */
+  .page-deux-colonnes {
+    display: grid; grid-template-columns: minmax(0, 16rem) minmax(0, 1fr);
+    gap: var(--e8); align-items: start;
+    padding-top: var(--e9); padding-bottom: var(--e10);
+  }
+  .sommaire { position: sticky; top: var(--e5); background: var(--puits); border-radius: var(--rayon); padding: var(--e6); }
+  .sommaire h2 { font-size: var(--t4); text-align: left; margin: 0 0 var(--e3); }
+  .sommaire ol { display: flex; flex-direction: column; gap: var(--e1); margin: 0; padding-left: var(--e5); }
+  .sommaire li { font-size: var(--t1); font-weight: 800; overflow-wrap: anywhere; }
+  .sommaire a { display: inline-flex; align-items: center; min-height: var(--touche); max-width: 100%; overflow-wrap: anywhere; font-size: var(--t1); font-weight: 800; }
+  .resume {
+    background: var(--carte); border-radius: var(--rayon); box-shadow: var(--ombre-carte);
+    border-left: var(--e1) solid var(--or);
+    padding: var(--e8); margin-bottom: var(--e5);
+  }
+  .resume p { font-size: var(--t2); font-weight: 700; line-height: 1.55; color: var(--encre); }
+  .retour { margin-top: var(--e6); font-weight: 800; }
+  .retour a { display: inline-flex; align-items: center; min-height: var(--touche); }
+  @media (max-width: 52rem) {
+    .page-deux-colonnes { grid-template-columns: minmax(0, 1fr); gap: var(--e5); padding-top: var(--e6); }
+    .sommaire { position: static; }
+    .resume { padding: var(--e5); }
+  }
+
+  /* ---- Téléphones ---- */
+  @media (max-width: 46rem) {
+    /* Sur téléphone, les onglets prenaient trois lignes et repoussaient le jeu
+       hors du premier écran. Ils laissent la place : la page se parcourt en
+       descendant, et le pied de page porte les mêmes liens, au complet. */
+    .entete .nav-site { display: none; }
+    .scene .enveloppe { padding-top: var(--e6); padding-bottom: var(--e9); }
+    main > section { padding: var(--e9) 0; }
+    .jeu { padding: var(--e5); gap: var(--e3); }
+    .jeu-saisie { flex-direction: column; }
+    .jeu-saisie input { flex: none; width: 100%; }
+    .duo > div, .bandeau-app { padding: var(--e6); }
+    .bandeau-app { margin-top: var(--e9); }
+    .bandeau-app { gap: var(--e5); text-align: center; justify-content: center; }
+    .bandeau-app h2 { text-align: center; }
+    .bandeau-app .bouton { width: 100%; }
+    .etapes li { padding: var(--e5); flex-direction: row; align-items: flex-start; gap: var(--e4); }
+    .etapes li > div { display: flex; flex-direction: column; gap: var(--e1); min-width: 0; }
+    .numero { width: var(--touche); height: var(--touche); font-size: var(--t3); }
+    .etapes h3 { font-size: var(--t3); }
+    .etapes p { font-size: var(--t0); }
+    .texte, .sommaire { padding: var(--e5); }
+    .fiche { grid-template-columns: minmax(0, 1fr); gap: var(--e1); }
+    .fiche dd { margin-bottom: var(--e3); }
+    .fiche dd:last-child { margin-bottom: 0; }
+  }
+
+  /* ---- Écrans bas : un iPhone SE, ou un téléphone tenu à l'horizontale ----
+     Le jeu doit tenir sous les yeux sans descendre : on resserre la carte
+     plutôt que de laisser « Valider » tomber sous le bord de l'écran. */
+  @media (max-height: 46rem) {
+    .scene .enveloppe { padding-top: var(--e4); padding-bottom: var(--e7); }
+    h1 { margin-bottom: var(--e3); }
+    .scene-sous { margin-bottom: var(--e5); }
+    .jeu { gap: var(--e2); padding: var(--e4); }
+    .jeu-objet { font-size: var(--t-objet-court); }
+  }
+
+  /* ---- Quand le système demande moins d'animation ---- */
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after { animation: none !important; transition: none !important; scroll-behavior: auto !important; }
+  }
+
+  /* ---- Impression : les navigateurs n'impriment pas les fonds ---- */
+  @media print {
+    body { background: #fff; color: #000; }
+    .saut, .entete, .nav-site, .jeu-saisie, .jeu-suite, .bandeau-app, .liens-pied { display: none !important; }
+    .scene, .titre-page, footer { background: #fff !important; color: #000 !important; }
+    .scene *, .titre-page *, footer * { color: #000 !important; }
+    .jeu, .texte, .question, .grille li, .etapes li, .jetons li, .duo > div {
+      box-shadow: none !important; background: #fff !important; color: #000 !important;
+      border: 1px solid #999;
+    }
+    .duo-violet, .duo-violet * { background: #fff !important; color: #000 !important; }
+    .question p { display: block !important; }
+    a { color: #000 !important; }
+  }
+
+  /* Zone d'annonce du jeu : un seul repère vivant, pour que les lecteurs
+     d'écran suivent le dialogue « C'est plus ! » puis la révélation. */
+  .jeu-annonce { width: 100%; display: flex; flex-direction: column; align-items: center; gap: var(--e3); }
+  .jeu-essai:empty { display: none; }
+  /* Lu par les lecteurs d'écran, invisible à l'œil */
+  .invisible {
+    position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px;
+    overflow: hidden; clip-path: inset(50%); white-space: nowrap; border: 0;
+  }
+</style>
+</head>
+<body>
+<a class="saut" href="#contenu">Aller au contenu</a>
+
+<header class="entete">
+  <div class="enveloppe">
+    <a class="marque" href="index.html"><span class="sceau" aria-hidden="true"></span>Devine le Prix</a>
+    <nav class="nav-site" aria-label="Sections du site">
+      <ul>
+        <li><a href="familles.html">Familles et seniors</a></li>
+        <li><a href="accessibilite.html">Accessibilité</a></li>
+        <li><a href="questions.html">Questions</a></li>
+        <li><a href="aide.html" aria-current="page">Aide</a></li>
+      </ul>
+    </nav>
+    <!-- Appel à l'action de l'en-tête. Comme les deux autres (dans le jeu et
+         dans le bandeau de fin), il attend l'adresse de la fiche App Store :
+         remplacer l'adresse ci-dessous par celle de la fiche, puis retirer
+         « hidden ». Caché, il ne prend aucune place. -->
+    <a class="bouton" id="lien-app-store-haut" hidden href="https://apps.apple.com/">Télécharger</a>
+  </div>
+</header>
+
+<main id="contenu" tabindex="-1">
+
+  <section class="titre-page">
+    <div class="enveloppe">
+      <h1>Aide et contact</h1>
+      <p>Un obstacle dans le jeu&nbsp;? Dis-nous ce qui bloque, nous corrigeons en priorité.</p>
+    </div>
+  </section>
+
+  <section>
+    <div class="enveloppe">
+      <h2>Souvent demandé</h2>
+      <div class="faq">
+        <details class="question">
+          <summary><span>Je n’entends pas la voix</span></summary>
+          <p>Trois choses à vérifier, dans cet ordre : le réglage « voix » dans les réglages de l’application, le volume de l’iPhone pendant que le jeu est ouvert, et le petit interrupteur sur la tranche de l’appareil, qui coupe les sons.</p>
+        </details>
+        <details class="question">
+          <summary><span>Agrandir le texte</span></summary>
+          <p>Le jeu suit la taille de texte de l’iPhone. Elle se règle dans Réglages › Affichage et luminosité › Taille du texte. Rien à changer dans l’application.</p>
+        </details>
+        <details class="question">
+          <summary><span>Restaurer mes achats</span></summary>
+          <p>L’achat « Version sans pub » est lié à ton identifiant Apple. Sur un autre appareil utilisant le même identifiant, il se restaure depuis les réglages de l’application. Nous ne recevons aucune information bancaire : tout passe par Apple.</p>
+        </details>
+        <details class="question">
+          <summary><span>Jouer à plusieurs téléphones</span></summary>
+          <p>Ce mode utilise Game Center : il faut être connecté à Game Center sur chaque appareil, avec un identifiant Apple. Les invitations s’envoient par Messages. Les deux autres modes, solo et « Sur ce téléphone », n’en ont pas besoin.</p>
+        </details>
+      </div>
+
+      <h2 class="h2-suite">Écris-nous</h2>
+      <div class="texte colonne">
+        <p>Il n’y a pas de formulaire sur ce site&nbsp;: il est fait de pages simples, sans compte, sans traceur et sans service extérieur, et un formulaire supposerait d’en ajouter un. Le bouton ci-dessous ouvre ton application de courrier avec la bonne adresse.</p>
+        <p>Pour qu’on puisse t’aider vite, dis-nous&nbsp;: ce que tu faisais, ce qui s’est passé, et le modèle d’iPhone ou d’iPad. Une capture d’écran vaut souvent mieux qu’un long message.</p>
+        <p class="centre"><a class="bouton" href="mailto:contact@protojo.fr?subject=Devine%20le%20Prix%20%E2%80%93%20demande%20d%27aide">Écrire à l’éditeur</a></p>
+        <p class="centre">Ou directement&nbsp;: <a href="mailto:contact@protojo.fr">contact@protojo.fr</a></p>
+      </div>
+
+      <div class="duo">
+        <div class="duo-violet">
+          <span class="emblisse" aria-hidden="true">❓</span>
+          <h3>Avant d’écrire</h3>
+          <p>Le compte, la publicité, les données, l’âge, les appareils, Android&nbsp;: douze réponses déjà écrites.</p>
+          <a class="lien-suite" href="questions.html">Les questions fréquentes →</a>
+        </div>
+        <div class="duo-blanc">
+          <span class="emblisse" aria-hidden="true">🛟</span>
+          <h3>Un obstacle d’accessibilité</h3>
+          <p>Texte, voix, VoiceOver, contraste&nbsp;: ce que le jeu suit déjà, et où nous écrire si ça coince.</p>
+          <a class="lien-suite" href="accessibilite.html">L’accessibilité en détail →</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <div class="enveloppe">
+    <ul class="liens-pied">
+      <li><a href="familles.html">Familles et seniors</a></li>
+      <li><a href="accessibilite.html">Accessibilité</a></li>
+      <li><a href="questions.html">Questions</a></li>
+      <li><a href="aide.html" aria-current="page">Aide</a></li>
+      <li><a href="presse.html">Presse</a></li>
+      <li><a href="confidentialite.html">Confidentialité</a></li>
+      <li><a href="mentions-legales.html">Mentions légales</a></li>
+    </ul>
+    <p>© 2026 ProtoJo Digital. Devine le Prix – Jeu Famille est édité par ProtoJo Digital (Johan Quille), France.<br>
+    Une question&nbsp;? Écris à <a href="mailto:contact@protojo.fr">contact@protojo.fr</a>.</p>
+  </div>
+</footer>
+</body>
+</html>
