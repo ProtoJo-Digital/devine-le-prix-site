@@ -9,8 +9,14 @@ ProtoJo Digital (Johan Quille), France.
 
 | Fichier | Rôle |
 | --- | --- |
-| `index.html` | Page d'accueil : la partie d'essai, comment on joue, familles et seniors, accessibilité, questions, aide |
+| `index.html` | Page d'accueil : la partie d'essai, « Comment on joue », l'appel au téléchargement |
+| `familles.html` | Pour les familles et les seniors : les cinq façons de jouer, ce qu'on gagne |
+| `accessibilite.html` | Ce que le jeu suit des réglages d'accessibilité de l'iPhone |
+| `questions.html` | Les onze questions fréquentes |
+| `aide.html` | Aide et contact |
+| `presse.html` | Espace presse : présentation, fiche, bannière à télécharger |
 | `confidentialite.html` | Politique de confidentialité |
+| `partage.jpg` | Aperçu du lien au partage (1200 × 630), et bannière de l'espace presse. Recadrée depuis `livrables/banniere-1920x1080.png` du projet Claude Design |
 | `.nojekyll` | Fichier vide qui demande à GitHub Pages de publier les fichiers tels quels, sans passer par Jekyll |
 | `CNAME` | Le domaine du site. Écrit par GitHub quand on renseigne le domaine personnalisé ; ne pas le modifier à la main |
 
@@ -19,11 +25,12 @@ ProtoJo Digital (Johan Quille), France.
 Site statique, sans étape de construction et sans outillage :
 
 - **Aucune dépendance** : pas de CDN, pas de police externe, pas de script, pas
-  de bibliothèque, pas de traceur ni de statistiques. Les deux pages sont
+  de bibliothèque, pas de traceur ni de statistiques. Les pages sont
   autonomes.
 - **Le CSS est intégré** dans une balise `<style>` au début de chaque page, et
-  les deux feuilles sont volontairement **identiques**. Toute modification de
-  style doit donc être reportée dans les deux fichiers.
+  les sept feuilles sont volontairement **identiques**, à l'octet près : toute
+  modification de style doit donc être reportée dans les sept fichiers. L'en-tête
+  et le pied de page le sont aussi, à la marque de page courante près.
 - **Publication** : GitHub Pages sert la branche `main`. Une fusion dans `main`
   met le site en ligne à jour en une minute environ. Rien n'est publié depuis
   une branche de travail ou une pull request.
@@ -59,8 +66,8 @@ Famille ! », fichier `Site web.dc.html`.** Elle fait référence pour la mise
 page, au même titre que la planche pour les couleurs. Le fichier
 `design-tokens/devine-le-prix.tokens.json` du même projet, tiré de `Theme.swift`,
 donne les valeurs exactes ; les jetons CSS du site les reprennent. Cette
-maquette décrit huit pages, le site n'en publie que deux pour le moment
-(voir « À faire »).
+maquette décrit huit pages ; le site en publie sept, les mentions légales
+restant à écrire (voir « À faire »).
 
 ### Couleurs
 
@@ -187,77 +194,73 @@ conventions git.
 
 Liste tenue à jour par la relecture quotidienne, de la plus utile à la moins
 utile pour les visiteurs. Les entrées faites en sortent, les nouvelles y
-entrent. Depuis que la maquette existe, l'essentiel du travail restant consiste
-à publier les six pages intérieures qu'elle décrit.
+entrent.
 
 ### Ce qui attend une décision ou une information de Johan
 
-- **Adresse de la fiche App Store (ou TestFlight)**, toujours la chose la plus
-  utile. Le bouton est écrit **trois** fois dans `index.html`, aux trois
-  endroits de la maquette : l'en-tête (`id="lien-app-store-haut"`), la carte du
-  jeu juste après la révélation (`id="lien-app-store-jeu"`), et le bandeau de
-  fin (`id="lien-app-store"`). Les trois portent `hidden` faute d'adresse et ne
-  prennent aucune place. Pour les allumer : remplacer l'adresse dans celui de
-  l'en-tête, retirer son `hidden` ; celui de la carte s'allume alors tout seul,
-  et il reste à retirer le `hidden` du bandeau de fin.
-- **Ouvrir le site à plus de deux fichiers.** La maquette décrit huit pages, le
-  site en publie deux. Les six autres — Familles et seniors, Accessibilité,
-  Questions, Aide, Mentions légales, Presse — demandent chacune un fichier. En
-  attendant, leur contenu tient en sections de l'accueil (`#familles`,
-  `#accessibilite`, `#questions`, `#aide`), et les onglets y mènent par ancre ;
-  il suffira de remplacer l'ancre par le nom du fichier.
-- **Mentions légales** : la maquette prévoit la page, les champs manquent —
-  forme juridique, capital, adresse du siège, SIREN ou RCS, e-mail affiché,
-  directeur de la publication, nom et adresse de l'hébergeur. Page obligatoire
-  pour un site édité depuis la France.
-- **Page Aide avec formulaire** : la maquette montre un formulaire
-  (« Ton adresse e-mail », « Le sujet », « Ton message »). Un site statique ne
-  peut pas envoyer de courriel sans service tiers, ce que la règle « aucun
-  script tiers » interdit. En attendant, la section Aide propose « Écrire à
-  l'éditeur », qui ouvre l'application de courrier.
-- **Page Presse** : il manque la date de sortie, le nom et l'adresse du contact
-  presse, et les trois fichiers à télécharger (icône 1024, six captures,
-  bannière 1920 × 1080). Ils existent dans le projet Claude Design, dossier
-  `livrables/` : les publier suppose d'ajouter des images au dépôt.
-- **Questions fréquentes** : la maquette en liste sept, le site en répond six.
-  Manquent « Le jeu est-il gratuit ? » (la maquette la note « à confirmer »),
-  « D'où viennent les prix ? », « Comment agrandir le texte ? » et
-  « Le jeu existe-t-il sur Android ? ».
-- **Adresse du site** : la maquette est titrée « Site web · devineleprix.fr »,
-  le site est publié sur `devine-le-prix.protojo.fr`, l'adresse du `CNAME` et
-  celle déclarée dans App Store Connect. Rien n'a été changé : si le domaine
-  doit bouger, cela se décide, et le `CNAME` suit.
-- **Image d'aperçu au partage (`og:image`)** : envoyé par Messages ou WhatsApp,
-  le lien s'affiche avec son titre et sa description, sans visuel. La bannière
-  du dossier `livrables/` ferait l'affaire. Suppose un fichier image au dépôt.
+- **Adresse de la fiche App Store.** L'application n'est pas encore envoyée en
+  validation ; dès qu'elle est en ligne, le bouton est écrit **trois** fois dans
+  `index.html`, aux trois endroits de la maquette : l'en-tête
+  (`id="lien-app-store-haut"`), la carte du jeu juste après la révélation
+  (`id="lien-app-store-jeu"`), et le bandeau de fin (`id="lien-app-store"`).
+  Pour les allumer : remplacer l'adresse dans celui de l'en-tête et retirer son
+  `hidden` ; celui de la carte s'allume alors tout seul, et il reste à retirer le
+  `hidden` du bandeau de fin. Penser aussi à la date de sortie dans
+  `presse.html`, qui dit aujourd'hui « pas encore publiée ».
+- **Mentions légales** : la page manque, et elle est obligatoire pour un site
+  édité depuis la France (LCEN, article 1-1 depuis la loi SREN de mai 2024).
+  Il faut : la forme juridique et, s'il y a lieu, le capital ; l'adresse du
+  siège ; le SIREN ou SIRET, et le RCS s'il y a lieu ; un moyen de contact
+  (l'adresse e-mail du pied de page convient) ; le nom du directeur de la
+  publication ; le nom, l'adresse et le téléphone de l'hébergeur. L'hébergeur
+  est GitHub : reprendre l'adresse et le téléphone depuis une page officielle
+  de GitHub plutôt que de mémoire, les sources publiques divergent sur le code
+  postal. « ProtoJo Digital » seul ne suffit pas.
+- **« D'où viennent les prix ? »**, la seule question de la maquette encore sans
+  réponse. Les dix autres sont écrites dans `questions.html`.
+- **Les trois affirmations reprises de la maquette et pas encore vues ailleurs** :
+  les mini-jeux « Plus cher ou moins cher ? », « Dans l'ordre » et « Escalade
+  des prix » ; « Le défi du jour » ; et « le classement récompense aussi le plus
+  proche du jour ». Elles viennent du projet Claude Design, pas du site : à
+  confirmer ou à retirer de `familles.html`.
 - **Icône d'écran d'accueil iOS (`apple-touch-icon`)** : ajouté à l'écran
   d'accueil d'un iPhone, le site prend une capture de la page en guise d'icône,
-  iOS n'acceptant pas le favicon SVG actuel. Suppose un PNG 180 × 180.
+  iOS n'acceptant pas le favicon SVG actuel. Le dossier `livrables/` du projet
+  Claude Design propose trois icônes (A, B, C) : il faut en choisir une.
+- **Le reste du dossier de presse** : l'icône 1024 et les six captures d'écran.
+  Elles arrivent avec la publication sur l'App Store, et peuvent encore changer
+  d'ici là. `presse.html` le dit et propose d'écrire en attendant.
 - **Page 404** : une adresse erronée affiche la page par défaut de GitHub
   Pages, en anglais. Un `404.html` aux couleurs du site réglerait ça.
-- **Registre** : l'accueil et le pied de page tutoient, la politique de
-  confidentialité vouvoie. Ce n'est pas choquant pour un texte juridique, mais
-  c'est visible dans le pied de page, commun aux deux pages.
+- **Adresse du site** : la maquette est titrée « Site web · devineleprix.fr »,
+  le site est publié sur `devine-le-prix.protojo.fr`, l'adresse du `CNAME` et
+  celle à déclarer dans App Store Connect. Rien n'a été changé.
+- **Registre** : tout le site tutoie, la politique de confidentialité vouvoie.
+  Ce n'est pas choquant pour un texte juridique, mais c'est visible dans le
+  pied de page, commun à toutes les pages.
 
 ### Ce qui peut être fait sans décision préalable
 
 - **Les onglets disparaissent sur téléphone.** Sous 46 rem, l'en-tête n'affiche
   plus que la marque : à trois lignes, les onglets repoussaient la partie
-  d'essai hors du premier écran. Les mêmes liens sont au pied de page, au
+  d'essai hors du premier écran. Les six liens sont au pied de page, au
   complet, mais il faut descendre toute la page pour les atteindre. La maquette
   règle cela par un menu « ☰ » ; reste à juger si un menu qui s'ouvre est une
   bonne idée pour des enfants et des personnes âgées.
 - **Sur un écran de 667 px de haut (iPhone SE), le bouton « Valider » finit
-  24 px sous le bord.** Le champ de saisie, lui, est visible. Mesuré : carte de
-  311 à 704 px, « Valider » jusqu'à 691 px pour 667 px de hauteur utile.
-  Gagner ces 24 px demanderait de réduire le titre, ce que la maquette veut
-  grand.
+  24 px sous le bord.** Le champ de saisie, lui, est visible. Gagner ces 24 px
+  demanderait de réduire le titre, ce que la maquette veut grand.
 - **Les emojis du catalogue sont parfois énigmatiques hors contexte** :
   🍱 pour un four à micro-ondes, 👔 pour un fer à repasser, 🧺 pour un
   lave-linge. Ils viennent du catalogue de l'application et le nom de l'objet
   est toujours écrit juste en dessous, donc rien n'est ambigu à la lecture ;
   mais le choix des 28 objets montrés sur le site pourrait privilégier ceux
   dont l'emoji se reconnaît seul.
+- **La feuille de style est recopiée dans les sept pages.** C'est la règle
+  « pages autonomes », et elle tient tant qu'un script vérifie l'égalité à
+  chaque relecture. Si le site grandit encore, un `style.css` unique servi
+  depuis le même domaine — ce n'est pas une dépendance externe — deviendra plus
+  sûr qu'une copie à maintenir sept fois.
 
 
 ## Relecture automatique

@@ -10,8 +10,9 @@ règles de fond. Ce fichier-ci dit comment travailler dessus.
 La **maquette du site** vit dans le projet Claude Design « Devine le Prix – Jeu
 Famille ! », fichier `Site web.dc.html` : c'est elle qui fait référence pour la
 mise en page, comme la planche DA pour les couleurs. Elle décrit huit pages, le
-site n'en publie que deux ; la section « À faire » du `README.md` dit ce qui
-manque pour les autres.
+mise en page, comme la planche DA pour les couleurs. Elle décrit huit pages ; le
+site en publie sept, les mentions légales restant à écrire ; la section
+« À faire » du `README.md` dit ce qui manque.
 
 ## Le public d'abord
 
@@ -37,7 +38,7 @@ la réponse changerait la décision, le dire plutôt que de deviner.
   identique.
 - **L'identité visuelle et la palette** (voir `README.md`). Une teinte peut être
   ajustée pour atteindre un contraste suffisant ; la palette ne change pas.
-- **Deux fichiers HTML autonomes, CSS intégré** : aucune dépendance externe,
+- **Des fichiers HTML autonomes, CSS intégré** : aucune dépendance externe,
   aucun CDN, aucune police téléchargée, aucun script tiers, aucun traceur,
   aucune étape de build. Ajouter un fichier au site se décide avec Johan.
 - **Aucune fonctionnalité de l'application qui ne soit certaine.**

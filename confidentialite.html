@@ -10,13 +10,19 @@
 <meta name="description" content="Politique de confidentialité de l’application Devine le Prix – Jeu Famille : aucune donnée personnelle collectée, aucun compte, progression enregistrée sur l’appareil.">
 <link rel="canonical" href="https://devine-le-prix.protojo.fr/confidentialite.html">
 <!-- Aperçu du lien quand le site est partagé (Messages, WhatsApp, réseaux sociaux) :
-     sans ces lignes, seule l'adresse brute s'affiche. -->
+     sans ces lignes, seule l'adresse brute s'affiche. L'image est la bannière de
+     la planche DA, recadrée au format que réclament les messageries. -->
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Devine le Prix – Jeu Famille">
 <meta property="og:locale" content="fr_FR">
 <meta property="og:url" content="https://devine-le-prix.protojo.fr/confidentialite.html">
 <meta property="og:title" content="Politique de confidentialité – Devine le Prix – Jeu Famille">
 <meta property="og:description" content="Aucune donnée personnelle collectée, aucun compte, progression enregistrée sur l’appareil.">
+<meta property="og:image" content="https://devine-le-prix.protojo.fr/partage.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Devine le Prix – Jeu Famille, par ProtoJo Digital. Trouve le prix des objets !">
+<meta name="twitter:card" content="summary_large_image">
 <style>
   :root {
     color-scheme: light;
@@ -114,7 +120,7 @@
   }
   .enveloppe { max-width: 1060px; margin: 0 auto; padding: 0 var(--e5); }
   /* Colonne de lecture : la page de confidentialité et les textes longs. */
-  .colonne { max-width: 760px; }
+  .colonne { max-width: 760px; margin-inline: auto; }
 
   /* Lien d'évitement, visible seulement au clavier */
   .saut {
@@ -301,7 +307,10 @@
 
   /* ---- Sections de contenu, sur fond clair ---- */
   main > section { padding: var(--e13) 0; }
-  main > section.scene { padding: 0; }
+  /* La scène et le bandeau de titre portent leur propre rembourrage : sans
+     cette ligne il s'ajoutait à celui des sections et le bandeau faisait
+     328 px de haut pour 180 px de contenu. */
+  main > section.scene, main > section.titre-page { padding: 0; }
 
   /* Les trois temps du jeu */
   .etapes { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(16rem, 100%), 1fr)); gap: var(--e6); list-style: none; margin: 0; padding: 0; }
@@ -357,6 +366,8 @@
   }
 
   .centre { text-align: center; }
+  /* Deuxième titre de même niveau dans une page : même taille, plus d'air. */
+  .h2-suite { margin-top: var(--e13); }
   /* Sous-titre d'un deuxième temps à l'intérieur d'une section */
   .sous-titre-section {
     font-size: var(--t4); line-height: 1.25; text-align: center;
@@ -366,6 +377,41 @@
     font-size: var(--t3); font-weight: 700; color: var(--encre-douce);
     max-width: 52ch; margin: calc(var(--e8) * -1) auto var(--e8); text-align: center;
   }
+
+  /* Points rassurants : une coche, une affirmation courte */
+  .points { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(17rem, 100%), 1fr)); gap: var(--e5); list-style: none; margin: 0; padding: 0; }
+  .points li {
+    display: flex; gap: var(--e4); align-items: flex-start;
+    background: var(--carte); border-radius: var(--rayon); padding: var(--e6);
+    box-shadow: var(--ombre-carte);
+  }
+  .points .coche { flex: none; width: var(--e8); height: var(--e8); color: var(--vert); }
+  .points li > div { min-width: 0; overflow-wrap: anywhere; }
+  .points h3 { font-size: var(--t3); margin: 0 0 var(--e1); }
+  .points p { font-size: var(--t1); font-weight: 700; line-height: 1.45; color: var(--encre-douce); margin: 0; }
+
+  /* Fiche d'identité de l'espace presse */
+  .fiche {
+    display: grid; grid-template-columns: minmax(0, auto) minmax(0, 1fr);
+    gap: var(--e3) var(--e6); margin: 0;
+  }
+  .fiche dt { font-size: var(--t1); font-weight: 900; overflow-wrap: anywhere; }
+  .fiche dd { font-size: var(--t1); font-weight: 700; color: var(--encre-douce); margin: 0; overflow-wrap: anywhere; }
+  /* Un lien seul dans une définition est une cible à part entière. */
+  .fiche dd > a:only-child { display: inline-flex; align-items: center; min-height: var(--touche); }
+
+  /* Fichiers à télécharger */
+  .telechargements { display: flex; flex-direction: column; gap: var(--e3); list-style: none; margin: 0; padding: 0; }
+  .telechargements a {
+    display: flex; flex-wrap: wrap; align-items: center; gap: var(--e1) var(--e4);
+    min-height: var(--touche); padding: var(--e4) var(--e5);
+    background: var(--puits); border-radius: var(--rayon-petit);
+    font-size: var(--t1); font-weight: 800; text-decoration: none;
+  }
+  .telechargements a > span:first-child { min-width: 0; overflow-wrap: anywhere; }
+  .telechargements a:hover { background: var(--carte); box-shadow: var(--ombre-carte); }
+  .telechargements .poids { margin-left: auto; font-weight: 700; color: var(--encre-douce); }
+  .apercu-partage { display: block; width: 100%; height: auto; border-radius: var(--rayon-petit); margin-bottom: var(--e4); }
 
   /* Jetons : ce qu'on gagne en jouant */
   .jetons { display: flex; flex-wrap: wrap; justify-content: center; gap: var(--e3); list-style: none; margin: 0; padding: 0; }
@@ -467,8 +513,8 @@
   .sommaire { position: sticky; top: var(--e5); background: var(--puits); border-radius: var(--rayon); padding: var(--e6); }
   .sommaire h2 { font-size: var(--t4); text-align: left; margin: 0 0 var(--e3); }
   .sommaire ol { display: flex; flex-direction: column; gap: var(--e1); margin: 0; padding-left: var(--e5); }
-  .sommaire li { font-size: var(--t1); font-weight: 800; }
-  .sommaire a { display: inline-flex; align-items: center; min-height: var(--touche); font-size: var(--t1); font-weight: 800; }
+  .sommaire li { font-size: var(--t1); font-weight: 800; overflow-wrap: anywhere; }
+  .sommaire a { display: inline-flex; align-items: center; min-height: var(--touche); max-width: 100%; overflow-wrap: anywhere; font-size: var(--t1); font-weight: 800; }
   .resume {
     background: var(--carte); border-radius: var(--rayon); box-shadow: var(--ombre-carte);
     border-left: var(--e1) solid var(--or);
@@ -505,6 +551,9 @@
     .etapes h3 { font-size: var(--t3); }
     .etapes p { font-size: var(--t0); }
     .texte, .sommaire { padding: var(--e5); }
+    .fiche { grid-template-columns: minmax(0, 1fr); gap: var(--e1); }
+    .fiche dd { margin-bottom: var(--e3); }
+    .fiche dd:last-child { margin-bottom: 0; }
   }
 
   /* ---- Écrans bas : un iPhone SE, ou un téléphone tenu à l'horizontale ----
@@ -557,10 +606,10 @@
     <a class="marque" href="index.html"><span class="sceau" aria-hidden="true"></span>Devine le Prix</a>
     <nav class="nav-site" aria-label="Sections du site">
       <ul>
-        <li><a href="index.html#familles">Familles et seniors</a></li>
-        <li><a href="index.html#accessibilite">Accessibilité</a></li>
-        <li><a href="index.html#questions">Questions</a></li>
-        <li><a href="index.html#aide">Aide</a></li>
+        <li><a href="familles.html">Familles et seniors</a></li>
+        <li><a href="accessibilite.html">Accessibilité</a></li>
+        <li><a href="questions.html">Questions</a></li>
+        <li><a href="aide.html">Aide</a></li>
       </ul>
     </nav>
     <!-- Appel à l'action de l'en-tête. Comme les deux autres (dans le jeu et
@@ -654,10 +703,11 @@
 <footer>
   <div class="enveloppe">
     <ul class="liens-pied">
-      <li><a href="index.html#familles">Familles et seniors</a></li>
-      <li><a href="index.html#accessibilite">Accessibilité</a></li>
-      <li><a href="index.html#questions">Questions</a></li>
-      <li><a href="index.html#aide">Aide</a></li>
+      <li><a href="familles.html">Familles et seniors</a></li>
+      <li><a href="accessibilite.html">Accessibilité</a></li>
+      <li><a href="questions.html">Questions</a></li>
+      <li><a href="aide.html">Aide</a></li>
+      <li><a href="presse.html">Presse</a></li>
       <li><a href="confidentialite.html" aria-current="page">Confidentialité</a></li>
     </ul>
     <p>© 2026 ProtoJo Digital. Devine le Prix – Jeu Famille est édité par ProtoJo Digital (Johan Quille), France.<br>
