@@ -20,6 +20,7 @@ ProtoJo Digital (Johan Quille), France.
 | `404.html` | Page servie par GitHub Pages pour toute adresse inconnue : le plan des huit pages et le retour à l'accueil |
 | `partage.jpg` | Aperçu du lien au partage (1200 × 630), et bannière de l'espace presse. Recadrée depuis `livrables/banniere-1920x1080.png` du projet Claude Design |
 | `apple-touch-icon.png` | Icône de l'écran d'accueil iOS (180 × 180), tirée de `livrables/icone-B-1024-carre.png` : l'anneau doré de la planche |
+| `objets/` | Les 27 photos d'objets de la partie d'essai (JPEG, 200 px, 260 ko en tout, une seule chargée à la fois). Mêmes images et même table de correspondance que l'app (`ItemPhotos.swift`) ; le cerf-volant n'a pas d'image juste et garde son emoji, comme dans l'app |
 | `.nojekyll` | Fichier vide qui demande à GitHub Pages de publier les fichiers tels quels, sans passer par Jekyll |
 | `CNAME` | Le domaine du site. Écrit par GitHub quand on renseigne le domaine personnalisé ; ne pas le modifier à la main |
 
