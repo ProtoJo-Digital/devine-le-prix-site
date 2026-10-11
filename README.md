@@ -12,7 +12,7 @@ ProtoJo Digital (Johan Quille), France.
 | `index.html` | Page d'accueil : la partie d'essai, « Comment on joue », l'appel au téléchargement |
 | `familles.html` | Pour les familles et les seniors : les cinq façons de jouer, ce qu'on gagne |
 | `accessibilite.html` | Ce que le jeu suit des réglages d'accessibilité de l'iPhone |
-| `questions.html` | Les onze questions fréquentes |
+| `questions.html` | Les douze questions fréquentes |
 | `aide.html` | Aide et contact |
 | `presse.html` | Espace presse : présentation, fiche, bannière à télécharger |
 | `confidentialite.html` | Politique de confidentialité |
@@ -209,8 +209,13 @@ entrent.
   `hidden` ; celui de la carte s'allume alors tout seul, et il reste à retirer le
   `hidden` du bandeau de fin. Penser aussi à la date de sortie dans
   `presse.html`, qui dit aujourd'hui « pas encore publiée ».
-- **« D'où viennent les prix ? »**, la seule question de la maquette encore sans
-  réponse. Les dix autres sont écrites dans `questions.html`.
+- **La réponse à « D'où viennent les prix ? » décrit la nature des prix, pas
+  leur source.** Johan ne connaît pas la méthode de relevé ; la réponse dit donc
+  seulement ce que les données montrent : 400 objets, 79 valeurs distinctes,
+  tous en euros entiers, aucun en « 19,99 € », médiane à 40 €, de 1 € à
+  18 000 €. Ce sont des ordres de grandeur arrondis, pas des relevés de caisse.
+  Si une méthode existe côté application, la réponse de `questions.html` est à
+  reprendre.
 - **Les trois affirmations reprises de la maquette et pas encore vues ailleurs** :
   les mini-jeux « Plus cher ou moins cher ? », « Dans l'ordre » et « Escalade
   des prix » ; « Le défi du jour » ; et « le classement récompense aussi le plus
