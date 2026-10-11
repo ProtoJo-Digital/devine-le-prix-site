@@ -9,9 +9,8 @@ règles de fond. Ce fichier-ci dit comment travailler dessus.
 
 La **maquette du site** vit dans le projet Claude Design « Devine le Prix – Jeu
 Famille ! », fichier `Site web.dc.html` : c'est elle qui fait référence pour la
-mise en page, comme la planche DA pour les couleurs. Elle décrit huit pages, le
-mise en page, comme la planche DA pour les couleurs. Elle décrit huit pages ; le
-site en publie sept, les mentions légales restant à écrire ; la section
+mise en page, comme la planche DA pour les couleurs. Elle décrit huit pages, et
+le site les publie toutes les huit.
 « À faire » du `README.md` dit ce qui manque.
 
 ## Le public d'abord

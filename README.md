@@ -16,6 +16,7 @@ ProtoJo Digital (Johan Quille), France.
 | `aide.html` | Aide et contact |
 | `presse.html` | Espace presse : présentation, fiche, bannière à télécharger |
 | `confidentialite.html` | Politique de confidentialité |
+| `mentions-legales.html` | Mentions légales : éditeur, directeur de la publication, hébergeur, propriété |
 | `partage.jpg` | Aperçu du lien au partage (1200 × 630), et bannière de l'espace presse. Recadrée depuis `livrables/banniere-1920x1080.png` du projet Claude Design |
 | `.nojekyll` | Fichier vide qui demande à GitHub Pages de publier les fichiers tels quels, sans passer par Jekyll |
 | `CNAME` | Le domaine du site. Écrit par GitHub quand on renseigne le domaine personnalisé ; ne pas le modifier à la main |
@@ -28,8 +29,8 @@ Site statique, sans étape de construction et sans outillage :
   de bibliothèque, pas de traceur ni de statistiques. Les pages sont
   autonomes.
 - **Le CSS est intégré** dans une balise `<style>` au début de chaque page, et
-  les sept feuilles sont volontairement **identiques**, à l'octet près : toute
-  modification de style doit donc être reportée dans les sept fichiers. L'en-tête
+  les huit feuilles sont volontairement **identiques**, à l'octet près : toute
+  modification de style doit donc être reportée dans les huit fichiers. L'en-tête
   et le pied de page le sont aussi, à la marque de page courante près.
 - **Publication** : GitHub Pages sert la branche `main`. Une fusion dans `main`
   met le site en ligne à jour en une minute environ. Rien n'est publié depuis
@@ -66,8 +67,7 @@ Famille ! », fichier `Site web.dc.html`.** Elle fait référence pour la mise
 page, au même titre que la planche pour les couleurs. Le fichier
 `design-tokens/devine-le-prix.tokens.json` du même projet, tiré de `Theme.swift`,
 donne les valeurs exactes ; les jetons CSS du site les reprennent. Cette
-maquette décrit huit pages ; le site en publie sept, les mentions légales
-restant à écrire (voir « À faire »).
+maquette décrit huit pages, et le site les publie toutes les huit.
 
 ### Couleurs
 
@@ -207,15 +207,12 @@ entrent.
   `hidden` ; celui de la carte s'allume alors tout seul, et il reste à retirer le
   `hidden` du bandeau de fin. Penser aussi à la date de sortie dans
   `presse.html`, qui dit aujourd'hui « pas encore publiée ».
-- **Mentions légales** : la page manque, et elle est obligatoire pour un site
-  édité depuis la France (LCEN, article 1-1 depuis la loi SREN de mai 2024).
-  Il faut : la forme juridique et, s'il y a lieu, le capital ; l'adresse du
-  siège ; le SIREN ou SIRET, et le RCS s'il y a lieu ; un moyen de contact
-  (l'adresse e-mail du pied de page convient) ; le nom du directeur de la
-  publication ; le nom, l'adresse et le téléphone de l'hébergeur. L'hébergeur
-  est GitHub : reprendre l'adresse et le téléphone depuis une page officielle
-  de GitHub plutôt que de mémoire, les sources publiques divergent sur le code
-  postal. « ProtoJo Digital » seul ne suffit pas.
+- **Deux adresses de contact cohabitent.** Les mentions légales déclarent
+  `contact@protojo.fr` et le 07 83 18 49 42, repris de
+  <https://protojo.fr/mentions-legales> ; le pied de page et la page Aide, eux,
+  donnent `johan.quille@trainedmanager.fr`, qui était déjà là. Une adresse de
+  contact est un fait : rien n'a été changé. Unifier sur `contact@protojo.fr`
+  rendrait le site plus cohérent, mais c'est une décision.
 - **« D'où viennent les prix ? »**, la seule question de la maquette encore sans
   réponse. Les dix autres sont écrites dans `questions.html`.
 - **Les trois affirmations reprises de la maquette et pas encore vues ailleurs** :
