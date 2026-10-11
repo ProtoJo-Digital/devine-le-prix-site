@@ -173,29 +173,45 @@
   .accroche { font-size: var(--t3); font-weight: 800; color: var(--or); margin: 0 0 var(--e6); }
 
   .precision {
-    font-size: var(--t2); font-weight: 700; color: var(--texte-doux);
+    font-size: var(--t2); font-weight: 500; color: var(--texte-doux);
     max-width: 34ch; margin: 0 auto var(--e6);
   }
 
   /* Publics visés — pastilles de la bannière de la planche DA */
   .publics { display: flex; flex-wrap: wrap; justify-content: center; gap: var(--e3); list-style: none; margin: 0 0 var(--e7); padding: 0; }
-  .publics li { padding: var(--e2) var(--e5); border-radius: var(--rayon-rond); font-weight: 800; color: #fff; }
+  .publics li { padding: var(--e2) var(--e5); border-radius: var(--rayon-rond); font-weight: 700; color: #fff; }
   .publics .enfants { background: var(--corail); }
   .publics .seniors { background: var(--vert); }
   .publics .famille { background: var(--bleu); }
 
   /* Objet sur carte blanche : la signature visuelle du jeu */
   .objet { max-width: 340px; margin: 0 auto; }
+  /* Deux ombres plutôt qu'une grosse : un contact net juste sous la carte, et
+     une ombre portée large et très diluée. C'est ce qui fait la différence
+     entre une carte posée sur le fond et une carte qui flotte dans une tache
+     grise. Le liseré clair en haut imite la lumière qui arrive d'en haut. */
   .objet-carte {
-    display: flex; flex-direction: column; align-items: center; gap: var(--e2);
+    display: flex; flex-direction: column; align-items: center; gap: var(--e3);
     background: var(--carte); border-radius: var(--rayon-grand); padding: var(--e6);
-    box-shadow: 0 20px 44px rgba(0, 0, 0, .42);
+    box-shadow:
+      0 1px 0 rgba(255, 255, 255, .5) inset,
+      0 2px 4px rgba(10, 6, 26, .3),
+      0 24px 48px -20px rgba(10, 6, 26, .85);
   }
-  /* L'emoji héritait du blanc du corps de page : sur un appareil qui ne rend
-     pas les emojis en couleur, il devenait du blanc sur la carte blanche, et
-     la carte — l'image même du jeu — apparaissait vide. L'encre sombre de la
-     carte ne change rien là où l'emoji est en couleur, et le sauve ailleurs. */
-  .objet-emoji { font-size: 5rem; line-height: 1; color: var(--encre); }
+  /* La planche de dessins ne s'affiche pas : elle ne sert qu'à être recopiée. */
+  .planche { position: absolute; width: 0; height: 0; overflow: hidden; }
+  /* Un seul réglage de trait pour tous les dessins du site : c'est ce qui les
+     fait appartenir à la même famille. */
+  .planche symbol, .objet-dessin, .pictogramme svg {
+    fill: none; stroke: currentColor; stroke-width: 2.6;
+    stroke-linecap: round; stroke-linejoin: round;
+  }
+  /* Le dessin est posé sur un rond lilas de la planche : seul au milieu du
+     blanc il flottait, et la carte paraissait vide. */
+  .objet-dessin {
+    box-sizing: content-box; width: 100px; height: 100px; padding: var(--e5);
+    border-radius: var(--rayon-rond); background: var(--lilas); color: var(--encre);
+  }
   /* Le nom est un élément de flex dans une carte en colonne : sans cette
      autorisation, un mot long (« connectée ») gardait sa largeur entière et
      sortait de la carte blanche à texte agrandi — de l'encre sombre sur le
@@ -259,7 +275,7 @@
      téléphone, tout doit tenir sous les yeux une fois la réponse donnée —
      la carte, le prix, le verdict et le bouton pour entrer. */
   .fenetre .objet-carte { padding: var(--e3); }
-  .fenetre .objet-emoji { font-size: 3.4rem; }
+  .fenetre .objet-dessin { width: 72px; height: 72px; padding: var(--e4); }
   .fenetre .objet-prix { margin-top: var(--e3); font-size: 2.4rem; }
   .fenetre .objet-legende { margin-top: var(--e1); font-size: var(--t1); }
   /* Les deux choix doivent tenir côte à côte même sur un petit téléphone :
@@ -274,7 +290,7 @@
   @media (max-height: 620px) {
     .fenetre { padding-top: var(--e4); padding-bottom: var(--e4); }
     .fenetre-sous { display: none; }
-    .fenetre .objet-emoji { font-size: 2.4rem; }
+    .fenetre .objet-dessin { width: 52px; height: 52px; padding: var(--e3); }
     .fenetre .objet-prix { margin-top: var(--e2); font-size: 1.9rem; }
     .fenetre .objet-legende { font-size: var(--t0); }
     .fenetre-lien { margin-top: var(--e3); }
@@ -319,7 +335,10 @@
      natif : rien à charger, et le clavier comme les lecteurs d'écran le
      comprennent sans qu'on ait à l'expliquer. */
   .faq { display: grid; gap: var(--e3); }
-  .question { background: var(--voile); border-radius: var(--rayon-petit); min-width: 0; }
+  .question {
+    background: var(--voile); border-radius: var(--rayon-petit); min-width: 0;
+    border: 1px solid rgba(255, 255, 255, .12);
+  }
   /* Même raison que pour les onglets et les pastilles plus haut : une boîte
      « flex » refuse de descendre sous la largeur de son mot le plus long. Sans
      ces deux lignes, une question poussait la page hors de l'écran dès que le
@@ -343,7 +362,7 @@
   .question[open] summary::after { transform: translateY(2px) rotate(-135deg); }
   .question p {
     margin: 0; padding: 0 var(--e5) var(--e5);
-    color: var(--texte-doux); font-weight: 500;
+    color: var(--texte-doux); font-weight: 500; line-height: 1.55;
   }
   .question a { color: var(--or); }
 
@@ -360,7 +379,7 @@
   .final p { margin: 0; }
   .final-texte {
     max-width: 30ch; margin: 0 auto var(--e7);
-    font-size: var(--t2); font-weight: 700; color: var(--texte-doux);
+    font-size: var(--t2); font-weight: 500; color: var(--texte-doux);
   }
   .final-contact { margin-top: var(--e4); }
   .final .bouton { min-height: 64px; padding-inline: var(--e7); font-size: var(--t3); }
@@ -422,7 +441,7 @@
      le visiteur avant de lui demander de lire une liste. */
   .chapeau {
     max-width: 46ch; margin: 0 0 var(--e5);
-    font-size: var(--t2); font-weight: 700; color: var(--texte-doux);
+    font-size: var(--t2); font-weight: 500; color: var(--texte-doux);
   }
   h3 { font-size: var(--t3); font-weight: 900; margin: 0 0 var(--e1); color: var(--encre); }
   p { margin: 0 0 1em; }
@@ -441,24 +460,34 @@
   .carte {
     background: var(--carte); color: var(--encre);
     border-radius: var(--rayon); padding: var(--e6);
-    box-shadow: 0 12px 30px rgba(0, 0, 0, .3);
+    box-shadow:
+      0 1px 0 rgba(255, 255, 255, .5) inset,
+      0 2px 4px rgba(10, 6, 26, .25),
+      0 18px 36px -18px rgba(10, 6, 26, .7);
   }
   /* Pas d'effet de survol sur les cartes : elles ne sont pas cliquables, et sur
      iPhone le survol reste collé après un appui — il laissait croire qu'il
      venait de se passer quelque chose. */
-  .carte p { margin: 0; color: var(--encre-douce); font-weight: 700; font-size: var(--t0); }
+  /* Tout était en gras : quand tout pèse, plus rien ne ressort. Les titres
+     gardent le 900, le texte courant redescend. */
+  .carte p { margin: 0; color: var(--encre-douce); font-weight: 500; font-size: var(--t1); line-height: 1.55; }
   .pictogramme {
     display: flex; align-items: center; justify-content: center;
     width: 64px; height: 64px; border-radius: var(--rayon-petit);
-    margin-bottom: var(--e4); font-size: 2rem; line-height: 1;
+    margin-bottom: var(--e5); color: var(--encre);
   }
+  .pictogramme svg { width: 38px; height: 38px; }
   .pictogramme.lilas { background: var(--lilas); }
   .pictogramme.menthe { background: var(--menthe); }
   .pictogramme.ciel { background: var(--ciel); }
 
   /* ---- Pastilles sur fond profond ---- */
   .jetons { display: flex; flex-wrap: wrap; gap: var(--e3); list-style: none; margin: 0; padding: 0; }
-  .jetons li { padding: var(--e2) var(--e5); border-radius: var(--rayon-rond); font-weight: 800; background: var(--voile); }
+  .jetons li {
+    padding: var(--e2) var(--e5); border-radius: var(--rayon-rond);
+    font-weight: 600; background: var(--voile);
+    border: 1px solid rgba(255, 255, 255, .12);
+  }
 
   .avantages { display: grid; gap: var(--e4); list-style: none; margin: 0; padding: 0; }
   @media (min-width: 700px) { .avantages { grid-template-columns: 1fr 1fr; } }
