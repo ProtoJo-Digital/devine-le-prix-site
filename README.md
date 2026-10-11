@@ -19,6 +19,7 @@ ProtoJo Digital (Johan Quille), France.
 | `mentions-legales.html` | Mentions légales : éditeur, directeur de la publication, hébergeur, propriété |
 | `404.html` | Page servie par GitHub Pages pour toute adresse inconnue : le plan des huit pages et le retour à l'accueil |
 | `partage.jpg` | Aperçu du lien au partage (1200 × 630), et bannière de l'espace presse. Recadrée depuis `livrables/banniere-1920x1080.png` du projet Claude Design |
+| `apple-touch-icon.png` | Icône de l'écran d'accueil iOS (180 × 180), tirée de `livrables/icone-B-1024-carre.png` : l'anneau doré de la planche |
 | `.nojekyll` | Fichier vide qui demande à GitHub Pages de publier les fichiers tels quels, sans passer par Jekyll |
 | `CNAME` | Le domaine du site. Écrit par GitHub quand on renseigne le domaine personnalisé ; ne pas le modifier à la main |
 
@@ -222,10 +223,6 @@ entrent.
   des prix » ; « Le défi du jour » ; et « le classement récompense aussi le plus
   proche du jour ». Elles viennent du projet Claude Design, pas du site : à
   confirmer ou à retirer de `familles.html`.
-- **Icône d'écran d'accueil iOS (`apple-touch-icon`)** : ajouté à l'écran
-  d'accueil d'un iPhone, le site prend une capture de la page en guise d'icône,
-  iOS n'acceptant pas le favicon SVG actuel. Le dossier `livrables/` du projet
-  Claude Design propose trois icônes (A, B, C) : il faut en choisir une.
 - **Le reste du dossier de presse** : l'icône 1024 et les six captures d'écran.
   Elles arrivent avec la publication sur l'App Store, et peuvent encore changer
   d'ici là. `presse.html` le dit et propose d'écrire en attendant.
