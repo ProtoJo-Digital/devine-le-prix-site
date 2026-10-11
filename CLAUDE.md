@@ -7,6 +7,12 @@ l'adresse <https://devine-le-prix.protojo.fr/>, sans outil de build.
 `README.md` décrit le contenu du dépôt, l'identité visuelle, la palette et les
 règles de fond. Ce fichier-ci dit comment travailler dessus.
 
+La **maquette du site** vit dans le projet Claude Design « Devine le Prix – Jeu
+Famille ! », fichier `Site web.dc.html` : c'est elle qui fait référence pour la
+mise en page, comme la planche DA pour les couleurs. Elle décrit huit pages, le
+site n'en publie que deux ; la section « À faire » du `README.md` dit ce qui
+manque pour les autres.
+
 ## Le public d'abord
 
 Les visiteurs sont des enfants et des personnes âgées. La simplicité prime sur

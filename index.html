@@ -4,14 +4,13 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <!-- Teinte de la barre du navigateur : le fond de l'en-tête, qui touche cette barre -->
-<meta name="theme-color" content="#1B1240">
+<meta name="theme-color" content="#2C1E6B">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%231B1240'/%3E%3Ccircle cx='32' cy='32' r='21' fill='none' stroke='%23FAB31A' stroke-width='6'/%3E%3Ctext x='32' y='44' text-anchor='middle' font-family='system-ui,sans-serif' font-size='32' font-weight='900' fill='%23ffffff'%3E?%3C/text%3E%3C/svg%3E">
 <title>Devine le Prix – Jeu Famille</title>
 <meta name="description" content="Devine le Prix – Jeu Famille : le jeu sur iPhone et iPad où toute la famille devine le prix des objets. Sans compte, sans inscription, aucune donnée personnelle collectée.">
 <link rel="canonical" href="https://devine-le-prix.protojo.fr/">
 <!-- Aperçu du lien quand le site est partagé (Messages, WhatsApp, réseaux sociaux) :
-     sans ces lignes, seule l'adresse brute s'affiche. Le texte reprend mot pour mot
-     le titre et la description ci-dessus. -->
+     sans ces lignes, seule l'adresse brute s'affiche. -->
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Devine le Prix – Jeu Famille">
 <meta property="og:locale" content="fr_FR">
@@ -20,74 +19,102 @@
 <meta property="og:description" content="Le jeu sur iPhone et iPad où toute la famille devine le prix des objets. Sans compte, sans inscription, aucune donnée personnelle collectée.">
 <style>
   :root {
-    color-scheme: dark;
+    color-scheme: light;
 
-    /* Palette officielle — planche DA « Devine le Prix – Jeu Famille » */
-    --fond: #1B1240;          /* Fond */
-    --fond-haut: #2C1E6B;     /* Haut du dégradé signature */
-    --carte: #FFFFFF;         /* Cartes */
-    --encre: #1B1240;         /* Encre dès qu'un fond clair ou l'or sert de fond */
-    --encre-douce: #5B5680;   /* Texte secondaire sur carte blanche */
-    --texte: #FFFFFF;         /* Texte blanc sur tous les fonds profonds */
-    --texte-doux: rgba(255, 255, 255, .8);
-    --or: #FAB31A;
-    --corail: #D63D2F;
-    --vert: #1E7F46;
-    --bleu: #2A6FD0;
-    --violet: #994DCC;    /* réserve de la planche, pas encore utilisée sur le site */
-    --accent: #6657D9;
-    --lavande: #B9AEFF;
-    --voile: rgba(255, 255, 255, .14);   /* Badges posés sur le fond profond */
-    /* Teintes claires des pictogrammes, posées sur carte blanche.
-       Les deux premières viennent de la planche ; la troisième a été ajoutée
-       par analogie pour la troisième carte, elle n'y figure pas. */
-    --lilas: #EFEBFF;
-    --menthe: #E4F3EA;
-    --ciel: #E4ECFA;
+    /* ---- Palette ----
+       Jetons de la planche DA, repris tels quels du fichier de design
+       « design-tokens/devine-le-prix.tokens.json », lui-même tiré de
+       Theme.swift. Les teintes ajoutées par la maquette du site (encres
+       intermédiaires, fond clair, violet foncé des liens) viennent de la même
+       planche : la palette s'étend, elle ne change pas. */
+    --fond: #1B1240;          /* ink-900 — fond profond, et encre sur fond clair */
+    --fond-haut: #2C1E6B;     /* stage-top — haut du dégradé signature */
+    --nuit: #120B2E;          /* ink-950 — bordure du téléphone, ombres */
+    --carte: #FFFFFF;
+    --clair: #F4F2FA;         /* fond des sections de contenu */
+    --puits: #EEEBFA;         /* well — creux posés sur fond clair */
+    --encre: #1B1240;         /* ink-900 — texte sur fond clair */
+    --encre-douce: #4E4773;   /* ink-700 — texte secondaire sur carte */
+    --encre-tendre: #676088;  /* ink-600 — texte d'invite */
+    --texte: #FFFFFF;
+    --texte-doux: rgba(255, 255, 255, .88);
+    --or: #FAB31A;            /* gold-500 */
+    --or-clair: #FFD36B;      /* gold-300 */
+    --corail: #D63D2F;        /* coral-600 — « C'est plus ! » */
+    --vert: #1E7F46;          /* green-600 — valider, réussite */
+    --bleu: #2A6FD0;          /* blue-600 — « C'est moins ! » */
+    --violet: #994DCC;        /* purple-600 */
+    --accent: #6657D9;        /* violet-500 — action principale */
+    --accent-fonce: #4F41C4;  /* violet-700 — liens sur fond clair */
+    --lavande: #B9AEFF;       /* violet-200 */
+    --voile: rgba(255, 255, 255, .14);
 
     /* Échelle d'espacement : uniquement des multiples de 4 px */
-    --e1: 4px; --e2: 8px; --e3: 12px; --e4: 16px;
-    --e5: 20px; --e6: 24px; --e7: 32px; --e8: 48px;
+    --e1: 4px;  --e2: 8px;  --e3: 12px; --e4: 16px; --e5: 20px;
+    --e6: 24px; --e7: 28px; --e8: 32px; --e9: 40px; --e10: 48px;
+    --e11: 56px; --e12: 64px; --e13: 80px;
 
     /* Échelle typographique, base 18 px. La charte interdit tout corps sous 17 px. */
-    --t0: .95rem;   /* 17 px */
-    --t1: 1rem;     /* 18 px */
-    --t2: 1.125rem; /* 20 px */
-    --t3: 1.25rem;  /* 23 px */
-    --t4: 1.5rem;   /* 27 px */
-    --t5: 3rem;     /* 54 px */
-    --t-titre: clamp(2.2rem, 9vw, 3.4rem);
-    --t-titre-page: clamp(1.75rem, 6.5vw, 2.3rem);
+    --t0: .945rem;   /* 17 px */
+    --t1: 1rem;      /* 18 px */
+    --t2: 1.056rem;  /* 19 px */
+    --t3: 1.167rem;  /* 21 px */
+    --t4: 1.333rem;  /* 24 px */
+    --t5: 1.444rem;  /* 26 px */
+    --t6: 1.556rem;  /* 28 px */
+    --t7: 1.889rem;  /* 34 px */
+    /* Titres fluides : les valeurs des deux bornes sont celles de la maquette,
+       téléphone (390 px) et ordinateur (1280 px). */
+    --t-titre: clamp(2.111rem, 6.4vw, 3.556rem);    /* 38 → 64 px */
+    --t-section: clamp(1.778rem, 4.4vw, 2.667rem);  /* 32 → 48 px */
+    --t-duo: clamp(1.333rem, 3.2vw, 1.889rem);      /* 24 → 34 px */
+    --t-prix: clamp(2rem, 6vw, 2.444rem);           /* 36 → 44 px */
+    --t-objet: clamp(4.444rem, 15vw, 6.111rem);     /* 80 → 110 px */
+    --t-objet-court: clamp(3.111rem, 11vw, 4.444rem); /* 56 → 80 px, écrans bas */
 
-    /* Rayons de la charte : cartes 24, grandes cartes 32, pastilles rondes */
+    /* Rayons de la planche */
     --rayon-focus: 6px;
     --rayon-petit: 16px;
+    --rayon-champ: 18px;
+    --rayon-bouton: 22px;
     --rayon: 24px;
+    --rayon-carte: 28px;
     --rayon-grand: 32px;
     --rayon-rond: 999px;
+
+    /* Tailles de la planche : 44 px est le minimum tactile, 64 px la hauteur
+       du champ de saisie, 66 px celle des grands boutons du jeu. */
+    --touche: 44px;
+    --champ: 64px;
+    --gros-bouton: 66px;
+
+    --ombre-carte: 0 8px 24px rgba(27, 18, 64, .08);
+    --ombre-jeu: 0 20px 50px rgba(0, 0, 0, .40);
+    --ombre-sceau: 0 10px 30px rgba(0, 0, 0, .40);
   }
+
   *, *::before, *::after { box-sizing: border-box; }
   /* L'attribut « hidden » du HTML ne fait que proposer « display: none » : la
-     moindre règle de cette feuille qui fixe un « display » l'emporte sur lui.
-     Sans cette ligne, le bouton « Un autre objet », pourtant marqué hidden,
-     s'affichait dès l'arrivée sur la page, avant toute réponse. */
+     moindre règle de cette feuille qui fixe un « display » l'emporte sur lui. */
   [hidden] { display: none !important; }
-  /* 112.5% = 18 px avec les réglages par défaut, tout en suivant la taille de texte choisie dans le navigateur */
+  /* 112.5% = 18 px avec les réglages par défaut, tout en suivant la taille de
+     texte choisie dans le navigateur. */
   html { -webkit-text-size-adjust: 100%; font-size: 112.5%; }
   body {
     margin: 0;
-    /* Pile système de la charte : SF Pro Rounded sur les appareils Apple, sans police à télécharger */
+    /* Pile système de la planche : SF Pro Rounded sur les appareils Apple,
+       aucune police à télécharger. */
     font-family: ui-rounded, -apple-system, "SF Pro Rounded", "SF Pro Display",
                  BlinkMacSystemFont, system-ui, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
     font-size: var(--t1);
     line-height: 1.6;
-    color: var(--texte);
-    background: var(--fond);
+    color: var(--encre);
+    background: var(--clair);
     overflow-wrap: break-word;
   }
-  .enveloppe { max-width: 760px; margin: 0 auto; padding: 0 var(--e5); }
-  /* Page en une seule colonne (confidentialité) : espace avant le pied de page. */
-  main > .enveloppe { padding-bottom: var(--e8); }
+  .enveloppe { max-width: 1060px; margin: 0 auto; padding: 0 var(--e5); }
+  /* Colonne de lecture : la page de confidentialité et les textes longs. */
+  .colonne { max-width: 760px; }
 
   /* Lien d'évitement, visible seulement au clavier */
   .saut {
@@ -99,452 +126,426 @@
   }
   .saut:focus { transform: none; }
 
-  a { color: var(--or); }
+  /* L'or sur blanc ne fait que 1,82:1. Sur fond clair, les liens passent au
+     violet foncé de la planche (7,28:1) ; sur fond profond ils restent dorés. */
+  a { color: var(--accent-fonce); }
+  .scene a, footer a { color: var(--or); }
   main a, footer a { text-decoration-thickness: 2px; text-underline-offset: 3px; }
-  /* L'or sur blanc ne fait que 1,82:1 : sur fond clair, les liens passent à l'accent violet (5,34:1). */
-  .carte a, .resume a { color: var(--accent); }
-  :focus-visible { outline: 3px solid var(--or); outline-offset: 3px; border-radius: var(--rayon-focus); }
-  /* Une ancre déplace le regard, pas le clavier. Sans « tabindex="-1" » sur la
-     cible, Safari — le navigateur de tous les visiteurs d'un site d'application
-     iPhone — laisse le focus là où il était : la tabulation suivante repart du
-     haut de la page, et le lien « Aller au contenu » ne fait alors rien d'utile.
-     Ces cibles ne sont pas des commandes ; elles reçoivent le focus pour que la
-     suite du parcours reparte du bon endroit, et n'ont donc pas de contour. */
+  :focus-visible { outline: 3px solid var(--accent); outline-offset: 3px; border-radius: var(--rayon-focus); }
+  .scene :focus-visible, footer :focus-visible { outline-color: var(--or); }
+  /* Une ancre déplace le regard, pas le clavier. Ces cibles ne sont pas des
+     commandes : elles reçoivent le focus sans porter de contour. */
   [tabindex="-1"]:focus { outline: none; }
 
-  /* Onglets, boutons et pastilles sont des boîtes « inline-flex » : par défaut elles
-     refusent de descendre sous la largeur de leur mot le plus long et poussent la page
-     hors de l'écran dès que le texte est agrandi. On les autorise à rétrécir, quitte à
-     couper un mot trop long — mieux vaut une coupure qu'un défilement latéral. */
-  .nav-site a, .bouton, .lien-page, .jetons li { max-width: 100%; overflow-wrap: anywhere; }
+  h1, h2, h3 { font-weight: 900; letter-spacing: -.02em; text-wrap: balance; }
+  h2 { font-size: var(--t-section); line-height: 1.1; margin: 0 0 var(--e8); text-align: center; }
+  h3 { font-size: var(--t5); line-height: 1.15; margin: 0; }
+  p { margin: 0 0 var(--e4); }
+  p:last-child { margin-bottom: 0; }
 
-  /* ---- En-tête ---- */
-  .entete { border-bottom: 1px solid rgba(255, 255, 255, .15); }
-  .entete .enveloppe {
-    display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between;
-    gap: var(--e1) var(--e5); padding-top: var(--e3); padding-bottom: var(--e3);
-  }
-  /* Sans cela, la marque et les onglets refusent de descendre sous la largeur de leur
-     mot le plus long : à texte très agrandi, ils poussent la page hors de l'écran. */
-  .entete .enveloppe > * { min-width: 0; }
-  .marque {
-    display: inline-flex; align-items: center; gap: var(--e3); min-height: 44px;
-    color: var(--texte); font-weight: 900; font-size: var(--t2);
-    letter-spacing: -.01em; text-decoration: none;
-  }
-  /* Marque : l'icône retenue de la planche DA — anneau doré, « ? » blanc, fond profond */
-  .sceau {
-    flex: none; display: inline-flex; align-items: center; justify-content: center;
-    width: var(--e7); height: var(--e7); border-radius: var(--rayon-rond);
-    border: 3px solid var(--or); background: var(--fond);
-    font-size: var(--t2); font-weight: 900; line-height: 1; color: var(--texte);
-  }
-  .sceau::before { content: "?"; transform: translateY(-1px); }
-  /* Les deux onglets passent à la ligne quand le texte est agrandi,
-     plutôt que de pousser la page en dehors de l'écran. */
-  .nav-site ul { display: flex; flex-wrap: wrap; gap: var(--e2); list-style: none; margin: 0; padding: 0; }
-  .nav-site ul, .nav-site li { min-width: 0; }
-  .nav-site a {
-    display: inline-flex; align-items: center; min-height: 44px; padding: var(--e1) var(--e4);
-    border-radius: var(--rayon-petit); color: var(--texte); font-weight: 700; text-decoration: none;
-  }
-  .nav-site a[aria-current="page"] { background: var(--voile); color: var(--or); font-weight: 800; }
-  .nav-site a:hover { background: var(--voile); }
-
-  main > section { position: relative; padding: var(--e8) 0; }
-  main > section h2 { margin-top: 0; }
-
-  /* ---- Bandeau d'accueil : dégradé signature + projecteurs très discrets ---- */
-  .hero {
-    text-align: center; overflow: hidden;
-    background: linear-gradient(180deg, var(--fond-haut) 0%, var(--fond) 100%);
-  }
-  .hero::before {
-    content: ""; position: absolute; inset: 0; pointer-events: none;
-    background: radial-gradient(ellipse 70% 62% at 50% -12%, rgba(255, 255, 255, .10), transparent 62%);
-  }
-  .hero > .enveloppe { position: relative; z-index: 1; }
-  h1 {
-    font-size: var(--t-titre); font-weight: 900; line-height: 1.02; letter-spacing: -.03em;
-    margin: 0 0 var(--e3); color: var(--texte); text-wrap: balance;
-  }
-  .hero h1 .sous-titre { color: var(--lavande); }
-  .sous-titre { display: block; }
-  .accroche { font-size: var(--t3); font-weight: 800; color: var(--or); margin: 0 0 var(--e6); }
-
-  .precision {
-    font-size: var(--t2); font-weight: 700; color: var(--texte-doux);
-    max-width: 34ch; margin: 0 auto var(--e6);
-  }
-
-  /* Publics visés — pastilles de la bannière de la planche DA */
-  .publics { display: flex; flex-wrap: wrap; justify-content: center; gap: var(--e3); list-style: none; margin: 0 0 var(--e7); padding: 0; }
-  .publics li { padding: var(--e2) var(--e5); border-radius: var(--rayon-rond); font-weight: 800; color: #fff; }
-  .publics .enfants { background: var(--corail); }
-  .publics .seniors { background: var(--vert); }
-  .publics .famille { background: var(--bleu); }
-
-  /* Objet sur carte blanche : la signature visuelle du jeu */
-  .objet { max-width: 340px; margin: 0 auto; }
-  .objet-carte {
-    display: flex; flex-direction: column; align-items: center; gap: var(--e2);
-    background: var(--carte); border-radius: var(--rayon-grand); padding: var(--e6);
-    box-shadow: 0 20px 44px rgba(0, 0, 0, .42);
-  }
-  /* L'emoji héritait du blanc du corps de page : sur un appareil qui ne rend
-     pas les emojis en couleur, il devenait du blanc sur la carte blanche, et
-     la carte — l'image même du jeu — apparaissait vide. L'encre sombre de la
-     carte ne change rien là où l'emoji est en couleur, et le sauve ailleurs. */
-  .objet-emoji { font-size: 5rem; line-height: 1; color: var(--encre); }
-  /* Le nom est un élément de flex dans une carte en colonne : sans cette
-     autorisation, un mot long (« connectée ») gardait sa largeur entière et
-     sortait de la carte blanche à texte agrandi — de l'encre sombre sur le
-     fond sombre, illisible, et rognée par le bord de l'écran. */
-  .objet-nom {
-    max-width: 100%; overflow-wrap: anywhere;
-    font-size: var(--t3); font-weight: 900; color: var(--encre);
-  }
-  .objet-prix {
-    display: block; margin-top: var(--e5);
-    font-size: var(--t5); font-weight: 900; line-height: 1; letter-spacing: -.02em; color: var(--or);
-  }
-  .objet-legende { margin-top: var(--e2); font-size: var(--t2); font-weight: 800; color: var(--texte-doux); }
-
-  /* ---- Mini-partie d'essai (accueil) ----
-     Deux gros boutons, une réponse immédiate : on comprend le jeu en un geste,
-     sans rien installer. Tout est allumé par le script de bas de page ; sans
-     lui, la carte garde son « ? € » et aucun bouton ne s'affiche. */
-  .essai { margin-top: var(--e6); }
-  .essai-boutons { display: flex; flex-wrap: wrap; justify-content: center; gap: var(--e3); }
-  .essai-verdict {
-    display: inline-flex; align-items: center; justify-content: center;
-    max-width: 100%; min-height: 44px; margin: var(--e4) 0 0;
-    padding: var(--e2) var(--e5); border-radius: var(--rayon-rond);
-    font-size: var(--t2); font-weight: 800; color: var(--texte);
-    overflow-wrap: anywhere;
-  }
-  /* Le verdict reste dans la page même vide, pour que les lecteurs d'écran
-     le suivent ; tant qu'il n'a rien à dire, il ne prend aucune place. */
-  .essai-verdict:empty { min-height: 0; margin: 0; padding: 0; }
-  .essai-verdict.juste { background: var(--vert); }
-  .essai-verdict.faux { background: var(--corail); }
-  .essai-rejouer { margin-top: var(--e4); }
-
-  /* ---- Fenêtre d'accueil : on devine un prix avant d'entrer ----
-     C'est le script qui l'ouvre, jamais le HTML : une balise <dialog> fermée
-     ne s'affiche pas, donc sans JavaScript le site se lit directement.
-     Aucune règle ici ne pose « forwards » ni « both » : une animation qui ne
-     partirait pas laisserait sinon son premier instant à l'écran, c'est-à-dire
-     du vide. Les animations ne sont ici que des embellissements. */
-  .fenetre {
-    width: min(26rem, 100% - var(--e7));
-    max-height: calc(100dvh - var(--e6));
-    overflow: auto;
-    margin: auto;
-    border: none; border-radius: var(--rayon-grand);
-    padding: var(--e6) var(--e4) var(--e6);
-    background: linear-gradient(180deg, var(--fond-haut) 0%, var(--fond) 100%);
-    color: var(--texte); text-align: center;
-    box-shadow: 0 30px 70px rgba(0, 0, 0, .55);
-  }
-  /* Le site reste là, derrière, mais illisible : c'est ce qui donne envie
-     d'ouvrir la porte. Le flou n'est qu'un bonus, l'assombrissement suffit. */
-  .fenetre::backdrop { background: rgba(11, 7, 28, .9); backdrop-filter: blur(4px); }
-  .fenetre[open] { animation: fenetre-entree .3s ease; }
-  @keyframes fenetre-entree { from { opacity: 0; transform: translateY(14px) scale(.96); } to { opacity: 1; transform: none; } }
-  .fenetre h2 { font-size: var(--t3); margin: 0 0 var(--e1); }
-  .fenetre-sous { font-size: var(--t1); font-weight: 700; color: var(--texte-doux); margin: 0 0 var(--e4); }
-  .fenetre-lien { display: inline-block; margin-top: var(--e4); font-size: var(--t0); font-weight: 700; }
-  /* Dans la fenêtre, le jeu est plus compact que dans la page : sur un petit
-     téléphone, tout doit tenir sous les yeux une fois la réponse donnée —
-     la carte, le prix, le verdict et le bouton pour entrer. */
-  .fenetre .objet-carte { padding: var(--e3); }
-  .fenetre .objet-emoji { font-size: 3.4rem; }
-  .fenetre .objet-prix { margin-top: var(--e3); font-size: 2.4rem; }
-  .fenetre .objet-legende { margin-top: var(--e1); font-size: var(--t1); }
-  /* Les deux choix doivent tenir côte à côte même sur un petit téléphone :
-     à deux lignes, le second passait sous le bord de la fenêtre. */
-  .fenetre .bouton-choix { padding-inline: var(--e3); }
-  .fenetre .essai-verdict { margin-top: var(--e3); }
-  .fenetre .essai p, .fenetre > p { margin-bottom: 0; }
-  .fenetre #fenetre-entrer { margin-top: var(--e4); }
-  /* Écran très bas — un téléphone tenu à l'horizontale, par exemple : on
-     resserre encore, pour que les deux choix restent sous les yeux plutôt
-     que de tomber sous le bord de la fenêtre. */
-  @media (max-height: 620px) {
-    .fenetre { padding-top: var(--e4); padding-bottom: var(--e4); }
-    .fenetre-sous { display: none; }
-    .fenetre .objet-emoji { font-size: 2.4rem; }
-    .fenetre .objet-prix { margin-top: var(--e2); font-size: 1.9rem; }
-    .fenetre .objet-legende { font-size: var(--t0); }
-    .fenetre-lien { margin-top: var(--e3); }
-  }
-
-  /* Les deux choix appellent le regard : trois battements, puis plus rien.
-     Rien ne bouge en permanence à l'écran, et qui demande moins d'animation
-     n'en voit aucun (bloc « prefers-reduced-motion » plus bas). */
-  @keyframes appel {
-    0%, 100% { transform: none; }
-    50% { transform: scale(1.06); box-shadow: 0 10px 24px rgba(0, 0, 0, .3), 0 0 0 10px rgba(250, 179, 26, .22); }
-  }
-  .bouton-choix.appel { animation: appel 1.5s ease-in-out 1s 3; }
-
-  /* ---- La fenêtre s'efface, le site arrive ----
-     Deux temps d'un même mouvement : le voile et la fenêtre s'en vont, le
-     bandeau d'accueil se lève. La durée est tenue par le script, jamais par
-     l'animation : si celle-ci ne part pas, la fenêtre se ferme quand même.
-     Aucune n'utilise « forwards » ni « both », pour la même raison que
-     plus haut — une animation qui ne démarre pas ne doit rien effacer. */
-  @keyframes fenetre-sortie { to { opacity: 0; transform: translateY(10px) scale(.94); } }
-  @keyframes voile-sortie { to { opacity: 0; } }
-  .fenetre.sortie { animation: fenetre-sortie .26s ease; }
-  .fenetre.sortie::backdrop { animation: voile-sortie .26s ease; }
-  @keyframes arrivee { from { opacity: 0; transform: translateY(18px) scale(.985); } }
-  .hero.arrivee > .enveloppe { animation: arrivee .55s cubic-bezier(.2, .7, .3, 1); }
-
-  /* Une fois la fenêtre refermée, le visiteur est en haut d'une page dont il
-     ne voit qu'un écran : cette flèche lui dit qu'il y a une suite. Trois
-     descentes, puis elle s'immobilise — rien ne bouge en continu à l'écran. */
-  .indice {
-    display: flex; flex-direction: column; align-items: center; gap: var(--e1);
-    margin: var(--e7) 0 0; color: var(--texte-doux);
-    font-size: var(--t0); font-weight: 800;
-  }
-  .indice svg { width: var(--e6); height: var(--e6); }
-  .indice.anime svg { animation: descend 1.4s ease-in-out 3; }
-  @keyframes descend { 0%, 100% { transform: none; } 50% { transform: translateY(7px); } }
-
-  /* ---- Questions fréquentes ----
-     On balaie les questions, on ouvre celle qui inquiète. « details » est
-     natif : rien à charger, et le clavier comme les lecteurs d'écran le
-     comprennent sans qu'on ait à l'expliquer. */
-  .faq { display: grid; gap: var(--e3); }
-  .question { background: var(--voile); border-radius: var(--rayon-petit); min-width: 0; }
-  /* Même raison que pour les onglets et les pastilles plus haut : une boîte
-     « flex » refuse de descendre sous la largeur de son mot le plus long. Sans
-     ces deux lignes, une question poussait la page hors de l'écran dès que le
-     texte était agrandi — mesuré à 320 px, 327 px de large pour 305 utiles. */
-  .question summary, .question p { min-width: 0; overflow-wrap: anywhere; }
-  .question summary {
-    display: flex; align-items: center; gap: var(--e4); min-height: 56px;
-    padding: var(--e3) var(--e5); cursor: pointer; list-style: none;
-    font-size: var(--t2); font-weight: 800; color: var(--texte);
-  }
-  .question summary::-webkit-details-marker { display: none; }
-  /* Un chevron dessiné en CSS plutôt qu'un caractère : il tourne à l'ouverture
-     et ne dépend d'aucune police. */
-  .question summary::after {
-    content: ""; flex: none; margin-left: auto;
-    width: 11px; height: 11px;
-    border-right: 3px solid var(--or); border-bottom: 3px solid var(--or);
-    transform: translateY(-3px) rotate(45deg);
-    transition: transform .2s ease;
-  }
-  .question[open] summary::after { transform: translateY(2px) rotate(-135deg); }
-  .question p {
-    margin: 0; padding: 0 var(--e5) var(--e5);
-    color: var(--texte-doux); font-weight: 500;
-  }
-  .question a { color: var(--or); }
-
-  /* Appel à l'action du bandeau d'accueil : la place est prête, en haut comme
-     en bas de page, pour le jour où l'adresse de la fiche App Store sera
-     connue. Tant qu'il est caché, il ne prend pas un pixel. */
-  .appel-haut { margin: 0 0 var(--e6); }
-
-  /* ---- Bloc de fin : la dernière image que le visiteur emporte ----
-     Le dégradé s'inverse par rapport au bandeau d'accueil : la page s'ouvre
-     et se referme sur la même lumière, et le bouton doré y ressort seul. */
-  .final { background: linear-gradient(180deg, var(--fond) 0%, var(--fond-haut) 100%); }
-  .final h2 { font-size: var(--t-titre-page); color: var(--texte); margin-bottom: var(--e4); }
-  .final p { margin: 0; }
-  .final-texte {
-    max-width: 30ch; margin: 0 auto var(--e7);
-    font-size: var(--t2); font-weight: 700; color: var(--texte-doux);
-  }
-  .final-contact { margin-top: var(--e4); }
-  .final .bouton { min-height: 64px; padding-inline: var(--e7); font-size: var(--t3); }
-  /* Le jour où le bouton App Store s'allume, « Écrire à l'éditeur » passe au
-     second plan : un seul bouton doré à la fois, sinon aucun des deux ne
-     ressort. Un navigateur sans « :has() » laisse les deux dorés — moins bien,
-     mais rien de cassé. */
-  .final:has(#lien-app-store:not([hidden])) .final-contact .bouton {
-    background: var(--voile); color: var(--texte); box-shadow: none;
-  }
-
-  /* ---- Pages intérieures ---- */
-  .titre-page { padding: var(--e7) 0 0; }
-  .titre-page h1 { font-size: var(--t-titre-page); }
-  .titre-page .sous-titre { font-size: var(--t2); font-weight: 800; color: var(--lavande); margin-top: var(--e3); }
-  .date { color: var(--texte-doux); font-size: var(--t0); font-weight: 700; }
-  .resume {
-    background: var(--carte); color: var(--encre); border-radius: var(--rayon);
-    padding: var(--e6); font-weight: 500;
-  }
-  .resume p:last-child { margin-bottom: 0; }
-
-  /* ---- Sommaire de la politique de confidentialité ----
-     La page fait près de 7 000 px de haut sur un téléphone : sans sommaire,
-     on n'atteint une section qu'en faisant défiler à l'aveugle. Les ancres
-     rendent en prime chaque section adressable par un lien. */
-  .sommaire { margin-bottom: var(--e7); }
-  .sommaire h2 { font-size: var(--t3); margin: var(--e7) 0 var(--e3); }
-  .sommaire ol {
-    display: grid; gap: var(--e1); counter-reset: sommaire;
-    list-style: none; margin: 0; padding: 0;
-  }
-  @media (min-width: 700px) { .sommaire ol { grid-template-columns: 1fr 1fr; } }
-  .sommaire li { counter-increment: sommaire; min-width: 0; }
-  /* Pas de soulignement : c'est de la navigation, comme les onglets de
-     l'en-tête, et le trait passait aussi sous le numéro. */
-  /* « anywhere » et non « break-word » : seul le premier autorise la boîte à
-     descendre sous la largeur de son mot le plus long. Sans lui, un titre d'un
-     seul tenant (« Modifications ») gardait sa largeur entière et poussait la
-     page hors de l'écran dès que le texte était agrandi. Pas de « max-width »
-     ici, contrairement aux autres liens : elle annulerait le débord de
-     gouttière voulu par la marge négative ci-dessous. */
-  .sommaire a {
-    display: flex; align-items: center; gap: var(--e3); min-height: 44px;
-    padding: var(--e1) var(--e4); margin-left: calc(-1 * var(--e4));
-    border-radius: var(--rayon-petit); font-weight: 700; text-decoration: none;
-    overflow-wrap: anywhere;
-  }
-  .sommaire a::before {
-    content: counter(sommaire) "."; flex: none;
-    color: var(--texte-doux); font-weight: 800;
-  }
-  .sommaire a:hover { background: var(--voile); }
-  /* Un titre atteint par une ancre ne colle pas au bord haut de l'écran */
-  :target { scroll-margin-top: var(--e6); }
-
-  h2 { font-size: var(--t4); font-weight: 900; line-height: 1.15; letter-spacing: -.02em; margin: 2em 0 .7em; color: var(--or); }
-  /* Chapeau : une phrase sous un titre, qui dit en quoi la section intéresse
-     le visiteur avant de lui demander de lire une liste. */
-  .chapeau {
-    max-width: 46ch; margin: 0 0 var(--e5);
-    font-size: var(--t2); font-weight: 700; color: var(--texte-doux);
-  }
-  h3 { font-size: var(--t3); font-weight: 900; margin: 0 0 var(--e1); color: var(--encre); }
-  p { margin: 0 0 1em; }
-
-  /* ---- Cartes blanches ---- */
-  /* Les cartes blanches respirent mal à 760 px en trois colonnes : ce bloc seul est plus large. */
-  .section-large .enveloppe { max-width: 920px; }
-  /* ...mais son titre reste aligné sur ceux des autres sections : 720 px centrés dans
-     les 880 px du bloc large retombent exactement sur la colonne de texte habituelle. */
-  .section-large h2 { max-width: 720px; margin-inline: auto; }
-  .modes { display: grid; gap: var(--e4); list-style: none; margin: 0; padding: 0; }
-  @media (min-width: 700px) { .modes { grid-template-columns: repeat(3, 1fr); } }
-  /* Une case de grille ou de flexbox ne rétrécit pas sous son mot le plus long
-     tant qu'on ne l'y autorise pas : « téléphones » suffisait à élargir la page. */
-  .modes > li, .avantages li, .avantages li > span { min-width: 0; }
-  .carte {
-    background: var(--carte); color: var(--encre);
-    border-radius: var(--rayon); padding: var(--e6);
-    box-shadow: 0 12px 30px rgba(0, 0, 0, .3);
-  }
-  /* Pas d'effet de survol sur les cartes : elles ne sont pas cliquables, et sur
-     iPhone le survol reste collé après un appui — il laissait croire qu'il
-     venait de se passer quelque chose. */
-  .carte p { margin: 0; color: var(--encre-douce); font-weight: 700; font-size: var(--t0); }
-  .pictogramme {
-    display: flex; align-items: center; justify-content: center;
-    width: 64px; height: 64px; border-radius: var(--rayon-petit);
-    margin-bottom: var(--e4); font-size: 2rem; line-height: 1;
-  }
-  .pictogramme.lilas { background: var(--lilas); }
-  .pictogramme.menthe { background: var(--menthe); }
-  .pictogramme.ciel { background: var(--ciel); }
-
-  /* ---- Pastilles sur fond profond ---- */
-  .jetons { display: flex; flex-wrap: wrap; gap: var(--e3); list-style: none; margin: 0; padding: 0; }
-  .jetons li { padding: var(--e2) var(--e5); border-radius: var(--rayon-rond); font-weight: 800; background: var(--voile); }
-
-  .avantages { display: grid; gap: var(--e4); list-style: none; margin: 0; padding: 0; }
-  @media (min-width: 700px) { .avantages { grid-template-columns: 1fr 1fr; } }
-  .avantages li { display: flex; gap: var(--e3); align-items: flex-start; }
-  .coche { flex: 0 0 auto; width: var(--e6); height: var(--e6); margin-top: var(--e1); color: var(--or); }
-
-  /* ---- Appel à l'action ---- */
-  .appel { text-align: center; }
+  /* ---- Boutons ----
+     Trois familles : l'or (action principale sur fond profond), le noir de
+     l'App Store, et le contour violet (action secondaire sur carte blanche). */
   .bouton {
     display: inline-flex; align-items: center; justify-content: center;
-    min-height: 56px; padding: var(--e2) var(--e7); border-radius: var(--rayon);
-    text-align: center;
+    min-height: var(--touche); padding: var(--e3) var(--e7);
+    border: none; border-radius: var(--rayon-rond);
     background: var(--or); color: var(--encre);
-    font-size: var(--t2); font-weight: 800; text-decoration: none;
-    box-shadow: 0 10px 24px rgba(0, 0, 0, .3);
-    transition: filter .18s ease;
+    font: inherit; font-size: var(--t1); font-weight: 900; line-height: 1.2;
+    text-align: center; text-decoration: none; cursor: pointer;
+    max-width: 100%; overflow-wrap: anywhere;
   }
-  .bouton:hover { filter: brightness(1.08); }
-  /* La variante est déclarée après « .bouton » : à égalité de
-     spécificité, c'est la dernière règle qui gagne. */
-  /* Rembourrage réduit, pour que les deux choix tiennent côte à côte sur un
-     téléphone de 375 px et passent l'un sous l'autre en dessous. */
-  .bouton-choix { padding-inline: var(--e4); }
-  /* Une fois la réponse donnée, le prix est révélé : les deux choix passent en
-     retrait et « Un autre objet » devient la seule chose à faire. Un bouton
-     éteint n'est soumis à aucun minimum de contraste, mais à 0,65 son libellé
-     reste lu sans effort (4,6:1) tout en se distinguant nettement de l'or vif. */
-  .bouton:disabled { opacity: .65; box-shadow: none; cursor: default; }
-  .bouton:disabled:hover { filter: none; }
-
-  footer { border-top: 1px solid rgba(255, 255, 255, .15); }
-  footer .enveloppe { padding-top: var(--e6); padding-bottom: var(--e7); }
-  footer p { color: var(--texte-doux); font-size: var(--t0); font-weight: 700; }
-  footer p:last-child { margin-bottom: 0; }
-  /* Lien de bas de page : cible tactile de 44 px de haut, comme dans la barre de navigation */
-  .lien-page {
-    display: inline-flex; align-items: center; min-height: 44px;
-    padding: var(--e1) var(--e4); margin-left: calc(-1 * var(--e4)); border-radius: var(--rayon-petit);
+  .bouton:hover { filter: brightness(1.06); }
+  .bouton-app {
+    min-height: var(--champ); padding: var(--e3) var(--e7);
+    border-radius: var(--rayon-champ);
+    background: #000; color: #fff;
+    box-shadow: inset 0 0 0 1.5px rgba(255, 255, 255, .5);
+    font-size: var(--t2); font-weight: 800;
   }
-  .lien-page:hover { background: var(--voile); }
+  .bouton-contour {
+    min-height: var(--champ); border-radius: var(--rayon-champ);
+    background: var(--carte); color: var(--accent-fonce);
+    box-shadow: inset 0 0 0 3px var(--accent);
+    font-size: var(--t2); font-weight: 800;
+  }
+  .bouton-valider {
+    min-height: var(--champ); padding: var(--e3) var(--e6);
+    border-radius: var(--rayon-champ);
+    background: var(--vert); color: var(--texte);
+    font-size: var(--t3); font-weight: 800;
+  }
 
-  /* Quand le système demande moins d'animation, on n'en joue aucune */
+  /* ---- En-tête ---- */
+  .entete { background: var(--fond-haut); color: var(--texte); }
+  .entete .enveloppe {
+    display: flex; flex-wrap: wrap; align-items: center;
+    gap: var(--e3) var(--e6); padding-top: var(--e4); padding-bottom: var(--e4);
+  }
+  .entete .enveloppe > * { min-width: 0; }
+  .marque {
+    display: inline-flex; align-items: center; gap: var(--e3); min-height: var(--touche);
+    color: var(--texte); font-weight: 900; font-size: var(--t3);
+    letter-spacing: -.01em; text-decoration: none; margin-right: auto;
+  }
+  /* Marque : l'icône de la planche — anneau doré, « ? » blanc, fond profond */
+  .sceau {
+    flex: none; display: inline-flex; align-items: center; justify-content: center;
+    width: var(--touche); height: var(--touche); border-radius: var(--rayon-champ);
+    background: radial-gradient(circle at 50% 40%, #3A2A85, var(--fond));
+    box-shadow: inset 0 0 0 1px rgba(255, 255, 255, .2);
+  }
+  .sceau::before {
+    content: "?"; display: flex; align-items: center; justify-content: center;
+    width: var(--e7); height: var(--e7); border-radius: var(--rayon-rond);
+    box-shadow: 0 0 0 3px var(--or);
+    font-size: var(--t1); font-weight: 900; line-height: 1; color: var(--texte);
+  }
+  .nav-site ul {
+    display: flex; flex-wrap: wrap; gap: var(--e1) var(--e2);
+    list-style: none; margin: 0; padding: 0;
+  }
+  .nav-site ul, .nav-site li { min-width: 0; }
+  .nav-site a {
+    display: inline-flex; align-items: center; min-height: var(--touche);
+    min-width: var(--touche); justify-content: center;
+    padding: var(--e1) var(--e4); border-radius: var(--rayon-petit);
+    color: var(--texte); font-size: var(--t0); font-weight: 800; text-decoration: none;
+    max-width: 100%; overflow-wrap: anywhere;
+  }
+  .nav-site a:hover { background: var(--voile); }
+  .nav-site a[aria-current="page"] { background: var(--voile); color: var(--or); }
+
+  /* ---- La scène : le dégradé signature, projecteurs très discrets ---- */
+  .scene {
+    position: relative; overflow: hidden;
+    color: var(--texte); text-align: center;
+    background:
+      radial-gradient(600px 600px at 20% -20%, rgba(255, 255, 255, .10), transparent 70%),
+      radial-gradient(600px 600px at 80% -20%, rgba(255, 255, 255, .10), transparent 70%),
+      linear-gradient(var(--fond-haut), var(--fond));
+  }
+  .scene .enveloppe { position: relative; z-index: 1; padding-top: var(--e9); padding-bottom: var(--e12); }
+  h1 {
+    font-size: var(--t-titre); line-height: 1.05; letter-spacing: -.03em;
+    margin: 0 auto var(--e5); max-width: 18ch; color: var(--texte);
+  }
+  .scene-sous {
+    font-size: var(--t3); font-weight: 700; color: var(--texte-doux);
+    max-width: 38ch; margin: 0 auto var(--e7);
+  }
+
+  /* ---- La carte du jeu ---- */
+  .jeu {
+    width: min(560px, 100%); margin: 0 auto;
+    background: var(--carte); color: var(--encre);
+    border-radius: var(--rayon-carte); box-shadow: var(--ombre-jeu);
+    padding: var(--e6);
+    display: flex; flex-direction: column; align-items: center; gap: var(--e3);
+    text-align: center;
+  }
+  .jeu-essai { font-size: var(--t0); font-weight: 800; color: var(--encre-douce); margin: 0; }
+  .jeu-objet { font-size: var(--t-objet); line-height: 1; }
+  .jeu-nom { font-size: var(--t6); font-weight: 900; line-height: 1.15; margin: 0; max-width: 100%; }
+  .jeu-indice {
+    display: inline-block; padding: var(--e1) var(--e4); border-radius: var(--rayon-rond);
+    background: var(--violet); color: var(--texte);
+    font-size: var(--t1); font-weight: 800; margin: 0; max-width: 100%; overflow-wrap: anywhere;
+  }
+  /* Le dialogue du jeu : « C'est plus ! » en corail, « C'est moins ! » en bleu.
+     Le mot et la flèche portent la réponse autant que la couleur. */
+  .jeu-message {
+    width: 100%; margin: 0; padding: var(--e3) var(--e4);
+    border-radius: var(--rayon-champ); color: var(--texte);
+    display: flex; align-items: center; justify-content: center; gap: var(--e2);
+    font-size: var(--t4); font-weight: 900; overflow-wrap: anywhere;
+  }
+  .jeu-message.plus { background: var(--corail); }
+  .jeu-message.moins { background: var(--bleu); }
+  .jeu-message:empty { display: none; }
+  .jeu-saisie { width: 100%; display: flex; gap: var(--e3); }
+  .jeu-saisie input {
+    flex: 1; min-width: 0; height: var(--champ);
+    border: 3px solid var(--accent); border-radius: var(--rayon-champ);
+    padding: 0 var(--e5); background: var(--carte);
+    font: inherit; font-size: var(--t5); font-weight: 800; color: var(--encre);
+    text-align: center;
+  }
+  .jeu-saisie input::placeholder { color: var(--encre-tendre); font-weight: 700; }
+  .jeu-saisie input:focus-visible { outline: 3px solid var(--accent); outline-offset: 2px; }
+  .jeu-fin { width: 100%; display: flex; flex-direction: column; align-items: center; gap: var(--e3); }
+  .jeu-fin-titre { font-size: var(--t3); font-weight: 800; color: var(--encre-douce); margin: 0; }
+  .jeu-prix {
+    display: inline-block; padding: var(--e2) var(--e6); border-radius: var(--rayon-champ);
+    background: var(--or); color: var(--encre);
+    font-size: var(--t-prix); font-weight: 900; line-height: 1.1; margin: 0;
+    max-width: 100%; overflow-wrap: anywhere;
+  }
+  .jeu-verdict { font-size: var(--t3); font-weight: 900; margin: 0; max-width: 100%; overflow-wrap: anywhere; }
+  .jeu-suite { width: 100%; display: flex; flex-wrap: wrap; gap: var(--e3); }
+  .jeu-suite > * { flex: 1 1 12rem; }
+  .jeu-sans-js { font-size: var(--t0); font-weight: 700; color: var(--encre-douce); margin: 0; }
+
+  /* Publics visés — pastilles de la bannière de la planche */
+  .publics {
+    display: flex; flex-wrap: wrap; justify-content: center; gap: var(--e3);
+    list-style: none; margin: var(--e7) 0 0; padding: 0;
+  }
+  .publics li {
+    padding: var(--e2) var(--e4); border-radius: var(--rayon-rond);
+    color: var(--texte); font-size: var(--t0); font-weight: 800;
+  }
+  .publics .enfants { background: var(--vert); }
+  .publics .seniors { background: var(--bleu); }
+  .publics .famille { background: var(--violet); }
+
+  /* ---- Sections de contenu, sur fond clair ---- */
+  main > section { padding: var(--e13) 0; }
+  main > section.scene { padding: 0; }
+
+  /* Les trois temps du jeu */
+  .etapes { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(16rem, 100%), 1fr)); gap: var(--e6); list-style: none; margin: 0; padding: 0; }
+  .etapes li {
+    background: var(--carte); border-radius: var(--rayon-carte); padding: var(--e7);
+    box-shadow: var(--ombre-carte);
+    display: flex; flex-direction: column; gap: var(--e3);
+  }
+  .numero {
+    flex: none; display: inline-flex; align-items: center; justify-content: center;
+    width: var(--e11); height: var(--e11); border-radius: var(--rayon-rond);
+    font-size: var(--t5); font-weight: 900; line-height: 1;
+  }
+  .numero-1 { background: var(--accent); color: var(--texte); }
+  .numero-2 { background: var(--corail); color: var(--texte); }
+  .numero-3 { background: var(--or); color: var(--encre); }
+  .etapes p { font-size: var(--t2); font-weight: 700; line-height: 1.45; color: var(--encre-douce); margin: 0; }
+
+  /* Les deux grandes cartes : la famille et l'accessibilité */
+  .duo { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(19rem, 100%), 1fr)); gap: var(--e6); margin-top: var(--e10); }
+  .duo > div {
+    border-radius: var(--rayon-grand); padding: var(--e9);
+    display: flex; flex-direction: column; gap: var(--e4);
+  }
+  .duo h3 { font-size: var(--t-duo); line-height: 1.1; }
+  .duo p { font-size: var(--t2); font-weight: 700; line-height: 1.45; margin: 0; }
+  .duo .emblisse { font-size: var(--t7); line-height: 1; }
+  .duo .lien-suite {
+    display: inline-flex; align-items: center; align-self: flex-start;
+    min-height: var(--touche); max-width: 100%; overflow-wrap: anywhere;
+    font-size: var(--t2); font-weight: 900;
+  }
+  .duo-violet { background: linear-gradient(135deg, var(--accent), var(--violet)); color: var(--texte); }
+  .duo-violet .lien-suite { color: var(--texte); }
+  .duo-blanc { background: var(--carte); box-shadow: var(--ombre-carte); }
+  .duo-blanc p { color: var(--encre-douce); }
+
+  /* Grilles de cartes : façons de jouer, accessibilité */
+  .grille { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(15rem, 100%), 1fr)); gap: var(--e5); list-style: none; margin: 0; padding: 0; }
+  .grille li {
+    background: var(--carte); border-radius: var(--rayon); padding: var(--e6);
+    box-shadow: var(--ombre-carte);
+    display: flex; flex-direction: column; gap: var(--e2);
+  }
+  .grille h3 { font-size: var(--t4); }
+  .grille p { font-size: var(--t1); font-weight: 700; line-height: 1.45; color: var(--encre-douce); margin: 0; }
+  .pictogramme {
+    display: inline-flex; align-items: center; justify-content: center;
+    align-self: flex-start; max-width: 100%;
+    min-width: var(--e11); min-height: var(--e11); padding: var(--e2);
+    border-radius: var(--rayon-petit);
+    background: var(--puits); font-size: var(--t5); line-height: 1; margin-bottom: var(--e1);
+  }
+
+  .centre { text-align: center; }
+  /* Sous-titre d'un deuxième temps à l'intérieur d'une section */
+  .sous-titre-section {
+    font-size: var(--t4); line-height: 1.25; text-align: center;
+    max-width: 46ch; margin: var(--e10) auto var(--e6);
+  }
+  .chapeau {
+    font-size: var(--t3); font-weight: 700; color: var(--encre-douce);
+    max-width: 52ch; margin: calc(var(--e8) * -1) auto var(--e8); text-align: center;
+  }
+
+  /* Jetons : ce qu'on gagne en jouant */
+  .jetons { display: flex; flex-wrap: wrap; justify-content: center; gap: var(--e3); list-style: none; margin: 0; padding: 0; }
+  .jetons li {
+    padding: var(--e3) var(--e5); border-radius: var(--rayon-rond);
+    background: var(--carte); box-shadow: var(--ombre-carte);
+    font-size: var(--t1); font-weight: 800; max-width: 100%; overflow-wrap: anywhere;
+  }
+
+  /* Questions fréquentes */
+  .faq { display: flex; flex-direction: column; gap: var(--e3); max-width: 760px; margin: 0 auto; }
+  .question {
+    background: var(--carte); border-radius: var(--rayon); box-shadow: var(--ombre-carte);
+  }
+  .question summary {
+    display: flex; align-items: center; justify-content: space-between; gap: var(--e4);
+    min-height: var(--touche); padding: var(--e5) var(--e6);
+    border-radius: var(--rayon);
+    font-size: var(--t3); font-weight: 900; cursor: pointer;
+    list-style: none;
+  }
+  .question summary::-webkit-details-marker { display: none; }
+  .question summary > span { min-width: 0; overflow-wrap: anywhere; }
+  /* Le signe dit l'état sans dépendre du triangle du navigateur, différent
+     d'un appareil à l'autre et parfois invisible. */
+  .question summary::after {
+    content: "+"; flex: none;
+    display: flex; align-items: center; justify-content: center;
+    width: var(--e8); height: var(--e8); border-radius: var(--rayon-rond);
+    background: var(--puits); color: var(--accent-fonce);
+    font-size: var(--t4); font-weight: 900; line-height: 1;
+  }
+  .question[open] summary::after { content: "−"; }
+  .question p {
+    padding: 0 var(--e6) var(--e6); margin: 0;
+    font-size: var(--t1); font-weight: 700; line-height: 1.5; color: var(--encre-douce);
+  }
+
+  /* Le bandeau de téléchargement */
+  .bandeau-app {
+    margin-top: var(--e10);
+    border-radius: var(--rayon-grand); padding: var(--e10);
+    background:
+      radial-gradient(500px 300px at 50% -20%, rgba(255, 255, 255, .12), transparent 70%),
+      linear-gradient(var(--fond-haut), var(--fond));
+    color: var(--texte);
+    display: flex; flex-wrap: wrap; align-items: center; gap: var(--e8);
+  }
+  .bandeau-app > div { flex: 1 1 16rem; min-width: 0; }
+  .bandeau-titre { font-size: var(--t7); font-weight: 900; letter-spacing: -.02em; line-height: 1.1; margin: 0 0 var(--e2); }
+  .bandeau-app p { font-size: var(--t2); font-weight: 700; color: var(--texte-doux); margin: 0; }
+  .bandeau-app .bouton { flex: none; }
+  .grand-sceau {
+    flex: none; display: flex; align-items: center; justify-content: center;
+    width: var(--e13); height: var(--e13); border-radius: var(--rayon-grand);
+    background: radial-gradient(circle at 50% 40%, #3A2A85, var(--fond));
+    box-shadow: inset 0 0 0 1px rgba(255, 255, 255, .2), var(--ombre-sceau);
+  }
+  .grand-sceau::before {
+    content: "?"; display: flex; align-items: center; justify-content: center;
+    width: var(--e10); height: var(--e10); border-radius: var(--rayon-rond);
+    box-shadow: 0 0 0 5px var(--or), 0 0 24px rgba(250, 179, 26, .5);
+    font-size: var(--t6); font-weight: 900; line-height: 1;
+  }
+
+  /* ---- Pied de page ---- */
+  footer { background: var(--fond); color: var(--texte); }
+  footer .enveloppe { padding-top: var(--e9); padding-bottom: var(--e9); }
+  footer p { font-size: var(--t0); font-weight: 700; color: var(--texte-doux); }
+  .liens-pied {
+    display: flex; flex-wrap: wrap; gap: var(--e3) var(--e7);
+    list-style: none; margin: 0 0 var(--e6); padding: 0;
+  }
+  .liens-pied a {
+    display: inline-flex; align-items: center; justify-content: center;
+    min-width: var(--touche); min-height: var(--touche);
+    font-size: var(--t0); font-weight: 800;
+  }
+
+  /* ---- Page de contenu (confidentialité) ---- */
+  .titre-page { background: linear-gradient(var(--fond-haut), var(--fond)); color: var(--texte); }
+  .titre-page .enveloppe { padding-top: var(--e9); padding-bottom: var(--e9); }
+  .titre-page h1 { text-align: left; margin: 0 0 var(--e2); max-width: 20ch; font-size: var(--t-section); }
+  .titre-page p { font-size: var(--t2); font-weight: 700; color: var(--texte-doux); margin: 0; }
+  .texte { background: var(--carte); border-radius: var(--rayon); box-shadow: var(--ombre-carte); padding: var(--e8); margin-bottom: var(--e5); }
+  .texte h2 { font-size: var(--t5); text-align: left; margin: 0 0 var(--e4); }
+  .texte h3 { font-size: var(--t4); margin: var(--e6) 0 var(--e3); }
+  .texte p, .texte li { font-size: var(--t1); font-weight: 700; line-height: 1.55; color: var(--encre-douce); }
+  .texte ul { margin: 0 0 var(--e4); padding-left: var(--e5); }
+  .texte li { margin-bottom: var(--e2); }
+  .texte > :last-child { margin-bottom: 0; }
+  /* Deux colonnes sur ordinateur : le sommaire reste sous les yeux pendant
+     qu'on descend dans le texte. Une seule colonne sur téléphone. */
+  .page-deux-colonnes {
+    display: grid; grid-template-columns: minmax(0, 16rem) minmax(0, 1fr);
+    gap: var(--e8); align-items: start;
+    padding-top: var(--e9); padding-bottom: var(--e10);
+  }
+  .sommaire { position: sticky; top: var(--e5); background: var(--puits); border-radius: var(--rayon); padding: var(--e6); }
+  .sommaire h2 { font-size: var(--t4); text-align: left; margin: 0 0 var(--e3); }
+  .sommaire ol { display: flex; flex-direction: column; gap: var(--e1); margin: 0; padding-left: var(--e5); }
+  .sommaire li { font-size: var(--t1); font-weight: 800; }
+  .sommaire a { display: inline-flex; align-items: center; min-height: var(--touche); font-size: var(--t1); font-weight: 800; }
+  .resume {
+    background: var(--carte); border-radius: var(--rayon); box-shadow: var(--ombre-carte);
+    border-left: var(--e1) solid var(--or);
+    padding: var(--e8); margin-bottom: var(--e5);
+  }
+  .resume p { font-size: var(--t2); font-weight: 700; line-height: 1.55; color: var(--encre); }
+  .retour { margin-top: var(--e6); font-weight: 800; }
+  .retour a { display: inline-flex; align-items: center; min-height: var(--touche); }
+  @media (max-width: 52rem) {
+    .page-deux-colonnes { grid-template-columns: minmax(0, 1fr); gap: var(--e5); padding-top: var(--e6); }
+    .sommaire { position: static; }
+    .resume { padding: var(--e5); }
+  }
+
+  /* ---- Téléphones ---- */
+  @media (max-width: 46rem) {
+    /* Sur téléphone, les onglets prenaient trois lignes et repoussaient le jeu
+       hors du premier écran. Ils laissent la place : la page se parcourt en
+       descendant, et le pied de page porte les mêmes liens, au complet. */
+    .entete .nav-site { display: none; }
+    .scene .enveloppe { padding-top: var(--e6); padding-bottom: var(--e9); }
+    main > section { padding: var(--e9) 0; }
+    .jeu { padding: var(--e5); gap: var(--e3); }
+    .jeu-saisie { flex-direction: column; }
+    .jeu-saisie input { flex: none; width: 100%; }
+    .duo > div, .bandeau-app { padding: var(--e6); }
+    .bandeau-app { margin-top: var(--e9); }
+    .bandeau-app { gap: var(--e5); text-align: center; justify-content: center; }
+    .bandeau-app h2 { text-align: center; }
+    .bandeau-app .bouton { width: 100%; }
+    .etapes li { padding: var(--e5); flex-direction: row; align-items: flex-start; gap: var(--e4); }
+    .etapes li > div { display: flex; flex-direction: column; gap: var(--e1); min-width: 0; }
+    .numero { width: var(--touche); height: var(--touche); font-size: var(--t3); }
+    .etapes h3 { font-size: var(--t3); }
+    .etapes p { font-size: var(--t0); }
+    .texte, .sommaire { padding: var(--e5); }
+  }
+
+  /* ---- Écrans bas : un iPhone SE, ou un téléphone tenu à l'horizontale ----
+     Le jeu doit tenir sous les yeux sans descendre : on resserre la carte
+     plutôt que de laisser « Valider » tomber sous le bord de l'écran. */
+  @media (max-height: 46rem) {
+    .scene .enveloppe { padding-top: var(--e4); padding-bottom: var(--e7); }
+    h1 { margin-bottom: var(--e3); }
+    .scene-sous { margin-bottom: var(--e5); }
+    .jeu { gap: var(--e2); padding: var(--e4); }
+    .jeu-objet { font-size: var(--t-objet-court); }
+  }
+
+  /* ---- Quand le système demande moins d'animation ---- */
   @media (prefers-reduced-motion: reduce) {
-    *, *::before, *::after {
-      animation-duration: .01ms !important; animation-iteration-count: 1 !important;
-      transition-duration: .01ms !important;
-    }
+    *, *::before, *::after { animation: none !important; transition: none !important; scroll-behavior: auto !important; }
   }
 
-  /* Sur papier et dans un PDF, les navigateurs n'impriment pas les fonds :
-     on repasse donc en texte foncé sur blanc pour rester lisible. */
+  /* ---- Impression : les navigateurs n'impriment pas les fonds ---- */
   @media print {
-    :root { color-scheme: light; }
-    body { background: #fff; color: var(--encre); font-size: 11pt; line-height: 1.45; }
-    .enveloppe { max-width: none; padding: 0; }
-    .saut, .nav-site, .hero::before, .objet, .essai, .fenetre, .indice, .retour,
-    .pictogramme, .sceau { display: none; }
-    main > section { padding: var(--e3) 0; }
-    /* Sur papier, les questions s'impriment ouvertes : un accordéon replié ne
-       donnerait qu'une liste de questions sans réponse. Le script les ouvre
-       avant l'impression ; cette règle-ci fait le même travail dans les
-       navigateurs qui la comprennent, avec ou sans JavaScript. */
-    .question::details-content { content-visibility: visible; }
-    .question summary::after { display: none; }
-    .question { background: none; border: 1px solid #6B6484; margin-bottom: var(--e2); }
-    /* Sans cette ligne, question et réponse restaient blanches sur blanc :
-       la page sortait avec six cadres vides. */
-    .question summary, .question p { color: var(--encre); }
-    .hero, .final { background: none; }
-    h1, h2, h3, .marque, .accroche, .date, .sous-titre, footer p,
-    .jetons li, .publics li, .coche, .precision, .objet-legende,
-    .hero h1 .sous-titre, .sommaire a::before,
-    .titre-page .sous-titre { color: var(--encre); }
-    /* « .question a » est plus spécifique que « a » : sans le citer ici, le lien
-       d'une réponse restait doré, soit 1,8:1 sur du papier blanc. */
-    a, .question a { color: #3A2B9E; }
-    main a[href^="http"]::after { content: " (" attr(href) ")"; font-weight: 400; word-break: break-all; }
-    .entete, footer { border-color: #6B6484; }
-    .carte, .resume, .jetons li, .publics li,
-    .publics .enfants, .publics .seniors, .publics .famille {
-      background: #fff; box-shadow: none; border: 1px solid #6B6484;
+    body { background: #fff; color: #000; }
+    .saut, .entete, .nav-site, .jeu-saisie, .jeu-suite, .bandeau-app, .liens-pied { display: none !important; }
+    .scene, .titre-page, footer { background: #fff !important; color: #000 !important; }
+    .scene *, .titre-page *, footer * { color: #000 !important; }
+    .jeu, .texte, .question, .grille li, .etapes li, .jetons li, .duo > div {
+      box-shadow: none !important; background: #fff !important; color: #000 !important;
+      border: 1px solid #999;
     }
-    .bouton, .lien-page, .sommaire a { min-height: 0; padding: 0; margin-left: 0; background: none;
-      box-shadow: none; color: #3A2B9E; }
-    h2, h3 { break-after: avoid; }
-    p, li { break-inside: avoid; }
+    .duo-violet, .duo-violet * { background: #fff !important; color: #000 !important; }
+    .question p { display: block !important; }
+    a { color: #000 !important; }
+  }
+
+  /* Zone d'annonce du jeu : un seul repère vivant, pour que les lecteurs
+     d'écran suivent le dialogue « C'est plus ! » puis la révélation. */
+  .jeu-annonce { width: 100%; display: flex; flex-direction: column; align-items: center; gap: var(--e3); }
+  .jeu-essai:empty { display: none; }
+  /* Lu par les lecteurs d'écran, invisible à l'œil */
+  .invisible {
+    position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px;
+    overflow: hidden; clip-path: inset(50%); white-space: nowrap; border: 0;
   }
 </style>
 </head>
@@ -554,105 +555,138 @@
 <header class="entete">
   <div class="enveloppe">
     <a class="marque" href="index.html"><span class="sceau" aria-hidden="true"></span>Devine le Prix</a>
-    <nav class="nav-site" aria-label="Navigation principale">
+    <nav class="nav-site" aria-label="Sections du site">
       <ul>
-        <li><a href="index.html" aria-current="page">Accueil</a></li>
-        <li><a href="confidentialite.html">Confiden&shy;tialité</a></li>
+        <li><a href="index.html#familles">Familles et seniors</a></li>
+        <li><a href="index.html#accessibilite">Accessibilité</a></li>
+        <li><a href="index.html#questions">Questions</a></li>
+        <li><a href="index.html#aide">Aide</a></li>
       </ul>
     </nav>
+    <!-- Appel à l'action de l'en-tête. Comme les deux autres (dans le jeu et
+         dans le bandeau de fin), il attend l'adresse de la fiche App Store :
+         remplacer l'adresse ci-dessous par celle de la fiche, puis retirer
+         « hidden ». Caché, il ne prend aucune place. -->
+    <a class="bouton" id="lien-app-store-haut" hidden href="https://apps.apple.com/">Télécharger</a>
   </div>
 </header>
 
 <main id="contenu" tabindex="-1">
 
-  <section class="hero">
+  <section class="scene">
     <div class="enveloppe">
-      <h1>Devine le Prix<span class="sous-titre">– Jeu Famille</span></h1>
-      <p class="accroche">Trouve le prix des objets !</p>
-      <p class="precision">Le jeu de devinettes de toute la famille, sur iPhone et iPad.</p>
+      <h1>Combien coûte cet objet, d’après toi&nbsp;?</h1>
+      <p class="scene-sous">Essaie ici, en 3 essais. Dans l’app, il y en a 400.</p>
+
+      <!-- La partie d'essai. Sans JavaScript, la carte montre un objet et sa
+           fourchette de prix, et la ligne « jeu-sans-js » explique pourquoi on
+           ne peut pas jouer : le reste de la page, lui, se lit entièrement. -->
+      <div class="jeu" id="jeu">
+        <p class="jeu-essai" id="jeu-essai"></p>
+        <span class="jeu-objet" id="jeu-objet" aria-hidden="true">🥖</span>
+        <p class="jeu-nom" id="jeu-nom">Une baguette de pain</p>
+        <p class="jeu-indice" id="jeu-indice">Entre 1&nbsp;€ et 5&nbsp;€</p>
+
+        <div class="jeu-annonce" role="status">
+          <p class="jeu-message" id="jeu-message"></p>
+          <div class="jeu-fin" id="jeu-fin" hidden>
+            <p class="jeu-fin-titre">Le bon prix est</p>
+            <p class="jeu-prix" id="jeu-prix"></p>
+            <p class="jeu-verdict" id="jeu-verdict"></p>
+          </div>
+        </div>
+
+        <form class="jeu-saisie" id="jeu-saisie" hidden>
+          <label class="invisible" for="jeu-champ">Ton prix en euros</label>
+          <input id="jeu-champ" type="text" inputmode="numeric" autocomplete="off" placeholder="Ton prix en €">
+          <button type="submit" class="bouton bouton-valider" id="jeu-valider">Valider</button>
+        </form>
+
+        <div class="jeu-suite" id="jeu-suite" hidden>
+          <button type="button" class="bouton bouton-contour" id="jeu-rejouer">Un autre objet</button>
+          <!-- Troisième emplacement du bouton de téléchargement : il apparaît au
+               moment où l'envie est la plus forte, juste après la révélation. -->
+          <a class="bouton bouton-app" id="lien-app-store-jeu" hidden href="https://apps.apple.com/">Télécharger l’app</a>
+        </div>
+
+        <p class="jeu-sans-js" id="jeu-sans-js">Pour essayer ici, il faut JavaScript. Tout le reste du site se lit sans.</p>
+      </div>
+
       <ul class="publics">
         <li class="enfants">Enfants</li>
         <li class="seniors">Seniors</li>
         <li class="famille">En famille</li>
       </ul>
-      <!-- Appel à l'action du premier écran, le plus regardé de la page. Comme
-           celui du bas, il attend l'adresse de la fiche App Store : remplacer
-           l'adresse ci-dessous par celle de la fiche, puis retirer « hidden ».
-           Caché, il ne prend pas de place. -->
-      <p class="appel-haut"><a class="bouton" id="lien-app-store-haut" hidden href="https://apps.apple.com/">Télécharger sur l’App Store</a></p>
-      <!-- Le jeu — la carte et les deux choix — part dans la fenêtre d'accueil
-           au chargement, puis revient ici une fois la réponse donnée. Il n'en
-           existe donc qu'un seul exemplaire, et sans JavaScript il ne bouge
-           pas : la page est exactement celle qu'on voit ci-dessous. -->
-      <div class="jeu" id="jeu">
-      <figure class="objet">
-        <span class="objet-carte">
-          <span class="objet-emoji" id="essai-emoji" aria-hidden="true">🎧</span>
-          <span class="objet-nom" id="essai-nom">Un casque audio</span>
-        </span>
-        <span class="objet-prix" id="essai-prix" aria-hidden="true">?&nbsp;€</span>
-        <figcaption class="objet-legende" id="essai-question">Quel est le prix ?</figcaption>
-      </figure>
-
-      <!-- Mini-partie d'essai. Le bloc reste caché tant que le script ne l'a pas
-           allumé : sans JavaScript, la page reste exactement ce qu'elle est. -->
-      <div class="essai" id="essai" hidden>
-        <div class="essai-boutons" id="essai-boutons">
-          <!-- « Un autre objet » change l'objet et le prix dans la carte, au-dessus,
-               puis envoie le focus droit sur ces deux boutons. Rien n'annonce plus ce
-               changement : sans cette description, un lecteur d'écran ne dit que
-               « C'est moins, bouton » et demande de juger un prix qu'il n'a jamais
-               énoncé. On réutilise le nom et le prix déjà présents dans la carte,
-               qui restent donc toujours à jour. -->
-          <button type="button" class="bouton bouton-choix" id="essai-moins" data-reponse="moins" aria-describedby="essai-nom essai-prix">C’est moins</button>
-          <button type="button" class="bouton bouton-choix" data-reponse="plus" aria-describedby="essai-nom essai-prix">C’est plus</button>
-        </div>
-        <p class="essai-verdict" id="essai-verdict" role="status"></p>
-        <!-- Bouton principal, et non secondaire : il n'apparaît qu'une fois la
-             réponse donnée, donc une fois les deux choix éteints. À ce moment-là
-             il est la seule chose à faire de tout l'écran, et c'est l'or vif qui
-             le dit. -->
-        <p><button type="button" class="bouton essai-rejouer" id="essai-rejouer" hidden>Un autre objet</button></p>
-      </div>
-      </div>
-
-      <!-- Allumé à la fermeture de la fenêtre : le visiteur vient d'entrer, on
-           lui montre qu'il y a une suite. Caché sans JavaScript, puisqu'alors
-           il n'y a pas eu de fenêtre. -->
-      <p class="indice" id="indice" hidden>
-        <span>Découvre le jeu</span>
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M12 5v13M6 13l6 6 6-6"/></svg>
-      </p>
     </div>
   </section>
 
-  <section class="section-large">
+  <section id="comment">
     <div class="enveloppe">
-      <h2>Trois façons de jouer</h2>
-      <ul class="modes">
-        <li class="carte">
-          <span class="pictogramme lilas" aria-hidden="true">🎯</span>
+      <h2>Comment on joue</h2>
+      <ol class="etapes">
+        <li>
+          <span class="numero numero-1" aria-hidden="true">1</span>
+          <div>
+            <h3>On voit un objet</h3>
+            <p>Une baguette, un vélo, un canapé&nbsp;: des objets que tout le monde connaît.</p>
+          </div>
+        </li>
+        <li>
+          <span class="numero numero-2" aria-hidden="true">2</span>
+          <div>
+            <h3>On tape un prix</h3>
+            <p>Le jeu répond «&nbsp;C’est plus&nbsp;!&nbsp;» ou «&nbsp;C’est moins&nbsp;!&nbsp;». Trois essais pour trouver.</p>
+          </div>
+        </li>
+        <li>
+          <span class="numero numero-3" aria-hidden="true">3</span>
+          <div>
+            <h3>Le prix se dévoile</h3>
+            <p>Chiffre par chiffre, comme à la télé. On gagne des étoiles et on tourne la roue bonus.</p>
+          </div>
+        </li>
+      </ol>
+
+      <div class="duo">
+        <div class="duo-violet">
+          <span class="emblisse" aria-hidden="true">👪</span>
+          <h3>Un seul téléphone pour toute la famille</h3>
+          <p>De 2 à 6 joueurs. Chacun devine à son tour, le jeu dit qui joue. Sans compte et sans Internet.</p>
+          <a class="lien-suite" href="#familles">Pour les familles et les seniors →</a>
+        </div>
+        <div class="duo-blanc">
+          <span class="emblisse" aria-hidden="true">🔊</span>
+          <h3>Facile à lire, à écouter et à toucher</h3>
+          <p>Texte agrandi selon l’iPhone, voix qui lit chaque consigne, boutons de 66 points, aucun chronomètre.</p>
+          <a class="lien-suite" href="#accessibilite">L’accessibilité en détail →</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="familles">
+    <div class="enveloppe">
+      <h2>Pour les familles et les seniors</h2>
+      <p class="chapeau">Un jeu qui réunit les petits-enfants et les grands-parents, de trois façons.</p>
+      <ul class="grille">
+        <li>
+          <span class="pictogramme" aria-hidden="true">🎯</span>
           <h3>Tout seul</h3>
           <p>Joue à ton rythme, gagne des points et monte de niveau.</p>
         </li>
-        <li class="carte">
-          <span class="pictogramme menthe" aria-hidden="true">👨‍👩‍👧</span>
+        <li>
+          <span class="pictogramme" aria-hidden="true">👨‍👩‍👧</span>
           <h3>Sur ce téléphone</h3>
-          <p>Passe l’appareil de main en main : chacun choisit son prénom et son avatar.</p>
+          <p>Passe l’appareil de main en main&nbsp;: chacun choisit son prénom et son avatar.</p>
         </li>
-        <li class="carte">
-          <span class="pictogramme ciel" aria-hidden="true">📲</span>
+        <li>
+          <span class="pictogramme" aria-hidden="true">📲</span>
           <h3>Avec d’autres téléphones</h3>
           <p>Chacun sur son appareil, grâce à Game Center. Les invitations passent par Messages.</p>
         </li>
       </ul>
-    </div>
-  </section>
 
-  <section>
-    <div class="enveloppe">
-      <h2>Ce que tu gagnes en jouant</h2>
-      <p class="chapeau">Chaque partie laisse une trace : on monte de niveau, on remplit sa collection, on tient sa série de jours.</p>
+      <h3 class="sous-titre-section">Chaque partie laisse une trace&nbsp;: on monte de niveau, on remplit sa collection, on tient sa série de jours.</h3>
       <ul class="jetons">
         <li>Niveaux</li>
         <li>Points d’expérience</li>
@@ -665,33 +699,50 @@
     </div>
   </section>
 
-  <section>
+  <section id="accessibilite">
     <div class="enveloppe">
-      <h2>Pensé pour les enfants et les grands-parents</h2>
-      <ul class="avantages">
+      <h2>Lisible par tous, de 6 à 99 ans</h2>
+      <p class="chapeau">Le jeu suit les réglages d’accessibilité de l’iPhone. Rien à configurer dans l’app.</p>
+      <ul class="grille">
         <li>
-          <svg class="coche" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="m4 12.5 5 5L20 6.5"/></svg>
-          <span>Les textes peuvent être lus à voix haute par la voix intégrée à l’iPhone.</span>
+          <span class="pictogramme" aria-hidden="true">🔠</span>
+          <h3>Texte agrandi</h3>
+          <p>Le texte grandit avec le réglage de l’iPhone, jusqu’aux très grandes tailles.</p>
         </li>
         <li>
-          <svg class="coche" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="m4 12.5 5 5L20 6.5"/></svg>
-          <span>Aucun compte, aucune inscription : tu ouvres l’application et tu joues.</span>
+          <span class="pictogramme" aria-hidden="true">🔊</span>
+          <h3>Voix qui lit</h3>
+          <p>Chaque consigne peut être lue à voix haute, avec un bouton toujours au même endroit.</p>
         </li>
         <li>
-          <svg class="coche" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="m4 12.5 5 5L20 6.5"/></svg>
-          <span>Aucune donnée personnelle collectée. La progression reste sur l’appareil, et se retrouve sur tes autres appareils si iCloud est activé.</span>
+          <span class="pictogramme" aria-hidden="true">🗣️</span>
+          <h3>VoiceOver</h3>
+          <p>Chaque bouton est nommé, et les résultats sont annoncés.</p>
         </li>
         <li>
-          <svg class="coche" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="m4 12.5 5 5L20 6.5"/></svg>
-          <span>Des réglages simples : voix, sons, musique, vibrations, nombre d’objets par partie.</span>
+          <span class="pictogramme" aria-hidden="true">👆</span>
+          <h3>Gros boutons</h3>
+          <p>Boutons de 66 points et touches de 52 points, faciles à toucher.</p>
         </li>
         <li>
-          <svg class="coche" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="m4 12.5 5 5L20 6.5"/></svg>
-          <span>Un rappel quotidien, à l’heure de ton choix, si tu le souhaites.</span>
+          <span class="pictogramme" aria-hidden="true">🌓</span>
+          <h3>Contraste fort</h3>
+          <p>Texte blanc sur fond foncé ou texte foncé sur fond doré, au moins 4,5:1.</p>
         </li>
         <li>
-          <svg class="coche" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="m4 12.5 5 5L20 6.5"/></svg>
-          <span>Jamais de publicité pendant le jeu. Celles de fin de partie sont non personnalisées, et l’achat « Version sans pub » les retire définitivement.</span>
+          <span class="pictogramme" aria-hidden="true">↕️</span>
+          <h3>Pas seulement la couleur</h3>
+          <p>«&nbsp;C’est plus&nbsp;!&nbsp;» s’affiche avec une flèche et un mot, pas seulement en couleur.</p>
+        </li>
+        <li>
+          <span class="pictogramme" aria-hidden="true">🎞️</span>
+          <h3>Animations réduites</h3>
+          <p>Avec le réglage de l’iPhone, les animations deviennent de simples fondus.</p>
+        </li>
+        <li>
+          <span class="pictogramme" aria-hidden="true">⏳</span>
+          <h3>Aucun chronomètre</h3>
+          <p>Personne n’est pressé&nbsp;: c’est le joueur qui passe à la suite.</p>
         </li>
       </ul>
     </div>
@@ -702,46 +753,52 @@
        ou dans la politique de confidentialité : rien n'y est affirmé de neuf. -->
   <section id="questions">
     <div class="enveloppe">
-      <h2>Les questions qu’on nous pose</h2>
+      <h2>Questions fréquentes</h2>
       <div class="faq">
         <details class="question">
-          <summary>Faut-il créer un compte ?</summary>
-          <p>Non. Aucun compte, aucune inscription : tu ouvres l’application et tu joues. Aucune adresse e-mail, aucun nom, aucune information de contact n’est demandée.</p>
+          <summary><span>Faut-il créer un compte&nbsp;?</span></summary>
+          <p>Non. Aucun compte, aucune inscription&nbsp;: tu ouvres l’application et tu joues. Aucune adresse e-mail, aucun nom, aucune information de contact n’est demandée.</p>
         </details>
         <details class="question">
-          <summary>Y a-t-il de la publicité ?</summary>
-          <p>Jamais pendant le jeu. Seulement à la fin d’une partie, et ces publicités sont non personnalisées, limitées à un contenu tout public. L’achat « Version sans pub » les retire définitivement.</p>
+          <summary><span>Y a-t-il de la publicité&nbsp;?</span></summary>
+          <p>Jamais pendant le jeu. Seulement à la fin d’une partie, et ces publicités sont non personnalisées, limitées à un contenu tout public. L’achat «&nbsp;Version sans pub&nbsp;» les retire définitivement.</p>
         </details>
         <details class="question">
-          <summary>Mes données sont-elles collectées ?</summary>
+          <summary><span>Mes données sont-elles collectées&nbsp;?</span></summary>
           <p>Aucune donnée personnelle n’est collectée. La progression et les réglages restent sur l’appareil, et se retrouvent sur tes autres appareils si iCloud est activé. Le détail est dans la <a href="confidentialite.html">politique de confidentialité</a>.</p>
         </details>
         <details class="question">
-          <summary>Est-ce adapté aux enfants ?</summary>
-          <p>L’application est configurée pour un public pouvant inclure des mineurs : publicités non personnalisées, contenu tout public, et aucune demande d’autorisation de suivi publicitaire. Les textes peuvent en plus être lus à voix haute par la voix intégrée à l’iPhone.</p>
+          <summary><span>Est-ce adapté aux enfants&nbsp;?</span></summary>
+          <p>L’application est configurée pour un public pouvant inclure des mineurs&nbsp;: publicités non personnalisées, contenu tout public, et aucune demande d’autorisation de suivi publicitaire. Les textes peuvent en plus être lus à voix haute par la voix intégrée à l’iPhone.</p>
         </details>
         <details class="question">
-          <summary>Peut-on jouer à plusieurs ?</summary>
-          <p>Oui, de deux façons : en se passant l’appareil de main en main, chacun choisissant son prénom et son avatar ; ou chacun sur son appareil, grâce à Game Center. Les invitations passent par Messages.</p>
+          <summary><span>Peut-on jouer à plusieurs&nbsp;?</span></summary>
+          <p>Oui, de deux façons&nbsp;: en se passant l’appareil de main en main, chacun choisissant son prénom et son avatar&nbsp;; ou chacun sur son appareil, grâce à Game Center. Les invitations passent par Messages.</p>
         </details>
         <details class="question">
-          <summary>Sur quels appareils ?</summary>
+          <summary><span>Sur quels appareils&nbsp;?</span></summary>
           <p>Sur iPhone et sur iPad.</p>
         </details>
       </div>
     </div>
   </section>
 
-  <section class="final">
-    <div class="enveloppe appel">
-      <h2>Prêt à jouer en famille ?</h2>
-      <p class="final-texte">Tout seul, à plusieurs sur le même téléphone, ou chacun sur le sien. Sans compte, sans inscription.</p>
-      <!-- Bouton de téléchargement : la place est prête, le bouton attend
-           l'adresse de la fiche App Store. Pour l'allumer, remplacer l'adresse
-           ci-dessous par celle de la fiche, puis retirer « hidden ». Tant qu'il
-           est caché, c'est « Écrire à l’éditeur » qui occupe la place. -->
-      <p><a class="bouton" id="lien-app-store" hidden href="https://apps.apple.com/">Télécharger sur l’App Store</a></p>
-      <p class="final-contact"><a class="bouton" href="mailto:johan.quille@trainedmanager.fr">Écrire à l’éditeur</a></p>
+  <section id="aide">
+    <div class="enveloppe">
+      <h2>Besoin d’aide&nbsp;?</h2>
+      <p class="chapeau">Un obstacle dans le jeu, un prix qui te semble faux, une question sur l’accessibilité&nbsp;: écris-nous, nous corrigeons en priorité.</p>
+      <p class="centre"><a class="bouton" href="mailto:johan.quille@trainedmanager.fr">Écrire à l’éditeur</a></p>
+
+      <div class="bandeau-app">
+        <span class="grand-sceau" aria-hidden="true"></span>
+        <div>
+          <p class="bandeau-titre">Devine le Prix – Jeu Famille</p>
+          <p>Sur iPhone et iPad, en français.</p>
+        </div>
+        <!-- Deuxième emplacement du bouton de téléchargement, en fin de page.
+             Même manœuvre que celui de l'en-tête pour l'allumer. -->
+        <a class="bouton bouton-app" id="lien-app-store" hidden href="https://apps.apple.com/">Télécharger sur l’App Store</a>
+      </div>
     </div>
   </section>
 
@@ -749,250 +806,194 @@
 
 <footer>
   <div class="enveloppe">
-    <p>Devine le Prix – Jeu Famille est édité par ProtoJo Digital (Johan Quille), France.<br>
-    Une question ? Écris à <a href="mailto:johan.quille@trainedmanager.fr">johan.quille@trainedmanager.fr</a>.</p>
-    <p><a class="lien-page" href="confidentialite.html">Politique de confidentialité</a></p>
+    <ul class="liens-pied">
+      <li><a href="index.html#familles">Familles et seniors</a></li>
+      <li><a href="index.html#accessibilite">Accessibilité</a></li>
+      <li><a href="index.html#questions">Questions</a></li>
+      <li><a href="index.html#aide">Aide</a></li>
+      <li><a href="confidentialite.html">Confidentialité</a></li>
+    </ul>
+    <p>© 2026 ProtoJo Digital. Devine le Prix – Jeu Famille est édité par ProtoJo Digital (Johan Quille), France.<br>
+    Une question&nbsp;? Écris à <a href="mailto:johan.quille@trainedmanager.fr">johan.quille@trainedmanager.fr</a>.</p>
   </div>
 </footer>
 
-<!-- Fenêtre d'accueil. Fermée dans le HTML : sans JavaScript elle ne s'affiche
-     pas du tout, et le site se lit directement. Le jeu lui-même n'est pas écrit
-     ici, il y est déplacé au chargement depuis le bandeau d'accueil. -->
-<dialog class="fenetre" id="fenetre" tabindex="-1" aria-labelledby="fenetre-titre">
-  <h2 id="fenetre-titre">À toi de jouer !</h2>
-  <p class="fenetre-sous" id="fenetre-sous">Une réponse, et le site s’ouvre.</p>
-  <div id="fenetre-jeu"></div>
-  <p><button type="button" class="bouton" id="fenetre-entrer" hidden>Découvrir le site</button></p>
-  <a class="fenetre-lien" href="confidentialite.html">Politique de confidentialité</a>
-</dialog>
-
 <script>
-/* Mini-partie d'essai de la page d'accueil.
+/* Partie d'essai de la page d'accueil.
    Aucune bibliothèque, aucun appel réseau, rien d'enregistré : le script se
-   contente d'allumer le bloc « essai » et d'écrire dans la carte déjà présente.
-   Sans JavaScript, rien de tout cela ne s'affiche et la page reste exactement
-   ce qu'elle était. */
+   contente d'écrire dans la carte déjà présente dans la page. Sans JavaScript,
+   la carte garde l'objet écrit en dur et la page reste entièrement lisible. */
 (function () {
   "use strict";
 
-  /* Objets d'exemple, propres au site : on montre un prix, le visiteur dit si
-     le vrai prix est au-dessus ou en dessous. */
+  /* Objets tirés du catalogue de l'application (Catalog.swift) : nom, emoji et
+     prix réels, repris tels quels. Le site en montre une poignée ; l'app en a 400. */
   var OBJETS = [
-    { emoji: "🎧", nom: "Un casque audio",      sujet: "Il",   propose: 149, vrai: 79 },
-    { emoji: "🛴", nom: "Une trottinette",      sujet: "Elle", propose: 99,  vrai: 159 },
-    { emoji: "🧸", nom: "Un ours en peluche",   sujet: "Il",   propose: 45,  vrai: 19 },
-    { emoji: "⌚", nom: "Une montre connectée", sujet: "Elle", propose: 199, vrai: 249 }
+    ["🥖", "Une baguette de pain", 1],
+    ["📮", "Un timbre", 1],
+    ["☕", "Un café en terrasse", 3],
+    ["🍎", "Un kilo de pommes", 3],
+    ["🍦", "Une glace à l’italienne", 3],
+    ["📖", "Un livre de poche", 8],
+    ["🍗", "Un poulet rôti", 10],
+    ["🎥", "Une place de cinéma", 12],
+    ["🍕", "Une pizza à emporter", 12],
+    ["🧩", "Un puzzle de 1 000 pièces", 25],
+    ["🪁", "Un cerf-volant", 25],
+    ["🍞", "Un grille-pain", 30],
+    ["🎄", "Un sapin de Noël", 40],
+    ["💇", "Un sèche-cheveux", 40],
+    ["👔", "Un fer à repasser", 45],
+    ["🍱", "Un four à micro-ondes", 90],
+    ["👟", "Une paire de baskets", 90],
+    ["🚲", "Un vélo d’enfant", 120],
+    ["🧹", "Un aspirateur traîneau", 150],
+    ["🎸", "Une guitare folk pour débuter", 200],
+    ["⌚", "Une montre connectée", 350],
+    ["🌱", "Une tondeuse à gazon thermique", 350],
+    ["🤖", "Un aspirateur robot", 400],
+    ["🧺", "Un lave-linge", 500],
+    ["📺", "Une télévision de 55 pouces", 600],
+    ["🧊", "Un réfrigérateur", 800],
+    ["🛋️", "Un canapé", 900],
+    ["🎹", "Un piano droit", 4000]
   ];
 
-  var essai    = document.getElementById("essai");
-  var emoji    = document.getElementById("essai-emoji");
-  var nom      = document.getElementById("essai-nom");
-  var prix     = document.getElementById("essai-prix");
-  var question = document.getElementById("essai-question");
-  var boutons  = document.getElementById("essai-boutons");
-  var verdict  = document.getElementById("essai-verdict");
-  var rejouer  = document.getElementById("essai-rejouer");
-  var premier  = document.getElementById("essai-moins");
-  /* La fenêtre d'accueil et le jeu qu'elle emprunte au bandeau. */
-  var fenetre  = document.getElementById("fenetre");
-  var accueil  = document.getElementById("fenetre-jeu");
-  var sous     = document.getElementById("fenetre-sous");
-  var entrer   = document.getElementById("fenetre-entrer");
-  var jeu      = document.getElementById("jeu");
-  var hero     = document.querySelector(".hero");
-  var indice   = document.getElementById("indice");
-  if (!essai || !emoji || !boutons || !verdict || !rejouer) { return; }
+  var ESSAIS = 3;
+
+  var carte    = document.getElementById("jeu");
+  var compteur = document.getElementById("jeu-essai");
+  var objet    = document.getElementById("jeu-objet");
+  var nom      = document.getElementById("jeu-nom");
+  var indice   = document.getElementById("jeu-indice");
+  var message  = document.getElementById("jeu-message");
+  var fin      = document.getElementById("jeu-fin");
+  var prix     = document.getElementById("jeu-prix");
+  var verdict  = document.getElementById("jeu-verdict");
+  var saisie   = document.getElementById("jeu-saisie");
+  var champ    = document.getElementById("jeu-champ");
+  var suite    = document.getElementById("jeu-suite");
+  var rejouer  = document.getElementById("jeu-rejouer");
+  var sansJs   = document.getElementById("jeu-sans-js");
+  var lienApp  = document.getElementById("lien-app-store-jeu");
+  var lienHaut = document.getElementById("lien-app-store-haut");
+
+  if (!carte || !champ || !saisie || !fin) { return; }
 
   var rang = Math.floor(Math.random() * OBJETS.length);
   var encours = null;
-  /* Le jeu se joue d'abord dans la fenêtre, puis dans la page. */
-  var dansFenetre = false;
-  /* La fermeture est animée : on ne la lance qu'une fois. */
-  var ferme = false;
-  /* Qui demande moins d'animation n'attend pas non plus qu'elles finissent. */
-  var douceur = !(window.matchMedia &&
-    window.matchMedia("(prefers-reduced-motion: reduce)").matches);
-  /* Où le jeu doit revenir une fois la fenêtre fermée. */
-  var berceau = jeu ? jeu.parentNode : null;
-  var apres = jeu ? jeu.nextSibling : null;
-  /* Les deux choix, pour les rouvrir ou les fermer en bloc. */
-  var choix = boutons.querySelectorAll("[data-reponse]");
+  var essai = 0;
+  var fini = false;
 
-  /* Les deux choix ne sont là que tant qu'il y a quelque chose à choisir. Une
-     fois la réponse donnée, ils quittent l'écran au lieu d'y rester éteints :
-     deux cibles mortes de plus entre le prix et le verdict, que des enfants et
-     des personnes âgées essaient encore de toucher. Le bloc est retiré, pas
-     seulement grisé — un bouton désactivé reste une invitation. */
-  function ouvrirChoix(ouverts) {
-    for (var i = 0; i < choix.length; i++) { choix[i].disabled = !ouverts; }
-    boutons.hidden = !ouverts;
+  /* Prix au format français : « 1 249 € », espaces insécables comprises. */
+  function euros(n) {
+    return String(n).replace(/\B(?=(\d{3})+(?!\d))/g, " ") + " €";
   }
 
-  function euros(n) { return n + "\u00a0€"; }
-
-  /* On arrive sur le jeu, on répond, le site s'ouvre. Le jeu n'est pas
-     recopié dans la fenêtre : il y est déplacé, puis remis à sa place dans le
-     bandeau d'accueil. Un seul jeu, donc un seul état à suivre. */
-  function ouvrirFenetre() {
-    /* Pas de <dialog> dans ce navigateur : le jeu reste dans la page, qui
-       fonctionne alors comme avant la fenêtre. */
-    if (!fenetre || !jeu || !accueil || !fenetre.showModal) { return; }
-    dansFenetre = true;
-    accueil.appendChild(jeu);
-    fenetre.showModal();
-    /* Le focus va à la fenêtre elle-même et non au premier bouton : un lecteur
-       d'écran annonce ainsi le titre et la question avant de proposer un choix. */
-    fenetre.focus();
-    for (var i = 0; i < choix.length; i++) { choix[i].classList.add("appel"); }
-  }
-
-  /* La fenêtre s'efface, puis le site arrive. Le compte à rebours est tenu
-     ici et non par l'animation : si le navigateur ne la joue pas, la fenêtre
-     se ferme à l'heure dite quand même. */
-  function fermerFenetre() {
-    if (ferme) { return; }
-    ferme = true;
-    fenetre.classList.add("sortie");
-    window.setTimeout(entrerDansLeSite, douceur ? 260 : 0);
-  }
-
-  function entrerDansLeSite() {
-    dansFenetre = false;
-    if (berceau) { berceau.insertBefore(jeu, apres); }
-    fenetre.close();
-    fenetre.classList.remove("sortie");
-    /* Le jeu continue dans la page : « Un autre objet » reprend son rôle. */
-    rejouer.hidden = false;
-    /* Le bandeau d'accueil se lève : c'est le site qui arrive, pas une page
-       qui était déjà là. */
-    if (hero) { hero.classList.add("arrivee"); }
-    /* Et on montre qu'il y a une suite sous le premier écran. */
-    if (indice) { indice.hidden = false; indice.classList.add("anime"); }
-    /* « preventScroll » n'est pas un détail : sans lui, donner le focus au
-       contenu fait défiler la page de la hauteur de l'en-tête, et le visiteur
-       entre sur un site dont la marque et les onglets sont déjà sortis par le
-       haut. Mesuré : 117 px de saut. */
-    var contenu = document.getElementById("contenu");
-    if (contenu) {
-      try { contenu.focus({ preventScroll: true }); } catch (e) { contenu.focus(); }
+  /* La fourchette annoncée encadre le vrai prix sans le trahir : on descend au
+     palier rond sous 45 % du prix, on monte à celui au-dessus de 220 %. */
+  var PALIERS = [1, 2, 5, 10, 20, 50, 100, 200, 500, 1000, 2000, 5000, 10000, 20000];
+  function fourchette(p) {
+    var bas = 1, haut = PALIERS[PALIERS.length - 1], i;
+    for (i = PALIERS.length - 1; i >= 0; i--) {
+      if (PALIERS[i] <= p * 0.45) { bas = PALIERS[i]; break; }
     }
+    for (i = 0; i < PALIERS.length; i++) {
+      if (PALIERS[i] >= p * 2.2) { haut = PALIERS[i]; break; }
+    }
+    return "Entre " + euros(bas) + " et " + euros(haut);
   }
 
   function poser() {
     encours = OBJETS[rang % OBJETS.length];
     rang += 1;
-    ouvrirChoix(true);
-    emoji.textContent = encours.emoji;
-    nom.textContent = encours.nom;
-    prix.textContent = euros(encours.propose);
-    /* Le prix devient une vraie information : il cesse d'être masqué aux
-       lecteurs d'écran, contrairement au « ? € » décoratif du départ. */
-    prix.removeAttribute("aria-hidden");
-    question.textContent = "Le vrai prix est-il plus ou moins\u00a0?";
-    verdict.textContent = "";
-    verdict.className = "essai-verdict";
-    rejouer.hidden = true;
-    if (entrer) { entrer.hidden = true; }
+    essai = 0;
+    fini = false;
+    objet.textContent = encours[0];
+    nom.textContent = encours[1];
+    indice.textContent = fourchette(encours[2]);
+    compteur.textContent = "Essai 1 sur " + ESSAIS;
+    message.textContent = "";
+    message.className = "jeu-message";
+    fin.hidden = true;
+    suite.hidden = true;
+    saisie.hidden = false;
+    champ.value = "";
   }
 
-  function repondre(reponse) {
-    /* Une question ne se répond qu'une fois : sans ce verrou, appuyer ensuite
-       sur l'autre choix transformait un « Raté ! » en « Bravo ! » pour le même
-       objet, dont le prix venait pourtant d'être révélé. */
-    if (!encours || choix[0].disabled) { return; }
-    /* À relever avant de désactiver : le navigateur retire aussitôt le focus
-       d'un bouton désactivé, et il serait déjà perdu si on regardait après. */
-    var auClavier = document.activeElement &&
-      document.activeElement.hasAttribute &&
-      document.activeElement.hasAttribute("data-reponse");
-    ouvrirChoix(false);
-    /* La question est posée : les boutons n'ont plus à appeler le regard. */
-    for (var i = 0; i < choix.length; i++) { choix[i].classList.remove("appel"); }
-    var juste = (encours.vrai < encours.propose) === (reponse === "moins");
-    /* Le grand chiffre doré, l'élément le plus visible de l'écran, passe au vrai
-       prix. Sans cela il continuait d'afficher le prix proposé : deux montants
-       différents restaient à l'écran, et le plus gros était celui que le verdict
-       venait de démentir. */
-    prix.textContent = euros(encours.vrai);
-    question.textContent = "Le vrai prix";
-    /* Le mot porte la réponse autant que la couleur : jamais la couleur seule. */
-    verdict.className = "essai-verdict " + (juste ? "juste" : "faux");
-    verdict.textContent = (juste ? "Bravo\u00a0!" : "Raté\u00a0!") + " " +
-      encours.sujet + " coûte " + euros(encours.vrai) + ".";
-    /* Dans la fenêtre, la seule chose à faire est d'entrer ; dans la page,
-       c'est de rejouer. Jamais les deux à la fois. */
-    var suivant = rejouer;
-    if (dansFenetre) {
-      suivant = entrer;
-      entrer.hidden = false;
-      if (sous) { sous.hidden = true; }
+  /* Le mot porte la réponse autant que la couleur : jamais la couleur seule.
+     La flèche n'est qu'un renfort, elle est donc masquée aux lecteurs d'écran. */
+  function dire(plusHaut) {
+    message.className = "jeu-message " + (plusHaut ? "plus" : "moins");
+    message.textContent = "";
+    var fleche = document.createElement("span");
+    fleche.setAttribute("aria-hidden", "true");
+    fleche.textContent = plusHaut ? "↑" : "↓";
+    var mot = document.createElement("span");
+    mot.textContent = plusHaut ? "C’est plus !" : "C’est moins !";
+    message.appendChild(fleche);
+    message.appendChild(mot);
+  }
+
+  function reveler(ecart, trouve) {
+    fini = true;
+    saisie.hidden = true;
+    message.textContent = "";
+    message.className = "jeu-message";
+    prix.textContent = euros(encours[2]);
+    if (ecart === 0) {
+      verdict.textContent = "Pile le bon prix !";
+    } else if (trouve) {
+      verdict.textContent = "Bravo ! À " + euros(ecart) + " près.";
     } else {
-      rejouer.hidden = false;
+      verdict.textContent = "Tu étais à " + euros(ecart) + " près.";
     }
-    /* Le choix qui portait le focus vient d'être désactivé : sans cela, le
-       focus retomberait sur la page entière. On le passe à la seule action
-       qui reste. */
-    if (auClavier) { suivant.focus(); }
-    /* Dans la fenêtre, le verdict et le bouton d'entrée viennent s'ajouter en
-       bas : sur un petit téléphone ils naissent hors de vue. On descend la
-       fenêtre jusqu'à eux, sinon le visiteur ne voit plus de porte de sortie. */
-    if (dansFenetre) { fenetre.scrollTop = fenetre.scrollHeight; }
-    /* Au doigt comme à la souris, rien ne faisait défiler la page : qui visait
-       les deux choix les avait amenés en bas de l'écran, et le verdict comme
-       « Un autre objet » apparaissaient juste en dessous, hors de vue. On
-       descend du strict nécessaire pour que la réponse et la suite tiennent à
-       l'écran — jamais vers le haut, et pas du tout si elles y sont déjà. */
-    if (!dansFenetre) {
-      var bas = rejouer.getBoundingClientRect().bottom + 16;
-      if (bas > window.innerHeight) { window.scrollBy(0, bas - window.innerHeight); }
+    if (trouve) {
+      compteur.textContent = essai === 1
+        ? "Trouvé du premier coup !"
+        : "Trouvé en " + essai + " essais";
+    } else {
+      compteur.textContent = "Après " + ESSAIS + " essais";
     }
+    fin.hidden = false;
+    suite.hidden = false;
+    rejouer.focus();
   }
 
-  boutons.addEventListener("click", function (e) {
-    var b = e.target && e.target.closest ? e.target.closest("[data-reponse]") : null;
-    if (b) { repondre(b.getAttribute("data-reponse")); }
-  });
+  function repondre(e) {
+    e.preventDefault();
+    if (fini || !encours) { return; }
+    var brut = champ.value.replace(/[^0-9]/g, "");
+    if (!brut) { champ.focus(); return; }
+    var propose = parseInt(brut, 10);
+    var vrai = encours[2];
+    var ecart = Math.abs(propose - vrai);
+    /* On gagne à 10 % près, et jamais à moins d'un euro près : viser à l'euro
+       sur un piano à 4 000 € n'aurait aucun sens pour un enfant. */
+    var trouve = ecart <= Math.max(1, Math.round(vrai * 0.1));
+    essai += 1;
+    if (trouve || essai >= ESSAIS) { reveler(ecart, trouve); return; }
+    dire(vrai > propose);
+    compteur.textContent = "Essai " + (essai + 1) + " sur " + ESSAIS;
+    champ.value = "";
+    champ.focus();
+  }
 
+  saisie.addEventListener("submit", repondre);
   rejouer.addEventListener("click", function () {
     poser();
-    /* Le bouton qui vient de disparaître avait le focus : on le rend au jeu. */
-    if (premier) { premier.focus(); }
+    champ.focus();
   });
 
-  if (entrer) { entrer.addEventListener("click", fermerFenetre); }
-  /* La touche Échap ne ferme pas la fenêtre : on en sort en répondant, et les
-     deux boutons sont atteignables au clavier comme au doigt. Le lien vers la
-     politique de confidentialité reste, lui, accessible depuis la fenêtre. */
-  if (fenetre) {
-    fenetre.addEventListener("cancel", function (e) { e.preventDefault(); });
+  /* Le bouton de téléchargement de la carte ne s'allume que si celui de
+     l'en-tête l'est : une seule adresse à renseigner, trois boutons suivent. */
+  if (lienApp && lienHaut && !lienHaut.hidden) {
+    lienApp.hidden = false;
+    lienApp.href = lienHaut.href;
   }
 
+  if (sansJs) { sansJs.hidden = true; }
   poser();
-  essai.hidden = false;
-  ouvrirFenetre();
-})();
-
-/* Les questions fréquentes à l'impression.
-   Indépendant du jeu : même si la mini-partie ne s'allume pas, une page
-   imprimée doit porter les réponses et pas seulement les questions. On
-   rouvre ensuite ce qu'on avait ouvert, pour rendre l'écran tel qu'il était. */
-(function () {
-  "use strict";
-  if (!window.addEventListener) { return; }
-  window.addEventListener("beforeprint", function () {
-    var q = document.querySelectorAll(".question:not([open])");
-    for (var i = 0; i < q.length; i++) {
-      q[i].open = true;
-      q[i].setAttribute("data-impression", "");
-    }
-  });
-  window.addEventListener("afterprint", function () {
-    var q = document.querySelectorAll(".question[data-impression]");
-    for (var i = 0; i < q.length; i++) {
-      q[i].open = false;
-      q[i].removeAttribute("data-impression");
-    }
-  });
 })();
 </script>
 </body>
