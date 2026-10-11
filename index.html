@@ -818,8 +818,14 @@
   /* Les deux choix, pour les rouvrir ou les fermer en bloc. */
   var choix = boutons.querySelectorAll("[data-reponse]");
 
+  /* Les deux choix ne sont là que tant qu'il y a quelque chose à choisir. Une
+     fois la réponse donnée, ils quittent l'écran au lieu d'y rester éteints :
+     deux cibles mortes de plus entre le prix et le verdict, que des enfants et
+     des personnes âgées essaient encore de toucher. Le bloc est retiré, pas
+     seulement grisé — un bouton désactivé reste une invitation. */
   function ouvrirChoix(ouverts) {
     for (var i = 0; i < choix.length; i++) { choix[i].disabled = !ouverts; }
+    boutons.hidden = !ouverts;
   }
 
   function euros(n) { return n + "\u00a0€"; }
