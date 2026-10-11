@@ -608,6 +608,15 @@
      d'écran suivent le dialogue « C'est plus ! » puis la révélation. */
   .jeu-annonce { width: 100%; display: flex; flex-direction: column; align-items: center; gap: var(--e3); }
   .jeu-essai:empty { display: none; }
+  /* Fin de la partie d'essai : trois objets, puis l'app. */
+  .jeu-fin-visite {
+    width: 100%; margin-top: var(--e2); padding: var(--e5);
+    border-radius: var(--rayon-champ); background: var(--puits);
+  }
+  .jeu-fin-visite p { margin: 0; font-size: var(--t2); font-weight: 700; color: var(--encre-douce); overflow-wrap: anywhere; }
+  .jeu-fin-visite .jeu-fin-visite-titre { margin-bottom: var(--e1); font-size: var(--t4); font-weight: 900; color: var(--encre); }
+  .jeu-fin-visite .jeu-bientot { margin-top: var(--e3); font-weight: 900; color: var(--accent-fonce); }
+  .jeu-fin-visite:focus { outline: none; }
   /* Lu par les lecteurs d'écran, invisible à l'œil */
   .invisible {
     position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px;
@@ -642,7 +651,7 @@
   <section class="scene">
     <div class="enveloppe">
       <h1>Combien coûte cet objet, d’après toi&nbsp;?</h1>
-      <p class="scene-sous">Essaie ici, en 3 essais. Dans l’app, il y en a 400.</p>
+      <p class="scene-sous">Essaie ici avec 3 objets, 3 essais chacun. Dans l’app, il y en a 400.</p>
 
       <!-- La partie d'essai. Sans JavaScript, la carte montre un objet et sa
            fourchette de prix, et la ligne « jeu-sans-js » explique pourquoi on
@@ -659,6 +668,14 @@
             <p class="jeu-fin-titre">Le bon prix est</p>
             <p class="jeu-prix" id="jeu-prix"></p>
             <p class="jeu-verdict" id="jeu-verdict"></p>
+          </div>
+          <!-- Le site fait goûter le jeu, l'app le donne en entier : après trois
+               objets, la partie d'essai s'arrête ici. Recharger la page en redonne
+               trois ; c'est voulu, un coup de pouce et non un verrou. -->
+          <div class="jeu-fin-visite" id="jeu-fin-visite" tabindex="-1" hidden>
+            <p class="jeu-fin-visite-titre">Tu as joué tes 3 objets.</p>
+            <p>Il y en a 400 dans l’app.</p>
+            <p class="jeu-bientot" id="jeu-bientot">Bientôt sur l’App Store.</p>
           </div>
         </div>
 
@@ -801,6 +818,8 @@
   ];
 
   var ESSAIS = 3;
+  /* Trois objets par visite : assez pour comprendre et y prendre goût. */
+  var OBJETS_PAR_VISITE = 3;
 
   var carte    = document.getElementById("jeu");
   var compteur = document.getElementById("jeu-essai");
@@ -818,6 +837,8 @@
   var sansJs   = document.getElementById("jeu-sans-js");
   var lienApp  = document.getElementById("lien-app-store-jeu");
   var lienHaut = document.getElementById("lien-app-store-haut");
+  var finVisite = document.getElementById("jeu-fin-visite");
+  var bientot  = document.getElementById("jeu-bientot");
 
   if (!carte || !champ || !saisie || !fin) { return; }
 
@@ -825,6 +846,7 @@
   var encours = null;
   var essai = 0;
   var fini = false;
+  var joues = 0;
 
   /* Prix au format français : « 1 249 € », espaces insécables comprises. */
   function euros(n) {
@@ -897,6 +919,22 @@
       compteur.textContent = "Après " + ESSAIS + " essais";
     }
     fin.hidden = false;
+    joues += 1;
+    if (finVisite && joues >= OBJETS_PAR_VISITE) {
+      /* Dernier objet de la visite : plus de « Un autre objet », place à l'app.
+         Tant que la fiche App Store n'existe pas, pas de bouton : une phrase. */
+      rejouer.hidden = true;
+      finVisite.hidden = false;
+      if (lienApp && !lienApp.hidden) {
+        if (bientot) { bientot.hidden = true; }
+        suite.hidden = false;
+        lienApp.focus();
+      } else {
+        suite.hidden = true;
+        finVisite.focus();
+      }
+      return;
+    }
     suite.hidden = false;
     rejouer.focus();
   }
@@ -922,6 +960,7 @@
 
   saisie.addEventListener("submit", repondre);
   rejouer.addEventListener("click", function () {
+    if (joues >= OBJETS_PAR_VISITE) { return; }
     poser();
     champ.focus();
   });

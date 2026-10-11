@@ -9,7 +9,7 @@ ProtoJo Digital (Johan Quille), France.
 
 | Fichier | Rôle |
 | --- | --- |
-| `index.html` | Page d'accueil : la partie d'essai, « Comment on joue », l'appel au téléchargement |
+| `index.html` | Page d'accueil : la partie d'essai (3 objets par visite, puis l'invitation à l'app), « Comment on joue », l'appel au téléchargement |
 | `familles.html` | Pour les familles et les seniors : les cinq façons de jouer, ce qu'on gagne |
 | `accessibilite.html` | Ce que le jeu suit des réglages d'accessibilité de l'iPhone |
 | `questions.html` | Les douze questions fréquentes |
