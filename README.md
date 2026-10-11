@@ -204,11 +204,13 @@ règle « le site reste deux fichiers HTML autonomes ».
 
 ### Ce qui peut être fait sans décision préalable
 
-- **Boutons éteints après la réponse, dans la mini-partie d'accueil** :
-  « C'est moins » et « C'est plus » restent affichés, inertes, entre le prix
-  et le verdict. Pour des enfants et des seniors, ce sont deux cibles mortes qui
-  invitent encore au clic. Les retirer sans provoquer de saut de mise en page
-  demande de réserver leur hauteur : à faire avec captures avant/après.
+- **Dans la fenêtre d'accueil, « Découvrir le site » monte sous le doigt.**
+  Depuis que les deux choix se retirent une fois la réponse donnée, le bouton
+  d'entrée occupe 18 px de la place qu'occupait le bas de « C'est moins » et
+  « C'est plus » : choix mesurés à 535-591 px, bouton d'entrée à 573-629 px
+  sur un écran de 375 px. Qui tape deux fois de suite entre dans le site sans
+  avoir lu le verdict. À corriger en réservant une poignée de pixels sous le
+  verdict, si cela ne rallonge pas trop la fenêtre sur un petit écran.
 
 ## Relecture automatique
 
